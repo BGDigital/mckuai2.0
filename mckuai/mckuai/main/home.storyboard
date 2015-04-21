@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <scenes>
+        <!--麦块2-->
+        <scene sceneID="OrS-ow-uRZ">
+            <objects>
+                <viewController storyboardIdentifier="mainViewController" id="ybe-Gr-Fgn" customClass="mainViewController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kBJ-ma-jPb"/>
+                        <viewControllerLayoutGuide type="bottom" id="XZQ-xu-H8W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fBC-qU-hKm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="麦块2" id="RXy-NH-JvM">
+                        <barButtonItem key="leftBarButtonItem" image="second_normal" id="Ww4-7g-7Qv">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="ybe-Gr-Fgn" id="xZb-cK-w8a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Ws-qE-utI" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841" y="-380"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Epc-4z-TTs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BPN-p9-nl4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gMq-5N-Okw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.24705882352941178" green="0.81176470588235294" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.21176470588235294" green="0.80392156862745101" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ybe-Gr-Fgn" kind="relationship" relationship="rootViewController" id="yEd-YN-dyX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="biY-eN-OJL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1029" y="-380"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="second_normal" width="30" height="30"/>
+    </resources>
+</document>

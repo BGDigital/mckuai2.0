@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Z27-sX-1eT">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <scenes>
+        <!--Root View Controller-->
+        <scene sceneID="Rce-Vs-KPd">
+            <objects>
+                <viewController id="Z27-sX-1eT" customClass="rootViewController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ohd-FZ-ObI"/>
+                        <viewControllerLayoutGuide type="bottom" id="d0X-ZQ-geh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qSg-VX-1Og">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pSp-N4-r2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-333" y="-386"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="56e-kh-Y1a">
+            <objects>
+                <viewController restorationIdentifier="tabBarController" storyboardIdentifier="tabBarController" id="Trl-2m-GeH" customClass="TabBarController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="edV-nD-d09"/>
+                        <viewControllerLayoutGuide type="bottom" id="aTp-9v-BWb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bll-y9-rY0">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBh-58-hr3">
+                                <rect key="frame" x="110" y="1" width="49" height="49"/>
+                                <state key="normal" title="Button" image="1024">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeTabBar:" destination="Trl-2m-GeH" eventType="touchUpInside" id="JZ4-jb-gIU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmr-ZO-aoe">
+                                <rect key="frame" x="16" y="1" width="49" height="49"/>
+                                <state key="normal" title="Button" image="1024">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeTabBar:" destination="Trl-2m-GeH" eventType="touchUpInside" id="uo4-us-X5n"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="50"/>
+                    <connections>
+                        <outlet property="home" destination="vmr-ZO-aoe" id="tws-nK-GVb"/>
+                        <outlet property="second" destination="KBh-58-hr3" id="CTf-pM-dcG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JTp-mO-G79" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="275" y="84"/>
+        </scene>
+        <!--Left Menu View Controller-->
+        <scene sceneID="lPX-Wa-jep">
+            <objects>
+                <viewController restorationIdentifier="leftMenuViewController" storyboardIdentifier="leftMenuViewController" id="0pr-G5-afB" customClass="leftMenuViewController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QIb-lh-xL9"/>
+                        <viewControllerLayoutGuide type="bottom" id="zLc-he-cP7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="600" id="tSX-yE-vzj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UJE-KS-vWv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="355" y="-386"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="Ldc-gL-5yi">
+            <objects>
+                <tabBarController storyboardIdentifier="contentViewController" id="ISO-7A-EIH" customClass="mainTabBarController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Hkh-hV-Bkp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5G1-pd-e4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-333" y="344"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="1024" width="215" height="221"/>
+    </resources>
+</document>

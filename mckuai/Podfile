@@ -1,0 +1,15 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '6.0'
+
+target 'mckuai' do
+pod 'SDWebImage', '~>3.7'
+pod 'MBProgressHUD', '~> 0.9.1'
+pod 'RESideMenu', '~> 4.0.7'
+pod 'MJRefresh'
+pod "AFNetworking", "~> 2.0"
+end
+
+target 'mckuaiTests' do
+
+end
+
