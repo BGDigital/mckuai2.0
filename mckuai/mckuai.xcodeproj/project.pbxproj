@@ -17,12 +17,17 @@
 		E63898941AE0307E00756679 /* mainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63898921AE0307E00756679 /* mainTableViewCell.swift */; };
 		E63898951AE0307E00756679 /* mainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E63898931AE0307E00756679 /* mainTableViewCell.xib */; };
 		E63898971AE042D900756679 /* mainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63898961AE042D900756679 /* mainData.swift */; };
+		E63DA5071AE6ACA6001D7811 /* mine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E63DA5061AE6ACA6001D7811 /* mine.storyboard */; };
+		E63DA5091AE6AD27001D7811 /* mineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63DA5081AE6AD27001D7811 /* mineTableViewController.swift */; };
+		E63DA50D1AE6B9C7001D7811 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = E63DA50C1AE6B9C7001D7811 /* UINavigationBar+Awesome.m */; };
 		E6518BED1ADD065E005A8C97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6518BEC1ADD065E005A8C97 /* AppDelegate.swift */; };
 		E6518BEF1ADD065E005A8C97 /* rootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6518BEE1ADD065E005A8C97 /* rootViewController.swift */; };
 		E6518BF21ADD065E005A8C97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6518BF01ADD065E005A8C97 /* Main.storyboard */; };
 		E6518BF41ADD065E005A8C97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6518BF31ADD065E005A8C97 /* Images.xcassets */; };
 		E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6518BF51ADD065E005A8C97 /* LaunchScreen.xib */; };
 		E6518C031ADD065E005A8C97 /* mckuaiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6518C021ADD065E005A8C97 /* mckuaiTests.swift */; };
+		E696E5241AE7829000261F57 /* mainHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5231AE7829000261F57 /* mainHeaderViewController.swift */; };
+		E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5281AE7920800261F57 /* MFRoundProgressView.swift */; };
 		E6B2043A1AE69E4C00EB11B4 /* mainSubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B204381AE69E4C00EB11B4 /* mainSubCell.swift */; };
 		E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B204391AE69E4C00EB11B4 /* mainSubCell.xib */; };
 		E6B204401AE6A56000EB11B4 /* live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B2043F1AE6A56000EB11B4 /* live.storyboard */; };
@@ -59,6 +64,10 @@
 		E63898921AE0307E00756679 /* mainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTableViewCell.swift; sourceTree = "<group>"; };
 		E63898931AE0307E00756679 /* mainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainTableViewCell.xib; sourceTree = "<group>"; };
 		E63898961AE042D900756679 /* mainData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainData.swift; sourceTree = "<group>"; };
+		E63DA5061AE6ACA6001D7811 /* mine.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = mine.storyboard; path = mine/mine.storyboard; sourceTree = "<group>"; };
+		E63DA5081AE6AD27001D7811 /* mineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mineTableViewController.swift; path = mine/mineTableViewController.swift; sourceTree = "<group>"; };
+		E63DA50B1AE6B9C7001D7811 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+Awesome.h"; path = "ThirdParty/LTNavigationBar/UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		E63DA50C1AE6B9C7001D7811 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+Awesome.m"; path = "ThirdParty/LTNavigationBar/UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		E6518BE71ADD065E005A8C97 /* mckuai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mckuai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6518BEB1ADD065E005A8C97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6518BEC1ADD065E005A8C97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +78,8 @@
 		E6518BFC1ADD065E005A8C97 /* mckuaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mckuaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6518C011ADD065E005A8C97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6518C021ADD065E005A8C97 /* mckuaiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mckuaiTests.swift; sourceTree = "<group>"; };
+		E696E5231AE7829000261F57 /* mainHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainHeaderViewController.swift; path = main/mainHeaderViewController.swift; sourceTree = "<group>"; };
+		E696E5281AE7920800261F57 /* MFRoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MFRoundProgressView.swift; path = ThirdParty/MFRoundProgressView/MFRoundProgressView.swift; sourceTree = "<group>"; };
 		E6B204381AE69E4C00EB11B4 /* mainSubCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainSubCell.swift; path = main/mainSubCell.swift; sourceTree = "<group>"; };
 		E6B204391AE69E4C00EB11B4 /* mainSubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = mainSubCell.xib; path = main/mainSubCell.xib; sourceTree = "<group>"; };
 		E6B2043F1AE6A56000EB11B4 /* live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = live.storyboard; path = live/live.storyboard; sourceTree = "<group>"; };
@@ -128,6 +139,24 @@
 			name = SABlurImageView;
 			sourceTree = "<group>";
 		};
+		E63DA5051AE6AC8D001D7811 /* mine */ = {
+			isa = PBXGroup;
+			children = (
+				E63DA5061AE6ACA6001D7811 /* mine.storyboard */,
+				E63DA5081AE6AD27001D7811 /* mineTableViewController.swift */,
+			);
+			name = mine;
+			sourceTree = "<group>";
+		};
+		E63DA50A1AE6B9A7001D7811 /* LTNavigatioinBar */ = {
+			isa = PBXGroup;
+			children = (
+				E63DA50B1AE6B9C7001D7811 /* UINavigationBar+Awesome.h */,
+				E63DA50C1AE6B9C7001D7811 /* UINavigationBar+Awesome.m */,
+			);
+			name = LTNavigatioinBar;
+			sourceTree = "<group>";
+		};
 		E6518BDE1ADD065E005A8C97 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +180,7 @@
 		E6518BE91ADD065E005A8C97 /* mckuai */ = {
 			isa = PBXGroup;
 			children = (
+				E63DA5051AE6AC8D001D7811 /* mine */,
 				E6D2C3691AE110D000FF823E /* root */,
 				E6B2043E1AE6A50A00EB11B4 /* community */,
 				E6B2043D1AE6A4FE00EB11B4 /* chat */,
@@ -192,6 +222,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E696E5271AE791EE00261F57 /* MFRoundProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				E696E5281AE7920800261F57 /* MFRoundProgressView.swift */,
+			);
+			name = MFRoundProgressView;
+			sourceTree = "<group>";
+		};
 		E6B2043C1AE6A4ED00EB11B4 /* live */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +260,8 @@
 		E6CB649D1ADD0F8700D61B85 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				E696E5271AE791EE00261F57 /* MFRoundProgressView */,
+				E63DA50A1AE6B9A7001D7811 /* LTNavigatioinBar */,
 				E626508D1ADFA35F00B16094 /* SwiftyJSON.swift */,
 				E603D6491ADE668D00D93708 /* SABlurImageView */,
 				E603D6411ADE650C00D93708 /* AsyncLegacy.swift */,
@@ -241,6 +281,7 @@
 				E63898961AE042D900756679 /* mainData.swift */,
 				E63898931AE0307E00756679 /* mainTableViewCell.xib */,
 				E6D2C36A1AE1111500FF823E /* home.storyboard */,
+				E696E5231AE7829000261F57 /* mainHeaderViewController.swift */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -341,6 +382,7 @@
 				E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */,
 				E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */,
 				E6518BF21ADD065E005A8C97 /* Main.storyboard in Resources */,
+				E63DA5071AE6ACA6001D7811 /* mine.storyboard in Resources */,
 				E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */,
 				E63898951AE0307E00756679 /* mainTableViewCell.xib in Resources */,
 				E6B204421AE6A63C00EB11B4 /* chat.storyboard in Resources */,
@@ -398,6 +440,8 @@
 				E603D6441ADE657700D93708 /* WobbleView.swift in Sources */,
 				E603D6421ADE650C00D93708 /* AsyncLegacy.swift in Sources */,
 				E603D64B1ADE66BF00D93708 /* UIImage+BlurEffect.swift in Sources */,
+				E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */,
+				E63DA5091AE6AD27001D7811 /* mineTableViewController.swift in Sources */,
 				E626508E1ADFA35F00B16094 /* SwiftyJSON.swift in Sources */,
 				E6B717601ADECE7400684E83 /* liveViewController.swift in Sources */,
 				E603D6481ADE664900D93708 /* SABlurImageView.swift in Sources */,
@@ -407,9 +451,11 @@
 				E63898971AE042D900756679 /* mainData.swift in Sources */,
 				E6518BEF1ADD065E005A8C97 /* rootViewController.swift in Sources */,
 				E6B717621ADED22D00684E83 /* leftMenuViewController.swift in Sources */,
+				E63DA50D1AE6B9C7001D7811 /* UINavigationBar+Awesome.m in Sources */,
 				E6B204481AE6A74A00EB11B4 /* communityViewController.swift in Sources */,
 				E6518BED1ADD065E005A8C97 /* AppDelegate.swift in Sources */,
 				E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */,
+				E696E5241AE7829000261F57 /* mainHeaderViewController.swift in Sources */,
 				E6B2043A1AE69E4C00EB11B4 /* mainSubCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

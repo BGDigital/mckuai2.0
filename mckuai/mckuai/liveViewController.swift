@@ -19,7 +19,7 @@ class liveViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.navigationController?.navigationBar.hidden = true
+//        self.navigationController?.navigationBar.hidden = true
         // Do any additional setup after loading the view.
     }
 
@@ -29,9 +29,7 @@ class liveViewController: UIViewController {
     }
     
     @IBAction func pushViewController(sender: AnyObject) {
-        var viewcontroller = UIViewController()
-        viewcontroller.title = "pushed Controller"
-        viewcontroller.view.backgroundColor = UIColor.greenColor()
+        var viewcontroller = mineTableViewController.mainRoot()
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
 

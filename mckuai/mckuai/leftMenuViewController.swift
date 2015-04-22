@@ -73,6 +73,10 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             self.sideMenuViewController.setContentViewController(liveViewController.mainRoot(), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
+        case 2:
+            self.sideMenuViewController.setContentViewController(mineTableViewController
+                .mainRoot(), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
         default:
             break
         }

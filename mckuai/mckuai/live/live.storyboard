@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
-        <!--Second View Controller-->
+        <!--Live View Controller-->
         <scene sceneID="jrf-pi-f61">
             <objects>
-                <viewController restorationIdentifier="liveViewController" storyboardIdentifier="liveViewController" id="rxb-ua-V2D" customClass="SecondViewController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="liveViewController" storyboardIdentifier="liveViewController" id="rxb-ua-V2D" customClass="liveViewController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FPK-6r-d5R"/>
                         <viewControllerLayoutGuide type="bottom" id="but-jL-4hm"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dog-pW-moo">
-                                <rect key="frame" x="277" y="173" width="133" height="30"/>
+                                <rect key="frame" x="234" y="285" width="133" height="30"/>
                                 <state key="normal" title="pushViewController">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -29,8 +29,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.10942639799999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="dog-pW-moo" secondAttribute="centerX" constant="-43.5" id="H8S-sE-MV2"/>
-                            <constraint firstAttribute="centerY" secondItem="dog-pW-moo" secondAttribute="centerY" constant="112" id="kYm-3S-wS2"/>
+                            <constraint firstAttribute="centerX" secondItem="dog-pW-moo" secondAttribute="centerX" constant="-0.5" id="H8S-sE-MV2"/>
+                            <constraint firstAttribute="centerY" secondItem="dog-pW-moo" secondAttribute="centerY" id="kYm-3S-wS2"/>
                         </constraints>
                     </view>
                 </viewController>

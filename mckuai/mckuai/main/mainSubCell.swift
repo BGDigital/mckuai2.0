@@ -14,9 +14,29 @@ class mainSubCell: UITableViewCell {
     @IBOutlet weak var username: UIButton!
     @IBOutlet weak var replys: UIButton!
     @IBOutlet weak var times: UILabel!
+    @IBOutlet weak var imageV: UIImageView!
+    @IBOutlet weak var alphaView: UIView!
+    @IBOutlet weak var liveView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func update(json: JSON) {
+        self.title.text = json["talkTitle"].stringValue+"\n "
+        self.username.setTitle(json["forumName"].stringValue, forState: .Normal)
+        self.replys.setTitle(json["replyNum"].stringValue, forState: .Normal)
+        self.times.text = json["replyTime"].stringValue
+        var url = json["mobilePic"].stringValue
+        if json["id"].stringValue != "213590" {
+            self.title.textColor = UIColor.whiteColor()
+            self.alphaView.hidden = false
+            self.liveView.hidden = true
+            self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder"))
+        } else {
+            self.alphaView.hidden = true
+            self.liveView.hidden = false
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

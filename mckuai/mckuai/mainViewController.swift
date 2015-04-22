@@ -12,8 +12,32 @@ import UIKit
 class mainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let cellIdentifier = "mainTableViewCell"
+    let url = "http://118.144.83.145:8081/index.do?act=all"
+    var manager = AFHTTPRequestOperationManager()
+    var json: JSON! {
+        didSet {
+            if "ok" == self.json["state"].stringValue {
+                if let d = self.json["dataObject", "talk"].array {
+                    self.datasource = d
+                }
+                if let live = self.json["dataObject", "banner"].array {
+                    self.liveData = live
+                }
+            }
+        }
+    }
     
-    var data = NSMutableArray()
+    var datasource: Array<JSON>! {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    var liveData: Array<JSON>! {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
     var tableView: UITableView!
     
     class func mainRoot()->UIViewController{
@@ -24,10 +48,14 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         self.tabBarItem.badgeValue = "3"
         
-        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 0.212, green: 0.804, blue: 0.380, alpha: 1.00)
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
+        //设置标题颜色
+        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
             
         
         setupTableView()
@@ -47,16 +75,16 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.backgroundView = nil //这个可以改背影
         tableView.scrollsToTop = false
         
+        //添加Header
+        var head = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainHeaderViewController") as! mainHeaderViewController
+        head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 245)
+        tableView.tableHeaderView = head.view
+        
         self.view.addSubview(tableView)
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
         self.tableView.footer.hidden = true
-        
-        //使 Cell 重用 (不知道为什么,一重用就会出现错位)
-//        var bundle: NSBundle = NSBundle.mainBundle()
-//        var nib: UINib = UINib(nibName: "mainTableViewCell", bundle: bundle)
-//        tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
     }
 
     func showCustomHUD(view: UIView, title: String, imgName: String) {
@@ -76,20 +104,21 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //加载数据,刷新
     func loadNewData() {
         //开始刷新
-        let url = "https://www.v2ex.com/api/topics/hot.json"
-        
-        var manager = AFHTTPRequestOperationManager()
         manager.GET(url,
             parameters: nil,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
-                var json = JSON(responseObject).arrayValue
-                for i in 0...json.count-1 {
-                    self.data.addObject(json[i]["title"].stringValue)
-                }
-                
+                //println(responseObject)
+                self.json = JSON(responseObject)
+//                if "ok" == self.json["state"].stringValue {
+//                    if let d = self.json["dataObject", "talk"].array {
+//                        self.datasource = d
+//                    }
+//                    if let live = self.json["dataObject", "banner"].array {
+//                        self.liveData = live
+//                    }
+//                }
                 self.tableView.header.endRefreshing()
-                self.tableView.reloadData()
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
@@ -103,17 +132,29 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //上拉加载更多数据
     func loadMoreData() {
         //1.添加假数据
-        for a in 0...5{
-            self.data.insertObject(a, atIndex: 0)
-        }
-        //2.模拟3秒后刷新表格UI
-        Async.main(after: 3, block: {
-            self.tableView.reloadData()
-            //拿到数据,结束刷新
-            self.tableView.footer.endRefreshing()
-            self.tableView.footer.noticeNoMoreData()
+        manager.GET(url,
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                self.json = JSON(responseObject)
+                if "ok" == self.json["state"].stringValue {
+                    if let d = self.json["dataObject"].array {
+                        if self.datasource == nil {
+                            self.datasource = d
+                        } else {
+                            self.datasource = self.datasource + d
+                        }
+                    }
+                }
+                self.tableView.footer.endRefreshing()
+                //self.tableView.footer.noticeNoMoreData()
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.tableView.footer.endRefreshing()
+                self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
         })
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -129,15 +170,24 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             return 192
         } else {
-            return 88
+            return 118
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.data.count > 10 {
-            self.tableView.footer.hidden = false
+        if self.datasource != nil && self.liveData != nil {
+            if self.datasource.count > 10 {
+                self.tableView.footer.hidden = false
+            }
+            switch (section) {
+            case 0:
+                return self.liveData.count
+            default:
+                return self.datasource.count
+            }
+        } else {
+            return 0
         }
-        return self.data.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -155,11 +205,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainTableViewCell", owner: self, options: nil)
                 cell = nib.lastObject as? mainTableViewCell
             }
-            cell!.title.text = self.data[indexPath.row] as? String
-            cell?.imageV.image = UIImage(named: "placeholder")
-            cell?.imageV.frame = CGRectMake(12, 12, 351, 140)
-            //cell?.imageV.sd_setImageWithURL(NSURL(string: "http://c.hiphotos.baidu.com/image/pic/item/86d6277f9e2f07084281b301eb24b899a901f22f.jpg"), placeholderImage: UIImage(named: "placeholderImage"))
-            //println("cell?.imageV.frame:\(cell?.imageV.frame)")
+            let d = self.liveData[indexPath.row] as JSON
+            cell?.update(d)
             return cell!
         default:
             var cell = tableView.dequeueReusableCellWithIdentifier("mainSubCell") as? mainSubCell
@@ -168,20 +215,10 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainSubCell", owner: self, options: nil)
                 cell = nib.lastObject as? mainSubCell
             }
-            
-            cell?.title.text = self.data[indexPath.row] as? String
+            let d = self.datasource[indexPath.row] as JSON
+            cell?.update(d)
             return cell!
-//            var cell = tableView.dequeueReusableCellWithIdentifier("SUBTITLECELL") as? UITableViewCell
-//            
-//            if cell == nil {
-//                println("Create mainTableViewCell, two......:\(indexPath.row)")
-//                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "SUBTITLECELL")
-//            }
-//            
-//            cell?.textLabel?.text = self.data[indexPath.row] as? String
-//            cell?.detailTextLabel?.text = "这里显示详细信息"
-//            cell?.imageView?.sd_setImageWithURL(NSURL(string: "http://c.hiphotos.baidu.com/image/pic/item/86d6277f9e2f07084281b301eb24b899a901f22f.jpg"), placeholderImage: UIImage(named: "Guide"))
-//            return cell!
+
         }
     }
 
