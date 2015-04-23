@@ -9,3 +9,5 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "UINavigationBar+Awesome.h"
+#import "HMSegmentedControl.h"
+#import "MJExtension.h"

@@ -26,6 +26,7 @@
 		E6518BF41ADD065E005A8C97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6518BF31ADD065E005A8C97 /* Images.xcassets */; };
 		E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6518BF51ADD065E005A8C97 /* LaunchScreen.xib */; };
 		E6518C031ADD065E005A8C97 /* mckuaiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6518C021ADD065E005A8C97 /* mckuaiTests.swift */; };
+		E692AA431AE8D0FC00577B3C /* mineHeadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692AA411AE8D0FC00577B3C /* mineHeadViewController.swift */; };
 		E696E5241AE7829000261F57 /* mainHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5231AE7829000261F57 /* mainHeaderViewController.swift */; };
 		E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5281AE7920800261F57 /* MFRoundProgressView.swift */; };
 		E696E5621AE7F88100261F57 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = E696E5601AE7F88100261F57 /* citydict.plist */; };
@@ -80,6 +81,7 @@
 		E6518BFC1ADD065E005A8C97 /* mckuaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mckuaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6518C011ADD065E005A8C97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6518C021ADD065E005A8C97 /* mckuaiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mckuaiTests.swift; sourceTree = "<group>"; };
+		E692AA411AE8D0FC00577B3C /* mineHeadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mineHeadViewController.swift; path = mine/mineHeadViewController.swift; sourceTree = "<group>"; };
 		E696E5231AE7829000261F57 /* mainHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainHeaderViewController.swift; path = main/mainHeaderViewController.swift; sourceTree = "<group>"; };
 		E696E5281AE7920800261F57 /* MFRoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MFRoundProgressView.swift; path = ThirdParty/MFRoundProgressView/MFRoundProgressView.swift; sourceTree = "<group>"; };
 		E696E5601AE7F88100261F57 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = citydict.plist; path = main/citydict.plist; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				E63DA5061AE6ACA6001D7811 /* mine.storyboard */,
 				E63DA5081AE6AD27001D7811 /* mineTableViewController.swift */,
+				E692AA411AE8D0FC00577B3C /* mineHeadViewController.swift */,
 			);
 			name = mine;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				E603D6481ADE664900D93708 /* SABlurImageView.swift in Sources */,
 				E6B204441AE6A66300EB11B4 /* chatViewController.swift in Sources */,
 				E63898941AE0307E00756679 /* mainTableViewCell.swift in Sources */,
+				E692AA431AE8D0FC00577B3C /* mineHeadViewController.swift in Sources */,
 				E60624ED1ADE6F27007D6DEF /* SwiftyUserDefaults.swift in Sources */,
 				E63898971AE042D900756679 /* mainData.swift in Sources */,
 				E6518BEF1ADD065E005A8C97 /* rootViewController.swift in Sources */,

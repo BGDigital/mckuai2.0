@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         launchView.addSubview(imageV)
         self.window?.bringSubviewToFront(launchView)
         //显示3秒杀
-        Async.main(after: 3, block: {self.removeLaunchView()})
+        Async.main(after: 1, block: {self.removeLaunchView()})
         //NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeLaunchView", userInfo: nil, repeats: false)
     }
     

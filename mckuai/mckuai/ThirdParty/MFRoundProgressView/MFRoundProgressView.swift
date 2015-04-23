@@ -17,6 +17,7 @@ class MFRoundProgressView: UIView {
             setNeedsDisplay()
         }
     }
+
     @IBInspectable var imageView: UIImageView! {
         didSet {
             showPercent = imageView.image == nil
@@ -35,6 +36,7 @@ class MFRoundProgressView: UIView {
 //        }
 //    }
     private var showPercent: Bool = true
+    private var showShadow: Bool = false
     private var startAngle: CGFloat = CGFloat(-90 * M_PI / 180)
     private var endAngle: CGFloat = CGFloat(270 * M_PI / 180)
     
@@ -70,24 +72,27 @@ class MFRoundProgressView: UIView {
         backgroundPath.fill()
         
         // Background Inner Shadow  这个地方是阴影
-//        CGContextSaveGState(context);
-//        UIRectClip(backgroundPath.bounds);
-//        CGContextSetShadowWithColor(context, CGSizeZero, 0, nil);
-//        
-//        CGContextSetAlpha(context, CGColorGetAlpha(innerShadow.CGColor))
-//        CGContextBeginTransparencyLayer(context, nil)
-//        
-//        let opaqueShadow = innerShadow.colorWithAlphaComponent(1)
-//        CGContextSetShadowWithColor(context, innerShadowOffset, innerShadowBlurRadius, opaqueShadow.CGColor)
-//        CGContextSetBlendMode(context, kCGBlendModeSourceOut)
-//        CGContextBeginTransparencyLayer(context, nil)
-//        
-//        opaqueShadow.setFill()
-//        backgroundPath.fill()
-//        CGContextEndTransparencyLayer(context);
-//        
-//        CGContextEndTransparencyLayer(context);
-//        CGContextRestoreGState(context);
+        if showShadow {
+            CGContextSaveGState(context);
+            UIRectClip(backgroundPath.bounds);
+            CGContextSetShadowWithColor(context, CGSizeZero, 0, nil);
+            
+            CGContextSetAlpha(context, CGColorGetAlpha(innerShadow.CGColor))
+            CGContextBeginTransparencyLayer(context, nil)
+            
+            let opaqueShadow = innerShadow.colorWithAlphaComponent(1)
+            CGContextSetShadowWithColor(context, innerShadowOffset, innerShadowBlurRadius, opaqueShadow.CGColor)
+            CGContextSetBlendMode(context, kCGBlendModeSourceOut)
+            CGContextBeginTransparencyLayer(context, nil)
+            
+            opaqueShadow.setFill()
+            backgroundPath.fill()
+            CGContextEndTransparencyLayer(context);
+            
+            CGContextEndTransparencyLayer(context);
+            CGContextRestoreGState(context);
+        }
+
         
         // ProgressBackground Drawing
         let kMFPadding = CGFloat(15)

@@ -10,6 +10,10 @@ import UIKit
 
 class mainHeaderViewController: UIViewController, CityProtocol {
 
+    var cityList: cityListViewController!
+    var mineFrm: mineTableViewController!
+    var nav: UINavigationController?
+    
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
     @IBOutlet weak var username: UIButton!
     @IBOutlet weak var times: UIButton!
@@ -32,16 +36,26 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         times.backgroundColor = UIColor(red: 0.843, green: 0.243, blue: 0.255, alpha: 1.00)
         
         //添加事件
-        //locationCity.addTarget(self, action: "openCityList", forControlEvents: UIControlEvents.TouchUpInside)
+        nickname.userInteractionEnabled = true
+        nickname.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "openMineSB"))
         // Do any additional setup after loading the view.
+    }
+    
+    func setNavi(navi: UINavigationController?) {
+        self.nav = navi
+    }
+    
+    @IBAction func openMineSB() {
+        mineFrm = mineTableViewController.mainRoot() as! mineTableViewController
+        self.nav?.pushViewController(mineFrm, animated: true)
     }
     
     @IBAction func openCityList(sender: UIButton) {
         println("打开城市列表")
-        var cityList = cityListViewController()
+        cityList = cityListViewController()
         cityList.Delegate = self
-        //self.navigationController?.pushViewController(cityList, animated: true)
-        self.presentViewController(cityList, animated: true, completion: nil)
+        self.nav?.pushViewController(cityList, animated: true)
+        //self.presentViewController(cityList, animated: true, completion: nil) //模态
     }
     
     func onSelectCity(selectedCity: String) {

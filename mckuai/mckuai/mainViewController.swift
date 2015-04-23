@@ -79,7 +79,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //添加Header
         head = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainHeaderViewController") as! mainHeaderViewController
         head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 245)
-        
+        head.setNavi(self.navigationController)
         tableView.tableHeaderView = head.view
         
         self.view.addSubview(tableView)

@@ -8,27 +8,90 @@
 
 import UIKit
 
-class mineTableViewController: UITableViewController {
-
+class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+    var tableView: UITableView!
+    var head: mineHeadViewController!
     let NAVBAR_CHANGE_POINT:CGFloat = 50
+    let url = "http://118.144.83.145:8081/user.do?act=message"
+    var manager = AFHTTPRequestOperationManager()
+    var json: JSON! {
+        didSet {
+            if "ok" == self.json["state"].stringValue {
+                if let d = self.json["dataObject", "message"].array {
+                    self.datasource = d
+                }
+                self.User = self.json["dataObject", "user"] as JSON
+                self.pageInfo = self.json["dataObject", "pageInfo"] as JSON
+            }
+            head.refreshHead(User)
+            self.tableView.reloadData()
+        }
+    }
+    var User: JSON!
+    var pageInfo: JSON!
+    var datasource: Array<JSON>!
     
     class func mainRoot()->UIViewController{
-        var main = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! UITableViewController
+        var main = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! UIViewController
         return main
+    }
+    
+    func setupViews() {
+        self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64), style: UITableViewStyle.Plain)
+        tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.opaque = false
+        tableView.backgroundColor = UIColor.clearColor()
+        tableView.separatorStyle = .None
+        //        var bg = UIImageView(image: UIImage(named: "Image"))
+        tableView.backgroundView = nil //这个可以改背影
+        tableView.scrollsToTop = false
+        
+        //添加Header
+        self.head = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineHeadViewController") as! mineHeadViewController
+        tableView.tableHeaderView = self.head.view
+        self.view.addSubview(tableView)
+        
+        self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
+        self.tableView.footer.hidden = true
+    }
+    
+    func loadNewData() {
+        //开始刷新
+        var param = ["id": 6, "page": 1]
+        manager.GET(url,
+            parameters: param,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                self.json = JSON(responseObject)
+                self.tableView.header.endRefreshing()
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.tableView.header.endRefreshing()
+                //self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+        })
+    }
+    
+    func loadMoreData() {
+    
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //[self.navigationController.navigationBar lt_setBackgroundColor:[UIColor blueColor]];
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+        setupViews()
+        
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.greenColor())
+        
+        //
+        loadNewData()
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
         var color = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)
         var offsetY = scrollView.contentOffset.y
         if offsetY > NAVBAR_CHANGE_POINT {
@@ -56,75 +119,33 @@ class mineTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 30
+        if self.datasource != nil {
+            return self.datasource.count
+        } else {
+            return 0
+        }
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as? UITableViewCell
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: "reuseIdentifier")
         }
-        
-        cell?.textLabel?.text = "第\(indexPath.row)条记录"
+        let d = self.datasource[indexPath.row]
+        cell?.textLabel?.text = d["talkTitle"].stringValue
         // Configure the cell...
 
         return cell!
     }
-
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

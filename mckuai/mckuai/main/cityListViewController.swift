@@ -128,7 +128,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         var key: AnyObject = self.keys.objectAtIndex(indexPath.section)
         Delegate?.onSelectCity((self.cities.objectForKey(key)?.objectAtIndex(indexPath.row) as? String)!)
         //back
-        self.dismissViewControllerAnimated(true, completion: nil)
-        //self.navigationController?.popViewControllerAnimated(true)
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
