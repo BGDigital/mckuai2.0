@@ -39,6 +39,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     var tableView: UITableView!
+    var head: mainHeaderViewController!
     
     class func mainRoot()->UIViewController{
         var main = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainViewController") as! UIViewController
@@ -76,8 +77,9 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.scrollsToTop = false
         
         //添加Header
-        var head = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainHeaderViewController") as! mainHeaderViewController
+        head = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainHeaderViewController") as! mainHeaderViewController
         head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 245)
+        
         tableView.tableHeaderView = head.view
         
         self.view.addSubview(tableView)

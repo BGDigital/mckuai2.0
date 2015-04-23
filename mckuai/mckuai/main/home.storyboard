@@ -91,6 +91,9 @@
                                         <state key="normal" title="成都" image="Guide">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="openCityList:" destination="XJX-YD-otr" eventType="touchUpInside" id="lnW-tT-93M"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.20784313725490197" green="0.70196078431372544" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -102,6 +105,7 @@
                                     <constraint firstItem="grs-bx-qWy" firstAttribute="leading" secondItem="qj8-bT-NLt" secondAttribute="trailing" constant="14" id="U8m-pe-M0t"/>
                                     <constraint firstItem="od5-If-XNm" firstAttribute="leading" secondItem="grs-bx-qWy" secondAttribute="trailing" constant="8" id="hJ5-1y-yF4"/>
                                     <constraint firstItem="a0K-Fu-ERJ" firstAttribute="leading" secondItem="T0F-CA-wdz" secondAttribute="leading" constant="82" id="jgK-Yx-IWw"/>
+                                    <constraint firstAttribute="height" constant="74" id="ohu-Ig-Lae"/>
                                     <constraint firstItem="qj8-bT-NLt" firstAttribute="leading" secondItem="T0F-CA-wdz" secondAttribute="leading" constant="8" id="orp-hg-i0Y"/>
                                     <constraint firstItem="grs-bx-qWy" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="15" id="qFT-1C-P5d"/>
                                     <constraint firstItem="od5-If-XNm" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="11" id="tqC-UC-kRq"/>
@@ -110,10 +114,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frP-xz-HHH">
                                 <rect key="frame" x="0.0" y="85" width="600" height="150"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEy-aD-rvb">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kEy-aD-rvb">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                                     </imageView>
-                                    <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="868-YO-PVl">
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="868-YO-PVl">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
@@ -123,13 +127,13 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFd-QZ-zbd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFd-QZ-zbd">
                                         <rect key="frame" x="8" y="66" width="584" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i8-bd-LKi">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i8-bd-LKi">
                                         <rect key="frame" x="4" y="0.0" width="86" height="22"/>
                                         <state key="normal" title="22:44:23" image="Guide">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -138,6 +142,19 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.94509803920000002" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="leading" secondItem="frP-xz-HHH" secondAttribute="leading" id="0GA-fp-CVH"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="top" secondItem="4i8-bd-LKi" secondAttribute="top" id="Byx-sP-e8q"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="centerY" secondItem="xFd-QZ-zbd" secondAttribute="centerY" id="CoK-g8-hLe"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="trailing" secondItem="kEy-aD-rvb" secondAttribute="trailing" id="IC5-1y-F28"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="bottom" secondItem="kEy-aD-rvb" secondAttribute="bottom" id="Oot-Cx-XZK"/>
+                                    <constraint firstAttribute="bottom" secondItem="868-YO-PVl" secondAttribute="bottom" id="SRo-S1-12a"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="leading" secondItem="kEy-aD-rvb" secondAttribute="leading" id="Vuh-n7-j4F"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="top" secondItem="kEy-aD-rvb" secondAttribute="top" id="j5J-u6-KLz"/>
+                                    <constraint firstAttribute="trailing" secondItem="868-YO-PVl" secondAttribute="trailing" id="obN-fd-SJs"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="top" secondItem="frP-xz-HHH" secondAttribute="top" id="vMK-mm-1BF"/>
+                                    <constraint firstItem="868-YO-PVl" firstAttribute="centerX" secondItem="xFd-QZ-zbd" secondAttribute="centerX" id="zWF-iu-B5N"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.9137254901960784" green="0.93333333333333335" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -159,7 +176,7 @@
                         <outlet property="chatTitle" destination="xFd-QZ-zbd" id="xgU-uC-fYb"/>
                         <outlet property="imageV" destination="kEy-aD-rvb" id="KjB-05-k1E"/>
                         <outlet property="level" destination="od5-If-XNm" id="BOi-Ae-9d2"/>
-                        <outlet property="locationCity" destination="a0K-Fu-ERJ" id="dnD-Op-56m"/>
+                        <outlet property="locationCity" destination="a0K-Fu-ERJ" id="OxS-De-Ln8"/>
                         <outlet property="nickname" destination="grs-bx-qWy" id="qcK-Uz-JM7"/>
                         <outlet property="roundProgressView" destination="qj8-bT-NLt" id="FI3-gX-y8M"/>
                         <outlet property="times" destination="4i8-bd-LKi" id="PnP-2g-55f"/>
@@ -168,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSa-5e-ByW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2465" y="-380.5"/>
+            <point key="canvasLocation" x="2589" y="-404.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Epc-4z-TTs">

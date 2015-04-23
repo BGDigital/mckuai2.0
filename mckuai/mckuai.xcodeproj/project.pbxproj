@@ -28,6 +28,8 @@
 		E6518C031ADD065E005A8C97 /* mckuaiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6518C021ADD065E005A8C97 /* mckuaiTests.swift */; };
 		E696E5241AE7829000261F57 /* mainHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5231AE7829000261F57 /* mainHeaderViewController.swift */; };
 		E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5281AE7920800261F57 /* MFRoundProgressView.swift */; };
+		E696E5621AE7F88100261F57 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = E696E5601AE7F88100261F57 /* citydict.plist */; };
+		E696E5631AE7F88100261F57 /* cityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5611AE7F88100261F57 /* cityListViewController.swift */; };
 		E6B2043A1AE69E4C00EB11B4 /* mainSubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B204381AE69E4C00EB11B4 /* mainSubCell.swift */; };
 		E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B204391AE69E4C00EB11B4 /* mainSubCell.xib */; };
 		E6B204401AE6A56000EB11B4 /* live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B2043F1AE6A56000EB11B4 /* live.storyboard */; };
@@ -80,6 +82,8 @@
 		E6518C021ADD065E005A8C97 /* mckuaiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mckuaiTests.swift; sourceTree = "<group>"; };
 		E696E5231AE7829000261F57 /* mainHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainHeaderViewController.swift; path = main/mainHeaderViewController.swift; sourceTree = "<group>"; };
 		E696E5281AE7920800261F57 /* MFRoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MFRoundProgressView.swift; path = ThirdParty/MFRoundProgressView/MFRoundProgressView.swift; sourceTree = "<group>"; };
+		E696E5601AE7F88100261F57 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = citydict.plist; path = main/citydict.plist; sourceTree = "<group>"; };
+		E696E5611AE7F88100261F57 /* cityListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = cityListViewController.swift; path = main/cityListViewController.swift; sourceTree = "<group>"; };
 		E6B204381AE69E4C00EB11B4 /* mainSubCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainSubCell.swift; path = main/mainSubCell.swift; sourceTree = "<group>"; };
 		E6B204391AE69E4C00EB11B4 /* mainSubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = mainSubCell.xib; path = main/mainSubCell.xib; sourceTree = "<group>"; };
 		E6B2043F1AE6A56000EB11B4 /* live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = live.storyboard; path = live/live.storyboard; sourceTree = "<group>"; };
@@ -274,6 +278,8 @@
 		E6D2C3681AE110B400FF823E /* main */ = {
 			isa = PBXGroup;
 			children = (
+				E696E5601AE7F88100261F57 /* citydict.plist */,
+				E696E5611AE7F88100261F57 /* cityListViewController.swift */,
 				E6B7175D1ADECE1D00684E83 /* mainViewController.swift */,
 				E6B204381AE69E4C00EB11B4 /* mainSubCell.swift */,
 				E6B204391AE69E4C00EB11B4 /* mainSubCell.xib */,
@@ -382,6 +388,7 @@
 				E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */,
 				E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */,
 				E6518BF21ADD065E005A8C97 /* Main.storyboard in Resources */,
+				E696E5621AE7F88100261F57 /* citydict.plist in Resources */,
 				E63DA5071AE6ACA6001D7811 /* mine.storyboard in Resources */,
 				E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */,
 				E63898951AE0307E00756679 /* mainTableViewCell.xib in Resources */,
@@ -443,6 +450,7 @@
 				E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */,
 				E63DA5091AE6AD27001D7811 /* mineTableViewController.swift in Sources */,
 				E626508E1ADFA35F00B16094 /* SwiftyJSON.swift in Sources */,
+				E696E5631AE7F88100261F57 /* cityListViewController.swift in Sources */,
 				E6B717601ADECE7400684E83 /* liveViewController.swift in Sources */,
 				E603D6481ADE664900D93708 /* SABlurImageView.swift in Sources */,
 				E6B204441AE6A66300EB11B4 /* chatViewController.swift in Sources */,
