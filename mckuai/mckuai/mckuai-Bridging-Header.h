@@ -11,3 +11,4 @@
 #import "UINavigationBar+Awesome.h"
 #import "HMSegmentedControl.h"
 #import "MJExtension.h"
+#import "UILabel+DynamicHeight.h"

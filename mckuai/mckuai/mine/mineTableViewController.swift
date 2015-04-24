@@ -91,6 +91,10 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         loadNewData()
     }
     
+    func refreshTableView() {
+        println("刷新TableView")
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var color = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)
         var offsetY = scrollView.contentOffset.y
@@ -118,6 +122,10 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     // MARK: - Table view data source
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+    }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
@@ -137,12 +145,14 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as? messageCell
+        
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: "reuseIdentifier")
+            let nib: NSArray = NSBundle.mainBundle().loadNibNamed("messageCell", owner: self, options: nil)
+            cell = nib.lastObject as? messageCell
         }
-        let d = self.datasource[indexPath.row]
-        cell?.textLabel?.text = d["talkTitle"].stringValue
+        let d = self.datasource[indexPath.row] as JSON
+        cell?.update(d)
         // Configure the cell...
 
         return cell!

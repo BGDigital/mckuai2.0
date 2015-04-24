@@ -53,7 +53,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         self.tabBarItem.badgeValue = "3"
         
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
         //设置标题颜色
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
@@ -62,6 +61,10 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupTableView()
 //        self.data = NSMutableArray()
         loadNewData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
     }
     
     func setupTableView() {

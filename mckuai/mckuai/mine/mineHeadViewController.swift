@@ -15,7 +15,11 @@ class mineHeadViewController: UIViewController {
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var locationCity: UIButton!
+    @IBOutlet weak var btnMsg: UIButton!
+    @IBOutlet weak var btnDynamic: UIButton!
+    @IBOutlet weak var btnWork: UIButton!
     
+    var lastSelected: UIButton!
     var segmentedControl: HMSegmentedControl!
     var headImg: String!
     var userId = 0
@@ -33,12 +37,50 @@ class mineHeadViewController: UIViewController {
         //模糊背景
         imageBg.addBlurEffect(30, times: 1)
         // Do any additional setup after loading the view.
+        //初始化Button
+        btnMsg.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
+        btnMsg.setBackgroundImage(UIImage(named: ""), forState: .Normal)
+        
+        btnDynamic.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
+        btnDynamic.setBackgroundImage(UIImage(named: ""), forState: .Normal)
+        
+        btnWork.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
+        btnWork.setBackgroundImage(UIImage(named: ""), forState: .Normal)
     }
     
     @IBAction func segmentSelected(sender: HMSegmentedControl) {
         println("segment selected:\(sender.selectedSegmentIndex)")
     }
 
+    @IBAction func messageSelected(sender: UIButton) {
+        sender.selected = true
+        if lastSelected != nil {
+            lastSelected.selected = false
+        }
+        lastSelected = sender
+        if sender.tag != 1 {
+            segmentedControl.hidden = true
+            self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300)
+        } else {
+            segmentedControl.hidden = false
+            self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
+        }
+        
+        
+        switch (sender.tag) {
+        case 1:
+            
+            break
+        case 2:
+
+            break
+        default:
+            //这个其实就是3
+            
+            break
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
