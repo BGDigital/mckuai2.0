@@ -19,7 +19,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="麦块2" id="RXy-NH-JvM">
-                        <barButtonItem key="leftBarButtonItem" image="second_normal" id="Ww4-7g-7Qv">
+                        <barButtonItem key="leftBarButtonItem" image="sidemenu" id="Ww4-7g-7Qv">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="ybe-Gr-Fgn" id="xZb-cK-w8a"/>
                             </connections>
@@ -40,20 +41,28 @@
                         <viewControllerLayoutGuide type="bottom" id="Anm-KF-hNE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j2b-Ci-2Su">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="245"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="235"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0F-CA-wdz">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="74"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这个是头" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grs-bx-qWy">
-                                        <rect key="frame" x="82" y="15" width="83" height="21"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_head_bg" translatesAutoresizingMaskIntoConstraints="NO" id="GDh-xh-4rA">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="21"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这个是头管你" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grs-bx-qWy">
+                                        <rect key="frame" x="82" y="15" width="102" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="83" id="flA-X2-Bu1"/>
+                                            <constraint firstAttribute="width" constant="68" id="flA-X2-Bu1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="flA-X2-Bu1"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qj8-bT-NLt" customClass="MFRoundProgressView" customModule="mckuai" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="60" height="60"/>
@@ -69,26 +78,31 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8c-DR-jBO">
-                                        <rect key="frame" x="530" y="23" width="51" height="22"/>
-                                        <state key="normal" title="背包" image="Guide">
+                                        <rect key="frame" x="518" y="23" width="63" height="27"/>
+                                        <state key="normal" title="背包" image="backpacker_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="od5-If-XNm">
-                                        <rect key="frame" x="173" y="11" width="45" height="29"/>
+                                        <rect key="frame" x="192" y="17" width="43" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="45" id="TIz-bI-ZSQ"/>
+                                            <constraint firstAttribute="width" constant="43" id="TIz-bI-ZSQ"/>
+                                            <constraint firstAttribute="height" constant="18" id="hZN-19-5Zp"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="LV. 22">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0K-Fu-ERJ">
-                                        <rect key="frame" x="82" y="44" width="43" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="成都" image="Guide">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0K-Fu-ERJ">
+                                        <rect key="frame" x="82" y="44" width="153" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="153" id="M0Q-5i-f0Q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="成都" image="location">
+                                            <color key="titleColor" red="0.18823529411764706" green="0.63529411764705879" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -96,19 +110,23 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.20784313725490197" green="0.70196078431372544" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.17254901960784313" green="0.82352941176470584" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="P8c-DR-jBO" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="23" id="6v2-r7-6CI"/>
                                     <constraint firstAttribute="trailing" secondItem="P8c-DR-jBO" secondAttribute="trailing" constant="19" id="B4s-gX-QWu"/>
                                     <constraint firstItem="a0K-Fu-ERJ" firstAttribute="top" secondItem="grs-bx-qWy" secondAttribute="bottom" constant="8" id="H0S-EQ-jFg"/>
                                     <constraint firstItem="qj8-bT-NLt" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="8" id="PLb-yh-thD"/>
                                     <constraint firstItem="grs-bx-qWy" firstAttribute="leading" secondItem="qj8-bT-NLt" secondAttribute="trailing" constant="14" id="U8m-pe-M0t"/>
+                                    <constraint firstItem="GDh-xh-4rA" firstAttribute="leading" secondItem="T0F-CA-wdz" secondAttribute="leading" id="eeF-ZR-mh7"/>
                                     <constraint firstItem="od5-If-XNm" firstAttribute="leading" secondItem="grs-bx-qWy" secondAttribute="trailing" constant="8" id="hJ5-1y-yF4"/>
+                                    <constraint firstAttribute="trailing" secondItem="GDh-xh-4rA" secondAttribute="trailing" id="j9o-h0-ZOH"/>
                                     <constraint firstItem="a0K-Fu-ERJ" firstAttribute="leading" secondItem="T0F-CA-wdz" secondAttribute="leading" constant="82" id="jgK-Yx-IWw"/>
                                     <constraint firstAttribute="height" constant="74" id="ohu-Ig-Lae"/>
                                     <constraint firstItem="qj8-bT-NLt" firstAttribute="leading" secondItem="T0F-CA-wdz" secondAttribute="leading" constant="8" id="orp-hg-i0Y"/>
                                     <constraint firstItem="grs-bx-qWy" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="15" id="qFT-1C-P5d"/>
-                                    <constraint firstItem="od5-If-XNm" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="11" id="tqC-UC-kRq"/>
+                                    <constraint firstItem="GDh-xh-4rA" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" id="thD-6o-25Z"/>
+                                    <constraint firstItem="od5-If-XNm" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="17" id="tqC-UC-kRq"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frP-xz-HHH">
@@ -133,9 +151,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i8-bd-LKi">
-                                        <rect key="frame" x="4" y="0.0" width="86" height="22"/>
-                                        <state key="normal" title="22:44:23" image="Guide">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i8-bd-LKi">
+                                        <rect key="frame" x="4" y="0.0" width="70" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="fWs-l7-U0H"/>
+                                            <constraint firstAttribute="height" constant="17" id="si5-k7-Gri"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="22:44:23" image="live_time" backgroundImage="tag_time">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -144,6 +167,7 @@
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.94509803920000002" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="868-YO-PVl" firstAttribute="leading" secondItem="frP-xz-HHH" secondAttribute="leading" id="0GA-fp-CVH"/>
+                                    <constraint firstItem="4i8-bd-LKi" firstAttribute="leading" secondItem="frP-xz-HHH" secondAttribute="leading" constant="4" id="7RZ-Vc-ah7"/>
                                     <constraint firstItem="868-YO-PVl" firstAttribute="top" secondItem="4i8-bd-LKi" secondAttribute="top" id="Byx-sP-e8q"/>
                                     <constraint firstItem="868-YO-PVl" firstAttribute="centerY" secondItem="xFd-QZ-zbd" secondAttribute="centerY" id="CoK-g8-hLe"/>
                                     <constraint firstItem="868-YO-PVl" firstAttribute="trailing" secondItem="kEy-aD-rvb" secondAttribute="trailing" id="IC5-1y-F28"/>
@@ -161,7 +185,7 @@
                         <constraints>
                             <constraint firstItem="T0F-CA-wdz" firstAttribute="leading" secondItem="frP-xz-HHH" secondAttribute="leading" id="CRQ-cM-fHb"/>
                             <constraint firstAttribute="trailing" secondItem="T0F-CA-wdz" secondAttribute="trailing" id="D6P-4w-QlK"/>
-                            <constraint firstItem="Anm-KF-hNE" firstAttribute="top" secondItem="frP-xz-HHH" secondAttribute="bottom" constant="10" id="Laa-bI-hLT"/>
+                            <constraint firstItem="Anm-KF-hNE" firstAttribute="top" secondItem="frP-xz-HHH" secondAttribute="bottom" id="Laa-bI-hLT"/>
                             <constraint firstAttribute="bottom" secondItem="T0F-CA-wdz" secondAttribute="bottom" constant="171" id="TfW-Bw-IO1"/>
                             <constraint firstItem="T0F-CA-wdz" firstAttribute="leading" secondItem="j2b-Ci-2Su" secondAttribute="leading" id="b1y-Xb-Ph0"/>
                             <constraint firstItem="T0F-CA-wdz" firstAttribute="trailing" secondItem="frP-xz-HHH" secondAttribute="trailing" id="eMq-hI-j6P"/>
@@ -170,7 +194,7 @@
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="245"/>
+                    <size key="freeformSize" width="600" height="235"/>
                     <connections>
                         <outlet property="bag" destination="P8c-DR-jBO" id="K4G-eD-vO8"/>
                         <outlet property="chatTitle" destination="xFd-QZ-zbd" id="xgU-uC-fYb"/>
@@ -212,6 +236,11 @@
     </scenes>
     <resources>
         <image name="Guide" width="15" height="15"/>
-        <image name="second_normal" width="30" height="30"/>
+        <image name="backpacker_normal" width="27" height="27"/>
+        <image name="live_time" width="11" height="11"/>
+        <image name="location" width="12" height="12"/>
+        <image name="main_head_bg" width="375" height="21"/>
+        <image name="sidemenu" width="21" height="21"/>
+        <image name="tag_time" width="70" height="17"/>
     </resources>
 </document>

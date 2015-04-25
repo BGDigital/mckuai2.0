@@ -9,7 +9,7 @@
 import UIKit
 
 class mainHeaderViewController: UIViewController, CityProtocol {
-
+    
     var cityList: cityListViewController!
     var mineFrm: mineTableViewController!
     var nav: UINavigationController?
@@ -30,14 +30,28 @@ class mainHeaderViewController: UIViewController, CityProtocol {
 
         roundProgressView.percent = 78
         roundProgressView.imageView = UIImageView(image: UIImage(named: "1024"))
-        username.imageEdgeInsets = UIEdgeInsetsMake(0.0, -20, 0.0, 0.0)
-        //locationCity.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        username.imageEdgeInsets = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)
+        locationCity.titleEdgeInsets = UIEdgeInsetsMake(-1.0, 3.0, 0.0, 0.0)
+        if let city = Defaults["CurrentCity"].string {
+            locationCity.setTitle(city, forState: .Normal)
+        } else {
+            locationCity.setTitle("未定位", forState: .Normal)
+        }
+        
+        //圆角背景
+        level.backgroundColor = UIColor(hexString: "#30A243")!
+        level.layer.cornerRadius = 10
+        self.times.layer.cornerRadius = 2
+        
+        bag.setImage(UIImage(named: "backpacker_selected"), forState: .Selected)
         imageV.sd_setImageWithURL(nil, placeholderImage: UIImage(named: "placeholder"))
         times.backgroundColor = UIColor(red: 0.843, green: 0.243, blue: 0.255, alpha: 1.00)
         
         //添加事件
         nickname.userInteractionEnabled = true
-        nickname.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "openMineSB"))
+        var m = UITapGestureRecognizer(target: self, action: "openMineSB")
+        nickname.addGestureRecognizer(m)
+        roundProgressView.addGestureRecognizer(m)
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +73,8 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     }
     
     func onSelectCity(selectedCity: String) {
+        //保存到本地
+        Defaults["CurrentCity"] = selectedCity
         locationCity.setTitle(selectedCity, forState: .Normal)
     }
     
@@ -66,7 +82,6 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

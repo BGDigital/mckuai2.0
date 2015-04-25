@@ -13,12 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var launchView: UIView!
-    let launchUrl = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //启动页面加载广告
+        self.window?.makeKeyAndVisible()
+//        //启动页面加载广告
         loadLaunchView()
-        
         return true
     }
     
@@ -31,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var imageV = UIImageView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height-100))
         
         // 加载网络图片
-        imageV.sd_setImageWithURL(NSURL(string: launchUrl), placeholderImage: nil)
+        imageV.sd_setImageWithURL(NSURL(string: MCUtils.URL_LAUNCH), placeholderImage: nil)
         
         launchView.addSubview(imageV)
         self.window?.bringSubviewToFront(launchView)

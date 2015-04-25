@@ -8,6 +8,13 @@
 
 import UIKit
 
+//消息类型
+enum MessageType: String {
+    case reply = "reply"
+    case system = "system"
+    case post = "post"
+}
+
 class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     var tableView: UITableView!
     var head: mineHeadViewController!
@@ -23,7 +30,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
                 self.User = self.json["dataObject", "user"] as JSON
                 self.pageInfo = self.json["dataObject", "pageInfo"] as JSON
             }
-            head.refreshHead(User)
+            head.RefreshHead(User)
             self.tableView.reloadData()
         }
     }
@@ -58,38 +65,27 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.footer.hidden = true
     }
     
-    func loadNewData() {
-        //开始刷新
-        var param = ["id": 6, "page": 1]
-        manager.GET(url,
-            parameters: param,
-            success: { (operation: AFHTTPRequestOperation!,
-                responseObject: AnyObject!) in
-                self.json = JSON(responseObject)
-                self.tableView.header.endRefreshing()
-            },
-            failure: { (operation: AFHTTPRequestOperation!,
-                error: NSError!) in
-                println("Error: " + error.localizedDescription)
-                self.tableView.header.endRefreshing()
-                //self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
-        })
-    }
-    
-    func loadMoreData() {
-    
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         setupViews()
         
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.greenColor())
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         
-        //
+        customNavBackButton()
         loadNewData()
     }
+    
+    func customNavBackButton() {
+        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
+        back.tintColor = UIColor.whiteColor()
+        self.navigationItem.leftBarButtonItem = back
+    }
+    
+    func backToMain() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
     
     func refreshTableView() {
         println("刷新TableView")
@@ -156,6 +152,53 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         // Configure the cell...
 
         return cell!
+    }
+    
+    func loadNewData() {
+        //开始刷新
+        var param = ["id": 6, "page": 1]
+        manager.GET(url,
+            parameters: param,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                self.json = JSON(responseObject)
+                self.tableView.header.endRefreshing()
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.tableView.header.endRefreshing()
+                //self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+        })
+    }
+    
+    func loadMoreData() {
+        
+    }
+
+    
+    //刷新数据
+    func onChangeType() {
+        
+        switch (self.head.bigType) {
+        case 1:
+            switch (self.head.smallType) {
+            case 1:
+                break
+            case 2:
+                break
+            case 3:
+                break
+            default:
+                break
+            }
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
+        }
     }
 
 }

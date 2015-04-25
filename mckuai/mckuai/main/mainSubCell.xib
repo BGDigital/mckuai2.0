@@ -42,9 +42,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kpK-sG-Hbw">
-                                <rect key="frame" x="160" y="86" width="51" height="15"/>
+                                <rect key="frame" x="178" y="86" width="16" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="小小麦" image="Guide">
+                                <state key="normal" image="replys">
                                     <color key="titleColor" red="0.69411764705882351" green="0.69803921568627447" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -120,6 +120,7 @@
     </objects>
     <resources>
         <image name="Guide" width="15" height="15"/>
+        <image name="replys" width="16" height="16"/>
         <image name="subCell_bg" width="5" height="118"/>
     </resources>
 </document>

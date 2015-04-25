@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mineCell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="x57-6a-wMu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mineCell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="x57-6a-wMu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="101"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1y-jK-v8d">

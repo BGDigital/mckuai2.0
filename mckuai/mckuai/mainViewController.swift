@@ -8,9 +8,8 @@
 
 import UIKit
 
-
 class mainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     let cellIdentifier = "mainTableViewCell"
     let url = "http://118.144.83.145:8081/index.do?act=all"
     var manager = AFHTTPRequestOperationManager()
@@ -49,22 +48,22 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         self.tabBarItem.badgeValue = "3"
         
         //设置标题颜色
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-            
         
         setupTableView()
 //        self.data = NSMutableArray()
         loadNewData()
     }
+
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
     
     func setupTableView() {
@@ -88,8 +87,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
-        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
-        self.tableView.footer.hidden = true
     }
 
     func showCustomHUD(view: UIView, title: String, imgName: String) {
@@ -134,34 +131,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    //上拉加载更多数据
-    func loadMoreData() {
-        //1.添加假数据
-        manager.GET(url,
-            parameters: nil,
-            success: { (operation: AFHTTPRequestOperation!,
-                responseObject: AnyObject!) in
-                self.json = JSON(responseObject)
-                if "ok" == self.json["state"].stringValue {
-                    if let d = self.json["dataObject"].array {
-                        if self.datasource == nil {
-                            self.datasource = d
-                        } else {
-                            self.datasource = self.datasource + d
-                        }
-                    }
-                }
-                self.tableView.footer.endRefreshing()
-                //self.tableView.footer.noticeNoMoreData()
-            },
-            failure: { (operation: AFHTTPRequestOperation!,
-                error: NSError!) in
-                println("Error: " + error.localizedDescription)
-                self.tableView.footer.endRefreshing()
-                self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
-        })
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -173,7 +142,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 192
+            return 190
         } else {
             return 118
         }
@@ -181,9 +150,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.datasource != nil && self.liveData != nil {
-            if self.datasource.count > 10 {
-                self.tableView.footer.hidden = false
-            }
             switch (section) {
             case 0:
                 return self.liveData.count
@@ -226,5 +192,27 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         }
     }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat  {
+        return 28
+    }
 
+    
+    //自定义Section样式
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var v = UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 28))
+        var bg = UIImageView(image: UIImage(named: "section_bg"))
+        bg.frame = v.frame
+        v.addSubview(bg)
+        var img: UIImage!
+        if section == 0 {
+            img = UIImage(named: "live_section")
+        } else {
+            img = UIImage(named: "hot_section")
+        }
+        var live = UIImageView(image: img)
+        live.frame = CGRectMake((self.view.bounds.size.width - img.size.width) / 2 , 0, img.size.width, img.size.height)
+        v.addSubview(live)
+        return v
+    }
 }

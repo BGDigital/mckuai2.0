@@ -31,6 +31,7 @@
 		E692AA4D1AE9E43E00577B3C /* messageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692AA4B1AE9E43E00577B3C /* messageCell.swift */; };
 		E692AA4E1AE9E43E00577B3C /* messageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E692AA4C1AE9E43E00577B3C /* messageCell.xib */; };
 		E692AA531AE9FA9E00577B3C /* UILabel+DynamicHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E692AA521AE9FA9E00577B3C /* UILabel+DynamicHeight.m */; };
+		E692AA591AEA477A00577B3C /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E692AA581AEA477A00577B3C /* HMSegmentedControl.m */; };
 		E696E5241AE7829000261F57 /* mainHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5231AE7829000261F57 /* mainHeaderViewController.swift */; };
 		E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5281AE7920800261F57 /* MFRoundProgressView.swift */; };
 		E696E5621AE7F88100261F57 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = E696E5601AE7F88100261F57 /* citydict.plist */; };
@@ -46,6 +47,9 @@
 		E6B717601ADECE7400684E83 /* liveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7175F1ADECE7400684E83 /* liveViewController.swift */; };
 		E6B717621ADED22D00684E83 /* leftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B717611ADED22D00684E83 /* leftMenuViewController.swift */; };
 		E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6D2C36A1AE1111500FF823E /* home.storyboard */; };
+		E6DDF4931AEB9D0500339E75 /* MCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4921AEB9D0500339E75 /* MCUtils.swift */; };
+		E6DDF49C1AEBBC6800339E75 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */; };
+		E6DDF49D1AEBBC6800339E75 /* WelcomePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,8 @@
 		E692AA4C1AE9E43E00577B3C /* messageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = messageCell.xib; path = mine/messageCell.xib; sourceTree = "<group>"; };
 		E692AA521AE9FA9E00577B3C /* UILabel+DynamicHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+DynamicHeight.m"; path = "ThirdParty/UILabel+DynamicHeight.m"; sourceTree = "<group>"; };
 		E692AA541AE9FAF300577B3C /* UILabel+DynamicHeight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UILabel+DynamicHeight.h"; path = "ThirdParty/UILabel+DynamicHeight.h"; sourceTree = "<group>"; };
+		E692AA571AEA477A00577B3C /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		E692AA581AEA477A00577B3C /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		E696E5231AE7829000261F57 /* mainHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainHeaderViewController.swift; path = main/mainHeaderViewController.swift; sourceTree = "<group>"; };
 		E696E5281AE7920800261F57 /* MFRoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MFRoundProgressView.swift; path = ThirdParty/MFRoundProgressView/MFRoundProgressView.swift; sourceTree = "<group>"; };
 		E696E5601AE7F88100261F57 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = citydict.plist; path = main/citydict.plist; sourceTree = "<group>"; };
@@ -107,6 +113,9 @@
 		E6B7175F1ADECE7400684E83 /* liveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liveViewController.swift; sourceTree = "<group>"; };
 		E6B717611ADED22D00684E83 /* leftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leftMenuViewController.swift; sourceTree = "<group>"; };
 		E6D2C36A1AE1111500FF823E /* home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = home.storyboard; path = main/home.storyboard; sourceTree = "<group>"; };
+		E6DDF4921AEB9D0500339E75 /* MCUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCUtils.swift; sourceTree = "<group>"; };
+		E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePlus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +207,7 @@
 		E6518BE91ADD065E005A8C97 /* mckuai */ = {
 			isa = PBXGroup;
 			children = (
+				E6DDF4991AEBBC6800339E75 /* Welcome */,
 				E63DA5051AE6AC8D001D7811 /* mine */,
 				E6D2C3691AE110D000FF823E /* root */,
 				E6B2043E1AE6A50A00EB11B4 /* community */,
@@ -211,6 +221,7 @@
 				E6518BF51ADD065E005A8C97 /* LaunchScreen.xib */,
 				E6518BEA1ADD065E005A8C97 /* Supporting Files */,
 				E6518BF01ADD065E005A8C97 /* Main.storyboard */,
+				E6DDF4921AEB9D0500339E75 /* MCUtils.swift */,
 			);
 			path = mckuai;
 			sourceTree = "<group>";
@@ -238,6 +249,15 @@
 				E6518C011ADD065E005A8C97 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E692AA561AEA477A00577B3C /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				E692AA571AEA477A00577B3C /* HMSegmentedControl.h */,
+				E692AA581AEA477A00577B3C /* HMSegmentedControl.m */,
+			);
+			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		E696E5271AE791EE00261F57 /* MFRoundProgressView */ = {
@@ -278,6 +298,7 @@
 		E6CB649D1ADD0F8700D61B85 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				E692AA561AEA477A00577B3C /* HMSegmentedControl */,
 				E696E5271AE791EE00261F57 /* MFRoundProgressView */,
 				E63DA50A1AE6B9A7001D7811 /* LTNavigatioinBar */,
 				E626508D1ADFA35F00B16094 /* SwiftyJSON.swift */,
@@ -316,6 +337,15 @@
 				E6518BEE1ADD065E005A8C97 /* rootViewController.swift */,
 			);
 			name = root;
+			sourceTree = "<group>";
+		};
+		E6DDF4991AEBBC6800339E75 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */,
+				E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */,
+			);
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +438,7 @@
 				E692AA4E1AE9E43E00577B3C /* messageCell.xib in Resources */,
 				E696E5621AE7F88100261F57 /* citydict.plist in Resources */,
 				E63DA5071AE6ACA6001D7811 /* mine.storyboard in Resources */,
+				E6DDF49C1AEBBC6800339E75 /* Launch.storyboard in Resources */,
 				E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */,
 				E63898951AE0307E00756679 /* mainTableViewCell.xib in Resources */,
 				E6B204421AE6A63C00EB11B4 /* chat.storyboard in Resources */,
@@ -467,6 +498,7 @@
 				E692AA4A1AE962AC00577B3C /* SwiftColors.swift in Sources */,
 				E603D64B1ADE66BF00D93708 /* UIImage+BlurEffect.swift in Sources */,
 				E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */,
+				E692AA591AEA477A00577B3C /* HMSegmentedControl.m in Sources */,
 				E63DA5091AE6AD27001D7811 /* mineTableViewController.swift in Sources */,
 				E626508E1ADFA35F00B16094 /* SwiftyJSON.swift in Sources */,
 				E696E5631AE7F88100261F57 /* cityListViewController.swift in Sources */,
@@ -475,7 +507,9 @@
 				E603D6481ADE664900D93708 /* SABlurImageView.swift in Sources */,
 				E6B204441AE6A66300EB11B4 /* chatViewController.swift in Sources */,
 				E63898941AE0307E00756679 /* mainTableViewCell.swift in Sources */,
+				E6DDF4931AEB9D0500339E75 /* MCUtils.swift in Sources */,
 				E692AA431AE8D0FC00577B3C /* mineHeadViewController.swift in Sources */,
+				E6DDF49D1AEBBC6800339E75 /* WelcomePlus.swift in Sources */,
 				E60624ED1ADE6F27007D6DEF /* SwiftyUserDefaults.swift in Sources */,
 				E63898971AE042D900756679 /* mainData.swift in Sources */,
 				E6518BEF1ADD065E005A8C97 /* rootViewController.swift in Sources */,

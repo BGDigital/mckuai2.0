@@ -10,7 +10,6 @@ import UIKit
 
 class mineHeadViewController: UIViewController {
 
-    
     @IBOutlet weak var imageBg: SABlurImageView!
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
     @IBOutlet weak var nickname: UILabel!
@@ -26,17 +25,16 @@ class mineHeadViewController: UIViewController {
     var userLevel = 0
     var username = ""
     
+    //大类型,小类型都默认取1
+    var bigType = 1   //1:消息,2:动态,3:作品
+    var smallType = 0  //0:All,1:@Me,2:系统
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
-        segmentedControl = HMSegmentedControl(sectionTitles: ["全部", "@你", "系统"])
-        segmentedControl.frame = CGRectMake(0, self.view.bounds.size.height-25, self.view.bounds.size.width, 25)
-        segmentedControl.addTarget(self, action: "segmentSelected", forControlEvents: UIControlEvents())  //这里不能用ValueChange,会报错!
-        self.view.addSubview(segmentedControl)
+        initSegmentedControl()
         //模糊背景
         imageBg.addBlurEffect(30, times: 1)
-        // Do any additional setup after loading the view.
         //初始化Button
         btnMsg.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
         btnMsg.setBackgroundImage(UIImage(named: ""), forState: .Normal)
@@ -46,12 +44,27 @@ class mineHeadViewController: UIViewController {
         
         btnWork.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
         btnWork.setBackgroundImage(UIImage(named: ""), forState: .Normal)
+        
+        if let city = Defaults["CurrentCity"].string {
+            locationCity.setTitle(city, forState: .Normal)
+        } else {
+            locationCity.setTitle("未定位", forState: .Normal)
+        }
+    }
+    
+    func initSegmentedControl() {
+        segmentedControl = HMSegmentedControl(sectionTitles: ["全部", "@你", "系统"])
+        segmentedControl.frame = CGRectMake(0, self.view.bounds.size.height-25, self.view.bounds.size.width, 25)
+        segmentedControl.addTarget(self, action: "segmentSelected:", forControlEvents: UIControlEvents.ValueChanged)  //这里不能用ValueChange,会报错!
+        self.view.addSubview(segmentedControl)
     }
     
     @IBAction func segmentSelected(sender: HMSegmentedControl) {
-        println("segment selected:\(sender.selectedSegmentIndex)")
+//        println("segment selected:\(sender.selectedSegmentIndex)")
+        smallType = sender.selectedSegmentIndex
     }
 
+    //这个是大类型
     @IBAction func messageSelected(sender: UIButton) {
         sender.selected = true
         if lastSelected != nil {
@@ -60,37 +73,24 @@ class mineHeadViewController: UIViewController {
         lastSelected = sender
         if sender.tag != 1 {
             segmentedControl.hidden = true
-            self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300)
+            //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300)
         } else {
             segmentedControl.hidden = false
-            self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
+            //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
         }
-        
-        
-        switch (sender.tag) {
-        case 1:
-            
-            break
-        case 2:
-
-            break
-        default:
-            //这个其实就是3
-            
-            break
-        }
+        bigType = sender.tag
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func refreshHead(j: JSON) {
+
+    func RefreshHead(J: JSON) {
         //圆形头像
         roundProgressView.percent = 78
-        headImg = j["headImg"].stringValue
-        nickname.text = j["nike"].stringValue
+        headImg = J["headImg"].stringValue
+        nickname.text = J["nike"].stringValue
         if !headImg.isEmpty {
             imageBg.sd_setImageWithURL(NSURL(string: headImg), placeholderImage: UIImage(named: "1024"), completed: {image, error, cacheType, imageURL in
                 self.roundProgressView.imageView = UIImageView(image: image)

@@ -20,9 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.5.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - HMSegmentedControl (1.5.1)
   - MBProgressHUD (0.9.1)
-  - MJExtension (2.0.0)
   - MJRefresh (1.4.5)
   - RESideMenu (4.0.7)
   - SDWebImage (3.7.2):
@@ -31,18 +29,14 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - HMSegmentedControl
   - MBProgressHUD (~> 0.9.1)
-  - MJExtension
   - MJRefresh
   - RESideMenu (~> 4.0.7)
   - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
-  HMSegmentedControl: 35460abdd15c3087368db2d3d956717f088b34d1
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MJExtension: 6e8f19786bacf20efa4d0ffeb8054f4cdd7754c4
   MJRefresh: 4b24394e577ea399fbc926e5b6072317aae2c152
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29

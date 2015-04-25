@@ -28,6 +28,7 @@ class mainTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .None
         self.replys.backgroundColor = UIColor(red: 0.251, green: 0.784, blue: 0.302, alpha: 1.00)
+        self.replys.layer.cornerRadius = 2
         //println("I'm running! \(self.imageV.frame)")
 //        midBtn = UIView(frame: self.imageV.frame)
 //        self.midBtn.backgroundColor = UIColor.blackColor()
@@ -36,7 +37,8 @@ class mainTableViewCell: UITableViewCell {
     }
     
     func update(json: JSON) {
-        self.title.text = json["title"].stringValue+"\n "
+        self.title.text = json["title"].stringValue+"UITableView个人使用总结【前篇-增量加载】 - John.Lv - 博客园"
+        self.title.sizeOfMultiLineLabel()
         //self.desc.text = json["shortDres"].stringValue
         //self.replys.text = json["talkNum"].stringValue
         var url = json["imgUrl"].stringValue
