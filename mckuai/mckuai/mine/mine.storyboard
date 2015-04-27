@@ -9,6 +9,7 @@
         <!--Navigation Controller-->
         <scene sceneID="3Lh-UZ-4Hv">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gkI-MQ-apZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="He3-Nw-8fQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AmO-jK-gDL">
@@ -26,7 +27,6 @@
                         <segue destination="I25-zG-OIf" kind="relationship" relationship="rootViewController" id="bXZ-ki-Ig6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gkI-MQ-apZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1876" y="355"/>
         </scene>
@@ -61,7 +61,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="325"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="dAd-7w-c3w" customClass="SABlurImageView" customModule="mckuai" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dAd-7w-c3w" customClass="SABlurImageView" customModule="mckuai" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="325"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBl-i9-NFW" customClass="MFRoundProgressView" customModule="mckuai" customModuleProvider="target">
@@ -116,7 +116,8 @@
                                     <constraint firstAttribute="height" constant="60" id="3Dh-m5-DGr"/>
                                     <constraint firstAttribute="width" constant="100" id="UBW-Zh-dfb"/>
                                 </constraints>
-                                <state key="normal" title="消息" backgroundImage="cell_bg">
+                                <state key="normal" title="消息">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -129,7 +130,8 @@
                                     <constraint firstAttribute="height" constant="60" id="dy3-IK-OcS"/>
                                     <constraint firstAttribute="width" constant="100" id="snO-BD-tDO"/>
                                 </constraints>
-                                <state key="normal" title="作品" backgroundImage="cell_bg">
+                                <state key="normal" title="作品">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -142,7 +144,8 @@
                                     <constraint firstAttribute="width" constant="100" id="Vof-0E-3KS"/>
                                     <constraint firstAttribute="height" constant="60" id="ft0-Z1-SZj"/>
                                 </constraints>
-                                <state key="normal" title="动态" backgroundImage="cell_bg">
+                                <state key="normal" title="动态">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -212,7 +215,5 @@
     </scenes>
     <resources>
         <image name="Guide" width="15" height="15"/>
-        <image name="Image" width="320" height="568"/>
-        <image name="cell_bg" width="12" height="192"/>
     </resources>
 </document>

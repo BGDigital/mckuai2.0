@@ -66,7 +66,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
         switch (indexPath.row) {
         case 0:
-            self.sideMenuViewController.setContentViewController(mainViewController.initializationMain(), animated: true)
+            self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 1:

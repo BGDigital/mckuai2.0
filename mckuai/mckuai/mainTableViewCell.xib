@@ -82,6 +82,7 @@
                         <constraints>
                             <constraint firstItem="GEm-Hy-L3L" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" constant="15" id="1k9-Zg-X8g"/>
                             <constraint firstItem="lKh-h0-Xiq" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" constant="15" id="3Lj-mW-Rby"/>
+                            <constraint firstAttribute="trailing" secondItem="EYO-wS-A5a" secondAttribute="trailing" constant="15" id="6RQ-pb-HAx"/>
                             <constraint firstItem="GEm-Hy-L3L" firstAttribute="top" secondItem="AuI-QP-hHi" secondAttribute="top" id="8be-B7-F2E"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="centerX" secondItem="6o2-i9-2oT" secondAttribute="centerX" id="97X-a6-oyr"/>
                             <constraint firstItem="bk3-vh-xT9" firstAttribute="top" secondItem="5Xj-dp-nxk" secondAttribute="bottom" constant="9" id="AeN-3l-wBH"/>
@@ -100,6 +101,7 @@
                             <constraint firstAttribute="trailing" secondItem="O0c-MS-O9N" secondAttribute="trailing" id="rzw-6x-ty6"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" id="uHx-Xc-dwq"/>
                             <constraint firstItem="4Iw-Yc-srH" firstAttribute="top" secondItem="5Xj-dp-nxk" secondAttribute="top" id="w7a-wd-6R6"/>
+                            <constraint firstItem="EYO-wS-A5a" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" constant="15" id="xxY-da-YhQ"/>
                             <constraint firstItem="5Xj-dp-nxk" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" id="y2e-p4-0kd"/>
                         </constraints>
                     </view>

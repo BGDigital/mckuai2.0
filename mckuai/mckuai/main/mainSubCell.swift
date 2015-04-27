@@ -20,6 +20,7 @@ class mainSubCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.selectionStyle = .None
     }
     
     func update(json: JSON) {

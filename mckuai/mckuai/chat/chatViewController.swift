@@ -12,7 +12,7 @@ class chatViewController: UIViewController {
 
     class func mainRoot()->UIViewController{
         var main = UIStoryboard(name: "chat", bundle: nil).instantiateViewControllerWithIdentifier("chatViewController") as! UIViewController
-        main.tabBarItem = UITabBarItem(title: "聊天", image: UIImage(named: "second_normal"), selectedImage: UIImage(named: "second_selected"))
+        main.tabBarItem = UITabBarItem(title: "聊天", image: UIImage(named: "third_normal"), selectedImage: UIImage(named: "third_selected"))
         return UINavigationController(rootViewController: main)
     }
     

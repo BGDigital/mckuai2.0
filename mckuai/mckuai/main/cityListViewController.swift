@@ -22,7 +22,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     var keys: NSArray!
     var tableView: UITableView!
     var Delegate: CityProtocol?
-    var currentCity: UILabel!
+    var currentCity: UIButton!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -43,6 +43,11 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func customNavBackButton() {
+        //设置标题颜色
+        self.navigationItem.title = "定位"
+        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
+        
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
@@ -62,23 +67,21 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func setupTableView() {
         
-        var head = UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 80))
-        head.backgroundColor = UIColor.redColor()
-        currentCity = UILabel(frame: CGRectMake(5, (head.bounds.size.height - 20) / 2, 200, 20))
-        if let city = Defaults["CurrentCity"].string {
-            currentCity.text = city
-        } else {
-            currentCity.text = "未定位"
-        }
+        var head = UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 40))
+        head.backgroundColor = UIColor.whiteColor()
+        var lb = UILabel(frame: CGRectMake(5, (head.bounds.size.height - 20) / 2, 100, 20))
+        lb.text = "GPS定位城市"
+        lb.font = UIFont(name: lb.font.fontName, size: 12)
+        lb.textColor = UIColor(hexString: "#B3B4B5")
+        head.addSubview(lb)
         
-        currentCity.textColor = UIColor.whiteColor()
+        currentCity = UIButton(frame: CGRectMake(head.bounds.size.width-160, (head.bounds.size.height - 20) / 2, 140, 20))
+        currentCity.setTitle("点击定位", forState: .Normal)
+        currentCity.setTitleColor(UIColor(hexString: "#32C561"), forState: .Normal)
+        currentCity.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
+        currentCity.titleLabel?.font = UIFont(name: currentCity.titleLabel!.font.fontName, size: 12)
+        currentCity.addTarget(self, action: "getLoactionCity", forControlEvents: UIControlEvents.TouchUpInside)
         head.addSubview(currentCity)
-        
-        var btn = UIButton(frame: CGRectMake(head.bounds.size.width-80, (head.bounds.size.height - 20) / 2, 60, 20))
-        btn.setTitle("定位", forState: .Normal)
-        btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        btn.addTarget(self, action: "getLoactionCity", forControlEvents: UIControlEvents.TouchUpInside)
-        head.addSubview(btn)
         
         self.tableView = UITableView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height), style: UITableViewStyle.Plain)
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
@@ -167,7 +170,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         //城市
         if(placemark.locality != nil){
             tempString = tempString +  placemark.locality + "\n"
-            self.currentCity.text = placemark.locality
+            self.currentCity.setTitle(placemark.locality, forState: .Normal)
             //保存到本地
             Defaults["CurrentCity"] = placemark.locality
         }

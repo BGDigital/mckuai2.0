@@ -13,7 +13,7 @@ var osVersion:Double=8.0
 
 class rootViewController: RESideMenu, RESideMenuDelegate {
     
-    var TB: UITabBarController!
+//    var TB: UITabBarController!
     override func awakeFromNib() {
         self.menuPreferredStatusBarStyle = UIStatusBarStyle.LightContent
         self.contentViewShadowColor = UIColor.blackColor()
@@ -28,11 +28,11 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         var third = chatViewController.mainRoot()
         var four = communityViewController.mainRoot()
         
-        TB = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("contentViewController") as! UITabBarController
-        TB.tabBar.tintColor = UIColor(red: 0.212, green: 0.804, blue: 0.380, alpha: 1.00)
-        TB.viewControllers = [main, second,third, four]
+        MCUtils.TB = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("contentViewController") as! UITabBarController
+        MCUtils.TB.tabBar.tintColor = UIColor(red: 0.212, green: 0.804, blue: 0.380, alpha: 1.00)
+        MCUtils.TB.viewControllers = [main, second,third, four]
         
-        self.contentViewController = TB
+        self.contentViewController = MCUtils.TB
         self.leftMenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
         //self.rightMenuViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
         self.backgroundImage = UIImage(named: "Image")

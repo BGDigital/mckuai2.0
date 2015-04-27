@@ -33,7 +33,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     class func initializationLive()->UIViewController{
         var root = UIStoryboard(name: "live", bundle: nil).instantiateViewControllerWithIdentifier("liveViewController") as! UIViewController
-        root.tabBarItem = UITabBarItem(title: "直播", image: UIImage(named: "third_normal"), selectedImage: UIImage(named: "third_selected"))
+        root.tabBarItem = UITabBarItem(title: "直播", image: UIImage(named: "second_normal"), selectedImage: UIImage(named: "second_selected"))
         return UINavigationController(rootViewController: root)
     }
     
@@ -63,7 +63,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func initSegmentedControl() {
         segmentedControl = HMSegmentedControl(sectionTitles: ["正在直播", "热门推荐", "全部"])
-        segmentedControl.frame = CGRectMake(0, 64, self.view.bounds.size.width, 25)
+        segmentedControl.frame = CGRectMake(0, 64, self.view.bounds.size.width, 35)
         
         segmentedControl.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleWidth
         segmentedControl.backgroundColor = UIColor.whiteColor()
@@ -84,7 +84,8 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func setNaviStyle() {
         //菜单按钮
-        var menu = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "showLiveType")
+        //var menu = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "showLiveType")
+        var menu = UIBarButtonItem(title: "生存", style: UIBarButtonItemStyle.Bordered, target: self, action: "showLiveType")
         menu.tintColor = UIColor.whiteColor()
         self.navigationItem.rightBarButtonItem = menu
         //设置标题颜色
@@ -125,7 +126,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setupTableView() {
-        self.tableView = UITableView(frame: CGRectMake(0, 64+25, self.view.frame.size.width, self.view.frame.size.height-(64+25)), style: UITableViewStyle.Plain)
+        self.tableView = UITableView(frame: CGRectMake(0, 64+35, self.view.frame.size.width, self.view.frame.size.height-(64+35)), style: UITableViewStyle.Plain)
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
         tableView.delegate = self
         tableView.dataSource = self

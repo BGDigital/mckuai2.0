@@ -36,14 +36,15 @@ class mineHeadViewController: UIViewController {
         //模糊背景
         imageBg.addBlurEffect(30, times: 1)
         //初始化Button
-        btnMsg.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
-        btnMsg.setBackgroundImage(UIImage(named: ""), forState: .Normal)
+        var selectedImg = UIImage.applicationCreateImageWithColor(UIColor(hexString: "#40C84D")!)
+        btnMsg.setBackgroundImage(selectedImg, forState: .Selected)
+        btnMsg.layer.cornerRadius = 30
         
-        btnDynamic.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
-        btnDynamic.setBackgroundImage(UIImage(named: ""), forState: .Normal)
+        btnDynamic.setBackgroundImage(selectedImg, forState: .Selected)
+        btnDynamic.layer.cornerRadius = 30
         
-        btnWork.setBackgroundImage(UIImage(named: "1024"), forState: .Selected)
-        btnWork.setBackgroundImage(UIImage(named: ""), forState: .Normal)
+        btnWork.setBackgroundImage(selectedImg, forState: .Selected)
+        btnWork.layer.cornerRadius = 30
         
         if let city = Defaults["CurrentCity"].string {
             locationCity.setTitle(city, forState: .Normal)
@@ -54,7 +55,7 @@ class mineHeadViewController: UIViewController {
     
     func initSegmentedControl() {
         segmentedControl = HMSegmentedControl(sectionTitles: ["全部", "@你", "系统"])
-        segmentedControl.frame = CGRectMake(0, self.view.bounds.size.height-25, self.view.bounds.size.width, 25)
+        segmentedControl.frame = CGRectMake(0, self.view.bounds.size.height-35, self.view.bounds.size.width, 35)
         
         
         segmentedControl.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleWidth

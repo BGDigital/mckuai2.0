@@ -32,20 +32,13 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         roundProgressView.imageView = UIImageView(image: UIImage(named: "1024"))
         username.imageEdgeInsets = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)
         locationCity.titleEdgeInsets = UIEdgeInsetsMake(-1.0, 3.0, 0.0, 0.0)
-        if let city = Defaults["CurrentCity"].string {
-            locationCity.setTitle(city, forState: .Normal)
-        } else {
-            locationCity.setTitle("未定位", forState: .Normal)
-        }
         
         //圆角背景
         level.backgroundColor = UIColor(hexString: "#30A243")!
         level.layer.cornerRadius = 10
-        self.times.layer.cornerRadius = 2
         
         bag.setImage(UIImage(named: "backpacker_selected"), forState: .Selected)
         imageV.sd_setImageWithURL(nil, placeholderImage: UIImage(named: "placeholder"))
-        times.backgroundColor = UIColor(red: 0.843, green: 0.243, blue: 0.255, alpha: 1.00)
         
         //添加事件
         nickname.userInteractionEnabled = true
@@ -53,6 +46,12 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         nickname.addGestureRecognizer(tapNickName)
         var tapRoundHead = UITapGestureRecognizer(target: self, action: "openMineSB")
         roundProgressView.addGestureRecognizer(tapRoundHead)
+        
+        if let city = Defaults["CurrentCity"].string {
+            locationCity.setTitle(city, forState: .Normal)
+        } else {
+            locationCity.setTitle("未定位", forState: .Normal)
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -61,7 +60,9 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     }
     
     @IBAction func openMineSB() {
-        mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
+        println("打开个人中心")
+        //mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
+        mineFrm = mineTableViewController()
         self.nav?.pushViewController(mineFrm, animated: true)
     }
     
@@ -70,7 +71,6 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         cityList = cityListViewController()
         cityList.Delegate = self
         self.nav?.pushViewController(cityList, animated: true)
-        //self.presentViewController(cityList, animated: true, completion: nil) //模态
     }
     
     func onSelectCity(selectedCity: String) {

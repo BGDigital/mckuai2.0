@@ -39,8 +39,8 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     var datasource: Array<JSON>!
     
     class func initializationMine()->UIViewController{
-        var mine = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! UIViewController
-        return mine
+        var mine = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! mineTableViewController
+        return UINavigationController(rootViewController: mine)
     }
     
     func setupViews() {
@@ -87,6 +87,8 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func backToMain() {
         self.navigationController?.popViewControllerAnimated(true)
+        //设置主界面
+        self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
     }
 
     
