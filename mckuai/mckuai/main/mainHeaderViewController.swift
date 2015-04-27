@@ -49,9 +49,10 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         
         //添加事件
         nickname.userInteractionEnabled = true
-        var m = UITapGestureRecognizer(target: self, action: "openMineSB")
-        nickname.addGestureRecognizer(m)
-        roundProgressView.addGestureRecognizer(m)
+        var tapNickName = UITapGestureRecognizer(target: self, action: "openMineSB")
+        nickname.addGestureRecognizer(tapNickName)
+        var tapRoundHead = UITapGestureRecognizer(target: self, action: "openMineSB")
+        roundProgressView.addGestureRecognizer(tapRoundHead)
         // Do any additional setup after loading the view.
     }
     
@@ -60,7 +61,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     }
     
     @IBAction func openMineSB() {
-        mineFrm = mineTableViewController.mainRoot() as! mineTableViewController
+        mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
         self.nav?.pushViewController(mineFrm, animated: true)
     }
     

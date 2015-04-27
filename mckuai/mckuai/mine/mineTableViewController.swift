@@ -38,9 +38,9 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     var pageInfo: JSON!
     var datasource: Array<JSON>!
     
-    class func mainRoot()->UIViewController{
-        var main = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! UIViewController
-        return main
+    class func initializationMine()->UIViewController{
+        var mine = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! UIViewController
+        return mine
     }
     
     func setupViews() {
@@ -51,7 +51,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.opaque = false
         tableView.backgroundColor = UIColor.clearColor()
         tableView.separatorStyle = .None
-        //        var bg = UIImageView(image: UIImage(named: "Image"))
         tableView.backgroundView = nil //这个可以改背影
         tableView.scrollsToTop = false
         
@@ -77,6 +76,10 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func customNavBackButton() {
+        //设置标题颜色 白色
+        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
+        
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back

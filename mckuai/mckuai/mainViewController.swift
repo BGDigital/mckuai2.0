@@ -40,17 +40,16 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tableView: UITableView!
     var head: mainHeaderViewController!
     
-    class func mainRoot()->UIViewController{
-        var main = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainViewController") as! UIViewController
-        main.tabBarItem = UITabBarItem(title: "首页", image: UIImage(named: "first_normal"), selectedImage: UIImage(named: "first_selected"))
-        return UINavigationController(rootViewController: main)
+    class func initializationMain()->UIViewController{
+        var root = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainViewController") as! UIViewController
+        root.tabBarItem = UITabBarItem(title: "首页", image: UIImage(named: "first_normal"), selectedImage: UIImage(named: "first_selected"))
+        return UINavigationController(rootViewController: root)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-        self.tabBarItem.badgeValue = "3"
         
         //设置标题颜色
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
@@ -88,20 +87,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
     }
-
-    func showCustomHUD(view: UIView, title: String, imgName: String) {
-        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        h.labelText = title
-        h.mode = MBProgressHUDMode.CustomView
-        h.customView = UIImageView(image: UIImage(named: imgName))
-        h.showAnimated(true, whileExecutingBlock: { () -> Void in
-            sleep(2)
-            return
-            }) { () -> Void in
-                h.removeFromSuperview()
-                h = nil
-        }
-    }
     
     //加载数据,刷新
     func loadNewData() {
@@ -126,7 +111,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
-                self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
         })
         
     }

@@ -26,9 +26,8 @@ class WelcomePlus: UIViewController ,UIScrollViewDelegate {
     
     var firstPop:Bool=true
     
-    class func WelcomePlusInit()->WelcomePlus{
-        var welcomePlus = UIStoryboard(name:"Launch",bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("welcomePlus") as! WelcomePlus
-        return welcomePlus
+    class func WelcomePlusInit()-> WelcomePlus{
+        return UIStoryboard(name:"Launch",bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("welcomePlus") as! WelcomePlus
     }
     
     override func viewDidLoad() {

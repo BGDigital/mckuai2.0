@@ -13,6 +13,7 @@ var osVersion:Double=8.0
 
 class rootViewController: RESideMenu, RESideMenuDelegate {
     
+    var TB: UITabBarController!
     override func awakeFromNib() {
         self.menuPreferredStatusBarStyle = UIStatusBarStyle.LightContent
         self.contentViewShadowColor = UIColor.blackColor()
@@ -22,12 +23,12 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         self.contentViewShadowEnabled = true
         
         //准备TabBar需要的ViewController
-        var main = mainViewController.mainRoot()
-        var second = liveViewController.mainRoot()
+        var main = mainViewController.initializationMain()
+        var second = liveViewController.initializationLive()
         var third = chatViewController.mainRoot()
         var four = communityViewController.mainRoot()
         
-        var TB = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("contentViewController") as! UITabBarController
+        TB = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("contentViewController") as! UITabBarController
         TB.tabBar.tintColor = UIColor(red: 0.212, green: 0.804, blue: 0.380, alpha: 1.00)
         TB.viewControllers = [main, second,third, four]
         
@@ -49,19 +50,19 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
     }
     
     func sideMenu(sideMenu: RESideMenu!, willShowMenuViewController menuViewController: UIViewController!) {
-        println("willShowMenuViewController")
+        //println("willShowMenuViewController")
     }
     
     func sideMenu(sideMenu: RESideMenu!, didShowMenuViewController menuViewController: UIViewController!) {
-        println("didShowMenuViewController")
+        //println("didShowMenuViewController")
     }
     
     func sideMenu(sideMenu: RESideMenu!, willHideMenuViewController menuViewController: UIViewController!) {
-        println("willHideMenuViewController")
+        //println("willHideMenuViewController")
     }
     
     func sideMenu(sideMenu: RESideMenu!, didHideMenuViewController menuViewController: UIViewController!) {
-        println("didHideMenuViewController")
+        //println("didHideMenuViewController")
     }
 }
 
