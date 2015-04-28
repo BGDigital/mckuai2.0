@@ -42,6 +42,10 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         customNavBackButton()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
+    }
+    
     func customNavBackButton() {
         //设置标题颜色
         self.navigationItem.title = "定位"
@@ -55,6 +59,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func backToMain() {
         self.navigationController?.popViewControllerAnimated(true)
+        self.tabBarController?.tabBar.hidden = false
     }
 
     func getCityData() {

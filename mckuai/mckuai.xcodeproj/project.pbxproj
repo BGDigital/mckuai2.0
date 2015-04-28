@@ -50,6 +50,11 @@
 		E6DDF4931AEB9D0500339E75 /* MCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4921AEB9D0500339E75 /* MCUtils.swift */; };
 		E6DDF49C1AEBBC6800339E75 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */; };
 		E6DDF49D1AEBBC6800339E75 /* WelcomePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */; };
+		E6DDF4A41AEF364A00339E75 /* backpackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4A31AEF364A00339E75 /* backpackerViewController.swift */; };
+		E6DDF4A71AEF3B0700339E75 /* favoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4A61AEF3B0700339E75 /* favoriteViewController.swift */; };
+		E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4AA1AEF662400339E75 /* CollectionCell.swift */; };
+		E6DDF4B11AEF7A7E00339E75 /* friendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4B01AEF7A7E00339E75 /* friendsViewController.swift */; };
+		E6DDF4B31AEF7C1000339E75 /* friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DDF4B21AEF7C1000339E75 /* friends.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +121,11 @@
 		E6DDF4921AEB9D0500339E75 /* MCUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCUtils.swift; sourceTree = "<group>"; };
 		E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePlus.swift; sourceTree = "<group>"; };
+		E6DDF4A31AEF364A00339E75 /* backpackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = backpackerViewController.swift; path = backpacker/backpackerViewController.swift; sourceTree = "<group>"; };
+		E6DDF4A61AEF3B0700339E75 /* favoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = favoriteViewController.swift; path = backpacker/favoriteViewController.swift; sourceTree = "<group>"; };
+		E6DDF4AA1AEF662400339E75 /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionCell.swift; path = backpacker/CollectionCell.swift; sourceTree = "<group>"; };
+		E6DDF4B01AEF7A7E00339E75 /* friendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = friendsViewController.swift; path = backpacker/friendsViewController.swift; sourceTree = "<group>"; };
+		E6DDF4B21AEF7C1000339E75 /* friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = friends.storyboard; path = backpacker/friends.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +217,7 @@
 		E6518BE91ADD065E005A8C97 /* mckuai */ = {
 			isa = PBXGroup;
 			children = (
+				E6DDF4A51AEF365400339E75 /* backpacker */,
 				E6DDF4991AEBBC6800339E75 /* Welcome */,
 				E63DA5051AE6AC8D001D7811 /* mine */,
 				E6D2C3691AE110D000FF823E /* root */,
@@ -348,6 +359,18 @@
 			path = Welcome;
 			sourceTree = "<group>";
 		};
+		E6DDF4A51AEF365400339E75 /* backpacker */ = {
+			isa = PBXGroup;
+			children = (
+				E6DDF4A31AEF364A00339E75 /* backpackerViewController.swift */,
+				E6DDF4A61AEF3B0700339E75 /* favoriteViewController.swift */,
+				E6DDF4AA1AEF662400339E75 /* CollectionCell.swift */,
+				E6DDF4B01AEF7A7E00339E75 /* friendsViewController.swift */,
+				E6DDF4B21AEF7C1000339E75 /* friends.storyboard */,
+			);
+			name = backpacker;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -435,6 +458,7 @@
 				E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */,
 				E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */,
 				E6518BF21ADD065E005A8C97 /* Main.storyboard in Resources */,
+				E6DDF4B31AEF7C1000339E75 /* friends.storyboard in Resources */,
 				E692AA4E1AE9E43E00577B3C /* messageCell.xib in Resources */,
 				E696E5621AE7F88100261F57 /* citydict.plist in Resources */,
 				E63DA5071AE6ACA6001D7811 /* mine.storyboard in Resources */,
@@ -493,8 +517,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6DDF4B11AEF7A7E00339E75 /* friendsViewController.swift in Sources */,
 				E603D6441ADE657700D93708 /* WobbleView.swift in Sources */,
 				E603D6421ADE650C00D93708 /* AsyncLegacy.swift in Sources */,
+				E6DDF4A71AEF3B0700339E75 /* favoriteViewController.swift in Sources */,
 				E692AA4A1AE962AC00577B3C /* SwiftColors.swift in Sources */,
 				E603D64B1ADE66BF00D93708 /* UIImage+BlurEffect.swift in Sources */,
 				E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */,
@@ -514,9 +540,11 @@
 				E63898971AE042D900756679 /* mainData.swift in Sources */,
 				E6518BEF1ADD065E005A8C97 /* rootViewController.swift in Sources */,
 				E6B717621ADED22D00684E83 /* leftMenuViewController.swift in Sources */,
+				E6DDF4A41AEF364A00339E75 /* backpackerViewController.swift in Sources */,
 				E63DA50D1AE6B9C7001D7811 /* UINavigationBar+Awesome.m in Sources */,
 				E6B204481AE6A74A00EB11B4 /* communityViewController.swift in Sources */,
 				E6518BED1ADD065E005A8C97 /* AppDelegate.swift in Sources */,
+				E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */,
 				E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */,
 				E692AA531AE9FA9E00577B3C /* UILabel+DynamicHeight.m in Sources */,
 				E696E5241AE7829000261F57 /* mainHeaderViewController.swift in Sources */,

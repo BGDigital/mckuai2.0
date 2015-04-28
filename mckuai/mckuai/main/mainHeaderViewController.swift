@@ -12,6 +12,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     
     var cityList: cityListViewController!
     var mineFrm: mineTableViewController!
+    var backpacker: backpackerViewController!
     var nav: UINavigationController?
     
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
@@ -46,6 +47,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         nickname.addGestureRecognizer(tapNickName)
         var tapRoundHead = UITapGestureRecognizer(target: self, action: "openMineSB")
         roundProgressView.addGestureRecognizer(tapRoundHead)
+        bag.addTarget(self, action: "openBackPacker", forControlEvents: UIControlEvents.TouchUpInside)
         
         if let city = Defaults["CurrentCity"].string {
             locationCity.setTitle(city, forState: .Normal)
@@ -55,6 +57,11 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func openBackPacker() {
+        backpacker = backpackerViewController()
+        self.nav?.pushViewController(backpacker, animated: true)
+    }
+    
     func setNavi(navi: UINavigationController?) {
         self.nav = navi
     }
@@ -62,8 +69,21 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     @IBAction func openMineSB() {
         println("打开个人中心")
         //mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
+        /*
+        CATransition *transition = [CATransition animation];
+        transition.duration = 1;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromTop;
+        transition.delegate = self;
+        [self.navigationController.view.layer addAnimation:transition forKey:nil];
+        self.navigationController.navigationBarHidden = NO;
+        [self.navigationController pushViewController:viewController animated:NO];
+        */
+        
+        
         mineFrm = mineTableViewController()
-        self.nav?.pushViewController(mineFrm, animated: true)
+        self.nav?.pushViewController(mineFrm, animated: true) //这个显示效果有问题
     }
     
     @IBAction func openCityList(sender: UIButton) {

@@ -69,14 +69,14 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         setupViews()
         
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-        
         customNavBackButton()
         loadNewData()
     }
     
     func customNavBackButton() {
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         //设置标题颜色 白色
+        self.navigationItem.title = "个人中心"
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         
@@ -110,11 +110,13 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.scrollViewDidScroll(self.tableView)
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.lt_reset()
+        self.tabBarController?.tabBar.hidden = false
     }
 
     override func didReceiveMemoryWarning() {

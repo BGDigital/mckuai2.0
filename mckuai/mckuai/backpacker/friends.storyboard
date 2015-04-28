@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Friends View Controller-->
+        <scene sceneID="1l2-Ip-od2">
+            <objects>
+                <collectionViewController storyboardIdentifier="friendsViewController" id="e4h-yn-u0z" customClass="friendsViewController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qpZ-ib-rtW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0jm-49-2ON">
+                            <size key="itemSize" width="110" height="135"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCell" id="usF-Xu-Ysf" customClass="CollectionCell" customModule="mckuai" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="110" height="135"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小小麦" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dw-95-pYz">
+                                            <rect key="frame" x="0.0" y="97" width="110" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="TlY-j9-n0P"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.29803921568627451" green="0.24313725490196078" blue="0.23921568627450981" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cr-sn-UIK">
+                                            <rect key="frame" x="0.0" y="118" width="110" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="成都" image="location">
+                                                <color key="titleColor" red="0.70588235294117652" green="0.70980392156862748" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hxw-g6-RnA" customClass="MFRoundProgressView" customModule="mckuai" customModuleProvider="target">
+                                            <rect key="frame" x="5" y="0.0" width="100" height="100"/>
+                                            <color key="backgroundColor" red="0.92941176470588238" green="0.94509803921568625" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="percent">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="8cr-sn-UIK" firstAttribute="bottom" secondItem="usF-Xu-Ysf" secondAttribute="bottomMargin" constant="6" id="1J7-5R-Q96"/>
+                                    <constraint firstItem="1Dw-95-pYz" firstAttribute="top" secondItem="usF-Xu-Ysf" secondAttribute="topMargin" constant="89" id="JRf-gi-dWN"/>
+                                    <constraint firstItem="1Dw-95-pYz" firstAttribute="leading" secondItem="usF-Xu-Ysf" secondAttribute="leading" id="V2Q-WA-TsE"/>
+                                    <constraint firstItem="8cr-sn-UIK" firstAttribute="leading" secondItem="1Dw-95-pYz" secondAttribute="leading" id="Y6B-xY-Qeb"/>
+                                    <constraint firstItem="8cr-sn-UIK" firstAttribute="centerX" secondItem="hxw-g6-RnA" secondAttribute="centerX" id="cLh-uu-a1v"/>
+                                    <constraint firstAttribute="trailing" secondItem="8cr-sn-UIK" secondAttribute="trailing" id="mI2-nq-Va7"/>
+                                    <constraint firstItem="1Dw-95-pYz" firstAttribute="centerX" secondItem="hxw-g6-RnA" secondAttribute="centerX" id="oQs-l6-ZVf"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="locationCity" destination="8cr-sn-UIK" id="tbS-UO-Fs0"/>
+                                    <outlet property="nickname" destination="1Dw-95-pYz" id="wow-I4-0jY"/>
+                                    <outlet property="roundProgressView" destination="hxw-g6-RnA" id="og9-bN-ysq"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="e4h-yn-u0z" id="0Oa-Yz-4QG"/>
+                            <outlet property="delegate" destination="e4h-yn-u0z" id="AlJ-LA-b9e"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="641-XZ-KnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="295" y="307"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="location" width="12" height="12"/>
+    </resources>
+</document>
