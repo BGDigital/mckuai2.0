@@ -30,6 +30,7 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         MCUtils.TB = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("contentViewController") as! UITabBarController
         MCUtils.TB.tabBar.tintColor = UIColor(red: 0.212, green: 0.804, blue: 0.380, alpha: 1.00)
         MCUtils.TB.viewControllers = [main, second, third, four]
+        MCUtils.TB.hidesBottomBarWhenPushed = true
         
         self.contentViewController = MCUtils.TB
         self.leftMenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController

@@ -59,6 +59,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     
     @IBAction func openBackPacker() {
         backpacker = backpackerViewController()
+        backpacker.hidesBottomBarWhenPushed = true
         self.nav?.pushViewController(backpacker, animated: true)
     }
     
@@ -71,12 +72,14 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         //mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
         
         mineFrm = mineTableViewController()
+        mineFrm.hidesBottomBarWhenPushed = true
         self.nav?.pushViewController(mineFrm, animated: true) //这个显示效果有问题
     }
     
     @IBAction func openCityList(sender: UIButton) {
         println("打开城市列表")
         cityList = cityListViewController()
+        cityList.hidesBottomBarWhenPushed = true
         cityList.Delegate = self
         self.nav?.pushViewController(cityList, animated: true)
     }

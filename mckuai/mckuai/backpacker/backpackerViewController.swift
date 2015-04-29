@@ -29,7 +29,6 @@ class backpackerViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = true
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
     
@@ -66,7 +65,6 @@ class backpackerViewController: UIViewController {
     
     func backToMain() {
         self.navigationController?.popViewControllerAnimated(true)
-        self.tabBarController?.tabBar.hidden = false
     }
 
     

@@ -111,13 +111,11 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.scrollViewDidScroll(self.tableView)
-        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.lt_reset()
-        self.tabBarController?.tabBar.hidden = false
     }
 
     override func didReceiveMemoryWarning() {

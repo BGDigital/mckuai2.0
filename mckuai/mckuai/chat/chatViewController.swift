@@ -18,13 +18,26 @@ class chatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        customNavBackButton()
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+    }
+    
+    func customNavBackButton() {
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        //设置标题颜色
+        self.navigationItem.title = "聊天"
+        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
+        
+//        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
+//        back.tintColor = UIColor.whiteColor()
+//        self.navigationItem.leftBarButtonItem = back
     }
     
     @IBAction func beginChat(sender: AnyObject) {
@@ -33,9 +46,9 @@ class chatViewController: UIViewController {
             completion: {userId in
                 println("Login Successrull:\(userId)")
                 var v: RCChatListViewController = RCIM.sharedRCIM().createConversationList(nil)
-                
+                v.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(v, animated: true)
-                self.tabBarController?.tabBar.hidden = true
+                //self.tabBarController?.tabBar.hidden = true
             },
             error: {status in
                 println("Login Faild. \(status)")
