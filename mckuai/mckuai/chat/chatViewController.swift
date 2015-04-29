@@ -27,6 +27,20 @@ class chatViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func beginChat(sender: AnyObject) {
+        var token = "dxcm0lr7Egt+GZp6DerjqOeLBPbf3gS4wMl0dLcWBkT2IBDBKobyAFDYl2T1/6H0d1ljiW3e/f4="
+        RCIM.connectWithToken(token,
+            completion: {userId in
+                println("Login Successrull:\(userId)")
+                var v: RCChatListViewController = RCIM.sharedRCIM().createConversationList(nil)
+                
+                self.navigationController?.pushViewController(v, animated: true)
+                self.tabBarController?.tabBar.hidden = true
+            },
+            error: {status in
+                println("Login Faild. \(status)")
+        })
+    }
 
     /*
     // MARK: - Navigation

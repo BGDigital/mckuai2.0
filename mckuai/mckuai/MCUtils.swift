@@ -12,6 +12,7 @@ class MCUtils {
 
 //一些通用的系统常量
 static var TB: UITabBarController!
+//static var chatView: UIViewController!
 //Tencent APP_Key
 static let tencentAppKey = "101155101"
     

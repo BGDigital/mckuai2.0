@@ -26,6 +26,24 @@
 		E6518BF41ADD065E005A8C97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6518BF31ADD065E005A8C97 /* Images.xcassets */; };
 		E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6518BF51ADD065E005A8C97 /* LaunchScreen.xib */; };
 		E6518C031ADD065E005A8C97 /* mckuaiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6518C021ADD065E005A8C97 /* mckuaiTests.swift */; };
+		E68F466D1AF13D37001DEA99 /* libiOS_IMKit_v1_4_6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F466B1AF13D37001DEA99 /* libiOS_IMKit_v1_4_6.a */; };
+		E68F466E1AF13D37001DEA99 /* RongCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E68F466C1AF13D37001DEA99 /* RongCloud.bundle */; };
+		E68F46701AF13D5A001DEA99 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F466F1AF13D5A001DEA99 /* AssetsLibrary.framework */; };
+		E68F46801AF13E34001DEA99 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46711AF13E34001DEA99 /* AudioToolbox.framework */; };
+		E68F46811AF13E34001DEA99 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46721AF13E34001DEA99 /* AVFoundation.framework */; };
+		E68F46821AF13E34001DEA99 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46731AF13E34001DEA99 /* CFNetwork.framework */; };
+		E68F46831AF13E34001DEA99 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46741AF13E34001DEA99 /* CoreAudio.framework */; };
+		E68F46841AF13E34001DEA99 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46751AF13E34001DEA99 /* CoreLocation.framework */; };
+		E68F46851AF13E34001DEA99 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46761AF13E34001DEA99 /* CoreMedia.framework */; };
+		E68F46861AF13E34001DEA99 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46771AF13E34001DEA99 /* CoreVideo.framework */; };
+		E68F46871AF13E34001DEA99 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46781AF13E34001DEA99 /* ImageIO.framework */; };
+		E68F46881AF13E34001DEA99 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F46791AF13E34001DEA99 /* libc++.dylib */; };
+		E68F46891AF13E34001DEA99 /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F467A1AF13E34001DEA99 /* libc++abi.dylib */; };
+		E68F468A1AF13E34001DEA99 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F467B1AF13E34001DEA99 /* libxml2.dylib */; };
+		E68F468B1AF13E34001DEA99 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F467C1AF13E34001DEA99 /* MapKit.framework */; };
+		E68F468C1AF13E34001DEA99 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F467D1AF13E34001DEA99 /* OpenGLES.framework */; };
+		E68F468D1AF13E34001DEA99 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F467E1AF13E34001DEA99 /* QuartzCore.framework */; };
+		E68F468E1AF13E34001DEA99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F467F1AF13E34001DEA99 /* UIKit.framework */; };
 		E692AA431AE8D0FC00577B3C /* mineHeadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692AA411AE8D0FC00577B3C /* mineHeadViewController.swift */; };
 		E692AA4A1AE962AC00577B3C /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692AA491AE962AC00577B3C /* SwiftColors.swift */; };
 		E692AA4D1AE9E43E00577B3C /* messageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692AA4B1AE9E43E00577B3C /* messageCell.swift */; };
@@ -137,6 +155,64 @@
 		E6518BFC1ADD065E005A8C97 /* mckuaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mckuaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6518C011ADD065E005A8C97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6518C021ADD065E005A8C97 /* mckuaiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mckuaiTests.swift; sourceTree = "<group>"; };
+		E68F46431AF13D37001DEA99 /* AmrDataConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmrDataConverter.h; sourceTree = "<group>"; };
+		E68F46441AF13D37001DEA99 /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		E68F46451AF13D37001DEA99 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		E68F46461AF13D37001DEA99 /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		E68F46471AF13D37001DEA99 /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		E68F46481AF13D37001DEA99 /* RCBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCBasicViewController.h; sourceTree = "<group>"; };
+		E68F46491AF13D37001DEA99 /* RCChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatListViewController.h; sourceTree = "<group>"; };
+		E68F464A1AF13D37001DEA99 /* RCChatSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatSettingViewController.h; sourceTree = "<group>"; };
+		E68F464B1AF13D37001DEA99 /* RCChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatViewController.h; sourceTree = "<group>"; };
+		E68F464C1AF13D37001DEA99 /* RCClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCClientDelegate.h; sourceTree = "<group>"; };
+		E68F464D1AF13D37001DEA99 /* RCCommandNotificationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCommandNotificationMessage.h; sourceTree = "<group>"; };
+		E68F464E1AF13D37001DEA99 /* RCContactNotificationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCContactNotificationMessage.h; sourceTree = "<group>"; };
+		E68F464F1AF13D37001DEA99 /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
+		E68F46501AF13D37001DEA99 /* RCDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDiscussion.h; sourceTree = "<group>"; };
+		E68F46511AF13D37001DEA99 /* RCDiscussionNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDiscussionNotification.h; sourceTree = "<group>"; };
+		E68F46521AF13D37001DEA99 /* RCGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCGroup.h; sourceTree = "<group>"; };
+		E68F46531AF13D37001DEA99 /* RCGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCGroupListViewController.h; sourceTree = "<group>"; };
+		E68F46541AF13D37001DEA99 /* RCHandShakeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCHandShakeMessage.h; sourceTree = "<group>"; };
+		E68F46551AF13D37001DEA99 /* RCIM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIM.h; sourceTree = "<group>"; };
+		E68F46561AF13D37001DEA99 /* RCImageMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCImageMessage.h; sourceTree = "<group>"; };
+		E68F46571AF13D37001DEA99 /* RCIMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIMClient.h; sourceTree = "<group>"; };
+		E68F46581AF13D37001DEA99 /* RCIMClientHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIMClientHeader.h; sourceTree = "<group>"; };
+		E68F46591AF13D37001DEA99 /* RCLocationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCLocationMessage.h; sourceTree = "<group>"; };
+		E68F465A1AF13D37001DEA99 /* RCLocationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCLocationPickerViewController.h; sourceTree = "<group>"; };
+		E68F465B1AF13D37001DEA99 /* RCLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCLocationViewController.h; sourceTree = "<group>"; };
+		E68F465C1AF13D37001DEA99 /* RCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessage.h; sourceTree = "<group>"; };
+		E68F465D1AF13D37001DEA99 /* RCMessageContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessageContent.h; sourceTree = "<group>"; };
+		E68F465E1AF13D37001DEA99 /* RCNotificationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCNotificationMessage.h; sourceTree = "<group>"; };
+		E68F465F1AF13D37001DEA99 /* RCPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCPreviewViewController.h; sourceTree = "<group>"; };
+		E68F46601AF13D37001DEA99 /* RCProfileNotificationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCProfileNotificationMessage.h; sourceTree = "<group>"; };
+		E68F46611AF13D37001DEA99 /* RCRenameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCRenameViewController.h; sourceTree = "<group>"; };
+		E68F46621AF13D37001DEA99 /* RCRichContentMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCRichContentMessage.h; sourceTree = "<group>"; };
+		E68F46631AF13D37001DEA99 /* RCSelectPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSelectPersonViewController.h; sourceTree = "<group>"; };
+		E68F46641AF13D37001DEA99 /* RCStatusDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCStatusDefine.h; sourceTree = "<group>"; };
+		E68F46651AF13D37001DEA99 /* RCStatusMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCStatusMessage.h; sourceTree = "<group>"; };
+		E68F46661AF13D37001DEA99 /* RCSuspendMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSuspendMessage.h; sourceTree = "<group>"; };
+		E68F46671AF13D37001DEA99 /* RCTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTextMessage.h; sourceTree = "<group>"; };
+		E68F46681AF13D37001DEA99 /* RCThemeDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCThemeDefine.h; sourceTree = "<group>"; };
+		E68F46691AF13D37001DEA99 /* RCUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUserInfo.h; sourceTree = "<group>"; };
+		E68F466A1AF13D37001DEA99 /* RCVoiceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCVoiceMessage.h; sourceTree = "<group>"; };
+		E68F466B1AF13D37001DEA99 /* libiOS_IMKit_v1_4_6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiOS_IMKit_v1_4_6.a; sourceTree = "<group>"; };
+		E68F466C1AF13D37001DEA99 /* RongCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RongCloud.bundle; sourceTree = "<group>"; };
+		E68F466F1AF13D5A001DEA99 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E68F46711AF13E34001DEA99 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E68F46721AF13E34001DEA99 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E68F46731AF13E34001DEA99 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E68F46741AF13E34001DEA99 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		E68F46751AF13E34001DEA99 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E68F46761AF13E34001DEA99 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E68F46771AF13E34001DEA99 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E68F46781AF13E34001DEA99 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		E68F46791AF13E34001DEA99 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		E68F467A1AF13E34001DEA99 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
+		E68F467B1AF13E34001DEA99 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		E68F467C1AF13E34001DEA99 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E68F467D1AF13E34001DEA99 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		E68F467E1AF13E34001DEA99 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E68F467F1AF13E34001DEA99 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E692AA411AE8D0FC00577B3C /* mineHeadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mineHeadViewController.swift; path = mine/mineHeadViewController.swift; sourceTree = "<group>"; };
 		E692AA491AE962AC00577B3C /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftColors.swift; path = ThirdParty/SwiftColors.swift; sourceTree = "<group>"; };
 		E692AA4B1AE9E43E00577B3C /* messageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = messageCell.swift; path = mine/messageCell.swift; sourceTree = "<group>"; };
@@ -241,16 +317,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6BF86011AF13245005F08B2 /* Security.framework in Frameworks */,
-				E6BF85FF1AF13238005F08B2 /* libiconv.dylib in Frameworks */,
-				E6BF85FD1AF13229005F08B2 /* SystemConfiguration.framework in Frameworks */,
-				E6BF85FB1AF13216005F08B2 /* CoreGraphics.framework in Frameworks */,
-				E6BF85F91AF131C8005F08B2 /* libsqlite3.dylib in Frameworks */,
+				E68F46801AF13E34001DEA99 /* AudioToolbox.framework in Frameworks */,
+				E68F46811AF13E34001DEA99 /* AVFoundation.framework in Frameworks */,
+				E68F46821AF13E34001DEA99 /* CFNetwork.framework in Frameworks */,
+				E68F46831AF13E34001DEA99 /* CoreAudio.framework in Frameworks */,
+				E68F46841AF13E34001DEA99 /* CoreLocation.framework in Frameworks */,
+				E68F46851AF13E34001DEA99 /* CoreMedia.framework in Frameworks */,
+				E68F46861AF13E34001DEA99 /* CoreVideo.framework in Frameworks */,
+				E68F46871AF13E34001DEA99 /* ImageIO.framework in Frameworks */,
+				E68F46881AF13E34001DEA99 /* libc++.dylib in Frameworks */,
+				E68F46891AF13E34001DEA99 /* libc++abi.dylib in Frameworks */,
+				E68F468A1AF13E34001DEA99 /* libxml2.dylib in Frameworks */,
+				E68F468B1AF13E34001DEA99 /* MapKit.framework in Frameworks */,
+				E68F468C1AF13E34001DEA99 /* OpenGLES.framework in Frameworks */,
+				E68F468D1AF13E34001DEA99 /* QuartzCore.framework in Frameworks */,
+				E68F468E1AF13E34001DEA99 /* UIKit.framework in Frameworks */,
 				E6BF85F71AF131B4005F08B2 /* CoreTelephony.framework in Frameworks */,
+				E6BF85F91AF131C8005F08B2 /* libsqlite3.dylib in Frameworks */,
 				E6BF85F51AF13171005F08B2 /* libstdc++.dylib in Frameworks */,
 				E6BF85F31AF1313C005F08B2 /* libz.dylib in Frameworks */,
+				E6BF85FD1AF13229005F08B2 /* SystemConfiguration.framework in Frameworks */,
+				E68F46701AF13D5A001DEA99 /* AssetsLibrary.framework in Frameworks */,
+				E6BF86011AF13245005F08B2 /* Security.framework in Frameworks */,
+				E6BF85FF1AF13238005F08B2 /* libiconv.dylib in Frameworks */,
+				E6BF85FB1AF13216005F08B2 /* CoreGraphics.framework in Frameworks */,
 				E6BF85D81AF12DA9005F08B2 /* libWeChatSDK.a in Frameworks */,
 				E6BF85C91AF12DA9005F08B2 /* libSocialQQ.a in Frameworks */,
+				E68F466D1AF13D37001DEA99 /* libiOS_IMKit_v1_4_6.a in Frameworks */,
 				E6BF85CD1AF12DA9005F08B2 /* libUMSocial_Sdk_4.2.1.a in Frameworks */,
 				E6BF85F11AF12F91005F08B2 /* libMobClickLibrary.a in Frameworks */,
 				E6BF85CA1AF12DA9005F08B2 /* TencentOpenAPI.framework in Frameworks */,
@@ -282,6 +375,22 @@
 		ADCC6B6270AA7D80466DDA55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E68F46711AF13E34001DEA99 /* AudioToolbox.framework */,
+				E68F46721AF13E34001DEA99 /* AVFoundation.framework */,
+				E68F46731AF13E34001DEA99 /* CFNetwork.framework */,
+				E68F46741AF13E34001DEA99 /* CoreAudio.framework */,
+				E68F46751AF13E34001DEA99 /* CoreLocation.framework */,
+				E68F46761AF13E34001DEA99 /* CoreMedia.framework */,
+				E68F46771AF13E34001DEA99 /* CoreVideo.framework */,
+				E68F46781AF13E34001DEA99 /* ImageIO.framework */,
+				E68F46791AF13E34001DEA99 /* libc++.dylib */,
+				E68F467A1AF13E34001DEA99 /* libc++abi.dylib */,
+				E68F467B1AF13E34001DEA99 /* libxml2.dylib */,
+				E68F467C1AF13E34001DEA99 /* MapKit.framework */,
+				E68F467D1AF13E34001DEA99 /* OpenGLES.framework */,
+				E68F467E1AF13E34001DEA99 /* QuartzCore.framework */,
+				E68F467F1AF13E34001DEA99 /* UIKit.framework */,
+				E68F466F1AF13D5A001DEA99 /* AssetsLibrary.framework */,
 				E6BF86001AF13245005F08B2 /* Security.framework */,
 				E6BF85FE1AF13238005F08B2 /* libiconv.dylib */,
 				E6BF85FC1AF13229005F08B2 /* SystemConfiguration.framework */,
@@ -328,6 +437,9 @@
 		E6518BDE1ADD065E005A8C97 = {
 			isa = PBXGroup;
 			children = (
+				E68F46421AF13D37001DEA99 /* Headers */,
+				E68F466B1AF13D37001DEA99 /* libiOS_IMKit_v1_4_6.a */,
+				E68F466C1AF13D37001DEA99 /* RongCloud.bundle */,
 				E6BF85941AF12BE1005F08B2 /* TencentOpenApi_IOS_Bundle.bundle */,
 				E6BF85951AF12BE1005F08B2 /* TencentOpenAPI.framework */,
 				E6518BE91ADD065E005A8C97 /* mckuai */,
@@ -400,6 +512,53 @@
 				E6518C011ADD065E005A8C97 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E68F46421AF13D37001DEA99 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				E68F46431AF13D37001DEA99 /* AmrDataConverter.h */,
+				E68F46441AF13D37001DEA99 /* dec_if.h */,
+				E68F46451AF13D37001DEA99 /* if_rom.h */,
+				E68F46461AF13D37001DEA99 /* interf_dec.h */,
+				E68F46471AF13D37001DEA99 /* interf_enc.h */,
+				E68F46481AF13D37001DEA99 /* RCBasicViewController.h */,
+				E68F46491AF13D37001DEA99 /* RCChatListViewController.h */,
+				E68F464A1AF13D37001DEA99 /* RCChatSettingViewController.h */,
+				E68F464B1AF13D37001DEA99 /* RCChatViewController.h */,
+				E68F464C1AF13D37001DEA99 /* RCClientDelegate.h */,
+				E68F464D1AF13D37001DEA99 /* RCCommandNotificationMessage.h */,
+				E68F464E1AF13D37001DEA99 /* RCContactNotificationMessage.h */,
+				E68F464F1AF13D37001DEA99 /* RCConversation.h */,
+				E68F46501AF13D37001DEA99 /* RCDiscussion.h */,
+				E68F46511AF13D37001DEA99 /* RCDiscussionNotification.h */,
+				E68F46521AF13D37001DEA99 /* RCGroup.h */,
+				E68F46531AF13D37001DEA99 /* RCGroupListViewController.h */,
+				E68F46541AF13D37001DEA99 /* RCHandShakeMessage.h */,
+				E68F46551AF13D37001DEA99 /* RCIM.h */,
+				E68F46561AF13D37001DEA99 /* RCImageMessage.h */,
+				E68F46571AF13D37001DEA99 /* RCIMClient.h */,
+				E68F46581AF13D37001DEA99 /* RCIMClientHeader.h */,
+				E68F46591AF13D37001DEA99 /* RCLocationMessage.h */,
+				E68F465A1AF13D37001DEA99 /* RCLocationPickerViewController.h */,
+				E68F465B1AF13D37001DEA99 /* RCLocationViewController.h */,
+				E68F465C1AF13D37001DEA99 /* RCMessage.h */,
+				E68F465D1AF13D37001DEA99 /* RCMessageContent.h */,
+				E68F465E1AF13D37001DEA99 /* RCNotificationMessage.h */,
+				E68F465F1AF13D37001DEA99 /* RCPreviewViewController.h */,
+				E68F46601AF13D37001DEA99 /* RCProfileNotificationMessage.h */,
+				E68F46611AF13D37001DEA99 /* RCRenameViewController.h */,
+				E68F46621AF13D37001DEA99 /* RCRichContentMessage.h */,
+				E68F46631AF13D37001DEA99 /* RCSelectPersonViewController.h */,
+				E68F46641AF13D37001DEA99 /* RCStatusDefine.h */,
+				E68F46651AF13D37001DEA99 /* RCStatusMessage.h */,
+				E68F46661AF13D37001DEA99 /* RCSuspendMessage.h */,
+				E68F46671AF13D37001DEA99 /* RCTextMessage.h */,
+				E68F46681AF13D37001DEA99 /* RCThemeDefine.h */,
+				E68F46691AF13D37001DEA99 /* RCUserInfo.h */,
+				E68F466A1AF13D37001DEA99 /* RCVoiceMessage.h */,
+			);
+			path = Headers;
 			sourceTree = "<group>";
 		};
 		E692AA561AEA477A00577B3C /* HMSegmentedControl */ = {
@@ -710,6 +869,7 @@
 				E6B204461AE6A73100EB11B4 /* community.storyboard in Resources */,
 				E6BF85D51AF12DA9005F08B2 /* UMSShareListController.xib in Resources */,
 				E6BF85CC1AF12DA9005F08B2 /* UMSocialLocalizable.strings in Resources */,
+				E68F466E1AF13D37001DEA99 /* RongCloud.bundle in Resources */,
 				E6B204401AE6A56000EB11B4 /* live.storyboard in Resources */,
 				E6BF859F1AF12CB0005F08B2 /* UserLogin.storyboard in Resources */,
 				E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */,
@@ -980,6 +1140,7 @@
 					"$(PROJECT_DIR)/mckuai/UMSocial_Sdk_4.2.1",
 					"$(PROJECT_DIR)/mckuai/Wechat",
 					"$(PROJECT_DIR)/mckuai",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "mckuai/mckuai-Bridging-Header.h";
@@ -1007,6 +1168,7 @@
 					"$(PROJECT_DIR)/mckuai/UMSocial_Sdk_4.2.1",
 					"$(PROJECT_DIR)/mckuai/Wechat",
 					"$(PROJECT_DIR)/mckuai",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "mckuai/mckuai-Bridging-Header.h";

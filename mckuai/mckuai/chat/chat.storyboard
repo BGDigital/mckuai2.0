@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Chat View Controller-->
@@ -23,11 +23,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT5-zo-Ajx">
+                                <rect key="frame" x="255" y="324" width="90" height="30"/>
+                                <state key="normal" title="打开聊天界面">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="beginChat:" destination="xHX-R8-csm" eventType="touchUpInside" id="j2p-jb-8qQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="nT5-zo-Ajx" firstAttribute="top" secondItem="HYr-lJ-YBi" secondAttribute="bottom" constant="14" id="JsP-rd-M2b"/>
                             <constraint firstItem="HYr-lJ-YBi" firstAttribute="centerX" secondItem="aFS-x9-ifQ" secondAttribute="centerX" id="NM5-p8-hNc"/>
                             <constraint firstAttribute="centerY" secondItem="HYr-lJ-YBi" secondAttribute="centerY" constant="0.5" id="yaM-gn-SIb"/>
+                            <constraint firstItem="nT5-zo-Ajx" firstAttribute="centerX" secondItem="HYr-lJ-YBi" secondAttribute="centerX" id="zg3-VY-hCT"/>
                         </constraints>
                     </view>
                 </viewController>

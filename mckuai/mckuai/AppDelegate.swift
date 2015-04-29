@@ -9,15 +9,43 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegate, RCIMUserInfoFetcherDelegagte {
 
     var window: UIWindow?
     var launchView: UIView!
+    
+    private func IS_IOS7() ->Bool
+    { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 7.0 }
+    private func IS_IOS8() -> Bool
+    { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0 }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window?.makeKeyAndVisible()
-//        //启动页面加载广告
+        //启动页面加载广告
         loadLaunchView()
+        //RongCloud
+        initRongCloud()
         return true
+    }
+    
+    //加载Rongcloud
+    func initRongCloud() {
+        RCIM.initWithAppKey("k51hidwq1fb4b", deviceToken: nil)
+        
+        //设置用户信息
+        RCIM.setUserInfoFetcherWithDelegate(self, isCacheUserInfo: false)
+        //设置好友信息
+        RCIM.setFriendsFetcherWithDelegate(self)
+        //设置群组信息
+        //RCIM.setGroupInfoFetcherWithDelegate(self)
+        
+        //注册苹果推送
+        if IS_IOS8() {
+            var settings = UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        } else {
+            UIApplication.sharedApplication().registerForRemoteNotificationTypes(.Badge | .Alert | .Sound)
+        }
     }
     
     func loadLaunchView() {
@@ -40,6 +68,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func removeLaunchView() {
         launchView.removeFromSuperview()
+    }
+    
+    //注册推送通知
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        if IS_IOS8() {application.registerForRemoteNotifications()}
+    }
+    //
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        if IS_IOS8() {
+            if (identifier == "declineAction") {}
+            else if (identifier == "answerAction") {}
+        }
+    }
+    
+    //获取苹果推送权限成功
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        println("didRegisterForRemoteNotificationsWithDeviceToken:\(deviceToken)")
+        RCIM.sharedRCIM().setDeviceToken(deviceToken)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        //var alert:UIAlertView = UIAlertView(title: "", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+        //alert.show()
+        println(error.localizedDescription)
+    }
+    
+    //获取好友列表方法
+    func getFriends() -> [AnyObject]! {
+        var arr = NSMutableArray()
+        var user1 = RCUserInfo()
+        user1.userId = "kyly"
+        user1.name = "麻哥"
+        user1.portraitUri = ""
+        arr.addObject(user1)
+        
+        return arr as [AnyObject]
+    }
+    
+    //获取用户信息方法
+    func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
+        if userId == "kyly" {
+            var u = RCUserInfo()
+            u.userId = "kyly"
+            u.name = "麻哥"
+            u.portraitUri = ""
+            
+            return completion(u)
+        }
+        
+        return completion(nil)
     }
 
     func applicationWillResignActive(application: UIApplication) {

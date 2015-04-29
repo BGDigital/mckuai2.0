@@ -16,6 +16,10 @@
 #import "UMSocial.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialWechatHandler.h"
-
 #import "MobClick.h"
+
+//Rongcloud
+#import "RCIM.h"
+#import "RCChatViewController.h"
+#import "RCChatListViewController.h"
 
