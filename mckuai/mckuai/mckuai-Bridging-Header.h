@@ -11,3 +11,11 @@
 #import "UINavigationBar+Awesome.h"
 #import "HMSegmentedControl.h"
 #import "UILabel+DynamicHeight.h"
+#import "SCNavTabBarController.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "UMSocial.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialWechatHandler.h"
+
+#import "MobClick.h"
+

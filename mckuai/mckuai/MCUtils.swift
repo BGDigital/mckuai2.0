@@ -12,6 +12,8 @@ class MCUtils {
 
 //一些通用的系统常量
 static var TB: UITabBarController!
+//Tencent APP_Key
+static let tencentAppKey = "101155101"
     
 static let COLOR_NavBG = "#43D152"
 static let COLOR_MAIN = "#4C4D4E"
