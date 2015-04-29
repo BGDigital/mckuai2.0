@@ -30,6 +30,7 @@ class backpackerViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = true
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
     
     func initSubView() {
@@ -61,6 +62,7 @@ class backpackerViewController: UIViewController {
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
     }
+    
     
     func backToMain() {
         self.navigationController?.popViewControllerAnimated(true)

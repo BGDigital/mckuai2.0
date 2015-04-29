@@ -69,18 +69,6 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     @IBAction func openMineSB() {
         println("打开个人中心")
         //mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
-        /*
-        CATransition *transition = [CATransition animation];
-        transition.duration = 1;
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        transition.type = kCATransitionPush;
-        transition.subtype = kCATransitionFromTop;
-        transition.delegate = self;
-        [self.navigationController.view.layer addAnimation:transition forKey:nil];
-        self.navigationController.navigationBarHidden = NO;
-        [self.navigationController pushViewController:viewController animated:NO];
-        */
-        
         
         mineFrm = mineTableViewController()
         self.nav?.pushViewController(mineFrm, animated: true) //这个显示效果有问题

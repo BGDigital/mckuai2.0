@@ -12,6 +12,7 @@ let reuseIdentifier = "CollectionCell"
 
 class friendsViewController: UICollectionViewController {
 
+    var otherZone: otherViewController!
     var nav: UINavigationController?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,14 +99,14 @@ class friendsViewController: UICollectionViewController {
         
         //button1
         var btn1 = UIButton(frame: CGRectMake(0, 0, self.view.bounds.size.width/2, 50))
-        btn1.setImage(UIImage(named: "Guide"), forState: .Normal)
+        btn1.setImage(UIImage(named: "backpacker_bag"), forState: .Normal)
         btn1.setTitle("去TA的家", forState: .Normal)
         btn1.addTarget(self, action: "btn1Click", forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(btn1)
         
         //button2
         var btn2 = UIButton(frame: CGRectMake(self.view.bounds.size.width/2, 0, self.view.bounds.size.width/2, 50))
-        btn2.setImage(UIImage(named: "Guide"), forState: .Normal)
+        btn2.setImage(UIImage(named: "backpacker_chat"), forState: .Normal)
         btn2.setTitle("和TA聊天", forState: .Normal)
         view.addSubview(btn2)
         
@@ -122,7 +123,8 @@ class friendsViewController: UICollectionViewController {
     }
     
     @IBAction func btn1Click() {
-        
+        otherZone = otherViewController()
+        self.nav?.pushViewController(otherZone, animated: true)
     }
 
     /*

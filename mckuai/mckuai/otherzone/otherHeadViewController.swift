@@ -1,25 +1,24 @@
 //
-//  mineHeadViewController.swift
+//  otherHeadViewController.swift
 //  mckuai
 //
-//  Created by XingfuQiu on 15/4/23.
+//  Created by XingfuQiu on 15/4/29.
 //  Copyright (c) 2015年 XingfuQiu. All rights reserved.
 //
 
 import UIKit
 
-class mineHeadViewController: UIViewController {
+class otherHeadViewController: UIViewController {
 
+    
     @IBOutlet weak var imageBg: SABlurImageView!
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var locationCity: UIButton!
     @IBOutlet weak var btnMsg: UIButton!
-    @IBOutlet weak var btnDynamic: UIButton!
     @IBOutlet weak var btnWork: UIButton!
     
     var lastSelected: UIButton!
-    var segmentedControl: HMSegmentedControl!
     var headImg: String!
     var userId = 0
     var userLevel = 0
@@ -31,13 +30,11 @@ class mineHeadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
-        initSegmentedControl()
+        self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300)
         //模糊背景
         imageBg.addBlurEffect(30, times: 1)
         //初始化Button
-        addSubTextToBtn("消息", parent: btnMsg)
-        addSubTextToBtn("动态", parent: btnDynamic)
+        addSubTextToBtn("动态", parent: btnMsg)
         addSubTextToBtn("作品", parent: btnWork)
         
         if let city = Defaults["CurrentCity"].string {
@@ -51,7 +48,7 @@ class mineHeadViewController: UIViewController {
         var selectedImg = UIImage.applicationCreateImageWithColor(UIColor(hexString: "#40C84D")!)
         parent.setBackgroundImage(selectedImg, forState: .Selected)
         parent.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-//        parent.layer.cornerRadius = 30  //圆角,对.Selected没有效果?
+        //        parent.layer.cornerRadius = 30  //圆角,对.Selected没有效果?
         parent.tintColor = UIColor.clearColor()
         
         var lb = UILabel(frame: CGRectMake(0, btnMsg.bounds.size.height-20, btnMsg.bounds.size.width, 14))
@@ -63,28 +60,6 @@ class mineHeadViewController: UIViewController {
         parent.addSubview(lb)
     }
     
-    func initSegmentedControl() {
-        segmentedControl = HMSegmentedControl(sectionTitles: ["@你", "系统"])
-        segmentedControl.frame = CGRectMake(0, self.view.bounds.size.height-35, self.view.bounds.size.width, 35)
-        
-        
-        segmentedControl.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleWidth
-        segmentedControl.backgroundColor = UIColor.whiteColor()
-        segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10)
-        segmentedControl.textColor = UIColor(red: 0.694, green: 0.694, blue: 0.694, alpha: 1.00)
-        segmentedControl.selectedTextColor = UIColor(red: 0.255, green: 0.788, blue: 0.298, alpha: 1.00)
-        segmentedControl.selectionIndicatorHeight = 2
-        segmentedControl.selectionIndicatorColor = UIColor(red: 0.255, green: 0.788, blue: 0.298, alpha: 1.00)
-        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
-        segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
-        segmentedControl.addTarget(self, action: "segmentSelected:", forControlEvents: UIControlEvents.ValueChanged)  //这里不能用ValueChange,会报错!
-        self.view.addSubview(segmentedControl)
-    }
-    
-    @IBAction func segmentSelected(sender: HMSegmentedControl) {
-        smallType = sender.selectedSegmentIndex
-    }
-
     //这个是大类型
     @IBAction func messageSelected(sender: UIButton) {
         sender.selected = true
@@ -92,13 +67,7 @@ class mineHeadViewController: UIViewController {
             lastSelected.selected = false
         }
         lastSelected = sender
-        if sender.tag != 1 {
-            segmentedControl.hidden = true
-            //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300)
-        } else {
-            segmentedControl.hidden = false
-            //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
-        }
+        
         bigType = sender.tag
     }
     
@@ -106,7 +75,7 @@ class mineHeadViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     //外面调用的函数
     func RefreshHead(J: JSON) {
         //圆形头像
@@ -122,6 +91,5 @@ class mineHeadViewController: UIViewController {
             
         }
     }
-
 
 }

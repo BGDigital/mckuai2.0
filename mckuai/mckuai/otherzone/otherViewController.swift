@@ -1,23 +1,17 @@
 //
-//  mineTableViewController.swift
+//  otherViewController.swift
 //  mckuai
 //
-//  Created by XingfuQiu on 15/4/22.
+//  Created by XingfuQiu on 15/4/29.
 //  Copyright (c) 2015年 XingfuQiu. All rights reserved.
 //
 
 import UIKit
 
-//消息类型
-enum MessageType: String {
-    case reply = "reply"
-    case system = "system"
-    case post = "post"
-}
+class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     var tableView: UITableView!
-    var head: mineHeadViewController!
+    var head: otherHeadViewController!
     let NAVBAR_CHANGE_POINT:CGFloat = 50
     let url = "http://118.144.83.145:8081/user.do?act=message"
     var manager = AFHTTPRequestOperationManager()
@@ -55,7 +49,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.scrollsToTop = false
         
         //添加Header
-        self.head = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineHeadViewController") as! mineHeadViewController
+        self.head = UIStoryboard(name: "other", bundle: nil).instantiateViewControllerWithIdentifier("otherHeadViewController") as! otherHeadViewController
         tableView.tableHeaderView = self.head.view
         self.view.addSubview(tableView)
         
@@ -89,7 +83,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         //设置主界面
         self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
     }
-
+    
     
     func refreshTableView() {
         println("刷新TableView")
@@ -100,7 +94,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         var offsetY = scrollView.contentOffset.y
         if offsetY > NAVBAR_CHANGE_POINT {
             var alpha = 1 - (NAVBAR_CHANGE_POINT + 64 - offsetY) / 64
-            self.navigationItem.title = "个人中心"
+            self.navigationItem.title = "用户的名字"
             self.navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(alpha))
         } else {
             self.navigationItem.title = ""
@@ -119,24 +113,24 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         self.navigationController?.navigationBar.lt_reset()
         self.tabBarController?.tabBar.hidden = false
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 100
     }
-
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
@@ -146,7 +140,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
             return 0
         }
     }
-
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as? messageCell
@@ -158,7 +152,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         let d = self.datasource[indexPath.row] as JSON
         cell?.update(d)
         // Configure the cell...
-
+        
         return cell!
     }
     
@@ -183,7 +177,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     func loadMoreData() {
         
     }
-
+    
     
     //刷新数据
     func onChangeType() {

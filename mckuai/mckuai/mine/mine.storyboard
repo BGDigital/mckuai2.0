@@ -116,7 +116,8 @@
                                     <constraint firstAttribute="height" constant="60" id="3Dh-m5-DGr"/>
                                     <constraint firstAttribute="width" constant="100" id="UBW-Zh-dfb"/>
                                 </constraints>
-                                <state key="normal" title="消息">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="999">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -130,7 +131,8 @@
                                     <constraint firstAttribute="height" constant="60" id="dy3-IK-OcS"/>
                                     <constraint firstAttribute="width" constant="100" id="snO-BD-tDO"/>
                                 </constraints>
-                                <state key="normal" title="作品">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="999">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -144,7 +146,8 @@
                                     <constraint firstAttribute="width" constant="100" id="Vof-0E-3KS"/>
                                     <constraint firstAttribute="height" constant="60" id="ft0-Z1-SZj"/>
                                 </constraints>
-                                <state key="normal" title="动态">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="999">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

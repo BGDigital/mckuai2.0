@@ -55,6 +55,9 @@
 		E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4AA1AEF662400339E75 /* CollectionCell.swift */; };
 		E6DDF4B11AEF7A7E00339E75 /* friendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4B01AEF7A7E00339E75 /* friendsViewController.swift */; };
 		E6DDF4B31AEF7C1000339E75 /* friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DDF4B21AEF7C1000339E75 /* friends.storyboard */; };
+		E6DDF4BC1AF0824500339E75 /* other.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DDF4BB1AF0824500339E75 /* other.storyboard */; };
+		E6DDF4BF1AF0829000339E75 /* otherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4BE1AF0829000339E75 /* otherViewController.swift */; };
+		E6DDF4C11AF082EA00339E75 /* otherHeadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4C01AF082EA00339E75 /* otherHeadViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +129,9 @@
 		E6DDF4AA1AEF662400339E75 /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionCell.swift; path = backpacker/CollectionCell.swift; sourceTree = "<group>"; };
 		E6DDF4B01AEF7A7E00339E75 /* friendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = friendsViewController.swift; path = backpacker/friendsViewController.swift; sourceTree = "<group>"; };
 		E6DDF4B21AEF7C1000339E75 /* friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = friends.storyboard; path = backpacker/friends.storyboard; sourceTree = "<group>"; };
+		E6DDF4BB1AF0824500339E75 /* other.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = other.storyboard; path = otherzone/other.storyboard; sourceTree = "<group>"; };
+		E6DDF4BE1AF0829000339E75 /* otherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = otherViewController.swift; path = otherzone/otherViewController.swift; sourceTree = "<group>"; };
+		E6DDF4C01AF082EA00339E75 /* otherHeadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = otherHeadViewController.swift; path = otherzone/otherHeadViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +223,7 @@
 		E6518BE91ADD065E005A8C97 /* mckuai */ = {
 			isa = PBXGroup;
 			children = (
+				E6DDF4BD1AF0825800339E75 /* otherzone */,
 				E6DDF4A51AEF365400339E75 /* backpacker */,
 				E6DDF4991AEBBC6800339E75 /* Welcome */,
 				E63DA5051AE6AC8D001D7811 /* mine */,
@@ -371,6 +378,16 @@
 			name = backpacker;
 			sourceTree = "<group>";
 		};
+		E6DDF4BD1AF0825800339E75 /* otherzone */ = {
+			isa = PBXGroup;
+			children = (
+				E6DDF4BB1AF0824500339E75 /* other.storyboard */,
+				E6DDF4C01AF082EA00339E75 /* otherHeadViewController.swift */,
+				E6DDF4BE1AF0829000339E75 /* otherViewController.swift */,
+			);
+			name = otherzone;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -459,6 +476,7 @@
 				E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */,
 				E6518BF21ADD065E005A8C97 /* Main.storyboard in Resources */,
 				E6DDF4B31AEF7C1000339E75 /* friends.storyboard in Resources */,
+				E6DDF4BC1AF0824500339E75 /* other.storyboard in Resources */,
 				E692AA4E1AE9E43E00577B3C /* messageCell.xib in Resources */,
 				E696E5621AE7F88100261F57 /* citydict.plist in Resources */,
 				E63DA5071AE6ACA6001D7811 /* mine.storyboard in Resources */,
@@ -520,6 +538,7 @@
 				E6DDF4B11AEF7A7E00339E75 /* friendsViewController.swift in Sources */,
 				E603D6441ADE657700D93708 /* WobbleView.swift in Sources */,
 				E603D6421ADE650C00D93708 /* AsyncLegacy.swift in Sources */,
+				E6DDF4BF1AF0829000339E75 /* otherViewController.swift in Sources */,
 				E6DDF4A71AEF3B0700339E75 /* favoriteViewController.swift in Sources */,
 				E692AA4A1AE962AC00577B3C /* SwiftColors.swift in Sources */,
 				E603D64B1ADE66BF00D93708 /* UIImage+BlurEffect.swift in Sources */,
@@ -535,6 +554,7 @@
 				E63898941AE0307E00756679 /* mainTableViewCell.swift in Sources */,
 				E6DDF4931AEB9D0500339E75 /* MCUtils.swift in Sources */,
 				E692AA431AE8D0FC00577B3C /* mineHeadViewController.swift in Sources */,
+				E6DDF4C11AF082EA00339E75 /* otherHeadViewController.swift in Sources */,
 				E6DDF49D1AEBBC6800339E75 /* WelcomePlus.swift in Sources */,
 				E60624ED1ADE6F27007D6DEF /* SwiftyUserDefaults.swift in Sources */,
 				E63898971AE042D900756679 /* mainData.swift in Sources */,

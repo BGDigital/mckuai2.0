@@ -39,7 +39,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cr-sn-UIK">
                                             <rect key="frame" x="0.0" y="118" width="110" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <state key="normal" title="成都" image="location">
+                                            <state key="normal" title="成都" image="backpacker_location">
                                                 <color key="titleColor" red="0.70588235294117652" green="0.70980392156862748" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -84,6 +84,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="location" width="12" height="12"/>
+        <image name="backpacker_location" width="12" height="12"/>
     </resources>
 </document>
