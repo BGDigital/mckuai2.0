@@ -41,8 +41,7 @@ class chatViewController: UIViewController {
     }
     
     @IBAction func beginChat(sender: AnyObject) {
-        var token = "dxcm0lr7Egt+GZp6DerjqOeLBPbf3gS4wMl0dLcWBkT2IBDBKobyAFDYl2T1/6H0d1ljiW3e/f4="
-        RCIM.connectWithToken(token,
+        RCIM.connectWithToken(MCUtils.RC_token,
             completion: {userId in
                 println("Login Successrull:\(userId)")
                 var v: RCChatListViewController = RCIM.sharedRCIM().createConversationList(nil)

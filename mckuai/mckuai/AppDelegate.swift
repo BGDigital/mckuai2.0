@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         loadLaunchView()
         //RongCloud
         initRongCloud()
+        
         return true
     }
     
