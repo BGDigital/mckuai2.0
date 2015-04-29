@@ -177,7 +177,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
             tempString = tempString +  placemark.locality + "\n"
             self.currentCity.setTitle(placemark.locality, forState: .Normal)
             //保存到本地
-            Defaults["CurrentCity"] = placemark.locality
+            Delegate?.onSelectCity(placemark.locality)
         }
         //邮编
         if(placemark.postalCode != nil){

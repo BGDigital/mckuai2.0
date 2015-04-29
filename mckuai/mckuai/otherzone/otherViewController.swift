@@ -62,7 +62,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         setupViews()
-        
+        showPopWindow()
         customNavBackButton()
         loadNewData()
     }
@@ -176,6 +176,36 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func loadMoreData() {
         
+    }
+    
+    //显示弹出出的选项
+    func showPopWindow() {
+        var view = UIView(frame: CGRectMake(0, self.view.bounds.size.height-50, self.view.bounds.size.width, 50))
+        view.backgroundColor = UIColor.blackColor()
+        
+        //button1
+        var btn1 = UIButton(frame: CGRectMake(0, 0, self.view.bounds.size.width/2, 50))
+        btn1.setImage(UIImage(named: "backpacker_add"), forState: .Normal)
+        btn1.setTitle("加入背包", forState: .Normal)
+        btn1.addTarget(self, action: "btn1Click", forControlEvents: UIControlEvents.TouchUpInside)
+        view.addSubview(btn1)
+        
+        //button2
+        var btn2 = UIButton(frame: CGRectMake(self.view.bounds.size.width/2, 0, self.view.bounds.size.width/2, 50))
+        btn2.setImage(UIImage(named: "backpacker_chat"), forState: .Normal)
+        btn2.setTitle("和TA聊天", forState: .Normal)
+        view.addSubview(btn2)
+        
+        //渐入效果
+        view.alpha = 0
+        self.view.addSubview(view)
+        UIView.animateWithDuration(0.5, animations: {
+            view.alpha = 1
+        })
+    }
+    
+    @IBAction func btn1Click() {
+        println("btn1 click")
     }
     
     

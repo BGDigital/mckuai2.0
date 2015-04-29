@@ -164,7 +164,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func loadNewData() {
         //开始刷新
-        var param = ["id": 6, "page": 1]
+        var param = ["id": 66, "page": 1]
         manager.GET(url,
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,

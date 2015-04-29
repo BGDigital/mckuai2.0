@@ -97,14 +97,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 responseObject: AnyObject!) in
                 //println(responseObject)
                 self.json = JSON(responseObject)
-//                if "ok" == self.json["state"].stringValue {
-//                    if let d = self.json["dataObject", "talk"].array {
-//                        self.datasource = d
-//                    }
-//                    if let live = self.json["dataObject", "banner"].array {
-//                        self.liveData = live
-//                    }
-//                }
                 self.tableView.header.endRefreshing()
             },
             failure: { (operation: AFHTTPRequestOperation!,
