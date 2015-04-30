@@ -12,8 +12,10 @@ class mainTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var imageV: UIImageView!
-    @IBOutlet weak var imageAlpha: UIView!
     @IBOutlet weak var replys: UIButton!
+    @IBOutlet weak var userName: UIButton!
+    @IBOutlet weak var liveType: UIButton!
+    @IBOutlet weak var liveStatus: UIButton!
     //var midBtn: UIView!
 //    这两句话有什么用
 //    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -37,12 +39,21 @@ class mainTableViewCell: UITableViewCell {
     }
     
     func update(json: JSON) {
-        self.title.text = json["title"].stringValue+"UITableView个人使用总结【前篇-增量加载】 - John.Lv - 博客园"
+        self.title.text = json["talkTitle"].stringValue
         self.title.sizeOfMultiLineLabel()
-        //self.desc.text = json["shortDres"].stringValue
-        //self.replys.text = json["talkNum"].stringValue
-        var url = json["imgUrl"].stringValue
+        self.replys.setTitle(json["replyNum"].stringValue, forState: .Normal)
+        self.userName.setTitle(json["userName"].stringValue, forState: .Normal)
+        var headImg = json["headImg"].stringValue
+        self.userName.setImage(MCUtils.getHeadImg(headImg, rect: CGRectMake(0, 0, 20, 20)), forState: .Normal)
+        self.liveType.setTitle(json["talkType"].stringValue, forState: .Normal)
+        var url = json["mobilePic"].stringValue
         self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder"))
+        
+        if json["isLive"].boolValue {
+            self.liveStatus.setTitle("正在直播", forState: .Normal)
+        } else {
+            self.liveStatus.setTitle("暂停直播", forState: .Normal)
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

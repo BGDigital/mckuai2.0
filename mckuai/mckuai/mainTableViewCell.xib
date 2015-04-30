@@ -14,11 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-QP-hHi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-QP-hHi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="live_cell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="O0c-MS-O9N">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="193"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="live_cell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="O0c-MS-O9N">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Xj-dp-nxk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
@@ -61,7 +61,11 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKh-h0-Xiq">
-                                <rect key="frame" x="15" y="158" width="93" height="16"/>
+                                <rect key="frame" x="15" y="156" width="93" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="93" id="Z1k-R7-EeU"/>
+                                    <constraint firstAttribute="height" constant="20" id="dPP-5k-spm"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="小小麦块块块" image="Guide">
                                     <color key="titleColor" red="0.64313725490196083" green="0.6470588235294118" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,7 +90,7 @@
                             <constraint firstItem="GEm-Hy-L3L" firstAttribute="top" secondItem="AuI-QP-hHi" secondAttribute="top" id="8be-B7-F2E"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="centerX" secondItem="6o2-i9-2oT" secondAttribute="centerX" id="97X-a6-oyr"/>
                             <constraint firstItem="bk3-vh-xT9" firstAttribute="top" secondItem="5Xj-dp-nxk" secondAttribute="bottom" constant="9" id="AeN-3l-wBH"/>
-                            <constraint firstItem="lKh-h0-Xiq" firstAttribute="top" secondItem="4Iw-Yc-srH" secondAttribute="bottom" constant="9" id="BIQ-LZ-H9T"/>
+                            <constraint firstItem="lKh-h0-Xiq" firstAttribute="top" secondItem="4Iw-Yc-srH" secondAttribute="bottom" constant="7" id="BIQ-LZ-H9T"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="centerY" secondItem="AuI-QP-hHi" secondAttribute="centerY" id="EpD-fF-3nv"/>
                             <constraint firstItem="bk3-vh-xT9" firstAttribute="leading" secondItem="O0c-MS-O9N" secondAttribute="trailing" constant="-94" id="FEq-oY-Qlt"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="top" secondItem="AuI-QP-hHi" secondAttribute="top" id="FGw-JR-ges"/>
@@ -108,18 +112,20 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="AuI-QP-hHi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CfD-Ty-NI4"/>
-                    <constraint firstAttribute="bottom" secondItem="AuI-QP-hHi" secondAttribute="bottom" id="bfk-n9-mht"/>
+                    <constraint firstAttribute="bottom" secondItem="AuI-QP-hHi" secondAttribute="bottom" constant="-1" id="bfk-n9-mht"/>
                     <constraint firstItem="AuI-QP-hHi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jlJ-tY-A7o"/>
                     <constraint firstAttribute="trailing" secondItem="AuI-QP-hHi" secondAttribute="trailing" id="wlJ-Ix-uT3"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imageV" destination="5Xj-dp-nxk" id="jwr-kA-IZD"/>
-                <outlet property="imageView" destination="5Xj-dp-nxk" id="bNe-mE-wOQ"/>
+                <outlet property="liveStatus" destination="bk3-vh-xT9" id="R4c-3S-57f"/>
+                <outlet property="liveType" destination="6o2-i9-2oT" id="KJW-e9-cKY"/>
                 <outlet property="replys" destination="GEm-Hy-L3L" id="eov-qg-CQd"/>
                 <outlet property="title" destination="EYO-wS-A5a" id="fQf-V8-74b"/>
+                <outlet property="userName" destination="lKh-h0-Xiq" id="Wwf-3J-Euh"/>
             </connections>
-            <point key="canvasLocation" x="200.5" y="274.5"/>
+            <point key="canvasLocation" x="35.5" y="264"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -3,6 +3,7 @@
 //
 
 #import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 #import "RESideMenu.h"
 #import "UIViewController+RESideMenu.h"
 #import "MJRefresh.h"

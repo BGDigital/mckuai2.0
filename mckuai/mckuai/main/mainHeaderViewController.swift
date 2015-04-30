@@ -16,7 +16,8 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     var nav: UINavigationController?
     
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
-    @IBOutlet weak var username: UIButton!
+    @IBOutlet weak var userHeadImg: UIImageView!
+    @IBOutlet weak var userLastSay: UILabel!
     @IBOutlet weak var times: UIButton!
     @IBOutlet weak var chatTitle: UILabel!
     @IBOutlet weak var imageV: UIImageView!
@@ -29,9 +30,6 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        roundProgressView.percent = 78
-        roundProgressView.imageView = UIImageView(image: UIImage(named: "1024"))
-        username.imageEdgeInsets = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)
         locationCity.titleEdgeInsets = UIEdgeInsetsMake(-1.0, 3.0, 0.0, 0.0)
         
         //圆角背景
@@ -55,6 +53,27 @@ class mainHeaderViewController: UIViewController, CityProtocol {
             locationCity.setTitle("未定位", forState: .Normal)
         }
         // Do any additional setup after loading the view.
+    }
+    
+    func setData(user: JSON!, chat: JSON!) {
+        
+        //用户信息
+        UIImageView().sd_setImageWithURL(NSURL(string: user["headImg"].stringValue), placeholderImage: UIImage(named: "Guide"), completed: {img,_,_,_ in
+            self.roundProgressView.imageView = UIImageView(image: img)
+        })
+        var p = user["process"].floatValue * 100
+        self.roundProgressView.percent = CGFloat(p)
+        self.nickname.text = user["nike"].stringValue
+        self.level.setTitle(user["level"].stringValue, forState: .Normal)
+        
+        //聊天室
+        self.times.setTitle(chat["insertTime"].stringValue, forState: .Normal)
+        self.chatTitle.text = chat["title"].stringValue
+        self.chatTitle.sizeOfMultiLineLabel()
+        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["HeadImg"].stringValue), placeholderImage: UIImage(named: "Guide"))
+        self.userLastSay.text = chat["speak"].stringValue
+        self.imageV.sd_setImageWithURL(NSURL(string: chat["icon"].stringValue), placeholderImage: UIImage(named: "Image"))
+        
     }
     
     @IBAction func openBackPacker() {

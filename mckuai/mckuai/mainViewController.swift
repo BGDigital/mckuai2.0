@@ -11,21 +11,23 @@ import UIKit
 class mainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let cellIdentifier = "mainTableViewCell"
-    let url = "http://118.144.83.145:8081/index.do?act=all"
     var manager = AFHTTPRequestOperationManager()
+    var isFirstLoad = true   //是否初次加载
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
                 if let d = self.json["dataObject", "talk"].array {
                     self.datasource = d
                 }
-                if let live = self.json["dataObject", "banner"].array {
+                if let live = self.json["dataObject", "live"].array {
                     self.liveData = live
                 }
+                var userinfo = self.json["dataObject", "user"]
+                var chat = self.json["dataObject", "chat"]
+                head.setData(userinfo, chat: chat)
             }
         }
     }
-    
     var datasource: Array<JSON>! {
         didSet {
             self.tableView.reloadData()
@@ -49,7 +51,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+        //manager.responseSerializer.acceptableContentTypes = NSSet(object: "application/json") as Set<NSObject>
         
         //设置标题颜色
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
@@ -57,7 +59,10 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setupTableView()
 //        self.data = NSMutableArray()
-        loadNewData()
+        if isFirstLoad {
+            self.tableView.header.beginRefreshing()
+            loadNewData()
+        }
     }
 
     
@@ -91,12 +96,13 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //加载数据,刷新
     func loadNewData() {
         //开始刷新
-        manager.GET(url,
+        manager.GET(URL_INDEX,
             parameters: nil,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)
                 self.json = JSON(responseObject)
+                self.isFirstLoad = false
                 self.tableView.header.endRefreshing()
             },
             failure: { (operation: AFHTTPRequestOperation!,

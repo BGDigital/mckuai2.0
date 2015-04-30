@@ -46,8 +46,7 @@ class chatViewController: UIViewController {
                 println("Login Successrull:\(userId)")
                 var v: RCChatListViewController = RCIM.sharedRCIM().createConversationList(nil)
                 v.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(v, animated: true)
-                //self.tabBarController?.tabBar.hidden = true
+                //self.navigationController?.pushViewController(v, animated: true)
             },
             error: {status in
                 println("Login Faild. \(status)")

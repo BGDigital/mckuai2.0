@@ -8,6 +8,10 @@
 
 import Foundation
 
+//mckuai网络接口
+//首页接口
+let URL_INDEX = "http:192.168.99.117/interface.do?act=indexRec&id=6"
+
 class MCUtils {
 
 //一些通用的系统常量
@@ -25,20 +29,92 @@ static let COLOR_GREEN = "#40C84D"
 
 static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
 
-//功能函数
-class func showCustomHUD(view: UIView, title: String, imgName: String) {
-    var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
-    h.labelText = title
-    h.mode = MBProgressHUDMode.CustomView
-    h.customView = UIImageView(image: UIImage(named: imgName))
-    h.showAnimated(true, whileExecutingBlock: { () -> Void in
-        sleep(2)
-        return
-        }) { () -> Void in
-            h.removeFromSuperview()
-            h = nil
+    //功能函数
+    class func showCustomHUD(view: UIView, title: String, imgName: String) {
+        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        h.labelText = title
+        h.mode = MBProgressHUDMode.CustomView
+        h.customView = UIImageView(image: UIImage(named: imgName))
+        h.showAnimated(true, whileExecutingBlock: { () -> Void in
+            sleep(2)
+            return
+            }) { () -> Void in
+                h.removeFromSuperview()
+                h = nil
+        }
     }
-}
+    
+    //截取小数点后的数
+    class func getStr(str: Double) -> String {
+        let d = "\(str)"
+        var result = ""
+        for character in d {
+            if (character == ".") {
+                break
+            } else {
+                result = result+"\(character)"
+            }
+        }
+        if result.toInt() == 0 {
+            return "1"
+        } else {
+            return result
+        }
+    }
+    
+    //计算时间差
+    class func compDate(beginStr: String) -> String {
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        formatter.locale = NSLocale(localeIdentifier: NSGregorianCalendar)
+        let date = formatter.dateFromString(beginStr)
+        if date == nil {
+            return "时间格式出错"
+        }
+        var second:NSTimeInterval
+        second = -date!.timeIntervalSinceNow
+        if second < 60 {
+            return "刚刚"
+        } else if (second/60) < 60 {
+            var tmp = second/60
+            var s = getStr(tmp)
+            return "\(s)分钟前"
+        } else if (second/60/60) < 24 {
+            var tmp = second/60/60
+            var s = getStr(tmp)
+            return "\(s)小时前"
+        } else if (second/60/60/24) < 30 {
+            var tmp = second/60/60/24
+            var s = getStr(tmp)
+            return "\(s)天前"
+        } else if (second/60/60/24/30) < 12 {
+            var tmp = second/60/60/24/30
+            var s = getStr(tmp)
+            return "\(s)月前"
+        } else {
+            var tmp = second/60/60/24/30/12
+            var s = getStr(tmp)
+            return "\(s)年前"
+        }
+    }
+    
+    /**
+    获取用户头像,并缩小
+    
+    :param: url 用户头像URL
+    
+    :returns: 返回缩小后的用户头像Image
+    */
+    class func getHeadImg(url: String, rect: CGRect) -> UIImage {
+        var iv = UIImageView(frame: rect)
+        iv.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "Guide"))
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        iv.image?.drawInRect(rect)
+        var newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }
 
 /**
