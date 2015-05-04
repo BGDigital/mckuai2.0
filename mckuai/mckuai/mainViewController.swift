@@ -61,7 +61,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        self.data = NSMutableArray()
         if isFirstLoad {
             self.tableView.header.beginRefreshing()
-            loadNewData()
         }
     }
 
@@ -96,6 +95,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //加载数据,刷新
     func loadNewData() {
         //开始刷新
+        println("ddd")
         manager.GET(URL_INDEX,
             parameters: nil,
             success: { (operation: AFHTTPRequestOperation!,
@@ -108,6 +108,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
+                MCUtils.showEmptyView(self.tableView)
                 self.tableView.header.endRefreshing()
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
         })
@@ -120,7 +121,11 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        if self.datasource != nil && self.liveData != nil {
+            return 2
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -140,10 +145,11 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return self.datasource.count
             }
         } else {
+            //没有数据
             return 0
         }
     }
-    
+        
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
@@ -155,7 +161,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? mainTableViewCell
             if cell == nil {
                 //如果没有cell就新创建出来
-                println("Create mainTableViewCell, one......:\(indexPath.row)")
                 let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainTableViewCell", owner: self, options: nil)
                 cell = nib.lastObject as? mainTableViewCell
             }

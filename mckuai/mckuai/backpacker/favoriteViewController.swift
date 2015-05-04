@@ -12,12 +12,12 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
 
     var tableView: UITableView!
     let cellIdentifier = "mainSubCell"
-    let url = "http://118.144.83.145:8081/index.do?act=all"
+    var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
-                if let d = self.json["dataObject", "talk"].array {
+                if let d = self.json["dataObject", "data"].array {
                     self.datasource = d
                 }
             }
@@ -40,10 +40,12 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+        //manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
 
         setupTableView()
-        loadNewData()
+        if isFirstLoad {
+            self.tableView.header.beginRefreshing()
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -54,7 +56,8 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadNewData() {
         //开始刷新
-        manager.GET(url,
+        self.isFirstLoad = false
+        manager.GET(URL_BAG_COLLECTTALK,
             parameters: nil,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
@@ -96,8 +99,10 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.datasource != nil {
+            self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
+            MCUtils.showEmptyView(self.tableView)
             return 0
         }
     }

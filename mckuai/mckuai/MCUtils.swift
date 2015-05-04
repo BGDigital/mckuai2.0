@@ -8,9 +8,36 @@
 
 import Foundation
 
+//本地配置文件
+//城市信息
+//是否已上传城市信息
+let ISUPADDR = "isUpCity"
+//当前城市
+let CURRENTCITY = "CurrentCity"
+
+//用户信息
+//用户ID
+let USERID = "UserId"
+//用户昵称
+let NIKENAME = "NikeName"
+//登录名-email
+let LOGINNAME = "LoginName"
+//登录密码
+let LOGINPWD = "LoginPwd"
+//是否记住登录信息(用户名,密码)
+let ISREMEMBERME = "isRememberMe"
+
 //mckuai网络接口
+//主接口地址-域名
+let URL_MC = "http://192.168.99.118/interface.do?"
 //首页接口
-let URL_INDEX = "http:192.168.99.117/interface.do?act=indexRec&id=6"
+let URL_INDEX = "http://221.237.152.39:8081/interface.do?act=indexRec&id=6"
+//背包-贴子收藏
+let URL_BAG_COLLECTTALK = "http://221.237.152.39:8081/interface.do?act=collectTalk&id=1&page=1"
+//背景-麦友
+let URL_BAG_ATTEUSER = "http://221.237.152.39:8081/interface.do?act=attentionUser&id=1&page=1"
+//直播
+let URL_LIVE = "http://192.168.99.118/interface.do?"
 
 class MCUtils {
 
@@ -115,6 +142,20 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
         UIGraphicsEndImageContext()
         return newImage
     }
+    
+    class func showEmptyView(tv: UITableView) {
+        var v = UIView(frame: tv.frame)
+        
+        var lb_msg = UILabel(frame: CGRectMake(0, tv.bounds.size.height-40, tv.bounds.size.width, 20))
+        lb_msg.text = "没有数据可用"
+        lb_msg.textAlignment = NSTextAlignment.Center
+        lb_msg.sizeToFit()
+        v.addSubview(lb_msg)
+        
+        tv.backgroundView = v
+        tv.separatorStyle = UITableViewCellSeparatorStyle.None
+    }
+
 }
 
 /**

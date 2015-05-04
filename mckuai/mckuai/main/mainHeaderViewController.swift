@@ -47,7 +47,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         roundProgressView.addGestureRecognizer(tapRoundHead)
         bag.addTarget(self, action: "openBackPacker", forControlEvents: UIControlEvents.TouchUpInside)
         
-        if let city = Defaults["CurrentCity"].string {
+        if let city = Defaults[CURRENTCITY].string {
             locationCity.setTitle(city, forState: .Normal)
         } else {
             locationCity.setTitle("未定位", forState: .Normal)
@@ -105,7 +105,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     
     func onSelectCity(selectedCity: String) {
         //保存到本地
-        Defaults["CurrentCity"] = selectedCity
+        Defaults[CURRENTCITY] = selectedCity
         locationCity.setTitle(selectedCity, forState: .Normal)
     }
     

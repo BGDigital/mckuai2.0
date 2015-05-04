@@ -13,12 +13,14 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tableView: UITableView!
     var segmentedControl: HMSegmentedControl!
     let cellIdentifier = "mainTableViewCell"
-    let url = "http://118.144.83.145:8081/index.do?act=all"
+    var liveType = "生存直播"
+    var liveOrder = "new"
+    var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
-                if let d = self.json["dataObject", "banner"].array {
+                if let d = self.json["dataObject", "data"].array {
                     self.datasource = d
                 }
             }
@@ -41,13 +43,12 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         super.viewDidLoad()
         initSegmentedControl()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-        
         
         setNaviStyle()
         setupTableView()
-        //self.tableView.header.beginRefreshing()
-        loadNewData()
+        if isFirstLoad {
+            self.tableView.header.beginRefreshing()
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -80,6 +81,18 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func segmentSelected(sender: HMSegmentedControl) {
         println("segment selected:\(sender.selectedSegmentIndex)")
+        self.tableView.header.beginRefreshing()
+        switch (sender.selectedSegmentIndex) {
+        case 0:
+            self.liveOrder = "new"
+            break
+        case 1:
+            self.liveOrder = "hot"
+            break
+        default:
+            self.liveOrder = "all"
+            break
+        }
     }
     
     func setNaviStyle() {
@@ -97,8 +110,18 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         var alertController = UIAlertController(title: "直播类型", message: "选择你感兴趣的直播类型", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         var cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
-        var deleteAction = UIAlertAction(title: "生存", style: UIAlertActionStyle.Default, handler: nil)
-        var archiveAction = UIAlertAction(title: "极限", style: UIAlertActionStyle.Default, handler: nil)
+        var deleteAction = UIAlertAction(title: "生存直播", style: UIAlertActionStyle.Default, handler: {a in
+            self.liveType = a.title
+            println(self.liveType)
+            self.navigationItem.rightBarButtonItem?.title = "生存"
+            self.tableView.header.beginRefreshing()
+        })
+        var archiveAction = UIAlertAction(title: "极限直播", style: UIAlertActionStyle.Default, handler: {a in
+            self.liveType = a.title
+                        println(self.liveType)
+            self.navigationItem.rightBarButtonItem?.title = "极限"
+            self.tableView.header.beginRefreshing()
+        })
         alertController.addAction(cancelAction)
         alertController.addAction(deleteAction)
         alertController.addAction(archiveAction)
@@ -108,9 +131,15 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func loadNewData() {
+        var dict = ["act":"live",
+                    "page":1,
+                    "type":self.liveType,
+                    "orderField":self.liveOrder]
+        println("加载:\(self.liveType),\(self.liveOrder)======")
+        isFirstLoad = false
         //开始刷新
-        manager.GET(url,
-            parameters: nil,
+        manager.GET(URL_LIVE,
+            parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)
@@ -168,7 +197,6 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? mainTableViewCell
         if cell == nil {
             //如果没有cell就新创建出来
-            println("Create mainTableViewCell, one......:\(indexPath.row)")
             let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainTableViewCell", owner: self, options: nil)
             cell = nib.lastObject as? mainTableViewCell
         }

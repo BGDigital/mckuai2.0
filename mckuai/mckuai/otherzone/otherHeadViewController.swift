@@ -37,7 +37,7 @@ class otherHeadViewController: UIViewController {
         addSubTextToBtn("动态", parent: btnMsg)
         addSubTextToBtn("作品", parent: btnWork)
         
-        if let city = Defaults["CurrentCity"].string {
+        if let city = Defaults[CURRENTCITY].string {
             locationCity.setTitle(city, forState: .Normal)
         } else {
             locationCity.setTitle("未定位", forState: .Normal)

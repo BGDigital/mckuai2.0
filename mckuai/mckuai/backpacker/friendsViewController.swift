@@ -14,6 +14,23 @@ class friendsViewController: UICollectionViewController {
 
     var otherZone: otherViewController!
     var nav: UINavigationController?
+    var isFirstLoad = true
+    var manager = AFHTTPRequestOperationManager()
+    var json: JSON! {
+        didSet {
+            if "ok" == self.json["state"].stringValue {
+                if let d = self.json["dataObject", "data"].array {
+                    self.datasource = d
+                }
+            }
+        }
+    }
+    
+    var datasource: Array<JSON>! {
+        didSet {
+            self.collectionView!.reloadData()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,11 +39,35 @@ class friendsViewController: UICollectionViewController {
         self.collectionView?.allowsMultipleSelection = false
         self.collectionView?.backgroundColor = UIColor(hexString: "#EDF1F2")
         // Do any additional setup after loading the view.
+        self.collectionView!.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+        
+        if isFirstLoad {
+            self.collectionView!.header.beginRefreshing()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadNewData() {
+        //开始刷新
+        self.isFirstLoad = false
+        manager.GET(URL_BAG_ATTEUSER,
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                //println(responseObject)
+                self.json = JSON(responseObject)
+                self.collectionView?.header.endRefreshing()
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.collectionView!.header.endRefreshing()
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+        })
     }
 
     // MARK: UICollectionViewDataSource
@@ -39,7 +80,11 @@ class friendsViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        return 18
+        if self.datasource != nil {
+            return self.datasource.count
+        } else {
+            return 0
+        }
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -47,10 +92,8 @@ class friendsViewController: UICollectionViewController {
         
         // Configure the cell
         cell.backgroundColor = UIColor(hexString: "#EDF1F2")
-        cell.roundProgressView.percent = 43
-        cell.roundProgressView.imageView = UIImageView(image: UIImage(named: "1024"))
-        cell.nickname.text = "小小麦\(indexPath.row)号"
-        cell.locationCity.setTitle("成都", forState: .Normal)
+        let j = self.datasource[indexPath.row] as JSON
+        cell.update(j)
         
         return cell
     }

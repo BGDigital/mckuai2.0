@@ -14,6 +14,7 @@ protocol CityProtocol {
 }
 
 class cityListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate {
+    var manager = AFHTTPRequestOperationManager()
     //用于定位服务管理类，它能够给我们提供位置信息和高度信息，也可以监控设备进入或离开某个区域，还可以获得设备的运行方向
     let locationManager : CLLocationManager = CLLocationManager()
     //这两个变量是用于反查城市的
@@ -171,6 +172,11 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         if(placemark.locality != nil){
             tempString = tempString +  placemark.locality + "\n"
             self.currentCity.setTitle(placemark.locality, forState: .Normal)
+            Defaults.remove(ISUPADDR)
+            if !Defaults.hasKey(ISUPADDR) {
+                println("用户地址没有上传,开始上传")
+                self.upAddrToServer(placemark.locality)
+            }
             //保存到本地
             Delegate?.onSelectCity(placemark.locality)
         }
@@ -188,6 +194,21 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!){
         println("locationManager,didFailWithError %@", error)
         var errorAlert : UIAlertView = UIAlertView(title: "Error", message: "Failed to get your location", delegate: nil, cancelButtonTitle: "OK")
+    }
+    
+    func upAddrToServer(city: String) {
+        var dict = ["act":"updateAddr","id":6,"addr":city]
+        manager.POST(URL_MC,
+            parameters: dict,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                println(responseObject)
+                Defaults[ISUPADDR] = true
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("func upAddrToServer,Error: " + error.localizedDescription)
+        })
     }
 
     

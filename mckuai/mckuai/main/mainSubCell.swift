@@ -26,16 +26,18 @@ class mainSubCell: UITableViewCell {
     func update(json: JSON) {
         self.title.text = json["talkTitle"].stringValue
         self.title.sizeOfMultiLineLabel()
+        var icon = json["icon"].stringValue
+        self.username.setImage(MCUtils.getHeadImg(icon, rect: CGRectMake(0, 0, 20, 20)), forState: .Normal)
         self.username.setTitle(json["forumName"].stringValue, forState: .Normal)
         self.replys.setTitle(json["replyNum"].stringValue, forState: .Normal)
         self.times.text = MCUtils.compDate(json["replyTime"].stringValue)
-        var url = json["mobilePic"].stringValue
-        if !json["hasImg"].boolValue {
+        if let url = json["mobilePic"].string {
             self.title.textColor = UIColor.whiteColor()
             self.alphaView.hidden = false
             self.liveView.hidden = true
             self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder"))
         } else {
+            self.title.textColor = UIColor(hexString: "#3B3C3D")
             self.alphaView.hidden = true
             self.liveView.hidden = false
         }
