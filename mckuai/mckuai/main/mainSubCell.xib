@@ -67,7 +67,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fz-Iz-wu3">
-                                <rect key="frame" x="12" y="38" width="351" height="20"/>
+                                <rect key="frame" x="12" y="30" width="351" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="icf-Td-C7n"/>
                                 </constraints>
@@ -105,7 +105,7 @@
                             <constraint firstItem="9fz-Iz-wu3" firstAttribute="leading" secondItem="08l-GC-jbA" secondAttribute="leading" id="iYe-EZ-aih"/>
                             <constraint firstItem="08l-GC-jbA" firstAttribute="top" secondItem="Aiw-Kr-529" secondAttribute="bottom" constant="8" symbolic="YES" id="klC-cV-Cp8"/>
                             <constraint firstItem="T7J-2c-4Ws" firstAttribute="top" secondItem="9fz-Iz-wu3" secondAttribute="bottom" constant="19" id="lzp-gi-ANp"/>
-                            <constraint firstItem="9fz-Iz-wu3" firstAttribute="top" secondItem="ejz-tI-HRZ" secondAttribute="top" constant="38" id="t4s-hF-CLM"/>
+                            <constraint firstItem="9fz-Iz-wu3" firstAttribute="top" secondItem="ejz-tI-HRZ" secondAttribute="top" constant="30" id="t4s-hF-CLM"/>
                             <constraint firstItem="T7J-2c-4Ws" firstAttribute="trailing" secondItem="8Mw-9F-ODS" secondAttribute="trailing" id="vCi-OE-irk"/>
                         </constraints>
                         <variation key="default">

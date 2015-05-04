@@ -8,23 +8,18 @@
 
 import UIKit
 
-//消息类型
-enum MessageType: String {
-    case reply = "reply"
-    case system = "system"
-    case post = "post"
-}
-
-class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MineProtocol {
     var tableView: UITableView!
+    var isFirstLoad = true
+    var mineType = "message"
+    var mineMsgType = "reply"
     var head: mineHeadViewController!
     let NAVBAR_CHANGE_POINT:CGFloat = 50
-    let url = "http://118.144.83.145:8081/user.do?act=message"
     var manager = AFHTTPRequestOperationManager()
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
-                if let d = self.json["dataObject", "message"].array {
+                if let d = self.json["dataObject", "list", "data"].array {
                     self.datasource = d
                 }
                 self.User = self.json["dataObject", "user"] as JSON
@@ -57,6 +52,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         //添加Header
         self.head = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineHeadViewController") as! mineHeadViewController
         tableView.tableHeaderView = self.head.view
+        self.head.Delegate = self
         self.view.addSubview(tableView)
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
@@ -66,11 +62,12 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         setupViews()
         
         customNavBackButton()
-        loadNewData()
+        if isFirstLoad {
+            self.tableView.header.beginRefreshing()
+        }
     }
     
     func customNavBackButton() {
@@ -126,7 +123,11 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Table view data source
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        if self.mineType != "work" {
+            return 100
+        } else {
+            return 118
+        }
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -141,29 +142,53 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         if self.datasource != nil {
             return self.datasource.count
         } else {
+            MCUtils.showEmptyView(self.tableView)
             return 0
         }
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as? messageCell
-        
-        if cell == nil {
-            let nib: NSArray = NSBundle.mainBundle().loadNibNamed("messageCell", owner: self, options: nil)
-            cell = nib.lastObject as? messageCell
-        }
-        let d = self.datasource[indexPath.row] as JSON
-        cell?.update(d)
-        // Configure the cell...
+        if self.mineType != "work" {
+            var cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as? messageCell
+            
+            if cell == nil {
+                let nib: NSArray = NSBundle.mainBundle().loadNibNamed("messageCell", owner: self, options: nil)
+                cell = nib.lastObject as? messageCell
+            }
+            let d = self.datasource[indexPath.row] as JSON
+            cell?.update(d, iType: self.mineType, sMsgType: self.mineMsgType)
+            // Configure the cell...
+            
+            return cell!
 
-        return cell!
+        } else {
+            var cell = tableView.dequeueReusableCellWithIdentifier("mainSubCell") as? mainSubCell
+            
+            if cell == nil {
+                let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainSubCell", owner: self, options: nil)
+                cell = nib.lastObject as? mainSubCell
+            }
+            let d = self.datasource[indexPath.row] as JSON
+            cell?.update(d)
+            return cell!
+
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println(indexPath.row)
     }
     
     func loadNewData() {
         //开始刷新
-        var param = ["id": 66, "page": 1]
-        manager.GET(url,
+        var param = [
+            "act": "center",
+            "id": 1,
+            "page": 1,
+            "type":self.mineType,
+            "messageType": self.mineMsgType]
+        manager.GET(URL_MC,
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
@@ -182,29 +207,35 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
 
-    
     //刷新数据
-    func onChangeType() {
-        
-        switch (self.head.bigType) {
+    //1:消息,2:动态,3:作品
+    //0:@Me,1:系统, 2:为空,不用传
+    func onRefreshDataSource(iType: Int, iMsgType: Int) {
+        //大类型
+        switch (iType) {
         case 1:
-            switch (self.head.smallType) {
-            case 1:
-                break
-            case 2:
-                break
-            case 3:
-                break
-            default:
-                break
-            }
+            self.mineType = "message"
         case 2:
-            break
-        case 3:
+            self.mineType = "dynamic"
             break
         default:
+            self.mineType = "work"
             break
         }
+        //小类型
+        switch (iMsgType) {
+        case 0:
+            self.mineMsgType = "reply"
+            break
+        case 1:
+            self.mineMsgType = "system"
+            break
+        default:
+            self.mineMsgType = ""
+            break
+        }
+        //开始加载数据
+        self.tableView.header.beginRefreshing()
     }
 
 }

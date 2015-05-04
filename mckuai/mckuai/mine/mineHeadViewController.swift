@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MineProtocol {
+    func onRefreshDataSource(iType: Int, iMsgType: Int)
+}
+
 class mineHeadViewController: UIViewController {
 
     @IBOutlet weak var imageBg: SABlurImageView!
@@ -17,6 +21,7 @@ class mineHeadViewController: UIViewController {
     @IBOutlet weak var btnMsg: UIButton!
     @IBOutlet weak var btnDynamic: UIButton!
     @IBOutlet weak var btnWork: UIButton!
+    var Delegate: MineProtocol?
     
     var lastSelected: UIButton!
     var segmentedControl: HMSegmentedControl!
@@ -27,7 +32,7 @@ class mineHeadViewController: UIViewController {
     
     //大类型,小类型都默认取1
     var bigType = 1   //1:消息,2:动态,3:作品
-    var smallType = 0  //0:All,1:@Me,2:系统
+    var smallType = 1  //0:为空,不用传,1:@Me,2:系统
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +44,9 @@ class mineHeadViewController: UIViewController {
         addSubTextToBtn("消息", parent: btnMsg)
         addSubTextToBtn("动态", parent: btnDynamic)
         addSubTextToBtn("作品", parent: btnWork)
+        //设置消息为选中状态
+        btnMsg.selected = true
+        lastSelected = btnMsg
         
         if let city = Defaults[CURRENTCITY].string {
             locationCity.setTitle(city, forState: .Normal)
@@ -83,6 +91,7 @@ class mineHeadViewController: UIViewController {
     
     @IBAction func segmentSelected(sender: HMSegmentedControl) {
         smallType = sender.selectedSegmentIndex
+        Delegate?.onRefreshDataSource(self.bigType, iMsgType: self.smallType)
     }
 
     //这个是大类型
@@ -94,12 +103,15 @@ class mineHeadViewController: UIViewController {
         lastSelected = sender
         if sender.tag != 1 {
             segmentedControl.hidden = true
+            self.smallType = 2
             //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300)
         } else {
             segmentedControl.hidden = false
+            self.smallType = 0
             //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
         }
         bigType = sender.tag
+        Delegate?.onRefreshDataSource(self.bigType, iMsgType: self.smallType)
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,7 +122,7 @@ class mineHeadViewController: UIViewController {
     //外面调用的函数
     func RefreshHead(J: JSON) {
         //圆形头像
-        roundProgressView.percent = 78
+        roundProgressView.percent = CGFloat(J["process"].floatValue * 100)
         headImg = J["headImg"].stringValue
         nickname.text = J["nike"].stringValue
         if !headImg.isEmpty {
@@ -118,8 +130,10 @@ class mineHeadViewController: UIViewController {
                 self.roundProgressView.imageView = UIImageView(image: image)
                 self.imageBg.addBlurEffect(30, times: 1)
             })
-            
-            
+        //
+        btnMsg.setTitle(J["messageNum"].stringValue, forState: .Normal)
+        btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)
+        btnWork.setTitle(J["workNum"].stringValue, forState: .Normal)
         }
     }
 

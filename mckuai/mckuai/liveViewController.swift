@@ -138,7 +138,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         println("加载:\(self.liveType),\(self.liveOrder)======")
         isFirstLoad = false
         //开始刷新
-        manager.GET(URL_LIVE,
+        manager.GET(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in

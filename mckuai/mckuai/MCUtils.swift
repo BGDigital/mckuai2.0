@@ -29,15 +29,13 @@ let ISREMEMBERME = "isRememberMe"
 
 //mckuai网络接口
 //主接口地址-域名
-let URL_MC = "http://192.168.99.118/interface.do?"
+let URL_MC = "http://221.237.152.39:8081/interface.do?"
 //首页接口
 let URL_INDEX = "http://221.237.152.39:8081/interface.do?act=indexRec&id=6"
 //背包-贴子收藏
 let URL_BAG_COLLECTTALK = "http://221.237.152.39:8081/interface.do?act=collectTalk&id=1&page=1"
 //背景-麦友
 let URL_BAG_ATTEUSER = "http://221.237.152.39:8081/interface.do?act=attentionUser&id=1&page=1"
-//直播
-let URL_LIVE = "http://192.168.99.118/interface.do?"
 
 class MCUtils {
 
@@ -200,6 +198,5 @@ extension UIImage {
     }
     
 }
-
 
 

@@ -12,13 +12,13 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     var tableView: UITableView!
     var head: otherHeadViewController!
+    var UserId: Int?  //外面传进来的UserId
     let NAVBAR_CHANGE_POINT:CGFloat = 50
-    let url = "http://118.144.83.145:8081/user.do?act=message"
     var manager = AFHTTPRequestOperationManager()
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
-                if let d = self.json["dataObject", "message"].array {
+                if let d = self.json["dataObject", "data"].array {
                     self.datasource = d
                 }
                 self.User = self.json["dataObject", "user"] as JSON
@@ -31,11 +31,6 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     var User: JSON!
     var pageInfo: JSON!
     var datasource: Array<JSON>!
-    
-    class func initializationMine()->UIViewController{
-        var mine = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! mineTableViewController
-        return UINavigationController(rootViewController: mine)
-    }
     
     func setupViews() {
         self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64), style: UITableViewStyle.Plain)
@@ -150,7 +145,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
             cell = nib.lastObject as? messageCell
         }
         let d = self.datasource[indexPath.row] as JSON
-        cell?.update(d)
+        cell?.update(d, iType: "", sMsgType: "")
         // Configure the cell...
         
         return cell!
@@ -159,7 +154,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     func loadNewData() {
         //开始刷新
         var param = ["id": 6, "page": 1]
-        manager.GET(url,
+        manager.GET(URL_MC,
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in

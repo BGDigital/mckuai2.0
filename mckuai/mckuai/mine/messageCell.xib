@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mineCell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="x57-6a-wMu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mineCell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="x57-6a-wMu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="101"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1y-jK-v8d">
@@ -40,7 +40,7 @@
                         <color key="textColor" red="0.69019607843137254" green="0.69411764705882351" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UILabel" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSJ-dr-cuR">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载中..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSJ-dr-cuR">
                         <rect key="frame" x="8" y="54" width="359" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="359" id="W3O-Qm-ga1"/>
@@ -64,6 +64,11 @@
                     <constraint firstItem="x57-6a-wMu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y2Q-VZ-LHe"/>
                     <constraint firstItem="NSJ-dr-cuR" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="zjb-jQ-ol9"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="tRb-er-sWt"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="message" destination="NSJ-dr-cuR" id="SgO-UV-fp5"/>
