@@ -15,7 +15,7 @@ class backpackerViewController: UIViewController {
     var friends: friendsViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.hidesBottomBarWhenPushed = true  //这句在pop回来的时候没有效果
         self.view.backgroundColor = UIColor.whiteColor()
         initSegmentedControl()
         customNavBackButton()
@@ -30,6 +30,7 @@ class backpackerViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        self.tabBarController?.tabBar.hidden = true
     }
     
     func initSubView() {

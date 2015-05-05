@@ -34,7 +34,7 @@ class friendsViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.hidesBottomBarWhenPushed = true
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
         self.collectionView?.allowsMultipleSelection = false
@@ -169,8 +169,7 @@ class friendsViewController: UICollectionViewController {
     }
     
     @IBAction func btn1Click() {
-        otherZone = otherViewController()
-        otherZone.UserId = self.selectUserId
+        otherZone = otherViewController(uId: self.selectUserId!)
         self.nav?.pushViewController(otherZone, animated: true)
     }
 

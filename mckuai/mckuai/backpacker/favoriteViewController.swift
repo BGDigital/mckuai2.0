@@ -24,7 +24,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    var datasource: Array<JSON>! {
+    var datasource: Array<JSON>! = Array() {
         didSet {
             self.tableView.reloadData()
         }
@@ -41,7 +41,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         //manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-
+        self.hidesBottomBarWhenPushed = true
         setupTableView()
         if isFirstLoad {
             self.tableView.header.beginRefreshing()
@@ -99,7 +99,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.datasource != nil {
+        if (!self.datasource.isEmpty) {
             self.tableView.backgroundView = nil
             return self.datasource.count
         } else {

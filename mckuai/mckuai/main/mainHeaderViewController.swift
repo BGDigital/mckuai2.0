@@ -33,7 +33,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         locationCity.titleEdgeInsets = UIEdgeInsetsMake(-1.0, 3.0, 0.0, 0.0)
         
         //圆角背景
-        level.backgroundColor = UIColor(hexString: "#30A243")!
+        level.backgroundColor = UIColor(hexString: "#30A243")
         level.layer.cornerRadius = 10
         
         bag.setImage(UIImage(named: "backpacker_selected"), forState: .Selected)

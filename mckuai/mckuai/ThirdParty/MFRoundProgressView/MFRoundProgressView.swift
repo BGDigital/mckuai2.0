@@ -21,8 +21,7 @@ class MFRoundProgressView: UIView {
     @IBInspectable var imageUrl: String! {
         didSet {
             showPercent = imageUrl.isEmpty
-            //println(showPercent)
-            imageView = UIImageView(frame: CGRectMake(9, 9, self.frame.width-18, self.frame.height-18))
+            imageView.frame = CGRectMake(9, 9, self.frame.width-18, self.frame.height-18)
             imageView.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: UIImage(named: "Guide"))
             //imageView.frame = CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height-20)
             imageView.layer.masksToBounds = true
@@ -43,14 +42,27 @@ class MFRoundProgressView: UIView {
             setNeedsDisplay()
         }
     }
-    
+    //进度条的进度宽度
     @IBInspectable var progressLineWidth:CGFloat = 2.0 {
         didSet {
             setNeedsDisplay()
         }
     }
+    //用户等级
+    @IBInspectable var level:Int = 0 {
+        didSet {
+            lb_level.frame = CGRectMake(8, 5, 25, 25)
+            lb_level.setTitle("lv." + String(level), forState: .Normal)
+            lb_level.titleLabel?.font = UIFont(name: lb_level.titleLabel!.font.fontName, size: 11)
+            lb_level.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            //圆角背景
+            lb_level.backgroundColor = UIColor(hexString: "#21D12B")
+            lb_level.layer.cornerRadius = 12.5
 
-    
+            self.addSubview(lb_level)
+            setNeedsDisplay()
+        }
+    }
     
     //默认显示文字百分比,为false时显示图片
 //    @IBInspectable var showPercent: Bool = true {
@@ -59,7 +71,7 @@ class MFRoundProgressView: UIView {
 //        }
 //    }
     //用户头像图片
-    private var imageView: UIImageView!
+    private var imageView: UIImageView = UIImageView()
     //是否显示进度数字
     private var showPercent: Bool = true
     //是否显示阴影
@@ -67,6 +79,7 @@ class MFRoundProgressView: UIView {
     //进度开始,结束点
     private var startAngle: CGFloat = CGFloat(-120 * M_PI / 180)
     private var endAngle: CGFloat = CGFloat(240 * M_PI / 180)
+    private var lb_level: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

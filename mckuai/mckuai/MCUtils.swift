@@ -140,11 +140,22 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
     class func showEmptyView(tv: UITableView) {
         var v = UIView(frame: tv.frame)
         
-        var lb_msg = UILabel(frame: CGRectMake(0, tv.bounds.size.height-40, tv.bounds.size.width, 20))
-        lb_msg.text = "没有数据可用"
-        lb_msg.textAlignment = NSTextAlignment.Center
-        lb_msg.sizeToFit()
-        v.addSubview(lb_msg)
+//        let btnR = CGSize(width: 200, height: 30)
+//        let btnX = (v.bounds.size.width - btnR.width) / 2
+//        let btnY = v.bounds.size.height - 50
+//        var lb_msg = UIButton(frame: CGRectMake(btnX, btnY, btnR.width, btnR.height))
+//        lb_msg.setTitle("没有数据可用", forState: .Normal)
+//        lb_msg.backgroundColor = UIColor.redColor()
+//        //lb_msg.textAlignment = NSTextAlignment.Center
+//        lb_msg.sizeToFit()
+//        v.addSubview(lb_msg)
+        
+        var lb = UILabel(frame: v.bounds)
+        lb.text = "获取数据失败\n请稍后刷新重试"
+        lb.numberOfLines = 2;
+        lb.textAlignment = .Center;
+        lb.textColor = UIColor.lightGrayColor()
+        v.addSubview(lb)
         
         tv.backgroundView = v
         tv.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -194,5 +205,4 @@ extension UIImage {
     }
     
 }
-
 

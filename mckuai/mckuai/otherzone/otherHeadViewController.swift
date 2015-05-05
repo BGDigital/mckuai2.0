@@ -87,6 +87,7 @@ class otherHeadViewController: UIViewController {
         //圆形头像
         roundProgressView.percent = CGFloat(J["process"].floatValue * 100)
         roundProgressView.imageUrl = J["headImg"].stringValue
+        self.roundProgressView.level = J["level"].intValue
         headImg = J["headImg"].stringValue
         nickname.text = J["nike"].stringValue
         if !headImg.isEmpty {

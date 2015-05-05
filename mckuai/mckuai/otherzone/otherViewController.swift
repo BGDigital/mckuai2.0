@@ -10,11 +10,11 @@ import UIKit
 
 class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OtherProtocol {
 
-    var tableView: UITableView!
-    var otherhead: otherHeadViewController!
-    var UserId: Int?  //外面传进来的UserId
-    let NAVBAR_CHANGE_POINT:CGFloat = 50
-    var manager = AFHTTPRequestOperationManager()
+    private var tableView: UITableView!
+    private var otherhead: otherHeadViewController!
+    private var UserId: Int?  //外面传进来的UserId
+    private let NAVBAR_CHANGE_POINT:CGFloat = 50
+    private var manager = AFHTTPRequestOperationManager()
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
@@ -33,6 +33,16 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     var datasource: Array<JSON>!
     
     var mineType = "dynamic"
+    
+    init(uId: Int) {
+        super.init(nibName: nil, bundle: nil)
+        self.UserId = uId
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     
     func setupViews() {
         self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64), style: UITableViewStyle.Plain)
@@ -57,6 +67,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hidesBottomBarWhenPushed = true
         setupViews()
         showPopWindow()
         customNavBackButton()
@@ -77,7 +88,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     func backToMain() {
         self.navigationController?.popViewControllerAnimated(true)
         //设置主界面
-        self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
+        //self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
     }
     
     

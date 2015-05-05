@@ -22,6 +22,7 @@ class CollectionCell: UICollectionViewCell {
     func update(j: JSON) {
         self.roundProgressView.percent = CGFloat(j["process"].floatValue)
         self.roundProgressView.imageUrl = j["headImg"].stringValue
+        self.roundProgressView.level = j["level"].intValue
         self.nickname.text = j["nike"].stringValue
         self.locationCity.setTitle("成都", forState: .Normal)
         self.userId = j["id"].intValue
