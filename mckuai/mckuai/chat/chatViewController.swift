@@ -8,10 +8,10 @@
 
 import UIKit
 
-class chatViewController: UIViewController {
+class chatViewController: RCChatListViewController {
 
     class func mainRoot()->UIViewController{
-        var main = UIStoryboard(name: "chat", bundle: nil).instantiateViewControllerWithIdentifier("chatViewController") as! UIViewController
+        var main = UIStoryboard(name: "chat", bundle: nil).instantiateViewControllerWithIdentifier("chatViewController") as! RCChatListViewController
         main.tabBarItem = UITabBarItem(title: "聊天", image: UIImage(named: "third_normal"), selectedImage: UIImage(named: "third_selected"))
         return UINavigationController(rootViewController: main)
     }
@@ -19,6 +19,15 @@ class chatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customNavBackButton()
+        
+        RCIM.connectWithToken(MCUtils.RC_token,
+            completion: {userId in
+                println("Login Successrull:\(userId)")
+            },
+            error: {status in
+                println("Login Faild. \(status)")
+        })
+        
         // Do any additional setup after loading the view.
     }
 
@@ -40,18 +49,18 @@ class chatViewController: UIViewController {
 //        self.navigationItem.leftBarButtonItem = back
     }
     
-    @IBAction func beginChat(sender: AnyObject) {
-        RCIM.connectWithToken(MCUtils.RC_token,
-            completion: {userId in
-                println("Login Successrull:\(userId)")
-                var v: RCChatListViewController = RCIM.sharedRCIM().createConversationList(nil)
-                v.hidesBottomBarWhenPushed = true
-                //self.navigationController?.pushViewController(v, animated: true)
-            },
-            error: {status in
-                println("Login Faild. \(status)")
-        })
-    }
+//    @IBAction func beginChat(sender: AnyObject) {
+//        RCIM.connectWithToken(MCUtils.RC_token,
+//            completion: {userId in
+//                println("Login Successrull:\(userId)")
+//                var v: RCChatListViewController = RCIM.sharedRCIM().createConversationList(nil)
+//                v.hidesBottomBarWhenPushed = true
+//                //self.navigationController?.pushViewController(v, animated: true)
+//            },
+//            error: {status in
+//                println("Login Faild. \(status)")
+//        })
+//    }
 
     /*
     // MARK: - Navigation

@@ -57,8 +57,9 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     func loadNewData() {
         //开始刷新
         self.isFirstLoad = false
-        manager.GET(URL_BAG_COLLECTTALK,
-            parameters: nil,
+        var dict = ["act":"collectTalk", "id": 6, "page": 1]
+        manager.GET(URL_MC,
+            parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)

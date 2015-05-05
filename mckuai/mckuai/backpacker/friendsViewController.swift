@@ -55,8 +55,9 @@ class friendsViewController: UICollectionViewController {
     func loadNewData() {
         //开始刷新
         self.isFirstLoad = false
-        manager.GET(URL_BAG_ATTEUSER,
-            parameters: nil,
+        var dict = ["act":"attentionUser", "id": 6, "page": 1]
+        manager.GET(URL_MC,
+            parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)

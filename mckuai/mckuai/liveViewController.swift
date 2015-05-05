@@ -13,7 +13,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tableView: UITableView!
     var segmentedControl: HMSegmentedControl!
     let cellIdentifier = "mainTableViewCell"
-    var liveType = "生存直播"
+    var liveType = ""  //为空就取全部的数据
     var liveOrder = "new"
     var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
@@ -80,8 +80,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func segmentSelected(sender: HMSegmentedControl) {
-        println("segment selected:\(sender.selectedSegmentIndex)")
-        self.tableView.header.beginRefreshing()
+//        println("segment selected:\(sender.selectedSegmentIndex)")
         switch (sender.selectedSegmentIndex) {
         case 0:
             self.liveOrder = "new"
@@ -93,12 +92,13 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.liveOrder = "all"
             break
         }
+        self.tableView.header.beginRefreshing()
     }
     
     func setNaviStyle() {
         //菜单按钮
         //var menu = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "showLiveType")
-        var menu = UIBarButtonItem(title: "生存", style: UIBarButtonItemStyle.Bordered, target: self, action: "showLiveType")
+        var menu = UIBarButtonItem(title: "全部", style: UIBarButtonItemStyle.Bordered, target: self, action: "showLiveType")
         menu.tintColor = UIColor.whiteColor()
         self.navigationItem.rightBarButtonItem = menu
         //设置标题颜色
@@ -116,15 +116,24 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationItem.rightBarButtonItem?.title = "生存"
             self.tableView.header.beginRefreshing()
         })
+        
         var archiveAction = UIAlertAction(title: "极限直播", style: UIAlertActionStyle.Default, handler: {a in
             self.liveType = a.title
-                        println(self.liveType)
+            println(self.liveType)
             self.navigationItem.rightBarButtonItem?.title = "极限"
+            self.tableView.header.beginRefreshing()
+        })
+        
+        var allAction = UIAlertAction(title: "全部直播", style: UIAlertActionStyle.Default, handler: {a in
+            self.liveType = ""
+            println(self.liveType)
+            self.navigationItem.rightBarButtonItem?.title = "全部"
             self.tableView.header.beginRefreshing()
         })
         alertController.addAction(cancelAction)
         alertController.addAction(deleteAction)
         alertController.addAction(archiveAction)
+        alertController.addAction(allAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
         
@@ -135,7 +144,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
                     "page":1,
                     "type":self.liveType,
                     "orderField":self.liveOrder]
-        println("加载:\(self.liveType),\(self.liveOrder)======")
+        //println("加载:\(self.liveType),\(self.liveOrder)======")
         isFirstLoad = false
         //开始刷新
         manager.GET(URL_MC,

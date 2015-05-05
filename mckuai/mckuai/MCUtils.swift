@@ -30,10 +30,6 @@ let D_ISREMEMBERME = "isRememberMe"
 //mckuai网络接口
 //主接口地址-域名
 let URL_MC = "http://221.237.152.39:8081/interface.do?"
-//背包-贴子收藏
-let URL_BAG_COLLECTTALK = "http://221.237.152.39:8081/interface.do?act=collectTalk&id=6&page=1"
-//背景-麦友
-let URL_BAG_ATTEUSER = "http://221.237.152.39:8081/interface.do?act=attentionUser&id=6&page=1"
 
 class MCUtils {
 
