@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D504800773B98F3939335BA1 /* libPods-mckuai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C803131B3C815A90D93EFEED /* libPods-mckuai.a */; };
+		E6003B631AF93392002DB99A /* GuidePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6003B621AF93392002DB99A /* GuidePageController.swift */; };
 		E603D6421ADE650C00D93708 /* AsyncLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603D6411ADE650C00D93708 /* AsyncLegacy.swift */; };
 		E603D6441ADE657700D93708 /* WobbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603D6431ADE657700D93708 /* WobbleView.swift */; };
 		E603D6481ADE664900D93708 /* SABlurImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603D6471ADE664900D93708 /* SABlurImageView.swift */; };
@@ -106,8 +107,6 @@
 		E6BF86011AF13245005F08B2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF86001AF13245005F08B2 /* Security.framework */; };
 		E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6D2C36A1AE1111500FF823E /* home.storyboard */; };
 		E6DDF4931AEB9D0500339E75 /* MCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4921AEB9D0500339E75 /* MCUtils.swift */; };
-		E6DDF49C1AEBBC6800339E75 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */; };
-		E6DDF49D1AEBBC6800339E75 /* WelcomePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */; };
 		E6DDF4A41AEF364A00339E75 /* backpackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4A31AEF364A00339E75 /* backpackerViewController.swift */; };
 		E6DDF4A71AEF3B0700339E75 /* favoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4A61AEF3B0700339E75 /* favoriteViewController.swift */; };
 		E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4AA1AEF662400339E75 /* CollectionCell.swift */; };
@@ -132,6 +131,7 @@
 		01A338F1C539FF6B80886F4A /* Pods-mckuai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mckuai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mckuai/Pods-mckuai.debug.xcconfig"; sourceTree = "<group>"; };
 		122493CA7CAEC4ECF51B2D3E /* Pods-mckuai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mckuai.release.xcconfig"; path = "Pods/Target Support Files/Pods-mckuai/Pods-mckuai.release.xcconfig"; sourceTree = "<group>"; };
 		C803131B3C815A90D93EFEED /* libPods-mckuai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mckuai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6003B621AF93392002DB99A /* GuidePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuidePageController.swift; sourceTree = "<group>"; };
 		E603D6411ADE650C00D93708 /* AsyncLegacy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AsyncLegacy.swift; path = ThirdParty/AsyncLegacy.swift; sourceTree = "<group>"; };
 		E603D6431ADE657700D93708 /* WobbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WobbleView.swift; path = ThirdParty/WobbleView.swift; sourceTree = "<group>"; };
 		E603D6471ADE664900D93708 /* SABlurImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SABlurImageView.swift; path = ThirdParty/SABlurImageView/SABlurImageView.swift; sourceTree = "<group>"; };
@@ -300,8 +300,6 @@
 		E6BF86001AF13245005F08B2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E6D2C36A1AE1111500FF823E /* home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = home.storyboard; path = main/home.storyboard; sourceTree = "<group>"; };
 		E6DDF4921AEB9D0500339E75 /* MCUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCUtils.swift; sourceTree = "<group>"; };
-		E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
-		E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePlus.swift; sourceTree = "<group>"; };
 		E6DDF4A31AEF364A00339E75 /* backpackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = backpackerViewController.swift; path = backpacker/backpackerViewController.swift; sourceTree = "<group>"; };
 		E6DDF4A61AEF3B0700339E75 /* favoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = favoriteViewController.swift; path = backpacker/favoriteViewController.swift; sourceTree = "<group>"; };
 		E6DDF4AA1AEF662400339E75 /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionCell.swift; path = backpacker/CollectionCell.swift; sourceTree = "<group>"; };
@@ -753,8 +751,7 @@
 		E6DDF4991AEBBC6800339E75 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
-				E6DDF49A1AEBBC6800339E75 /* Launch.storyboard */,
-				E6DDF49B1AEBBC6800339E75 /* WelcomePlus.swift */,
+				E6003B621AF93392002DB99A /* GuidePageController.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -889,7 +886,6 @@
 				E6BF85D31AF12DA9005F08B2 /* UMSLoginViewController.xib in Resources */,
 				E6BF85ED1AF12E33005F08B2 /* TalkList.storyboard in Resources */,
 				E6BF85A11AF12CB0005F08B2 /* UserRegister.storyboard in Resources */,
-				E6DDF49C1AEBBC6800339E75 /* Launch.storyboard in Resources */,
 				E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */,
 				E6BF85D61AF12DA9005F08B2 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				E6BF85CF1AF12DA9005F08B2 /* UMSCommentInputController.xib in Resources */,
@@ -965,13 +961,13 @@
 				E692AA4D1AE9E43E00577B3C /* messageCell.swift in Sources */,
 				E603D6481ADE664900D93708 /* SABlurImageView.swift in Sources */,
 				E6B204441AE6A66300EB11B4 /* chatViewController.swift in Sources */,
+				E6003B631AF93392002DB99A /* GuidePageController.swift in Sources */,
 				E63898941AE0307E00756679 /* mainTableViewCell.swift in Sources */,
 				E6DDF4931AEB9D0500339E75 /* MCUtils.swift in Sources */,
 				E692AA431AE8D0FC00577B3C /* mineHeadViewController.swift in Sources */,
 				E6BF85E31AF12DC4005F08B2 /* SCNavTabBar.m in Sources */,
 				E6BF85E51AF12DC4005F08B2 /* SCPopView.m in Sources */,
 				E6DDF4C11AF082EA00339E75 /* otherHeadViewController.swift in Sources */,
-				E6DDF49D1AEBBC6800339E75 /* WelcomePlus.swift in Sources */,
 				E60624ED1ADE6F27007D6DEF /* SwiftyUserDefaults.swift in Sources */,
 				E63898971AE042D900756679 /* mainData.swift in Sources */,
 				E6BF85EC1AF12E33005F08B2 /* TalkDetail.swift in Sources */,

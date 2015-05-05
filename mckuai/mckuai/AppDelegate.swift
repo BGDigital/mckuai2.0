@@ -25,7 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         loadLaunchView()
         //RongCloud
         initRongCloud()
-        
+        //RongCloud登录
+        RCIM.connectWithToken(MCUtils.RC_token,
+            completion: {userId in
+                println("Login Successrull:\(userId)")
+            },
+            error: {status in
+                println("Login Faild. \(status)")
+        })
         return true
     }
     

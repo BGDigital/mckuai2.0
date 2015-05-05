@@ -13,6 +13,8 @@ var osVersion:Double=8.0
 
 class rootViewController: RESideMenu, RESideMenuDelegate {
 
+    var guideView: GuidePageController!
+    
     override func awakeFromNib() {
         self.menuPreferredStatusBarStyle = UIStatusBarStyle.LightContent
         self.contentViewShadowColor = UIColor.blackColor()
@@ -34,6 +36,7 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         
         self.contentViewController = MCUtils.TB
         self.leftMenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
+        //这里不需要右边栏
         //self.rightMenuViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
         self.backgroundImage = UIImage(named: "Image")
         self.delegate = self;
@@ -41,13 +44,53 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //Defaults.remove(ISFIRSTRUN)
+        if !Defaults.hasKey(ISFIRSTRUN) {
+            //没有"ISFIRSTRUN"这个key就是第一次启动,显示引导页
+            loadWelcome()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func loadWelcome() {
+        //引导页图片
+        var mGuideImages:Array<NSString>=["Image","Image","Image","Image"]
+        //结束按钮
+        let btnWidth:CGFloat = 250.0
+        let btnHeight:CGFloat = 100.0
+        let btnX:CGFloat = (UIScreen.mainScreen().bounds.width - btnWidth)/2
+        let btnY:CGFloat = UIScreen.mainScreen().bounds.height - btnHeight - 50
+        var btnSubmit = UIButton(frame:CGRect(origin: CGPointMake(btnX, btnY), size:CGSizeMake(btnWidth,btnHeight)))
+        btnSubmit.setTitle("立即体验麦块", forState: UIControlState.Normal)
+        btnSubmit.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        btnSubmit.setTitleColor(UIColor.greenColor(), forState: UIControlState.Highlighted)
+        btnSubmit.addTarget(self, action: "onClick", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        guideView = GuidePageController(datas:mGuideImages,button:btnSubmit)
+        self.view.addSubview(guideView.view)
+    }
+    
+    func onClick(){
+        UIView.animateWithDuration(0.5,
+            animations : {
+                self.guideView.view.alpha = 0
+            },
+            completion : {_ in
+                Defaults[ISFIRSTRUN] = false
+                if(self.guideView.firstPop){
+                    self.guideView.view.removeFromSuperview()
+                }else{
+                    //这个暂时不用,只在第一次启动的时候显示引导页
+                    self.guideView.dismissViewControllerAnimated(false, completion: nil)
+                }
+            }
+        )
+    }
+
     
     func sideMenu(sideMenu: RESideMenu!, willShowMenuViewController menuViewController: UIViewController!) {
         //println("willShowMenuViewController")

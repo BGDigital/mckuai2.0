@@ -9,6 +9,8 @@
 import Foundation
 
 //本地配置文件
+//引导页
+let ISFIRSTRUN = "isFirstRun"
 //城市信息
 //是否已上传城市信息
 let D_ISUPADDR = "isUpCity"

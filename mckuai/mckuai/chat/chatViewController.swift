@@ -12,25 +12,17 @@ class chatViewController: RCChatListViewController {
 
     class func mainRoot()->UIViewController{
         var main = UIStoryboard(name: "chat", bundle: nil).instantiateViewControllerWithIdentifier("chatViewController") as! RCChatListViewController
+        //tabbar
         main.tabBarItem = UITabBarItem(title: "聊天", image: UIImage(named: "third_normal"), selectedImage: UIImage(named: "third_selected"))
         return UINavigationController(rootViewController: main)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customNavBackButton()
-        
-        RCIM.connectWithToken(MCUtils.RC_token,
-            completion: {userId in
-                println("Login Successrull:\(userId)")
-            },
-            error: {status in
-                println("Login Faild. \(status)")
-        })
-        
+        //customNavBackButton()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
