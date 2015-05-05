@@ -8,29 +8,31 @@
 
 import UIKit
 
-class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OtherProtocol {
 
     var tableView: UITableView!
-    var head: otherHeadViewController!
+    var otherhead: otherHeadViewController!
     var UserId: Int?  //外面传进来的UserId
     let NAVBAR_CHANGE_POINT:CGFloat = 50
     var manager = AFHTTPRequestOperationManager()
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
-                if let d = self.json["dataObject", "data"].array {
+                if let d = self.json["dataObject", "list", "data"].array {
                     self.datasource = d
                 }
                 self.User = self.json["dataObject", "user"] as JSON
                 self.pageInfo = self.json["dataObject", "pageInfo"] as JSON
             }
-            head.RefreshHead(User)
+            otherhead.RefreshHead(User)
             self.tableView.reloadData()
         }
     }
     var User: JSON!
     var pageInfo: JSON!
     var datasource: Array<JSON>!
+    
+    var mineType = "dynamic"
     
     func setupViews() {
         self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64), style: UITableViewStyle.Plain)
@@ -44,18 +46,17 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.scrollsToTop = false
         
         //添加Header
-        self.head = UIStoryboard(name: "other", bundle: nil).instantiateViewControllerWithIdentifier("otherHeadViewController") as! otherHeadViewController
-        tableView.tableHeaderView = self.head.view
+        otherhead = UIStoryboard(name: "other", bundle: nil).instantiateViewControllerWithIdentifier("otherHeadViewController") as! otherHeadViewController
+        otherhead.Delegate = self
+        tableView.tableHeaderView = otherhead.view
         self.view.addSubview(tableView)
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
-        self.tableView.footer.hidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         setupViews()
         showPopWindow()
         customNavBackButton()
@@ -117,7 +118,12 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: - Table view data source
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        if self.mineType != "work" {
+            return 100
+        } else {
+            return 118
+        }
+
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -138,22 +144,40 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as? messageCell
-        
-        if cell == nil {
-            let nib: NSArray = NSBundle.mainBundle().loadNibNamed("messageCell", owner: self, options: nil)
-            cell = nib.lastObject as? messageCell
+        if self.mineType != "work" {
+            var cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as? messageCell
+            
+            if cell == nil {
+                let nib: NSArray = NSBundle.mainBundle().loadNibNamed("messageCell", owner: self, options: nil)
+                cell = nib.lastObject as? messageCell
+            }
+            let d = self.datasource[indexPath.row] as JSON
+            cell?.update(d, iType: self.mineType, sMsgType: "")
+            // Configure the cell...
+            
+            return cell!
+            
+        } else {
+            var cell = tableView.dequeueReusableCellWithIdentifier("mainSubCell") as? mainSubCell
+            
+            if cell == nil {
+                let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainSubCell", owner: self, options: nil)
+                cell = nib.lastObject as? mainSubCell
+            }
+            let d = self.datasource[indexPath.row] as JSON
+            cell?.update(d)
+            return cell!
+            
         }
-        let d = self.datasource[indexPath.row] as JSON
-        cell?.update(d, iType: "", sMsgType: "")
-        // Configure the cell...
-        
-        return cell!
     }
     
     func loadNewData() {
         //开始刷新
-        var param = ["id": 6, "page": 1]
+        var param = [
+            "act": "center",
+            "id": self.UserId!,
+            "page": 1,
+            "type":self.mineType]
         manager.GET(URL_MC,
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,
@@ -171,6 +195,22 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func loadMoreData() {
         
+    }
+    
+    //刷新数据
+    //1:消息,2:动态,3:作品
+    //0:@Me,1:系统, 2:为空,不用传
+    func onRefreshDataSource(iType: Int) {
+        //大类型
+        switch (iType) {
+        case 1:
+            self.mineType = "dynamic"
+        default:
+            self.mineType = "work"
+            break
+        }
+        //开始加载数据
+        self.tableView.header.beginRefreshing()
     }
     
     //显示弹出出的选项
@@ -199,33 +239,24 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         })
     }
     
+    //加入背包
     @IBAction func btn1Click() {
-        println("btn1 click")
-    }
-    
-    
-    //刷新数据
-    func onChangeType() {
-        
-        switch (self.head.bigType) {
-        case 1:
-            switch (self.head.smallType) {
-            case 1:
-                break
-            case 2:
-                break
-            case 3:
-                break
-            default:
-                break
-            }
-        case 2:
-            break
-        case 3:
-            break
-        default:
-            break
-        }
+        var param = [
+            "act": "attention",
+            "ownerId": 6,
+            "otherId": self.UserId!]
+        manager.POST(URL_MC,
+            parameters: param,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                println("加入背包:\(responseObject)")
+                MCUtils.showCustomHUD(self.view, title: "添加成功", imgName: "Guide")
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                MCUtils.showCustomHUD(self.view, title: "添加失败,请重试", imgName: "Guide")
+        })
     }
 
 }

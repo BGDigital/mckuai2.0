@@ -95,9 +95,9 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //加载数据,刷新
     func loadNewData() {
         //开始刷新
-        println("ddd")
-        manager.GET(URL_INDEX,
-            parameters: nil,
+        var dict = ["act":"indexRec", "id":6]
+        manager.GET(URL_MC,
+            parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)

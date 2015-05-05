@@ -151,7 +151,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="300"/>
                     <connections>
-                        <outlet property="btnMsg" destination="nUQ-aM-kyg" id="C8Z-K6-YTW"/>
+                        <outlet property="btnDynamic" destination="nUQ-aM-kyg" id="KVo-jG-0S0"/>
                         <outlet property="btnWork" destination="FFg-g7-Yja" id="Axf-PV-B0u"/>
                         <outlet property="imageBg" destination="NbU-bn-eo4" id="gmr-zj-ov4"/>
                         <outlet property="locationCity" destination="IYO-U3-Vnl" id="vnG-hW-Wte"/>

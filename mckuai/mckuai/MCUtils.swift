@@ -11,31 +11,29 @@ import Foundation
 //本地配置文件
 //城市信息
 //是否已上传城市信息
-let ISUPADDR = "isUpCity"
+let D_ISUPADDR = "isUpCity"
 //当前城市
-let CURRENTCITY = "CurrentCity"
+let D_CURRENTCITY = "CurrentCity"
 
 //用户信息
 //用户ID
-let USERID = "UserId"
+let D_USERID = "UserId"
 //用户昵称
-let NIKENAME = "NikeName"
+let D_NIKENAME = "NikeName"
 //登录名-email
-let LOGINNAME = "LoginName"
+let D_LOGINNAME = "LoginName"
 //登录密码
-let LOGINPWD = "LoginPwd"
+let D_LOGINPWD = "LoginPwd"
 //是否记住登录信息(用户名,密码)
-let ISREMEMBERME = "isRememberMe"
+let D_ISREMEMBERME = "isRememberMe"
 
 //mckuai网络接口
 //主接口地址-域名
 let URL_MC = "http://221.237.152.39:8081/interface.do?"
-//首页接口
-let URL_INDEX = "http://221.237.152.39:8081/interface.do?act=indexRec&id=6"
 //背包-贴子收藏
-let URL_BAG_COLLECTTALK = "http://221.237.152.39:8081/interface.do?act=collectTalk&id=1&page=1"
+let URL_BAG_COLLECTTALK = "http://221.237.152.39:8081/interface.do?act=collectTalk&id=6&page=1"
 //背景-麦友
-let URL_BAG_ATTEUSER = "http://221.237.152.39:8081/interface.do?act=attentionUser&id=1&page=1"
+let URL_BAG_ATTEUSER = "http://221.237.152.39:8081/interface.do?act=attentionUser&id=6&page=1"
 
 class MCUtils {
 

@@ -172,8 +172,8 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         if(placemark.locality != nil){
             tempString = tempString +  placemark.locality + "\n"
             self.currentCity.setTitle(placemark.locality, forState: .Normal)
-            Defaults.remove(ISUPADDR)
-            if !Defaults.hasKey(ISUPADDR) {
+            //Defaults.remove(D_ISUPADDR)
+            if !Defaults.hasKey(D_ISUPADDR) {
                 println("用户地址没有上传,开始上传")
                 self.upAddrToServer(placemark.locality)
             }
@@ -203,7 +203,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 println(responseObject)
-                Defaults[ISUPADDR] = true
+                Defaults[D_ISUPADDR] = true
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in

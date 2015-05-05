@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OtherProtocol {
+    func onRefreshDataSource(iType: Int)
+}
+
 class otherHeadViewController: UIViewController {
 
     
@@ -15,9 +19,9 @@ class otherHeadViewController: UIViewController {
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var locationCity: UIButton!
-    @IBOutlet weak var btnMsg: UIButton!
+    @IBOutlet weak var btnDynamic: UIButton!
     @IBOutlet weak var btnWork: UIButton!
-    
+    var Delegate: OtherProtocol?
     var lastSelected: UIButton!
     var headImg: String!
     var userId = 0
@@ -25,8 +29,7 @@ class otherHeadViewController: UIViewController {
     var username = ""
     
     //大类型,小类型都默认取1
-    var bigType = 1   //1:消息,2:动态,3:作品
-    var smallType = 0  //0:All,1:@Me,2:系统
+    var bigType = 1   //1:动态,2:作品
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +37,12 @@ class otherHeadViewController: UIViewController {
         //模糊背景
         imageBg.addBlurEffect(30, times: 1)
         //初始化Button
-        addSubTextToBtn("动态", parent: btnMsg)
+        addSubTextToBtn("动态", parent: btnDynamic)
         addSubTextToBtn("作品", parent: btnWork)
-        
-        if let city = Defaults[CURRENTCITY].string {
+        btnDynamic.selected = true
+        lastSelected = btnDynamic
+        //所在城市
+        if let city = Defaults[D_CURRENTCITY].string {
             locationCity.setTitle(city, forState: .Normal)
         } else {
             locationCity.setTitle("未定位", forState: .Normal)
@@ -51,7 +56,7 @@ class otherHeadViewController: UIViewController {
         //        parent.layer.cornerRadius = 30  //圆角,对.Selected没有效果?
         parent.tintColor = UIColor.clearColor()
         
-        var lb = UILabel(frame: CGRectMake(0, btnMsg.bounds.size.height-20, btnMsg.bounds.size.width, 14))
+        var lb = UILabel(frame: CGRectMake(0, btnDynamic.bounds.size.height-20, btnDynamic.bounds.size.width, 14))
         lb.text = aText
         lb.font = UIFont(name: lb.font.fontName, size: 12)
         lb.textColor = UIColor(hexString: "#BCABA8")
@@ -69,6 +74,7 @@ class otherHeadViewController: UIViewController {
         lastSelected = sender
         
         bigType = sender.tag
+        Delegate?.onRefreshDataSource(bigType)
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,9 +93,9 @@ class otherHeadViewController: UIViewController {
                 self.roundProgressView.imageView = UIImageView(image: image)
                 self.imageBg.addBlurEffect(30, times: 1)
             })
-            
-            
         }
+        btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)
+        btnWork.setTitle(J["workNum"].stringValue, forState: .Normal)
     }
 
 }

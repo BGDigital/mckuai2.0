@@ -13,7 +13,7 @@ class CollectionCell: UICollectionViewCell {
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var locationCity: UIButton!
-    var userId: String!
+    var userId: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +27,7 @@ class CollectionCell: UICollectionViewCell {
         self.roundProgressView.percent = CGFloat(j["process"].floatValue)
         self.nickname.text = j["nike"].stringValue
         self.locationCity.setTitle("成都", forState: .Normal)
-        userId = j["id"].stringValue
+        self.userId = j["id"].intValue
     }
     
 }

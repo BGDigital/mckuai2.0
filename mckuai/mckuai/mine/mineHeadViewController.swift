@@ -48,7 +48,7 @@ class mineHeadViewController: UIViewController {
         btnMsg.selected = true
         lastSelected = btnMsg
         
-        if let city = Defaults[CURRENTCITY].string {
+        if let city = Defaults[D_CURRENTCITY].string {
             locationCity.setTitle(city, forState: .Normal)
         } else {
             locationCity.setTitle("未定位", forState: .Normal)

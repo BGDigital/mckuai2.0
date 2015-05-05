@@ -16,6 +16,7 @@ class friendsViewController: UICollectionViewController {
     var nav: UINavigationController?
     var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
+    var selectUserId: Int?
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
@@ -124,6 +125,7 @@ class friendsViewController: UICollectionViewController {
         cell.selected = true
         cell.contentView.layer.borderColor = UIColor.redColor().CGColor
         cell.contentView.layer.borderWidth = 2
+        self.selectUserId = cell.userId
         showPopWindow()
     }
     
@@ -167,6 +169,7 @@ class friendsViewController: UICollectionViewController {
     
     @IBAction func btn1Click() {
         otherZone = otherViewController()
+        otherZone.UserId = self.selectUserId
         self.nav?.pushViewController(otherZone, animated: true)
     }
 
