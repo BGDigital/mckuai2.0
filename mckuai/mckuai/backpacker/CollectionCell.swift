@@ -20,11 +20,8 @@ class CollectionCell: UICollectionViewCell {
     }
     
     func update(j: JSON) {
-        UIImageView().sd_setImageWithURL(NSURL(string: j["headImg"].stringValue), placeholderImage: UIImage(named: "Guide"), completed: {img,_,_,_ in
-            self.roundProgressView.imageView = UIImageView(image: img)
-        })
-
         self.roundProgressView.percent = CGFloat(j["process"].floatValue)
+        self.roundProgressView.imageUrl = j["headImg"].stringValue
         self.nickname.text = j["nike"].stringValue
         self.locationCity.setTitle("成都", forState: .Normal)
         self.userId = j["id"].intValue

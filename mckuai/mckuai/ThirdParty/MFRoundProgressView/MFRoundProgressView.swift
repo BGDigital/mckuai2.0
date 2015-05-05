@@ -18,27 +18,55 @@ class MFRoundProgressView: UIView {
         }
     }
 
-    @IBInspectable var imageView: UIImageView! {
+    @IBInspectable var imageUrl: String! {
         didSet {
-            showPercent = imageView.image == nil
-            println(showPercent)
-            imageView.frame = CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height-20)
+            showPercent = imageUrl.isEmpty
+            //println(showPercent)
+            imageView = UIImageView(frame: CGRectMake(9, 9, self.frame.width-18, self.frame.height-18))
+            imageView.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: UIImage(named: "Guide"))
+            //imageView.frame = CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height-20)
             imageView.layer.masksToBounds = true
-            imageView.layer.cornerRadius = (self.frame.width - 20) / 2
+            imageView.layer.cornerRadius = (self.frame.width - 18) / 2
             self.addSubview(imageView)
             setNeedsDisplay()
         }
     }
+    //进度条颜色
+    @IBInspectable var progressColor:UIColor = UIColor(hexString: "#40C74D")! {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    //进度条背景颜色
+    @IBInspectable var progressBackgroundColor:UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.4) {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    @IBInspectable var progressLineWidth:CGFloat = 2.0 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    
+    
     //默认显示文字百分比,为false时显示图片
 //    @IBInspectable var showPercent: Bool = true {
 //        didSet {
 //            setNeedsDisplay()
 //        }
 //    }
+    //用户头像图片
+    private var imageView: UIImageView!
+    //是否显示进度数字
     private var showPercent: Bool = true
+    //是否显示阴影
     private var showShadow: Bool = false
-    private var startAngle: CGFloat = CGFloat(-90 * M_PI / 180)
-    private var endAngle: CGFloat = CGFloat(270 * M_PI / 180)
+    //进度开始,结束点
+    private var startAngle: CGFloat = CGFloat(-120 * M_PI / 180)
+    private var endAngle: CGFloat = CGFloat(240 * M_PI / 180)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,9 +84,9 @@ class MFRoundProgressView: UIView {
         var context = UIGraphicsGetCurrentContext()
         
         // Color Declarations
-        let progressColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        let backGroundColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 0.2)
-        let progressBackgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)
+//        let progressColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+//        let backGroundColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 0.2)
+//        let progressBackgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)
         let titleColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         
         // Shadow Declarations
@@ -99,7 +127,7 @@ class MFRoundProgressView: UIView {
         
         let progressBackgroundPath = UIBezierPath(ovalInRect: CGRect(x: CGRectGetMinX(rect) + kMFPadding/2, y: CGRectGetMinY(rect) + kMFPadding/2, width: rect.size.width - kMFPadding, height: rect.size.height - kMFPadding))
         progressBackgroundColor.setStroke()
-        progressBackgroundPath.lineWidth = 2
+        progressBackgroundPath.lineWidth = progressLineWidth
         progressBackgroundPath.stroke()
         
         // Progress Drawing
@@ -107,7 +135,7 @@ class MFRoundProgressView: UIView {
         let progressPath = UIBezierPath()
         progressPath.addArcWithCenter(CGPoint(x: CGRectGetMidX(progressRect), y: CGRectGetMidY(progressRect)), radius: CGRectGetWidth(progressRect) / 2, startAngle: startAngle, endAngle: (endAngle - startAngle) * (percent / 100) + startAngle, clockwise: true)
         progressColor.setStroke()
-        progressPath.lineWidth = 1
+        progressPath.lineWidth = progressLineWidth
         progressPath.lineCapStyle = kCGLineCapRound
         progressPath.stroke()
         

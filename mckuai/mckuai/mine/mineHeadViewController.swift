@@ -123,11 +123,12 @@ class mineHeadViewController: UIViewController {
     func RefreshHead(J: JSON) {
         //圆形头像
         roundProgressView.percent = CGFloat(J["process"].floatValue * 100)
+        self.roundProgressView.imageUrl = J["headImg"].stringValue
         headImg = J["headImg"].stringValue
         nickname.text = J["nike"].stringValue
         if !headImg.isEmpty {
             imageBg.sd_setImageWithURL(NSURL(string: headImg), placeholderImage: UIImage(named: "1024"), completed: {image, error, cacheType, imageURL in
-                self.roundProgressView.imageView = UIImageView(image: image)
+//                self.roundProgressView.imageView = UIImageView(image: image)
                 self.imageBg.addBlurEffect(30, times: 1)
             })
         //

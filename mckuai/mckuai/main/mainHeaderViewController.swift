@@ -58,11 +58,12 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     func setData(user: JSON!, chat: JSON!) {
         
         //用户信息
-        UIImageView().sd_setImageWithURL(NSURL(string: user["headImg"].stringValue), placeholderImage: UIImage(named: "Guide"), completed: {img,_,_,_ in
-            self.roundProgressView.imageView = UIImageView(image: img)
-        })
         var p = user["process"].floatValue * 100
+        self.roundProgressView.progressLineWidth = 1
+        self.roundProgressView.progressColor = UIColor(hexString: "#32FD2F")!
+        self.roundProgressView.progressBackgroundColor = UIColor.whiteColor()
         self.roundProgressView.percent = CGFloat(p)
+        self.roundProgressView.imageUrl = user["headImg"].stringValue
         self.nickname.text = user["nike"].stringValue
         self.level.setTitle(user["level"].stringValue, forState: .Normal)
         

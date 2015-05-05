@@ -462,6 +462,7 @@
 		E6518BE91ADD065E005A8C97 /* mckuai */ = {
 			isa = PBXGroup;
 			children = (
+				E6CB649D1ADD0F8700D61B85 /* ThirdParty */,
 				E6BF85A31AF12DA9005F08B2 /* TencentOpenAPI */,
 				E6BF85A81AF12DA9005F08B2 /* UMSocial_Sdk_4.2.1 */,
 				E6BF85C31AF12DA9005F08B2 /* Wechat */,
@@ -479,7 +480,6 @@
 				E6BF85EF1AF12F91005F08B2 /* libMobClickLibrary.a */,
 				E6BF85F01AF12F91005F08B2 /* MobClick.h */,
 				E6B4FA961ADD07C900664D6C /* mckuai-Bridging-Header.h */,
-				E6CB649D1ADD0F8700D61B85 /* ThirdParty */,
 				E6518BEC1ADD065E005A8C97 /* AppDelegate.swift */,
 				E6518BF51ADD065E005A8C97 /* LaunchScreen.xib */,
 				E6518BEA1ADD065E005A8C97 /* Supporting Files */,
