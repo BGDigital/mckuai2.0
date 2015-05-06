@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class UserRegister: UIViewController,UITextFieldDelegate {
+    var manager = AFHTTPRequestOperationManager()
     
     @IBOutlet weak var nickName: UITextField!
     @IBOutlet weak var passWord: UITextField!
@@ -68,14 +69,59 @@ class UserRegister: UIViewController,UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func showCustomHUD(view: UIView, title: String, imgName: String) {
+        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        h.labelText = title
+        h.mode = MBProgressHUDMode.CustomView
+        h.customView = UIImageView(image: UIImage(named: imgName))
+        h.showAnimated(true, whileExecutingBlock: { () -> Void in
+            sleep(2)
+            return
+            }) { () -> Void in
+                h.removeFromSuperview()
+                h = nil
+        }
+    }
+    
     @IBAction func registerUserInfo(sender: UIButton) {
         println("注册用户")
         
-        if(self.userName.text == nil || self.passWord.text == nil || self.nickName.text == nil || self.userName.text == "注册邮箱" || self.passWord.text == "密码" || self.nickName == "用户昵称" ){
+        if(self.userName.text == nil || self.passWord.text == nil || self.nickName.text == nil || self.userName.text == "注册邮箱" || self.passWord.text == "密码" || self.nickName.text == "用户昵称" ){
             var alertView = UIAlertView(title: "输入的信息不能为空", message: "", delegate: self, cancelButtonTitle: "确定")
             alertView.show()
             return
         }
+        
+        let params = [
+            "userName": self.userName.text,
+            "passWord": self.passWord.text,
+            "nickName": self.nickName.text,
+        ]
+        
+        
+        manager.POST(register_url,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                var json = JSON(responseObject)
+                
+                if "ok" == json["state"].stringValue {
+                    var userId = json["dataObject"].intValue
+                    //保存登录信息
+                    var userDefault = NSUserDefaults.standardUserDefaults()
+                    userDefault.setInteger(userId, forKey: "appUserIdSave")
+                    userDefault.synchronize()
+                    appUserIdSave = userId
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                }
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.showCustomHUD(self.view, title: "注册失败", imgName: "Guide")
+        })
+        
         
 //        APIClient.sharedInstance.mckuaiRegisterByPost(self.view, userName: self.userName.text, passWord: self.passWord.text,nickName:self.nickName.text,success: { (json) -> Void in
 //            if json["state"].stringValue == "ok" {

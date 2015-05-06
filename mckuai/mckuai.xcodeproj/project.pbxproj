@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B8671231AF9E23E00F3F63F /* FollowTalk.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8671181AF9E23E00F3F63F /* FollowTalk.storyboard */; };
+		0B8671241AF9E23E00F3F63F /* FollowTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8671191AF9E23E00F3F63F /* FollowTalk.swift */; };
+		0B8671251AF9E23E00F3F63F /* HttpUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B86711A1AF9E23E00F3F63F /* HttpUrl.swift */; };
+		0B8671261AF9E23E00F3F63F /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B86711B1AF9E23E00F3F63F /* ImageUtil.swift */; };
+		0B8671271AF9E23E00F3F63F /* MBProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B86711C1AF9E23E00F3F63F /* MBProgress.swift */; };
+		0B8671281AF9E23E00F3F63F /* SendTalk.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B86711D1AF9E23E00F3F63F /* SendTalk.storyboard */; };
+		0B8671291AF9E23E00F3F63F /* SendTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B86711E1AF9E23E00F3F63F /* SendTalk.swift */; };
+		0B86712A1AF9E23E00F3F63F /* TalkDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B86711F1AF9E23E00F3F63F /* TalkDetail.storyboard */; };
+		0B86712B1AF9E23E00F3F63F /* TalkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8671201AF9E23E00F3F63F /* TalkDetail.swift */; };
+		0B86712C1AF9E23E00F3F63F /* TalkList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8671211AF9E23E00F3F63F /* TalkList.storyboard */; };
+		0B86712D1AF9E23E00F3F63F /* TalkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8671221AF9E23E00F3F63F /* TalkList.swift */; };
+		0B8671301AF9E3A100F3F63F /* community.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B86712E1AF9E3A100F3F63F /* community.storyboard */; };
+		0B8671311AF9E3A100F3F63F /* communityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B86712F1AF9E3A100F3F63F /* communityViewController.swift */; };
 		D504800773B98F3939335BA1 /* libPods-mckuai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C803131B3C815A90D93EFEED /* libPods-mckuai.a */; };
 		E6003B631AF93392002DB99A /* GuidePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6003B621AF93392002DB99A /* GuidePageController.swift */; };
 		E603D6421ADE650C00D93708 /* AsyncLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603D6411ADE650C00D93708 /* AsyncLegacy.swift */; };
@@ -60,8 +73,6 @@
 		E6B204401AE6A56000EB11B4 /* live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B2043F1AE6A56000EB11B4 /* live.storyboard */; };
 		E6B204421AE6A63C00EB11B4 /* chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B204411AE6A63C00EB11B4 /* chat.storyboard */; };
 		E6B204441AE6A66300EB11B4 /* chatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B204431AE6A66300EB11B4 /* chatViewController.swift */; };
-		E6B204461AE6A73100EB11B4 /* community.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B204451AE6A73100EB11B4 /* community.storyboard */; };
-		E6B204481AE6A74A00EB11B4 /* communityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B204471AE6A74A00EB11B4 /* communityViewController.swift */; };
 		E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7175D1ADECE1D00684E83 /* mainViewController.swift */; };
 		E6B717601ADECE7400684E83 /* liveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7175F1ADECE7400684E83 /* liveViewController.swift */; };
 		E6B717621ADED22D00684E83 /* leftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B717611ADED22D00684E83 /* leftMenuViewController.swift */; };
@@ -92,10 +103,6 @@
 		E6BF85E41AF12DC4005F08B2 /* SCNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BF85DE1AF12DC4005F08B2 /* SCNavTabBarController.m */; };
 		E6BF85E51AF12DC4005F08B2 /* SCPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BF85E01AF12DC4005F08B2 /* SCPopView.m */; };
 		E6BF85E61AF12DC4005F08B2 /* SJAvatarBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BF85E21AF12DC4005F08B2 /* SJAvatarBrowser.m */; };
-		E6BF85EB1AF12E33005F08B2 /* TalkDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BF85E71AF12E33005F08B2 /* TalkDetail.storyboard */; };
-		E6BF85EC1AF12E33005F08B2 /* TalkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF85E81AF12E33005F08B2 /* TalkDetail.swift */; };
-		E6BF85ED1AF12E33005F08B2 /* TalkList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BF85E91AF12E33005F08B2 /* TalkList.storyboard */; };
-		E6BF85EE1AF12E33005F08B2 /* TalkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF85EA1AF12E33005F08B2 /* TalkList.swift */; };
 		E6BF85F11AF12F91005F08B2 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF85EF1AF12F91005F08B2 /* libMobClickLibrary.a */; };
 		E6BF85F31AF1313C005F08B2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF85F21AF1313C005F08B2 /* libz.dylib */; };
 		E6BF85F51AF13171005F08B2 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF85F41AF13171005F08B2 /* libstdc++.dylib */; };
@@ -129,6 +136,19 @@
 
 /* Begin PBXFileReference section */
 		01A338F1C539FF6B80886F4A /* Pods-mckuai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mckuai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mckuai/Pods-mckuai.debug.xcconfig"; sourceTree = "<group>"; };
+		0B8671181AF9E23E00F3F63F /* FollowTalk.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FollowTalk.storyboard; path = community/FollowTalk.storyboard; sourceTree = "<group>"; };
+		0B8671191AF9E23E00F3F63F /* FollowTalk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowTalk.swift; path = community/FollowTalk.swift; sourceTree = "<group>"; };
+		0B86711A1AF9E23E00F3F63F /* HttpUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpUrl.swift; path = community/HttpUrl.swift; sourceTree = "<group>"; };
+		0B86711B1AF9E23E00F3F63F /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageUtil.swift; path = community/ImageUtil.swift; sourceTree = "<group>"; };
+		0B86711C1AF9E23E00F3F63F /* MBProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MBProgress.swift; path = community/MBProgress.swift; sourceTree = "<group>"; };
+		0B86711D1AF9E23E00F3F63F /* SendTalk.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SendTalk.storyboard; path = community/SendTalk.storyboard; sourceTree = "<group>"; };
+		0B86711E1AF9E23E00F3F63F /* SendTalk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendTalk.swift; path = community/SendTalk.swift; sourceTree = "<group>"; };
+		0B86711F1AF9E23E00F3F63F /* TalkDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = TalkDetail.storyboard; path = community/TalkDetail.storyboard; sourceTree = "<group>"; };
+		0B8671201AF9E23E00F3F63F /* TalkDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkDetail.swift; path = community/TalkDetail.swift; sourceTree = "<group>"; };
+		0B8671211AF9E23E00F3F63F /* TalkList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = TalkList.storyboard; path = community/TalkList.storyboard; sourceTree = "<group>"; };
+		0B8671221AF9E23E00F3F63F /* TalkList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkList.swift; path = community/TalkList.swift; sourceTree = "<group>"; };
+		0B86712E1AF9E3A100F3F63F /* community.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = community.storyboard; path = community/community.storyboard; sourceTree = "<group>"; };
+		0B86712F1AF9E3A100F3F63F /* communityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = communityViewController.swift; path = community/communityViewController.swift; sourceTree = "<group>"; };
 		122493CA7CAEC4ECF51B2D3E /* Pods-mckuai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mckuai.release.xcconfig"; path = "Pods/Target Support Files/Pods-mckuai/Pods-mckuai.release.xcconfig"; sourceTree = "<group>"; };
 		C803131B3C815A90D93EFEED /* libPods-mckuai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mckuai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6003B621AF93392002DB99A /* GuidePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuidePageController.swift; sourceTree = "<group>"; };
@@ -230,8 +250,6 @@
 		E6B2043F1AE6A56000EB11B4 /* live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = live.storyboard; path = live/live.storyboard; sourceTree = "<group>"; };
 		E6B204411AE6A63C00EB11B4 /* chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = chat.storyboard; path = chat/chat.storyboard; sourceTree = "<group>"; };
 		E6B204431AE6A66300EB11B4 /* chatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = chatViewController.swift; path = chat/chatViewController.swift; sourceTree = "<group>"; };
-		E6B204451AE6A73100EB11B4 /* community.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = community.storyboard; path = community/community.storyboard; sourceTree = "<group>"; };
-		E6B204471AE6A74A00EB11B4 /* communityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = communityViewController.swift; path = community/communityViewController.swift; sourceTree = "<group>"; };
 		E6B4FA961ADD07C900664D6C /* mckuai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mckuai-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6B7175D1ADECE1D00684E83 /* mainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		E6B7175F1ADECE7400684E83 /* liveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liveViewController.swift; sourceTree = "<group>"; };
@@ -284,10 +302,6 @@
 		E6BF85E01AF12DC4005F08B2 /* SCPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopView.m; sourceTree = "<group>"; };
 		E6BF85E11AF12DC4005F08B2 /* SJAvatarBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAvatarBrowser.h; sourceTree = "<group>"; };
 		E6BF85E21AF12DC4005F08B2 /* SJAvatarBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAvatarBrowser.m; sourceTree = "<group>"; };
-		E6BF85E71AF12E33005F08B2 /* TalkDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TalkDetail.storyboard; sourceTree = "<group>"; };
-		E6BF85E81AF12E33005F08B2 /* TalkDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkDetail.swift; sourceTree = "<group>"; };
-		E6BF85E91AF12E33005F08B2 /* TalkList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TalkList.storyboard; sourceTree = "<group>"; };
-		E6BF85EA1AF12E33005F08B2 /* TalkList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkList.swift; sourceTree = "<group>"; };
 		E6BF85EF1AF12F91005F08B2 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		E6BF85F01AF12F91005F08B2 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		E6BF85F21AF1313C005F08B2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -597,12 +611,19 @@
 		E6B2043E1AE6A50A00EB11B4 /* community */ = {
 			isa = PBXGroup;
 			children = (
-				E6BF85E71AF12E33005F08B2 /* TalkDetail.storyboard */,
-				E6BF85E81AF12E33005F08B2 /* TalkDetail.swift */,
-				E6BF85E91AF12E33005F08B2 /* TalkList.storyboard */,
-				E6BF85EA1AF12E33005F08B2 /* TalkList.swift */,
-				E6B204451AE6A73100EB11B4 /* community.storyboard */,
-				E6B204471AE6A74A00EB11B4 /* communityViewController.swift */,
+				0B86712E1AF9E3A100F3F63F /* community.storyboard */,
+				0B86712F1AF9E3A100F3F63F /* communityViewController.swift */,
+				0B8671181AF9E23E00F3F63F /* FollowTalk.storyboard */,
+				0B8671191AF9E23E00F3F63F /* FollowTalk.swift */,
+				0B86711A1AF9E23E00F3F63F /* HttpUrl.swift */,
+				0B86711B1AF9E23E00F3F63F /* ImageUtil.swift */,
+				0B86711C1AF9E23E00F3F63F /* MBProgress.swift */,
+				0B86711D1AF9E23E00F3F63F /* SendTalk.storyboard */,
+				0B86711E1AF9E23E00F3F63F /* SendTalk.swift */,
+				0B86711F1AF9E23E00F3F63F /* TalkDetail.storyboard */,
+				0B8671201AF9E23E00F3F63F /* TalkDetail.swift */,
+				0B8671211AF9E23E00F3F63F /* TalkList.storyboard */,
+				0B8671221AF9E23E00F3F63F /* TalkList.swift */,
 			);
 			name = community;
 			sourceTree = "<group>";
@@ -863,7 +884,6 @@
 			files = (
 				E6BF85D01AF12DA9005F08B2 /* UMSCommentInputControlleriPad.xib in Resources */,
 				E6BF85961AF12BE1005F08B2 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				E6B204461AE6A73100EB11B4 /* community.storyboard in Resources */,
 				E6BF85D51AF12DA9005F08B2 /* UMSShareListController.xib in Resources */,
 				E6BF85CC1AF12DA9005F08B2 /* UMSocialLocalizable.strings in Resources */,
 				E68F466E1AF13D37001DEA99 /* RongCloud.bundle in Resources */,
@@ -871,21 +891,24 @@
 				E6BF859F1AF12CB0005F08B2 /* UserLogin.storyboard in Resources */,
 				E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */,
 				E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */,
+				0B8671301AF9E3A100F3F63F /* community.storyboard in Resources */,
 				E6BF85D11AF12DA9005F08B2 /* UMShareEditViewController.xib in Resources */,
+				0B8671231AF9E23E00F3F63F /* FollowTalk.storyboard in Resources */,
 				E6518BF21ADD065E005A8C97 /* Main.storyboard in Resources */,
-				E6BF85EB1AF12E33005F08B2 /* TalkDetail.storyboard in Resources */,
 				E6BF85D21AF12DA9005F08B2 /* UMShareEditViewControlleriPad.xib in Resources */,
 				E6DDF4B31AEF7C1000339E75 /* friends.storyboard in Resources */,
 				E6BF85CE1AF12DA9005F08B2 /* UMSCommentDetailController.xib in Resources */,
 				E6DDF4BC1AF0824500339E75 /* other.storyboard in Resources */,
 				E692AA4E1AE9E43E00577B3C /* messageCell.xib in Resources */,
+				0B86712C1AF9E23E00F3F63F /* TalkList.storyboard in Resources */,
 				E6BF85CB1AF12DA9005F08B2 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				E6BF85D41AF12DA9005F08B2 /* UMSnsAccountViewController.xib in Resources */,
 				E696E5621AE7F88100261F57 /* citydict.plist in Resources */,
 				E63DA5071AE6ACA6001D7811 /* mine.storyboard in Resources */,
+				0B8671281AF9E23E00F3F63F /* SendTalk.storyboard in Resources */,
 				E6BF85D31AF12DA9005F08B2 /* UMSLoginViewController.xib in Resources */,
-				E6BF85ED1AF12E33005F08B2 /* TalkList.storyboard in Resources */,
 				E6BF85A11AF12CB0005F08B2 /* UserRegister.storyboard in Resources */,
+				0B86712A1AF9E23E00F3F63F /* TalkDetail.storyboard in Resources */,
 				E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */,
 				E6BF85D61AF12DA9005F08B2 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				E6BF85CF1AF12DA9005F08B2 /* UMSCommentInputController.xib in Resources */,
@@ -942,8 +965,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B86712B1AF9E23E00F3F63F /* TalkDetail.swift in Sources */,
+				0B8671271AF9E23E00F3F63F /* MBProgress.swift in Sources */,
 				E6DDF4B11AEF7A7E00339E75 /* friendsViewController.swift in Sources */,
 				E603D6441ADE657700D93708 /* WobbleView.swift in Sources */,
+				0B8671241AF9E23E00F3F63F /* FollowTalk.swift in Sources */,
 				E6BF85A01AF12CB0005F08B2 /* UserLogin.swift in Sources */,
 				E6BF85A21AF12CB0005F08B2 /* UserRegister.swift in Sources */,
 				E603D6421ADE650C00D93708 /* AsyncLegacy.swift in Sources */,
@@ -955,6 +981,7 @@
 				E692AA591AEA477A00577B3C /* HMSegmentedControl.m in Sources */,
 				E63DA5091AE6AD27001D7811 /* mineTableViewController.swift in Sources */,
 				E6BF85E61AF12DC4005F08B2 /* SJAvatarBrowser.m in Sources */,
+				0B8671291AF9E23E00F3F63F /* SendTalk.swift in Sources */,
 				E626508E1ADFA35F00B16094 /* SwiftyJSON.swift in Sources */,
 				E696E5631AE7F88100261F57 /* cityListViewController.swift in Sources */,
 				E6B717601ADECE7400684E83 /* liveViewController.swift in Sources */,
@@ -966,18 +993,19 @@
 				E6DDF4931AEB9D0500339E75 /* MCUtils.swift in Sources */,
 				E692AA431AE8D0FC00577B3C /* mineHeadViewController.swift in Sources */,
 				E6BF85E31AF12DC4005F08B2 /* SCNavTabBar.m in Sources */,
+				0B8671311AF9E3A100F3F63F /* communityViewController.swift in Sources */,
 				E6BF85E51AF12DC4005F08B2 /* SCPopView.m in Sources */,
 				E6DDF4C11AF082EA00339E75 /* otherHeadViewController.swift in Sources */,
 				E60624ED1ADE6F27007D6DEF /* SwiftyUserDefaults.swift in Sources */,
+				0B86712D1AF9E23E00F3F63F /* TalkList.swift in Sources */,
 				E63898971AE042D900756679 /* mainData.swift in Sources */,
-				E6BF85EC1AF12E33005F08B2 /* TalkDetail.swift in Sources */,
 				E6BF85E41AF12DC4005F08B2 /* SCNavTabBarController.m in Sources */,
-				E6BF85EE1AF12E33005F08B2 /* TalkList.swift in Sources */,
 				E6518BEF1ADD065E005A8C97 /* rootViewController.swift in Sources */,
 				E6B717621ADED22D00684E83 /* leftMenuViewController.swift in Sources */,
 				E6DDF4A41AEF364A00339E75 /* backpackerViewController.swift in Sources */,
 				E63DA50D1AE6B9C7001D7811 /* UINavigationBar+Awesome.m in Sources */,
-				E6B204481AE6A74A00EB11B4 /* communityViewController.swift in Sources */,
+				0B8671261AF9E23E00F3F63F /* ImageUtil.swift in Sources */,
+				0B8671251AF9E23E00F3F63F /* HttpUrl.swift in Sources */,
 				E6518BED1ADD065E005A8C97 /* AppDelegate.swift in Sources */,
 				E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */,
 				E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */,

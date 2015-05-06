@@ -10,13 +10,19 @@
 import UIKit
 
 class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
-    
+    var manager = AFHTTPRequestOperationManager()
     var segmentedControl:HMSegmentedControl!
     var kindsArray = ["最新","精华","置顶"]
+    
+    
+    var forumId:Int!
+    var forumName:String!
+    var type:String! = "lastChangeTime"
     var tableView : UITableView!
-    var data = NSMutableArray()
-    var currentPage:Int!
-    var pageSize:Int = 5
+    var json:JSON!
+    var data:Array<JSON>!
+    var currentPage:Int = 1
+    var pageSize:Int = 20
     
     var viewIndex:Int!//view下标
     var isReloadView:Bool = false//初次是否加载
@@ -59,14 +65,24 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.data.count > pageSize {
-            self.tableView.footer.hidden = false
+        if self.data != nil {
+            if self.data.count >= pageSize {
+                self.tableView.footer.hidden = false
+            }
+            return self.data.count
+        }else{
+            return 0
         }
-        return self.data.count
+
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let id = self.data[indexPath.row]["id"].intValue
+        TalkDetail.showTalkDetailPage(self.navigationController, id: String(id))
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -86,8 +102,9 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
 //            cell = nib.lastObject as? mainSubCell
 //        }
         
-        cell!.title.text = self.data[indexPath.row] as? String
-        cell?.imageV = UIImageView(image: UIImage(named: "1024"))
+//        cell!.title.text = self.data[indexPath.row] as? String
+//        cell?.imageV = UIImageView(image: UIImage(named: "1024"))
+        cell?.update(self.data[indexPath.row])
         return cell!
     }
 
@@ -132,20 +149,22 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     }
     
     func loadNewData(){
-        //开始刷新
-        let url = "https://www.v2ex.com/api/topics/hot.json"
         
-        var manager = AFHTTPRequestOperationManager()
-        manager.GET(url,
-            parameters: nil,
+        let dict = [
+            "page": "1",
+            "forumId":String(self.forumId),
+            "type":self.type
+        ]
+        manager.GET(talk_url,
+            parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
-                var json = JSON(responseObject).arrayValue
-                if(json.count != 0) {
-                    self.data.removeAllObjects()
-                }
-                for i in 0...json.count-1 {
-                    self.data.addObject(json[i]["title"].stringValue)
+                self.json = JSON(responseObject)
+                
+                if "ok" == self.json["state"].stringValue {
+                     self.data = self.json["dataObject"]["data"].array
+                     self.currentPage = self.json["dataObject"]["page"].intValue
+                     self.pageSize = self.json["dataObject"]["pageSize"].intValue
                 }
                 
                 self.tableView.header.endRefreshing()
@@ -163,25 +182,39 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     func loadMoreData(){
         
-        //开始刷新
-        let url = "https://www.v2ex.com/api/topics/hot.json"
+        let dict_more = [
+            "page": String(self.currentPage+1),
+            "forumId":String(self.forumId),
+            "type":self.type
+        ]
         
-        var manager = AFHTTPRequestOperationManager()
-        manager.GET(url,
-            parameters: nil,
+        manager.GET(talk_url,
+            parameters: dict_more,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
-                var json = JSON(responseObject).arrayValue
-                for i in 0...json.count-1 {
-                    self.data.addObject(json[i]["title"].stringValue)
+                var json_more = JSON(responseObject)
+                if "ok" == json_more["state"].stringValue {
+                    if let d = json_more["dataObject"]["data"].array {
+                        
+                        if self.data == nil {
+                            self.data = d
+                        } else {
+                            self.data = self.data + d
+                            self.currentPage = self.currentPage + 1
+                            
+                        }
+                        if(d.count<self.pageSize){
+                            self.tableView.footer.noticeNoMoreData()
+                        }
+                    }
+
                 }
+                
                 
                 self.tableView.reloadData()
                 //拿到数据,结束刷新
                 self.tableView.footer.endRefreshing()
-                if(json.count<self.pageSize){
-                    self.tableView.footer.noticeNoMoreData()
-                }
+
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
@@ -210,7 +243,6 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     }
     
     func updateTableView () {
-        print("updateTableView")
         if(isReloadView == false){
             self.tableView.legendHeader.beginRefreshing()
             loadNewData()
@@ -220,6 +252,15 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     func segmentSelected(sender: HMSegmentedControl) {
         println("segment selected:\(sender.selectedSegmentIndex)")
+        if(sender.selectedSegmentIndex == 0){
+            self.type = "lastChangeTime"
+        }else if(sender.selectedSegmentIndex == 1){
+            self.type = "isJing"
+        }else{
+            self.type = "isDing"
+        }
+        self.tableView.legendHeader.beginRefreshing()
+        self.loadNewData()
     }
     
 }

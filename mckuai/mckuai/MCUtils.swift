@@ -8,6 +8,8 @@
 
 import Foundation
 
+let tencentAppKey = "101155101"
+
 //本地配置文件
 //引导页
 let ISFIRSTRUN = "isFirstRun"
