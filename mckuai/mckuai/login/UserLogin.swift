@@ -10,9 +10,11 @@ import Foundation
 import UIKit
 
 
-
+var appUserIdSave: Int!
 
 class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
+    
+    var manager = AFHTTPRequestOperationManager()
     
     var rightButton:UIButton?
 //    let ITEM_WIDTH:CGFloat = 45
@@ -31,11 +33,12 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     @IBOutlet weak var mckuaiLogin: UIButton!
     @IBOutlet weak var qqLogin: UIButton!
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         super.viewDidLoad()
         qqLogin.setBackgroundImage(UIImage(named: "user_login_normal"), forState: UIControlState.Normal)
         qqLogin.setBackgroundImage(UIImage(named: "user_login_press"), forState: UIControlState.Highlighted)//按下去时,selected被选中时
         
-        tencentOAuth = TencentOAuth(appId: MCUtils.tencentAppKey, andDelegate: self)
+        tencentOAuth = TencentOAuth(appId: tencentAppKey, andDelegate: self)
         
         
         userName.delegate = self
@@ -108,7 +111,51 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         }
     }
     
+    
+    func showCustomHUD(view: UIView, title: String, imgName: String) {
+        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        h.labelText = title
+        h.mode = MBProgressHUDMode.CustomView
+        h.customView = UIImageView(image: UIImage(named: imgName))
+        h.showAnimated(true, whileExecutingBlock: { () -> Void in
+            sleep(2)
+            return
+            }) { () -> Void in
+                h.removeFromSuperview()
+                h = nil
+        }
+    }
+    
     func mckuaiLoginFunction() {
+        let params = [
+            "userName":self.userName.text,
+            "passWord":self.passWord.text,
+
+        ]
+        
+        manager.POST(login_url,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                var json = JSON(responseObject)
+                
+                if "ok" == json["state"].stringValue {
+                     var userId = json["dataObject"].intValue
+                     //保存登录信息
+                     var userDefault = NSUserDefaults.standardUserDefaults()
+                     userDefault.setInteger(userId, forKey: "appUserIdSave")
+                     userDefault.synchronize()
+                     appUserIdSave = userId
+                     self.navigationController?.popViewControllerAnimated(true)
+                }
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.showCustomHUD(self.view, title: "登录失败", imgName: "Guide")
+        })
+
         
         
 //        APIClient.sharedInstance.mckuaiLoginByPost(self.view, userName: self.userName.text, passWord: self.passWord.text,success: { (json) -> Void in
@@ -164,6 +211,44 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             var gender:String = userInfo["gender"] as! String!
             var headImg:String = userInfo["figureurl_qq_2"] as! String!
             println(nickName)
+            
+            let params = [
+                "accessToken": accessToken,
+                "openId": openId,
+                "nickName": nickName,
+                "gender": gender,
+                "headImg": headImg,
+            ]
+            
+            var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+            hud.labelText = "登录中"
+            
+            manager.POST(qqlogin_url,
+                parameters: params,
+                success: { (operation: AFHTTPRequestOperation!,
+                    responseObject: AnyObject!) in
+                    var json = JSON(responseObject)
+                    
+                    if "ok" == json["state"].stringValue {
+                        var userId = json["dataObject"].intValue
+                        //保存登录信息
+                        var userDefault = NSUserDefaults.standardUserDefaults()
+                        userDefault.setInteger(userId, forKey: "appUserIdSave")
+                        userDefault.synchronize()
+                        appUserIdSave = userId
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }
+                    
+                },
+                failure: { (operation: AFHTTPRequestOperation!,
+                    error: NSError!) in
+                    println("Error: " + error.localizedDescription)
+                    hud.hide(true)
+                    self.showCustomHUD(self.view, title: "登录失败", imgName: "Guide")
+            })
+            
+            
+            
 //            APIClient.sharedInstance.qqLoginByPost(self.view, accessToken: accessToken, openId: openId, nickName: nickName, gender: gender, headImg: headImg,success: { (json) -> Void in
 //                println(json)
 //                if json["state"].stringValue == "ok" {

@@ -24,7 +24,7 @@
         <!--帖子详情-->
         <scene sceneID="cVp-Cj-oMp">
             <objects>
-                <viewController storyboardIdentifier="talkDetail" id="MjU-MI-5oq" customClass="TalkDetail" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="talkDetail" hidesBottomBarWhenPushed="YES" id="MjU-MI-5oq" customClass="TalkDetail" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eKM-VT-df8"/>
                         <viewControllerLayoutGuide type="bottom" id="vV9-cQ-oLe"/>
@@ -34,18 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="帖子详情" id="hZ8-cf-q5h">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="0d7-WD-utY">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lRO-MR-llH">
-                                <rect key="frame" x="-23" y="-15" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="只看楼主">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="帖子详情" id="hZ8-cf-q5h"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bv9-Dh-eaf" userLabel="First Responder" sceneMemberID="firstResponder"/>

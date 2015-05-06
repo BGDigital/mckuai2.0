@@ -91,8 +91,11 @@
             button.selected = YES;
             [button setBackgroundColor:[UIColor colorWithRed:0.184f green:0.627f blue:0.267f alpha:1.00f]];
         }
-        button.frame = CGRectMake(buttonX, 7, [widths[index] floatValue], 30);
-        button.layer.cornerRadius = 15;
+        button.frame = CGRectMake(buttonX, 5, 74, 74);
+        button.layer.cornerRadius = 37;
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
         button.titleLabel.font = [UIFont systemFontOfSize:12];
         [button setTitle:_itemTitles[index] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:0.169f green:0.565f blue:0.208f alpha:1.00f] forState:UIControlStateNormal];
@@ -244,7 +247,7 @@
 
     CGFloat flag = _showArrowButton ? (SCREEN_WIDTH - ARROW_BUTTON_WIDTH) : SCREEN_WIDTH;
     
-    if (button.frame.origin.x + button.frame.size.width > flag)
+    if (button.frame.origin.x + button.frame.size.width > flag-74)
     {
         CGFloat offsetX = button.frame.origin.x + button.frame.size.width - flag;
         if (_currentItemIndex < [_itemTitles count] - 1)
