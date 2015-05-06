@@ -38,12 +38,18 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         self.leftMenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
         //这里不需要右边栏
         //self.rightMenuViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
-        self.backgroundImage = UIImage(named: "Image")
+        //self.backgroundImage = UIImage(named: "Image")
+        //模糊背景
+        var bg = SABlurImageView()
+        bg.image = UIImage(named: "Image")
+        bg.addBlurEffect(30, times: 1)
+        self.backgroundImage = bg.image!
         self.delegate = self;
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //Defaults.remove(ISFIRSTRUN)
         if !Defaults.hasKey(ISFIRSTRUN) {
             //没有"ISFIRSTRUN"这个key就是第一次启动,显示引导页

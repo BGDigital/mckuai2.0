@@ -13,6 +13,17 @@ class backpackerViewController: UIViewController {
     var segmentedControl: HMSegmentedControl!
     var favorite: favoriteViewController!
     var friends: friendsViewController!
+    var UserId: Int!
+    
+    init(uId: Int) {
+        super.init(nibName: nil, bundle: nil)
+        self.UserId = uId
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hidesBottomBarWhenPushed = true  //这句在pop回来的时候没有效果

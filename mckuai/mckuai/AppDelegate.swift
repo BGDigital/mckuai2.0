@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0 }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        //缓存,不知道有没有用
+        var cache: NSURLCache
+        
         self.window?.makeKeyAndVisible()
         //启动页面加载广告
         loadLaunchView()

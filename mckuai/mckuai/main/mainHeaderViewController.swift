@@ -25,6 +25,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var level: UIButton!
     @IBOutlet weak var locationCity: UIButton!
+    var UserId: Int!
     
     
     override func viewDidLoad() {
@@ -66,21 +67,19 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         self.roundProgressView.imageUrl = user["headImg"].stringValue
         self.nickname.text = user["nike"].stringValue
         self.level.setTitle(user["level"].stringValue, forState: .Normal)
-        
+        self.UserId = user["id"].intValue
         //聊天室
         self.times.setTitle(chat["insertTime"].stringValue, forState: .Normal)
         self.chatTitle.text = chat["title"].stringValue
         self.chatTitle.sizeOfMultiLineLabel()
-        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["HeadImg"].stringValue), placeholderImage: UIImage(named: "Guide"))
+        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "Guide"))
         self.userLastSay.text = chat["speak"].stringValue
         self.imageV.sd_setImageWithURL(NSURL(string: chat["icon"].stringValue), placeholderImage: UIImage(named: "Image"))
         
     }
     
     @IBAction func openBackPacker() {
-        backpacker = backpackerViewController()
-        backpacker.hidesBottomBarWhenPushed = true
-        self.nav?.pushViewController(backpacker, animated: true)
+        MCUtils.openBackPacker(self.nav!, userId: self.UserId)
     }
     
     func setNavi(navi: UINavigationController?) {

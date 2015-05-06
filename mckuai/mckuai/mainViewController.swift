@@ -58,10 +58,11 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         
         setupTableView()
-//        self.data = NSMutableArray()
+        MCUtils.mainNav = self.navigationController
         if isFirstLoad {
             self.tableView.header.beginRefreshing()
         }
+
     }
 
     
@@ -133,7 +134,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             return 190
         } else {
-            return 118
+            return 190
         }
     }
     
@@ -163,30 +164,21 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? mainTableViewCell
+        if cell == nil {
+            //如果没有cell就新创建出来
+            let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainTableViewCell", owner: self, options: nil)
+            cell = nib.lastObject as? mainTableViewCell
+        }
+        var d: JSON!
         switch (indexPath.section) {
         case 0:
-            //var cell = tableView.cellForRowAtIndexPath(indexPath) as? mainTableViewCell
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? mainTableViewCell
-            if cell == nil {
-                //如果没有cell就新创建出来
-                let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainTableViewCell", owner: self, options: nil)
-                cell = nib.lastObject as? mainTableViewCell
-            }
-            let d = self.liveData[indexPath.row] as JSON
-            cell?.update(d)
-            return cell!
+            d = self.liveData[indexPath.row] as JSON
         default:
-            var cell = tableView.dequeueReusableCellWithIdentifier("mainSubCell") as? mainSubCell
-            
-            if cell == nil {
-                let nib: NSArray = NSBundle.mainBundle().loadNibNamed("mainSubCell", owner: self, options: nil)
-                cell = nib.lastObject as? mainSubCell
-            }
-            let d = self.datasource[indexPath.row] as JSON
-            cell?.update(d)
-            return cell!
-
+            d = self.datasource[indexPath.row] as JSON
         }
+        cell?.update(d, iType: indexPath.section)
+        return cell!
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat  {

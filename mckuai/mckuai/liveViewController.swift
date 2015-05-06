@@ -260,7 +260,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell = nib.lastObject as? mainTableViewCell
         }
         let d = self.datasource[indexPath.row] as JSON
-        cell?.update(d)
+        cell?.update(d, iType: 0)
         return cell!
     }
 

@@ -169,7 +169,7 @@ class friendsViewController: UICollectionViewController {
     }
     
     @IBAction func btn1Click() {
-        MCUtils.openOtherZone(self.nav!, userId: selectUserId!)
+        MCUtils.openOtherZone(self.nav, userId: selectUserId!)
 //        otherZone = otherViewController(uId: self.selectUserId!)
 //        self.nav?.pushViewController(otherZone, animated: true)
     }

@@ -13,8 +13,8 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     let cellHeight: CGFloat = 50
     let headerHeight: CGFloat = 50
     var tableView: UITableView!
-    let titles = ["推荐", "新手任务", "我的背包", "分享给好友", "软件设置", "评价APP", "退出登录"]
-    let images = ["Guide", "Guide", "Guide", "Guide", "Guide", "Guide", "Guide"]
+    let titles = ["新手任务", "我的背包", "分享给好友", "评价APP", "软件设置", "退出登录"]
+    let images = ["newuser", "backpacker", "share", "pingfen", "setting", "logout"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,23 +63,31 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
         switch (indexPath.row) {
         case 0:
-            self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
-            self.sideMenuViewController.hideMenuViewController()
+            //新手任务
+//            self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
+//            self.sideMenuViewController.hideMenuViewController()
             break
         case 1:
-            self.sideMenuViewController.setContentViewController(liveViewController.initializationLive(), animated: true)
-            self.sideMenuViewController.hideMenuViewController()
+            //我的背包
+            MCUtils.openBackPacker(self.navigationController, userId: 6)
             break
         case 2:
-            self.sideMenuViewController.setContentViewController(mineTableViewController
-                .initializationMine(), animated: true)
-            self.sideMenuViewController.hideMenuViewController()
+            //分享给好友
+            break
+        case 3:
+            //评价APP
+            break
+        case 4:
+            //设置
+            break
         default:
+            //退出
             break
         }
+        //隐藏菜单
+        self.sideMenuViewController.hideMenuViewController()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -88,14 +96,19 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
-            cell?.backgroundColor = UIColor.clearColor()
-            cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 21)
-            cell?.textLabel?.textColor = UIColor.whiteColor()
-            cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
-            cell?.selectedBackgroundView = UIView()
-            cell?.textLabel?.text = titles[indexPath.row]
-            cell?.imageView?.image = UIImage(named: images[indexPath.row])
         }
+        
+        cell?.backgroundColor = UIColor.clearColor()
+        cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
+        cell?.textLabel?.textColor = UIColor.whiteColor()
+        cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
+        cell?.selectedBackgroundView = UIView()
+        cell?.textLabel?.text = titles[indexPath.row]
+        cell?.imageView?.image = UIImage(named: images[indexPath.row])
+        var line = UIView(frame: CGRectMake(0, cell!.bounds.size.height-1, cell!.bounds.size.width, 0.5))
+        line.backgroundColor = UIColor.blackColor()
+        line.alpha = 0.15
+        cell?.addSubview(line)
         return cell!
     }
     
@@ -108,6 +121,6 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return titles.count
     }
 }

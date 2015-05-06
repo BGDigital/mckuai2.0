@@ -55,9 +55,8 @@ class MCUtils {
 
 //一些通用的系统常量
 static var TB: UITabBarController!
-//static var chatView: UIViewController!
-//Tencent APP_Key
-static let tencentAppKey = "101155101"
+//这里存储一个首页的NavigationController,侧边菜单用
+static var mainNav: UINavigationController?
 //RondCloud
 static let RC_token = "dxcm0lr7Egt+GZp6DerjqOeLBPbf3gS4wMl0dLcWBkT2IBDBKobyAFDYl2T1/6H0d1ljiW3e/f4="
     
@@ -178,14 +177,26 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
         tv.backgroundView = v
         tv.separatorStyle = UITableViewCellSeparatorStyle.None
     }
-    
-    //供其它界面调用  --他人的空间
-    class func openOtherZone(nav: UINavigationController, userId: Int) {
-        var otherZone: otherViewController = otherViewController(uId: userId)
-        nav.pushViewController(otherZone, animated: true)
-    }
 
+    //供其它界面调用  --他人的空间
+    class func openOtherZone(nav: UINavigationController?, userId: Int) {
+        var otherZone: otherViewController = otherViewController(uId: userId)
+        if let n = nav {
+            n.pushViewController(otherZone, animated: true)
+        } else {
+            self.mainNav?.pushViewController(otherZone, animated: true)
+        }
+    }
     
+    //--我的背包
+    class func openBackPacker(nav: UINavigationController?, userId: Int) {
+        var backpacker:backpackerViewController = backpackerViewController(uId: userId)
+        if let n = nav {
+            n.pushViewController(backpacker, animated: true)
+        } else {
+            self.mainNav?.pushViewController(backpacker, animated: true)
+        }
+    }
 }
 
 /**
