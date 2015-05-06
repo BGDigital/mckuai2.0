@@ -93,7 +93,7 @@ class otherHeadViewController: UIViewController {
         if !headImg.isEmpty {
             imageBg.sd_setImageWithURL(NSURL(string: headImg), placeholderImage: UIImage(named: "1024"), completed: {image, error, cacheType, imageURL in
                 //self.roundProgressView.imageView = UIImageView(image: image)
-                self.imageBg.addBlurEffect(30, times: 1)
+                self.imageBg.addBlurEffect(8, times: 1)
             })
         }
         btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)

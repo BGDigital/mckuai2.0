@@ -16,22 +16,44 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     var head: mineHeadViewController!
     let NAVBAR_CHANGE_POINT:CGFloat = 50
     var manager = AFHTTPRequestOperationManager()
+    var page: PageInfo!
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
+                page = PageInfo(
+                    currentPage: self.json["dataObject", "list", "page"].intValue,
+                    pageCount: self.json["dataObject", "list", "pageCount"].intValue,
+                    pageSize: self.json["dataObject", "list", "pageSize"].intValue,
+                    allCount: self.json["dataObject", "list", "allCount"].intValue)
                 if let d = self.json["dataObject", "list", "data"].array {
-                    self.datasource = d
+                    self.tableView.tableHeaderView?.hidden = false
+                    if page.currentPage == 1 {
+                        println("刷新数据")
+                        self.datasource = d
+                    } else {
+                        println("加载更多")
+                        self.datasource = self.datasource + d
+                    }
                 }
                 self.User = self.json["dataObject", "user"] as JSON
-                self.pageInfo = self.json["dataObject", "pageInfo"] as JSON
             }
             head.RefreshHead(User)
             self.tableView.reloadData()
         }
     }
     var User: JSON!
-    var pageInfo: JSON!
-    lazy var datasource: Array<JSON> = Array()
+    var datasource: Array<JSON> = Array() {
+        didSet {
+            if self.datasource.count < page.allCount {
+                self.tableView.footer.hidden = self.datasource.count < page.pageSize
+                println("没有达到最大值 \(self.tableView.footer.hidden)")
+            } else {
+                println("最大值了,noMoreData")
+                self.tableView.footer.hidden = true
+            }
+            self.tableView.reloadData()
+        }
+    }
     
     class func initializationMine()->UIViewController{
         var mine = UIStoryboard(name: "mine", bundle: nil).instantiateViewControllerWithIdentifier("mineTableViewController") as! mineTableViewController
@@ -54,6 +76,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.tableHeaderView = self.head.view
         self.head.Delegate = self
         self.view.addSubview(tableView)
+        self.tableView.tableHeaderView?.hidden = true
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
@@ -65,9 +88,17 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         setupViews()
         
         customNavBackButton()
+        
+        
         if isFirstLoad {
-            self.tableView.header.beginRefreshing()
+            loadDataWithoutMJRefresh()
         }
+    }
+    
+    func loadDataWithoutMJRefresh() {
+        var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        h.labelText = MCUtils.TEXT_LOADING
+        h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
     }
     
     func customNavBackButton() {
@@ -140,6 +171,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         if !self.datasource.isEmpty {
+            self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
             MCUtils.showEmptyView(self.tableView)
@@ -186,7 +218,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         //开始刷新
         var param = [
             "act": "center",
-            "id": 1,
+            "id": 6,
             "page": 1,
             "type":self.mineType,
             "messageType": self.mineMsgType]
@@ -194,6 +226,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
+                self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.tableView.header.endRefreshing()
             },
@@ -201,12 +234,30 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
-                //self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
         })
     }
     
     func loadMoreData() {
-        
+        var param = [
+            "act": "center",
+            "id": 6,
+            "page": page.currentPage+1,
+            "type":self.mineType,
+            "messageType": self.mineMsgType]
+        manager.GET(URL_MC,
+            parameters: param,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                self.json = JSON(responseObject)
+                self.tableView.footer.endRefreshing()
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.tableView.footer.endRefreshing()
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+        })
     }
 
     //刷新数据
@@ -237,7 +288,8 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
             break
         }
         //开始加载数据
-        self.tableView.header.beginRefreshing()
+        //self.tableView.header.beginRefreshing()
+        loadDataWithoutMJRefresh()
     }
 
 }

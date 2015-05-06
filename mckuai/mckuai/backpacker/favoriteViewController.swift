@@ -14,11 +14,23 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     let cellIdentifier = "mainSubCell"
     var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
+    var page: PageInfo!
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
+                page = PageInfo(
+                    currentPage: self.json["dataObject", "page"].intValue,
+                    pageCount: self.json["dataObject", "pageCount"].intValue,
+                    pageSize: self.json["dataObject", "pageSize"].intValue,
+                    allCount: self.json["dataObject", "allCount"].intValue)
                 if let d = self.json["dataObject", "data"].array {
-                    self.datasource = d
+                    if page.currentPage == 1 {
+                        println("刷新数据")
+                        self.datasource = d
+                    } else {
+                        println("加载更多")
+                        self.datasource = self.datasource + d
+                    }
                 }
             }
         }
@@ -26,6 +38,14 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     var datasource: Array<JSON>! = Array() {
         didSet {
+            if self.datasource.count < page.allCount {
+                self.tableView.footer.hidden = self.datasource.count < page.pageSize
+                println("没有达到最大值 \(self.tableView.footer.hidden)")
+            } else {
+                println("最大值了,noMoreData")
+                self.tableView.footer.hidden = true
+            }
+
             self.tableView.reloadData()
         }
     }
@@ -43,8 +63,11 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
         //manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         self.hidesBottomBarWhenPushed = true
         setupTableView()
+        
         if isFirstLoad {
-            self.tableView.header.beginRefreshing()
+            var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            h.labelText = MCUtils.TEXT_LOADING
+            h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
         }
         // Do any additional setup after loading the view.
     }
@@ -56,13 +79,13 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadNewData() {
         //开始刷新
-        self.isFirstLoad = false
         var dict = ["act":"collectTalk", "id": 6, "page": 1]
         manager.GET(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)
+                self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.tableView.header.endRefreshing()
             },
@@ -70,6 +93,28 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+        })
+    }
+    
+    func loadMoreData() {
+        println("开始加载\(self.page.currentPage+1)页")
+        var dict = ["act":"collectTalk", "id": 6, "page": page.currentPage+1]
+        //println("加载:\(self.liveType),\(self.liveOrder)======")
+        isFirstLoad = false
+        //开始刷新
+        manager.GET(URL_MC,
+            parameters: dict,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                //println(responseObject)
+                self.json = JSON(responseObject)
+                self.tableView.footer.endRefreshing()
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.tableView.footer.endRefreshing()
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
         })
     }
@@ -88,6 +133,8 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(tableView)
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
+        self.tableView.footer.hidden = true
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

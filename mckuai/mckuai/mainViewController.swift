@@ -60,8 +60,11 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setupTableView()
         MCUtils.mainNav = self.navigationController
+        
         if isFirstLoad {
-            self.tableView.header.beginRefreshing()
+            var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            h.labelText = MCUtils.TEXT_LOADING
+            h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
         }
 
     }

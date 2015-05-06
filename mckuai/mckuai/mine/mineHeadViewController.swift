@@ -59,7 +59,8 @@ class mineHeadViewController: UIViewController {
         var selectedImg = UIImage.applicationCreateImageWithColor(UIColor(hexString: "#40C84D")!)
         parent.setBackgroundImage(selectedImg, forState: .Selected)
         parent.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-//        parent.layer.cornerRadius = 30  //圆角,对.Selected没有效果?
+        parent.layer.masksToBounds = true
+        parent.layer.cornerRadius = 30  //圆角,对.Selected没有效果?
         parent.tintColor = UIColor.clearColor()
         
         var lb = UILabel(frame: CGRectMake(0, btnMsg.bounds.size.height-20, btnMsg.bounds.size.width, 14))
@@ -130,7 +131,7 @@ class mineHeadViewController: UIViewController {
         if !headImg.isEmpty {
             imageBg.sd_setImageWithURL(NSURL(string: headImg), placeholderImage: UIImage(named: "1024"), completed: {image, error, cacheType, imageURL in
 //                self.roundProgressView.imageView = UIImageView(image: image)
-                self.imageBg.addBlurEffect(30, times: 1)
+                self.imageBg.addBlurEffect(8, times: 1)
             })
         //
         btnMsg.setTitle(J["messageNum"].stringValue, forState: .Normal)

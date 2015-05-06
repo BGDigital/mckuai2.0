@@ -64,9 +64,11 @@ static let COLOR_NavBG = "#43D152"
 static let COLOR_MAIN = "#4C4D4E"
 static let COLOR_SUB = "#B3B4B5"
 static let COLOR_GREEN = "#40C84D"
+    
+static let TEXT_LOADING = "Loading..."
 
 static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
-
+    
     //功能函数
     class func showCustomHUD(view: UIView, title: String, imgName: String) {
         var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
@@ -154,6 +156,11 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
         return newImage
     }
     
+    /**
+    UITableView 空数据时显示的类型
+    
+    :param: tv 要显示内容的TableView
+    */
     class func showEmptyView(tv: UITableView) {
         var v = UIView(frame: tv.frame)
         

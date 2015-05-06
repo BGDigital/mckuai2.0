@@ -42,7 +42,7 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         //模糊背景
         var bg = SABlurImageView()
         bg.image = UIImage(named: "Image")
-        bg.addBlurEffect(30, times: 1)
+        bg.addBlurEffect(8, times: 1)
         self.backgroundImage = bg.image!
         self.delegate = self;
     }

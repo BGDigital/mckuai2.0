@@ -43,7 +43,9 @@ class friendsViewController: UICollectionViewController {
         self.collectionView!.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         
         if isFirstLoad {
-            self.collectionView!.header.beginRefreshing()
+            var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            h.labelText = MCUtils.TEXT_LOADING
+            h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
         }
     }
 
@@ -54,13 +56,14 @@ class friendsViewController: UICollectionViewController {
     
     func loadNewData() {
         //开始刷新
-        self.isFirstLoad = false
+        
         var dict = ["act":"attentionUser", "id": 6, "page": 1]
         manager.GET(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)
+                self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.collectionView?.header.endRefreshing()
             },

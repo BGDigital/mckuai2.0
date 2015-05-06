@@ -69,6 +69,15 @@ class messageCell: UITableViewCell {
                 var sText = self.getMsgType(json["type"].stringValue)
                 var str = json["userName"].stringValue + sText
                 self.username.setTitle(str, forState: .Normal)
+//                var Avatar = json["headImg"].stringValue
+//                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "Guide"), completed: { img,_,_,_ in
+//                    var rect = CGRectMake(0, 0, 20, 20)
+//                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+//                    img.drawInRect(rect)
+//                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
+//                    UIGraphicsEndImageContext()
+//                    self.username.setImage(newImage, forState: .Normal)
+//                })
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
                 setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
                 //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)

@@ -66,11 +66,19 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setNaviStyle()
         setupTableView()
+        
         if isFirstLoad {
-            self.tableView.header.beginRefreshing()
+            loadDataWithoutMJRefresh()
         }
         // Do any additional setup after loading the view.
     }
+    
+    func loadDataWithoutMJRefresh() {
+        var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        h.labelText = MCUtils.TEXT_LOADING
+        h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
+    }
+
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
@@ -112,7 +120,8 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.liveOrder = "all"
             break
         }
-        self.tableView.header.beginRefreshing()
+        loadDataWithoutMJRefresh()
+        //self.tableView.header.beginRefreshing()
     }
     
     func setNaviStyle() {
@@ -134,21 +143,24 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.liveType = a.title
             println(self.liveType)
             self.navigationItem.rightBarButtonItem?.title = "生存"
-            self.tableView.header.beginRefreshing()
+            self.loadDataWithoutMJRefresh()
+            //self.tableView.header.beginRefreshing()
         })
         
         var archiveAction = UIAlertAction(title: "极限直播", style: UIAlertActionStyle.Default, handler: {a in
             self.liveType = a.title
             println(self.liveType)
             self.navigationItem.rightBarButtonItem?.title = "极限"
-            self.tableView.header.beginRefreshing()
+            self.loadDataWithoutMJRefresh()
+            //self.tableView.header.beginRefreshing()
         })
         
         var allAction = UIAlertAction(title: "全部直播", style: UIAlertActionStyle.Default, handler: {a in
             self.liveType = ""
             println(self.liveType)
             self.navigationItem.rightBarButtonItem?.title = "全部"
-            self.tableView.header.beginRefreshing()
+            self.loadDataWithoutMJRefresh()
+            //self.tableView.header.beginRefreshing()
         })
         alertController.addAction(cancelAction)
         alertController.addAction(deleteAction)
@@ -165,13 +177,13 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
                     "type":self.liveType,
                     "orderField":self.liveOrder]
         //println("加载:\(self.liveType),\(self.liveOrder)======")
-        isFirstLoad = false
         //开始刷新
         manager.GET(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 //println(responseObject)
+                self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.tableView.header.endRefreshing()
             },
