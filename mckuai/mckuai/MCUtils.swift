@@ -179,6 +179,13 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
         tv.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
+    //供其它界面调用  --他人的空间
+    class func openOtherZone(nav: UINavigationController, userId: Int) {
+        var otherZone: otherViewController = otherViewController(uId: userId)
+        nav.pushViewController(otherZone, animated: true)
+    }
+
+    
 }
 
 /**
