@@ -33,6 +33,22 @@ let D_ISREMEMBERME = "isRememberMe"
 //主接口地址-域名
 let URL_MC = "http://221.237.152.39:8081/interface.do?"
 
+//PageInfo 用于下拉刷新
+class PageInfo {
+    var currentPage: Int = 0
+    var pageCount: Int = 0
+    var pageSize: Int = 0
+    var allCount: Int = 0
+    
+    init(currentPage: Int, pageCount: Int, pageSize: Int, allCount: Int) {
+        self.currentPage = currentPage
+        self.pageCount = pageCount
+        self.pageSize = pageSize
+        self.allCount = allCount
+    }
+}
+
+
 class MCUtils {
 
 //一些通用的系统常量
@@ -160,7 +176,7 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
         tv.backgroundView = v
         tv.separatorStyle = UITableViewCellSeparatorStyle.None
     }
-
+    
 }
 
 /**

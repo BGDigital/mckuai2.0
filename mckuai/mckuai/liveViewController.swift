@@ -17,11 +17,24 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     var liveOrder = "new"
     var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
+    var page: PageInfo!
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
+                page = PageInfo(
+                    currentPage: self.json["dataObject", "page"].intValue,
+                    pageCount: self.json["dataObject", "pageCount"].intValue,
+                    pageSize: self.json["dataObject", "pageSize"].intValue,
+                    allCount: self.json["dataObject", "allCount"].intValue)
+                println(self.json["dataObject", "page"].intValue)
                 if let d = self.json["dataObject", "data"].array {
-                    self.datasource = d
+                    if page.currentPage == 1 {
+                        println("刷新数据")
+                        self.datasource = d
+                    } else {
+                        println("加载更多")
+                        self.datasource = self.datasource + d
+                    }
                 }
             }
         }
@@ -29,6 +42,13 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var datasource: Array<JSON>! = Array(){
         didSet {
+            if self.datasource.count < page.allCount {
+                self.tableView.footer.hidden = self.datasource.count < page.pageSize
+                println("没有达到最大值 \(self.tableView.footer.hidden)")
+            } else {
+                println("最大值了,noMoreData")
+                self.tableView.footer.hidden = true
+            }
             self.tableView.reloadData()
         }
     }
@@ -163,8 +183,33 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
     }
     
+    func loadMoreData() {
+        println("开始加载\(self.page.currentPage+1)页")
+        var dict = ["act":"live",
+            "page":self.page.currentPage+1,
+            "type":self.liveType,
+            "orderField":self.liveOrder]
+        //println("加载:\(self.liveType),\(self.liveOrder)======")
+        isFirstLoad = false
+        //开始刷新
+        manager.GET(URL_MC,
+            parameters: dict,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                //println(responseObject)
+                self.json = JSON(responseObject)
+                self.tableView.footer.endRefreshing()
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.tableView.footer.endRefreshing()
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+        })
+    }
+    
     func setupTableView() {
-        self.tableView = UITableView(frame: CGRectMake(0, 64+35, self.view.frame.size.width, self.view.frame.size.height-(64+35)), style: UITableViewStyle.Plain)
+        self.tableView = UITableView(frame: CGRectMake(0, 64+35, self.view.frame.size.width, self.view.frame.size.height-(64+35+44)), style: UITableViewStyle.Plain)
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
         tableView.delegate = self
         tableView.dataSource = self
@@ -178,6 +223,8 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
+        self.tableView.footer.hidden = true
     }
     
     
