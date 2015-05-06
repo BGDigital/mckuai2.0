@@ -29,6 +29,10 @@ class mainTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .None
+        self.userName.imageView?.layer.masksToBounds = true
+        self.userName.imageView?.layer.cornerRadius = 10
+        self.userName.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
+        self.replys.titleEdgeInsets = UIEdgeInsetsMake(-2, 2, 0, 0)
     }
     
     func update(json: JSON, iType: Int) {
@@ -85,7 +89,6 @@ class mainTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        self.replys.titleEdgeInsets = UIEdgeInsetsMake(-2, 2, 0, 0)
         // Configure the view for the selected state
     }
     

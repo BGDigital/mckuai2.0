@@ -59,23 +59,51 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     func setData(user: JSON!, chat: JSON!) {
         
         //用户信息
-        var p = user["process"].floatValue * 100
-        self.roundProgressView.progressLineWidth = 1
-        self.roundProgressView.progressColor = UIColor(hexString: "#32FD2F")!
-        self.roundProgressView.progressBackgroundColor = UIColor.whiteColor()
-        self.roundProgressView.percent = CGFloat(p)
-        self.roundProgressView.imageUrl = user["headImg"].stringValue
-        self.nickname.text = user["nike"].stringValue
-        self.level.setTitle(user["level"].stringValue, forState: .Normal)
-        self.UserId = user["id"].intValue
+        if user.type != .Null {
+            self.nickname.hidden = false
+            self.level.hidden = false
+            self.locationCity.hidden = false
+            self.bag.hidden = false
+            
+            var p = user["process"].floatValue * 100
+            self.roundProgressView.progressLineWidth = 1
+            self.roundProgressView.progressColor = UIColor(hexString: "#32FD2F")!
+            self.roundProgressView.progressBackgroundColor = UIColor.whiteColor()
+            self.roundProgressView.percent = CGFloat(p)
+            self.roundProgressView.imageUrl = user["headImg"].stringValue
+            self.nickname.text = user["nike"].stringValue
+            self.level.setTitle(user["level"].stringValue, forState: .Normal)
+            self.locationCity.setTitle(user["addr"].stringValue, forState: .Normal)
+            self.UserId = user["id"].intValue
+        } else {
+            self.roundProgressView.imageUrl = "1" //任意值都可以
+            self.nickname.hidden = true
+            self.level.hidden = true
+            self.locationCity.hidden = true
+            self.bag.hidden = true
+            
+            var btnLogin = UIButton(frame: CGRectMake(75, 22, 100, 30))
+            btnLogin.setTitle("登录更精彩", forState: .Normal)
+            btnLogin.titleLabel?.font = UIFont(name: btnLogin.titleLabel!.font.fontName, size: 14)
+            btnLogin.backgroundColor = UIColor(hexString: "#30A243")
+            btnLogin.layer.cornerRadius = 8
+            btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
+            self.view.addSubview(btnLogin)
+        }
         //聊天室
         self.times.setTitle(chat["insertTime"].stringValue, forState: .Normal)
         self.chatTitle.text = chat["title"].stringValue
         self.chatTitle.sizeOfMultiLineLabel()
         self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "Guide"))
+        self.userHeadImg.layer.masksToBounds = true
+        self.userHeadImg.layer.cornerRadius = 10
         self.userLastSay.text = chat["speak"].stringValue
         self.imageV.sd_setImageWithURL(NSURL(string: chat["icon"].stringValue), placeholderImage: UIImage(named: "Image"))
         
+    }
+    
+    @IBAction func userLogin() {
+        UserLogin.showUserLoginView(presentNavigator: self.nav)
     }
     
     @IBAction func openBackPacker() {

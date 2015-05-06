@@ -16,6 +16,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
+                self.tableView.tableHeaderView?.hidden = false
                 if let d = self.json["dataObject", "talk"].array {
                     self.datasource = d
                 }
@@ -87,6 +88,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 245)
         head.setNavi(self.navigationController)
         tableView.tableHeaderView = head.view
+        self.tableView.tableHeaderView?.hidden = true
         
         self.view.addSubview(tableView)
         

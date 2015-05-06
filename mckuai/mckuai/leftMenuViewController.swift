@@ -31,20 +31,25 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         
         //这里加了个Header(用户信息)
         var header = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, headerHeight))
-        var image = UIImageView(frame: CGRectMake(0, 0, 50, 50))
-        image.image = UIImage(named: "1024")
-        header.addSubview(image)
+        var Avatar = UIImageView(frame: CGRectMake(15, 5, 40, 40))
+        Avatar.image = UIImage(named: "1024")
+        Avatar.backgroundColor = UIColor.clearColor()  //这句可有可无
+        Avatar.layer.masksToBounds = true
+        Avatar.layer.cornerRadius = 20
+        header.addSubview(Avatar)
         
-        var username = UILabel(frame: CGRectMake(55, 0, self.view.frame.size.width-60, 25))
-        username.text = "邱兴福"
+        var username = UILabel(frame: CGRectMake(70, 0, self.view.frame.size.width-60, 20))
+        username.text = "一叶之秋"
         username.textColor = UIColor.whiteColor()
-        username.font = UIFont(name: "HelveticaNeue", size: 21)
+        username.font = UIFont(name: "HelveticaNeue", size: 16)
         header.addSubview(username)
         
-        var level = UILabel(frame: CGRectMake(55, 30, self.view.frame.size.width-60, 15))
-        level.text = "等级:12"
-        level.textColor = UIColor.whiteColor()
-        level.font = UIFont(name: "HelveticaNeue", size: 12)
+        var level = UIButton(frame: CGRectMake(70, 30, 45, 15))
+        level.setTitle("LV.8", forState: .Normal)
+        level.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        level.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
+        level.backgroundColor = UIColor(hexString: "#000000", alpha: 0.3)
+        level.layer.cornerRadius = 7
         header.addSubview(level)
         
         header.backgroundColor = UIColor.clearColor()
@@ -96,19 +101,19 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
+            cell?.backgroundColor = UIColor.clearColor()
+            cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
+            cell?.textLabel?.textColor = UIColor.whiteColor()
+            cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
+            cell?.selectedBackgroundView = UIView()
+            cell?.textLabel?.text = titles[indexPath.row]
+            cell?.imageView?.image = UIImage(named: images[indexPath.row])
+            var line = UIView(frame: CGRectMake(0, cell!.bounds.size.height-1, cell!.bounds.size.width, 0.5))
+            line.backgroundColor = UIColor.blackColor()
+            line.alpha = 0.15
+            cell?.addSubview(line)
         }
         
-        cell?.backgroundColor = UIColor.clearColor()
-        cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
-        cell?.textLabel?.textColor = UIColor.whiteColor()
-        cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
-        cell?.selectedBackgroundView = UIView()
-        cell?.textLabel?.text = titles[indexPath.row]
-        cell?.imageView?.image = UIImage(named: images[indexPath.row])
-        var line = UIView(frame: CGRectMake(0, cell!.bounds.size.height-1, cell!.bounds.size.width, 0.5))
-        line.backgroundColor = UIColor.blackColor()
-        line.alpha = 0.15
-        cell?.addSubview(line)
         return cell!
     }
     
