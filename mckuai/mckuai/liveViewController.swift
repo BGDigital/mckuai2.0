@@ -27,7 +27,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    var datasource: Array<JSON>! {
+    var datasource: Array<JSON>! = Array(){
         didSet {
             self.tableView.reloadData()
         }
@@ -190,7 +190,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.datasource != nil {
+        if !self.datasource.isEmpty {
             return self.datasource.count
         } else {
             return 0

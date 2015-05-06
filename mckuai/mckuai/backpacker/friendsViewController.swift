@@ -27,7 +27,7 @@ class friendsViewController: UICollectionViewController {
         }
     }
     
-    var datasource: Array<JSON>! {
+    var datasource: Array<JSON>! = Array() {
         didSet {
             self.collectionView!.reloadData()
         }
@@ -82,7 +82,7 @@ class friendsViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        if self.datasource != nil {
+        if !self.datasource.isEmpty {
             return self.datasource.count
         } else {
             return 0

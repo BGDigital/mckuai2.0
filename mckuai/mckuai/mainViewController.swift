@@ -28,12 +28,12 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    var datasource: Array<JSON>! {
+    var datasource: Array<JSON>! = Array(){
         didSet {
             self.tableView.reloadData()
         }
     }
-    var liveData: Array<JSON>! {
+    var liveData: Array<JSON>! = Array(){
         didSet {
             self.tableView.reloadData()
         }
@@ -108,9 +108,10 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                MCUtils.showEmptyView(self.tableView)
                 self.tableView.header.endRefreshing()
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                self.tableView.tableHeaderView?.hidden = true
+                MCUtils.showEmptyView(self.tableView)
+//                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
         })
         
     }
@@ -121,7 +122,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if self.datasource != nil && self.liveData != nil {
+        if !self.datasource.isEmpty && !self.datasource.isEmpty {
             return 2
         } else {
             return 0
@@ -137,7 +138,9 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.datasource != nil && self.liveData != nil {
+        if !self.datasource.isEmpty && !self.datasource.isEmpty {
+            self.tableView.tableHeaderView?.hidden = false
+            self.tableView.backgroundView = nil
             switch (section) {
             case 0:
                 return self.liveData.count
@@ -146,6 +149,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         } else {
             //没有数据
+            self.tableView.tableHeaderView?.hidden = true
+            MCUtils.showEmptyView(self.tableView)
             return 0
         }
     }

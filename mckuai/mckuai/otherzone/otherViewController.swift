@@ -30,7 +30,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     var User: JSON!
     var pageInfo: JSON!
-    var datasource: Array<JSON>!
+    lazy var datasource: Array<JSON>! = Array()
     
     var mineType = "dynamic"
     
@@ -146,7 +146,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        if self.datasource != nil {
+        if !self.datasource.isEmpty {
             return self.datasource.count
         } else {
             return 0

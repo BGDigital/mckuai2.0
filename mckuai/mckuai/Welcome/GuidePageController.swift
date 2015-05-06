@@ -55,8 +55,8 @@ class GuidePageController: UIViewController , UIScrollViewDelegate {
         pageControl.backgroundColor = UIColor(white: 0, alpha: 0)
         pageControl.numberOfPages = mDatas.count
         pageControl.currentPage = 0
-        pageControl.currentPageIndicatorTintColor = UIColor(red:0.325, green:0.667, blue:0.922, alpha: 1)
-        pageControl.pageIndicatorTintColor = UIColor.whiteColor()
+        pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
+        pageControl.pageIndicatorTintColor = UIColor(hexString: "#000000", alpha: 0.1)
         self.view.addSubview(pageControl)
         
         //根据数据数量来动态创建视图

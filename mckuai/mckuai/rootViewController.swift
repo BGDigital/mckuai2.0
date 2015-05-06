@@ -58,16 +58,20 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
     
     func loadWelcome() {
         //引导页图片
-        var mGuideImages:Array<NSString>=["Image","Image","Image","Image"]
+        var mGuideImages:Array<NSString>=["guidepage1","guidepage2","guidepage3","guidepage4"]
         //结束按钮
         let btnWidth:CGFloat = 250.0
-        let btnHeight:CGFloat = 100.0
+        let btnHeight:CGFloat = 50
         let btnX:CGFloat = (UIScreen.mainScreen().bounds.width - btnWidth)/2
-        let btnY:CGFloat = UIScreen.mainScreen().bounds.height - btnHeight - 50
+        let btnY:CGFloat = UIScreen.mainScreen().bounds.height - btnHeight - 100
         var btnSubmit = UIButton(frame:CGRect(origin: CGPointMake(btnX, btnY), size:CGSizeMake(btnWidth,btnHeight)))
-        btnSubmit.setTitle("立即体验麦块", forState: UIControlState.Normal)
-        btnSubmit.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
-        btnSubmit.setTitleColor(UIColor.greenColor(), forState: UIControlState.Highlighted)
+        btnSubmit.setTitle("立即体验", forState: UIControlState.Normal)
+        btnSubmit.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btnSubmit.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
+        btnSubmit.backgroundColor = UIColor(hexString: "#57C848")
+        btnSubmit.layer.borderColor = UIColor.whiteColor().CGColor
+        btnSubmit.layer.borderWidth = 1
+        
         btnSubmit.addTarget(self, action: "onClick", forControlEvents: UIControlEvents.TouchUpInside)
         
         guideView = GuidePageController(datas:mGuideImages,button:btnSubmit)
