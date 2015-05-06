@@ -91,17 +91,12 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         //self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
     }
     
-    
-    func refreshTableView() {
-        println("刷新TableView")
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var color = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)
         var offsetY = scrollView.contentOffset.y
         if offsetY > NAVBAR_CHANGE_POINT {
             var alpha = 1 - (NAVBAR_CHANGE_POINT + 64 - offsetY) / 64
-            self.navigationItem.title = "用户的名字"
+            self.navigationItem.title = self.User["nike"].stringValue
             self.navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(alpha))
         } else {
             self.navigationItem.title = ""
