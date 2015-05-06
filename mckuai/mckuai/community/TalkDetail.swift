@@ -46,6 +46,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clearColor()
+        self.hidesBottomBarWhenPushed = true
         //初始化uiwebview
          initWebView()
          initNavigation()
@@ -175,9 +176,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     
     override func viewWillDisappear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = false
+//        self.tabBarController?.tabBar.hidden = false
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        self.tabBarController?.tabBar.hidden = true
+//        self.tabBarController?.tabBar.hidden = true
     }
     override func viewWillAppear(animated: Bool) {
 //        self.tabBarController?.tabBar.hidden = true

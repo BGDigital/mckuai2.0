@@ -128,6 +128,12 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: - Table view data source
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let id = self.datasource[indexPath.row]["id"].stringValue
+        TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if self.mineType != "work" {
             return 100
