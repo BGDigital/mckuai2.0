@@ -63,7 +63,7 @@ class friendsViewController: UICollectionViewController {
     func loadNewData() {
         //开始刷新
         
-        var dict = ["act":"attentionUser", "id": 6, "page": 1]
+        var dict = ["act":"attentionUser", "id": appUserIdSave, "page": 1]
         manager.GET(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,

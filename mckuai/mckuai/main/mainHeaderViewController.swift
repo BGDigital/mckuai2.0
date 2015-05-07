@@ -25,7 +25,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var level: UIButton!
     @IBOutlet weak var locationCity: UIButton!
-    var UserId: Int!
+    var btnLogin: UIButton!
     
     
     override func viewDidLoad() {
@@ -48,11 +48,15 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         roundProgressView.addGestureRecognizer(tapRoundHead)
         bag.addTarget(self, action: "openBackPacker", forControlEvents: UIControlEvents.TouchUpInside)
         
-        if let city = Defaults[D_CURRENTCITY].string {
-            locationCity.setTitle(city, forState: .Normal)
-        } else {
-            locationCity.setTitle("未定位", forState: .Normal)
-        }
+        //登录按钮
+        btnLogin = UIButton(frame: CGRectMake(75, 22, 100, 30))
+        btnLogin.setTitle("登录更精彩", forState: .Normal)
+        btnLogin.titleLabel?.font = UIFont(name: btnLogin.titleLabel!.font.fontName, size: 14)
+        btnLogin.backgroundColor = UIColor(hexString: "#30A243")
+        btnLogin.layer.cornerRadius = 8
+        btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(btnLogin)
+        btnLogin.hidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -64,6 +68,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
             self.level.hidden = false
             self.locationCity.hidden = false
             self.bag.hidden = false
+            self.btnLogin.hidden = true
             
             var p = user["process"].floatValue * 100
             self.roundProgressView.progressLineWidth = 1
@@ -73,22 +78,18 @@ class mainHeaderViewController: UIViewController, CityProtocol {
             self.roundProgressView.imageUrl = user["headImg"].stringValue
             self.nickname.text = user["nike"].stringValue
             self.level.setTitle(user["level"].stringValue, forState: .Normal)
-            self.locationCity.setTitle(user["addr"].stringValue, forState: .Normal)
-            self.UserId = user["id"].intValue
+            if !user["addr"].stringValue.isEmpty {
+                locationCity.setTitle(user["addr"].stringValue, forState: .Normal)
+            } else {
+                locationCity.setTitle("未定位", forState: .Normal)
+            }
         } else {
             self.roundProgressView.imageUrl = "1" //任意值都可以
             self.nickname.hidden = true
             self.level.hidden = true
             self.locationCity.hidden = true
             self.bag.hidden = true
-            
-            var btnLogin = UIButton(frame: CGRectMake(75, 22, 100, 30))
-            btnLogin.setTitle("登录更精彩", forState: .Normal)
-            btnLogin.titleLabel?.font = UIFont(name: btnLogin.titleLabel!.font.fontName, size: 14)
-            btnLogin.backgroundColor = UIColor(hexString: "#30A243")
-            btnLogin.layer.cornerRadius = 8
-            btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
-            self.view.addSubview(btnLogin)
+            self.btnLogin.hidden = false
         }
         //聊天室
         self.times.setTitle(chat["insertTime"].stringValue, forState: .Normal)
@@ -107,7 +108,11 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     }
     
     @IBAction func openBackPacker() {
-        MCUtils.openBackPacker(self.nav!, userId: self.UserId)
+        if appUserIdSave != 0 {
+            MCUtils.openBackPacker(self.nav!, userId: appUserIdSave)
+        } else {
+            SCLAlertView().showWarning("提示", subTitle: "登录后才能打开背包,先登录吧", closeButtonTitle: "确定", duration: 0)
+        }
     }
     
     func setNavi(navi: UINavigationController?) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OtherProtocol {
+class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OtherProtocol, UIGestureRecognizerDelegate {
 
     private var tableView: UITableView!
     private var otherhead: otherHeadViewController!
@@ -27,7 +27,6 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 pageSize: self.json["dataObject", "list", "pageSize"].intValue,
                 allCount: self.json["dataObject", "list", "allCount"].intValue)
                 if let d = self.json["dataObject", "list", "data"].array {
-                    self.tableView.tableHeaderView?.hidden = false
                     if page.currentPage == 1 {
                         println("刷新数据")
                         self.datasource = d
@@ -85,7 +84,6 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         otherhead.Delegate = self
         tableView.tableHeaderView = otherhead.view
         self.view.addSubview(tableView)
-        self.tableView.tableHeaderView?.hidden = true
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
@@ -119,6 +117,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
     }
     
     func backToMain() {
@@ -184,10 +183,8 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         if !self.datasource.isEmpty {
-            self.tableView.tableHeaderView?.hidden = false
             return self.datasource.count
         } else {
-            self.tableView.tableHeaderView?.hidden = true
             MCUtils.showEmptyView(self.tableView)
             return 0
         }

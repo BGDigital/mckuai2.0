@@ -13,7 +13,7 @@ protocol CityProtocol {
     func onSelectCity(selectedCity: String)
 }
 
-class cityListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate {
+class cityListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     var manager = AFHTTPRequestOperationManager()
     //用于定位服务管理类，它能够给我们提供位置信息和高度信息，也可以监控设备进入或离开某个区域，还可以获得设备的运行方向
     let locationManager : CLLocationManager = CLLocationManager()
@@ -52,6 +52,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
     }
     
     func backToMain() {
@@ -197,7 +198,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func upAddrToServer(city: String) {
-        var dict = ["act":"updateAddr","id":6,"addr":city]
+        var dict = ["act":"updateAddr","id":appUserIdSave,"addr":city]
         manager.POST(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,

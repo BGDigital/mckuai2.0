@@ -8,7 +8,7 @@
 
 import UIKit
 
-class backpackerViewController: UIViewController {
+class backpackerViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var segmentedControl: HMSegmentedControl!
     var favorite: favoriteViewController!
@@ -76,6 +76,7 @@ class backpackerViewController: UIViewController {
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
     }
     
     

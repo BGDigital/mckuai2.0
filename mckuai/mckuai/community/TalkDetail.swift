@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate {
+class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate, UIGestureRecognizerDelegate {
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
@@ -64,6 +64,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
         
         setRightBarButtonItem()
     }
@@ -152,7 +153,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         
         
         let params = [
-            "userId":String(appUserIdSave),
+            "userId":String(stringInterpolationSegment: appUserIdSave),
             "talkId":String(self.id)
         ]
         
@@ -184,7 +185,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func cancleCollectTalk() {
         let params = [
-            "userId":String(appUserIdSave),
+            "userId":String(stringInterpolationSegment: appUserIdSave),
             "talkId":String(self.id)
         ]
         
@@ -215,7 +216,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     func toolBarFunc(sender:UIButton) {
         if(sender.tag == 0){
             
-            if(appUserIdSave == nil || appUserIdSave == 0) {
+            if(appUserIdSave == 0) {
                 UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                 
             }else{
@@ -255,7 +256,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             println("reply")
             
             
-            if(appUserIdSave == nil || appUserIdSave == 0) {
+            if(appUserIdSave == 0) {
                 UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                 
             }else{
@@ -348,7 +349,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         if action == "reply" {
             println("Reply...........")
             self.textView.becomeFirstResponder()
-            if(appUserIdSave == nil || appUserIdSave == 0) {
+            if(appUserIdSave == 0) {
                 UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                 
             }
@@ -477,7 +478,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         if(self.params != nil) {
             self.params["replyContext"] = replyContext
             self.params["device"] = "ios"
-            self.params["userId"] = String(appUserIdSave)
+            self.params["userId"] = String(stringInterpolationSegment: appUserIdSave)
             var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
             hud.labelText = "正在发送"
             

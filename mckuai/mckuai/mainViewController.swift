@@ -17,7 +17,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
-                self.tableView.tableHeaderView?.hidden = false
                 if let d = self.json["dataObject", "talk"].array {
                     self.datasource = d
                 }
@@ -52,8 +51,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //manager.responseSerializer.acceptableContentTypes = NSSet(object: "application/json") as Set<NSObject>
         
         //设置标题颜色
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
@@ -110,7 +107,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 245)
         head.setNavi(self.navigationController)
         tableView.tableHeaderView = head.view
-        self.tableView.tableHeaderView?.hidden = true
         
         self.view.addSubview(tableView)
         
@@ -118,9 +114,10 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //加载数据,刷新
+
     func loadNewData() {
         //开始刷新
-        var dict = ["act":"indexRec", "id":6]
+        var dict = ["act":"indexRec", "id": appUserIdSave]
         manager.GET(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
@@ -135,7 +132,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
-                self.tableView.tableHeaderView?.hidden = true
                 self.hud?.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
@@ -165,7 +161,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !self.datasource.isEmpty && !self.datasource.isEmpty {
-            self.tableView.tableHeaderView?.hidden = false
             self.tableView.backgroundView = nil
             switch (section) {
             case 0:
@@ -175,7 +170,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         } else {
             //没有数据
-            self.tableView.tableHeaderView?.hidden = true
             MCUtils.showEmptyView(self.tableView)
             return 0
         }

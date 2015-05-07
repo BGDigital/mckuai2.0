@@ -21,6 +21,7 @@ class mainSubCell: UITableViewCell {
         self.selectionStyle = .None
         self.username.imageView?.layer.masksToBounds = true
         self.username.imageView?.layer.cornerRadius = 10
+        self.replys.titleEdgeInsets = UIEdgeInsetsMake(-2, 0, 0, 0)
         
         //底部线
         self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
@@ -53,7 +54,8 @@ class mainSubCell: UITableViewCell {
         self.title.sizeOfMultiLineLabel()
         var icon = json["headImg"].stringValue
         if !icon.isEmpty {
-            self.username.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "first_normal"), completed: { img,_,_,_ in
+            self.username.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,url in
+                println("imageUrl:\(url)")
                 var rect = CGRectMake(0, 0, 20, 20)
                 UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
                 img.drawInRect(rect)

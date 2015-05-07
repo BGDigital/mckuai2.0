@@ -15,9 +15,29 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     var tableView: UITableView!
     let titles = ["新手任务", "我的背包", "分享给好友", "评价APP", "软件设置", "退出登录"]
     let images = ["newuser", "backpacker", "share", "pingfen", "setting", "logout"]
+    
+    var Avatar: UIImageView!
+    var username: UILabel!
+    var level: UIButton!
+    var btnLogin: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //获取用户信息
+        if Defaults.hasKey(D_USER_ID) {
+            appUserIdSave = Defaults[D_USER_ID].int!
+            appUserLevel = 8
+            appUserPic = ""
+            appUserNickName = "一叶之秋"
+            appUserAddr = "成都市"
+
+//            appUserLevel = Defaults[D_USER_LEVEL].int!
+//            appUserPic = Defaults[D_USER_ARATAR].string!
+//            appUserAddr = Defaults[D_CURRENTCITY].string!
+//            appUserNickName = Defaults[D_USER_NICKNAME].string!
+//            appUserAddr = Defaults[D_CURRENTCITY].string!
+        }
 
         self.tableView = UITableView(frame: CGRectMake(0, (self.view.frame.size.height-cellHeight*7-headerHeight) / 2, self.view.frame.size.width, cellHeight*7+headerHeight), style: UITableViewStyle.Plain)
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
@@ -31,32 +51,56 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         
         //这里加了个Header(用户信息)
         var header = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, headerHeight))
-        var Avatar = UIImageView(frame: CGRectMake(15, 5, 40, 40))
-        Avatar.image = UIImage(named: "Avatar")
-        Avatar.backgroundColor = UIColor.clearColor()  //这句可有可无
+        Avatar = UIImageView(frame: CGRectMake(15, 5, 40, 40))
+        Avatar.sd_setImageWithURL(NSURL(string: appUserPic), placeholderImage: UIImage(named: "Avatar"))
         Avatar.layer.masksToBounds = true
         Avatar.layer.cornerRadius = 20
         header.addSubview(Avatar)
         
-        var username = UILabel(frame: CGRectMake(70, 0, self.view.frame.size.width-60, 20))
-        username.text = "一叶之秋"
+        username = UILabel(frame: CGRectMake(70, 0, self.view.frame.size.width-60, 20))
+        username.text = appUserNickName
         username.textColor = UIColor.whiteColor()
         username.font = UIFont(name: "HelveticaNeue", size: 16)
         header.addSubview(username)
         
-        var level = UIButton(frame: CGRectMake(70, 30, 45, 15))
-        level.setTitle("LV.8", forState: .Normal)
+        level = UIButton(frame: CGRectMake(70, 30, 45, 15))
+        level.setTitle("LV."+String(appUserLevel), forState: .Normal)
         level.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         level.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
         level.backgroundColor = UIColor(hexString: "#000000", alpha: 0.3)
         level.layer.cornerRadius = 7
         header.addSubview(level)
+    
+        btnLogin = UIButton(frame: CGRectMake(70, 10, 100, 30))
+        btnLogin.setTitle("登录更精彩", forState: .Normal)
+        btnLogin.titleLabel?.font = UIFont(name: btnLogin.titleLabel!.font.fontName, size: 14)
+        btnLogin.backgroundColor = UIColor(hexString: "#30A243")
+        btnLogin.layer.cornerRadius = 8
+        btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
+        header.addSubview(btnLogin)
         
         header.backgroundColor = UIColor.clearColor()
         tableView.tableHeaderView = header
         
+        if appUserIdSave != 0 {
+            username.hidden = false
+            level.hidden = false
+            btnLogin.hidden = true
+        } else {
+            username.hidden = true
+            level.hidden = true
+            btnLogin.hidden = false
+        }
+        
         self.view.addSubview(self.tableView)
     }
+    
+    @IBAction func userLogin() {
+        UserLogin.showUserLoginView(presentNavigator: nil)
+        //隐藏菜单
+        self.sideMenuViewController.hideMenuViewController()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,8 +120,11 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             break
         case 1:
             //我的背包
-            MCUtils.openBackPacker(self.navigationController, userId: 6)
-            break
+            if appUserIdSave != 0 {
+                MCUtils.openBackPacker(self.navigationController, userId: appUserIdSave)
+            } else {
+                SCLAlertView().showWarning("提示", subTitle: "登录后才能打开背包,先登录吧", closeButtonTitle: "确定", duration: 0)
+            }
         case 2:
             //分享给好友
             break
@@ -88,8 +135,30 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             //设置
             break
         default:
-            //退出
-            break
+            if appUserIdSave != 0 {
+                let alert = SCLAlertView()
+    //            alert.addButton("确定注销", target:self, selector:Selector("firstButton"))
+                alert.addButton("确定注销") {
+                    //清除数据
+                    Defaults.remove(D_USER_ID)
+                    Defaults.remove(D_USER_ARATAR)
+                    Defaults.remove(D_USER_LEVEL)
+                    Defaults.remove(D_USER_NICKNAME)
+                    Defaults.remove(D_CURRENTCITY)
+                    appUserIdSave = 0
+                    appUserLevel = 0
+                    appUserPic = ""
+                    appUserAddr = ""
+                    appUserNickName = ""
+                    //刷新界面
+                    self.username.hidden = true
+                    self.level.hidden = true
+                    self.btnLogin.hidden = false
+                }
+                alert.showWarning("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏贴子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
+            } else {
+                SCLAlertView().showWarning("注销登录", subTitle: "无效操作,你还没有登录", closeButtonTitle: "确定", duration: 0)
+            }
         }
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()

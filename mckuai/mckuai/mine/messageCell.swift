@@ -85,7 +85,7 @@ class messageCell: UITableViewCell {
                 setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
                 //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)
             default:  //system
-                self.username.setImage(UIImage.applicationCreateImageWithColor(UIColor.greenColor()), forState: .Normal)
+                self.username.setImage(UIImage(named: "Avatar"), forState: .Normal)
                 self.username.setTitle("系统消息", forState: .Normal)
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
                 setLabelFrame(json["showText"].stringValue)

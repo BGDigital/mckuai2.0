@@ -85,7 +85,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadNewData() {
         //开始刷新
-        var dict = ["act":"collectTalk", "id": 6, "page": 1]
+        var dict = ["act":"collectTalk", "id": appUserIdSave, "page": 1]
         manager.GET(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
@@ -107,7 +107,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadMoreData() {
         println("开始加载\(self.page.currentPage+1)页")
-        var dict = ["act":"collectTalk", "id": 6, "page": page.currentPage+1]
+        var dict = ["act":"collectTalk", "id": appUserIdSave, "page": page.currentPage+1]
         //println("加载:\(self.liveType),\(self.liveOrder)======")
         isFirstLoad = false
         //开始刷新

@@ -21,19 +21,29 @@ let D_CURRENTCITY = "CurrentCity"
 
 //用户信息
 //用户ID
-let D_USERID = "UserId"
+let D_USER_ID = "appUserIdSave"
 //用户昵称
-let D_NIKENAME = "NikeName"
+let D_USER_NICKNAME = "NickName"
+//用户等级
+let D_USER_LEVEL = "UserLevel"
+//用户头像
+let D_USER_ARATAR = "UserAvatar"
 //登录名-email
-let D_LOGINNAME = "LoginName"
+let D_USER_LOGINNAME = "LoginName"
 //登录密码
-let D_LOGINPWD = "LoginPwd"
+let D_USER_LOGINPWD = "LoginPwd"
 //是否记住登录信息(用户名,密码)
-let D_ISREMEMBERME = "isRememberMe"
+let D_USER_ISREMEMBERME = "isRememberMe"
 
 //mckuai网络接口
 //主接口地址-域名
 let URL_MC = "http://221.237.152.39:8081/interface.do?"
+//保存的用户ID
+var appUserIdSave: Int = 0
+var appUserLevel: Int = 0
+var appUserNickName: String = ""
+var appUserPic: String = ""
+var appUserAddr: String = ""
 
 //PageInfo 用于下拉刷新
 class PageInfo {

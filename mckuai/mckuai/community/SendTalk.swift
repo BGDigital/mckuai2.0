@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
@@ -399,6 +399,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
         setRightBarButtonItem()
     }
     
@@ -522,7 +523,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
     func postTalkToServer() {
 
         let params = [
-            "userId":String(appUserIdSave),
+            "userId":String(stringInterpolationSegment: appUserIdSave),
             "forumId":String(self.forumId_post),
             "forumName":self.forumName_post,
             "talkTypeid":String(self.talkTypeId_post),

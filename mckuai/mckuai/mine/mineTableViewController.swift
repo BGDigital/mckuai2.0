@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MineProtocol {
+class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MineProtocol, UIGestureRecognizerDelegate {
     var tableView: UITableView!
     var isFirstLoad = true
     var mineType = "message"
@@ -27,7 +27,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
                     pageSize: self.json["dataObject", "list", "pageSize"].intValue,
                     allCount: self.json["dataObject", "list", "allCount"].intValue)
                 if let d = self.json["dataObject", "list", "data"].array {
-                    self.tableView.tableHeaderView?.hidden = false
                     if page.currentPage == 1 {
                         println("刷新数据")
                         self.datasource = d
@@ -77,7 +76,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.tableHeaderView = self.head.view
         self.head.Delegate = self
         self.view.addSubview(tableView)
-        self.tableView.tableHeaderView?.hidden = true
         
         self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
@@ -112,6 +110,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
     }
     
     func backToMain() {
@@ -220,7 +219,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         //开始刷新
         var param = [
             "act": "center",
-            "id": 1,
+            "id": appUserIdSave,
             "page": 1,
             "type":self.mineType,
             "messageType": self.mineMsgType]
@@ -245,7 +244,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     func loadMoreData() {
         var param = [
             "act": "center",
-            "id": 6,
+            "id": appUserIdSave,
             "page": page.currentPage+1,
             "type":self.mineType,
             "messageType": self.mineMsgType]
@@ -292,7 +291,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
             break
         }
         //开始加载数据
-        self.tableView.header.beginRefreshing()
         loadDataWithoutMJRefresh()
     }
 

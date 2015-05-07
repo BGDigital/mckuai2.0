@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-
-var appUserIdSave: Int!
-
 class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     var manager = AFHTTPRequestOperationManager()
@@ -138,14 +135,31 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 var json = JSON(responseObject)
-                
+                println(responseObject)
                 if "ok" == json["state"].stringValue {
                      var userId = json["dataObject"].intValue
                      //保存登录信息
-                     var userDefault = NSUserDefaults.standardUserDefaults()
-                     userDefault.setInteger(userId, forKey: "appUserIdSave")
-                     userDefault.synchronize()
+                    Defaults["D_USERID"] = userId
+                    //Defaults["D_NICKNAME"] =
                      appUserIdSave = userId
+                    
+                    //xingfuqiu
+                    /*
+                    let D_USERID = "appUserIdSave"
+                    //用户昵称
+                    let D_NIKENAME = "NikeName"
+                    //用户等级
+                    let D_LEVEL = "UserLevel"
+                    //用户头像
+                    let D_ARATAR = "UserAvatar"
+                    //登录名-email
+                    let D_LOGINNAME = "LoginName"
+                    //登录密码
+                    let D_LOGINPWD = "LoginPwd"
+                    //是否记住登录信息(用户名,密码)
+                    let D_ISREMEMBERME = "isRememberMe"
+                    */
+                    
                      self.navigationController?.popViewControllerAnimated(true)
                 }
                 
@@ -232,11 +246,13 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     if "ok" == json["state"].stringValue {
                         var userId = json["dataObject"].intValue
                         //保存登录信息
-                        var userDefault = NSUserDefaults.standardUserDefaults()
-                        userDefault.setInteger(userId, forKey: "appUserIdSave")
-                        userDefault.synchronize()
+                        Defaults[D_USER_ID] = userId
                         appUserIdSave = userId
-                        self.navigationController?.popViewControllerAnimated(true)
+                        if let nav = self.navigationController {
+                            self.navigationController?.popViewControllerAnimated(true)
+                        } else {
+                            MCUtils.mainNav?.popViewControllerAnimated(true)
+                        }
                     }
                     
                 },
@@ -284,7 +300,7 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         if (ctl != nil) {
             ctl?.pushViewController(userLoginView, animated: true)
         } else {
-            ctl?.presentViewController(userLoginView, animated: true, completion: nil)
+            MCUtils.mainNav?.pushViewController(userLoginView, animated: true)
         }
         
         

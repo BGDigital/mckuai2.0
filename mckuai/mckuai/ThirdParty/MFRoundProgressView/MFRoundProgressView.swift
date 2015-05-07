@@ -64,14 +64,8 @@ class MFRoundProgressView: UIView {
         }
     }
     
-    //默认显示文字百分比,为false时显示图片
-//    @IBInspectable var showPercent: Bool = true {
-//        didSet {
-//            setNeedsDisplay()
-//        }
-//    }
     //用户头像图片
-    private var imageView: UIImageView = UIImageView()
+    private var imageView: UIImageView = UIImageView(image: UIImage(named: "Avatar"))
     //是否显示进度数字
     private var showPercent: Bool = true
     //是否显示阴影

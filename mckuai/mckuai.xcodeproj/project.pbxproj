@@ -69,6 +69,7 @@
 		E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5281AE7920800261F57 /* MFRoundProgressView.swift */; };
 		E696E5621AE7F88100261F57 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = E696E5601AE7F88100261F57 /* citydict.plist */; };
 		E696E5631AE7F88100261F57 /* cityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696E5611AE7F88100261F57 /* cityListViewController.swift */; };
+		E6A40C931AFBD07000F19D75 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A40C921AFBD07000F19D75 /* SCLAlertView.swift */; };
 		E6B2043A1AE69E4C00EB11B4 /* mainSubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B204381AE69E4C00EB11B4 /* mainSubCell.swift */; };
 		E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B204391AE69E4C00EB11B4 /* mainSubCell.xib */; };
 		E6B204401AE6A56000EB11B4 /* live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B2043F1AE6A56000EB11B4 /* live.storyboard */; };
@@ -246,6 +247,7 @@
 		E696E5281AE7920800261F57 /* MFRoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MFRoundProgressView.swift; path = ThirdParty/MFRoundProgressView/MFRoundProgressView.swift; sourceTree = "<group>"; };
 		E696E5601AE7F88100261F57 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = citydict.plist; path = main/citydict.plist; sourceTree = "<group>"; };
 		E696E5611AE7F88100261F57 /* cityListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = cityListViewController.swift; path = main/cityListViewController.swift; sourceTree = "<group>"; };
+		E6A40C921AFBD07000F19D75 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = ThirdParty/SCLAlertView.swift; sourceTree = "<group>"; };
 		E6B204381AE69E4C00EB11B4 /* mainSubCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainSubCell.swift; path = main/mainSubCell.swift; sourceTree = "<group>"; };
 		E6B204391AE69E4C00EB11B4 /* mainSubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = mainSubCell.xib; path = main/mainSubCell.xib; sourceTree = "<group>"; };
 		E6B2043F1AE6A56000EB11B4 /* live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = live.storyboard; path = live/live.storyboard; sourceTree = "<group>"; };
@@ -741,6 +743,7 @@
 				E692AA491AE962AC00577B3C /* SwiftColors.swift */,
 				E692AA521AE9FA9E00577B3C /* UILabel+DynamicHeight.m */,
 				E692AA541AE9FAF300577B3C /* UILabel+DynamicHeight.h */,
+				E6A40C921AFBD07000F19D75 /* SCLAlertView.swift */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -1001,6 +1004,7 @@
 				E6DDF4C11AF082EA00339E75 /* otherHeadViewController.swift in Sources */,
 				E60624ED1ADE6F27007D6DEF /* SwiftyUserDefaults.swift in Sources */,
 				0B86712D1AF9E23E00F3F63F /* TalkList.swift in Sources */,
+				E6A40C931AFBD07000F19D75 /* SCLAlertView.swift in Sources */,
 				E63898971AE042D900756679 /* mainData.swift in Sources */,
 				E6BF85E41AF12DC4005F08B2 /* SCNavTabBarController.m in Sources */,
 				E6518BEF1ADD065E005A8C97 /* rootViewController.swift in Sources */,

@@ -80,7 +80,7 @@ class communityViewController: UIViewController {
     func rightBarButtonItemClicked() {
         print("send talk")
         
-        if(appUserIdSave == nil || appUserIdSave == 0) {
+        if(appUserIdSave == 0) {
             UserLogin.showUserLoginView(presentNavigator: self.navigationController)
             
         }else{

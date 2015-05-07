@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
     var params = [String: String]()
@@ -39,6 +39,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
         var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
         back.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = back
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
         initTextView()
         initimage()
         
@@ -262,7 +263,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
         
         self.params["content"] = content
         self.params["device"] = "ios"
-        self.params["userId"] = String(appUserIdSave)
+        self.params["userId"] = String(stringInterpolationSegment: appUserIdSave)
         
         manager.POST(followTalk_url,
             parameters: self.params,
