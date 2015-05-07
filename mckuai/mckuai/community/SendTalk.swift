@@ -113,8 +113,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
             self.pic_wight = (self.view.frame.width-6*10)/5
             
             addPic = UIButton(frame: CGRectMake(0, self.textView.frame.origin.y+self.textView.frame.size.height+5, pic_wight, pic_wight))
-            addPic.setTitle("add", forState: UIControlState.Normal)
-            addPic.backgroundColor = UIColor.blueColor()
+            addPic.setImage(UIImage(named: "addImage"), forState: UIControlState.Normal)
             addPic.addTarget(self, action: "addPicAction", forControlEvents: UIControlEvents.TouchUpInside)
             
             image_button += [addPic]
@@ -175,7 +174,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
         if(self.image_button.count >= 5){
             self.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "Guide")
         }else{
-            var sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            var sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
             if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
                 sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             }
@@ -397,8 +396,15 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
-        
+        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
+        back.tintColor = UIColor.whiteColor()
+        self.navigationItem.leftBarButtonItem = back
         setRightBarButtonItem()
+    }
+    
+    
+    func backToPage() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     

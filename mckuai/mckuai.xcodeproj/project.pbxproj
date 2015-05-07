@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B76F6341AFB688A00B4E043 /* TencentOpenApi_IOS_Bundle.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF85941AF12BE1005F08B2 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		0B8671231AF9E23E00F3F63F /* FollowTalk.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8671181AF9E23E00F3F63F /* FollowTalk.storyboard */; };
 		0B8671241AF9E23E00F3F63F /* FollowTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8671191AF9E23E00F3F63F /* FollowTalk.swift */; };
 		0B8671251AF9E23E00F3F63F /* HttpUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B86711A1AF9E23E00F3F63F /* HttpUrl.swift */; };
@@ -329,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B76F6341AFB688A00B4E043 /* TencentOpenApi_IOS_Bundle.bundle in Frameworks */,
 				E68F46801AF13E34001DEA99 /* AudioToolbox.framework in Frameworks */,
 				E68F46811AF13E34001DEA99 /* AVFoundation.framework in Frameworks */,
 				E68F46821AF13E34001DEA99 /* CFNetwork.framework in Frameworks */,

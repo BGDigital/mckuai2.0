@@ -36,11 +36,19 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
         sendButton.target = self
         sendButton.action = Selector("send")
         self.navigationItem.rightBarButtonItem = sendButton
-        
+        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
+        back.tintColor = UIColor.whiteColor()
+        self.navigationItem.leftBarButtonItem = back
         initTextView()
         initimage()
         
+        
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func backToPage() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func initTextView() {
@@ -103,8 +111,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
         
         
         addPic = UIButton(frame: CGRectMake(10, self.textView.frame.origin.y+self.textView.frame.size.height+5, pic_wight, pic_wight))
-        addPic.setTitle("add", forState: UIControlState.Normal)
-        addPic.backgroundColor = UIColor.blueColor()
+        addPic.setImage(UIImage(named: "addImage"), forState: UIControlState.Normal)
         addPic.addTarget(self, action: "addPicAction", forControlEvents: UIControlEvents.TouchUpInside)
         image_button += [addPic]
         self.view.addSubview(addPic)
