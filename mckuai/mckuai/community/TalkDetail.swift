@@ -27,9 +27,11 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     var rightButton:UIButton?
     let item_wight:CGFloat = 80
     let item_height:CGFloat = 44
+    var admin:String = ""
+
     var id:String! {
         didSet {
-            self.url = NSURL(string: webView_url+"&id="+id)
+            self.url = NSURL(string: webView_url+"&id="+id+"&admin="+admin)
         }
     }
     
@@ -82,8 +84,20 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func rightBarButtonItemClicked() {
         println("only louzhu")
-        currentForumName = "矿工茶馆"
-        self.navigationController?.tabBarController?.selectedIndex = 3
+        
+        if(self.rightButton?.selected == false){
+           self.rightButton?.selected = true
+           self.admin = "admin"
+           self.url = NSURL(string: webView_url+"&id="+id+"&admin="+admin)
+        }else{
+            self.rightButton?.selected = false
+            self.admin = "all"
+            self.url = NSURL(string: webView_url+"&id="+id+"&admin="+admin)
+        }
+        
+        var request = NSURLRequest(URL: url)
+        webView.loadRequest(request)
+        
     }
     
     func initToolBar() {
@@ -224,7 +238,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
         if action == "viewuser" && param["id"] != nil{
             if let id = param["id"]!.toInt(){
-                // 跳转到他人空间
+                
             }
         }
         self.params = param;
@@ -234,10 +248,16 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             if(appUserIdSave == nil || appUserIdSave == 0) {
                 UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                 
-            }else{
-                
             }
             
+        }
+        if action == "toForumList" && param["forumName"] != nil {
+            currentForumName = param["forumName"]
+            if(self.navigationController?.tabBarController?.selectedIndex == 3){
+                self.navigationController?.popViewControllerAnimated(true)
+            }else{
+                self.navigationController?.tabBarController?.selectedIndex = 3
+            }
         }
     }
     
@@ -273,6 +293,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     func reloadView() {
+//        var request = NSURLRequest(URL: url)
+//        webView.loadRequest(request)
         self.webView.reload()
     }
     class func showTalkDetailPage(fromNavigation:UINavigationController?,id:String){
@@ -351,7 +373,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         if(self.params != nil) {
             self.params["replyContext"] = replyContext
             self.params["device"] = "ios"
-            
+            self.params["userId"] = String(appUserIdSave)
             var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
             hud.labelText = "正在发送"
             
@@ -362,11 +384,14 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     var json = JSON(responseObject)
                     
                     if "ok" == json["state"].stringValue {
+                        self.textView.resignFirstResponder()
                         hud.hide(true)
                         self.showCustomHUD(self.view, title: "回复成功", imgName:  "HUD_OK")
-                        
                         self.sendButton.enabled = true
-                        self.textView.resignFirstResponder()
+                        
+                        if self.params["isOver"] == "yes" {
+                           self.afterReply()
+                        }
 
                     }else{
                         self.rightButton?.enabled = true
@@ -441,7 +466,10 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func afterReply(){
         println("addReplyHtml")
-        self.webView.stringByEvaluatingJavaScriptFromString("addReplyHtml()");
+        if(self.admin != "admin"){
+            self.webView.stringByEvaluatingJavaScriptFromString("addReplyHtml()");
+        }
+        
     }
     
 

@@ -98,6 +98,8 @@ class UserRegister: UIViewController,UITextFieldDelegate {
             "nickName": self.nickName.text,
         ]
         
+        var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.labelText = "注册中"
         
         manager.POST(register_url,
             parameters: params,
@@ -113,13 +115,17 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                     userDefault.synchronize()
                     appUserIdSave = userId
                     self.navigationController?.popToRootViewControllerAnimated(true)
+                }else{
+                    hud.hide(true)
+                    self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "Guide")
                 }
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                self.showCustomHUD(self.view, title: "注册失败", imgName: "Guide")
+                hud.hide(true)
+                self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "Guide")
         })
         
         

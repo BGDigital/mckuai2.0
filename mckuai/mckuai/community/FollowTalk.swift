@@ -11,6 +11,7 @@ import UIKit
 
 class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var manager = AFHTTPRequestOperationManager()
+    var progress = MBProgressHUD()
     var params = [String: String]()
     var fromViewController:UIViewController!
     var textView:UITextView!
@@ -23,6 +24,8 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
     var image_button_tag:Int = 0
     
     var sendButton:UIBarButtonItem!
+    
+    var content:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +110,26 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
         self.view.addSubview(addPic)
     }
     
+    func removeImg(sender:UIButton) {
+        var selected_index:Int = 0
+        println(sender.tag)
+        for(var i=0;i<self.image_button.count;i++) {
+            if(sender.tag == self.image_button[i].tag){
+                selected_index = i
+                break
+            }
+        }
+        for(var i=0;i<self.image_button.count;i++){
+            if(self.image_button[i].frame.origin.x>sender.frame.origin.x){
+                self.image_button[i].frame.origin.x -= (self.pic_wight+10)
+            }
+        }
+        sender.hidden = true
+        self.image_button.removeAtIndex(selected_index)
+        self.image_array.removeAtIndex(selected_index)
+        
+    }
+    
     func addPicAction() {
         if(self.image_button.count >= 5){
             self.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "Guide")
@@ -161,56 +184,111 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
 
     
     func send() {
+        
+        
         self.sendButton.enabled = false
-        var content = self.textView.text
-        if(content == nil || content.isEmpty){
+        content = self.textView.text
+        if(content == nil || content.isEmpty || content == "内容..."){
             self.showCustomHUD(self.view, title: "跟贴的内容不能为空", imgName:  "Guide")
             self.sendButton.enabled = true
             return
         }
         
+        
+        
+        
         if(self.params.count != 0) {
-            self.params["content"] = content
-            self.params["device"] = "ios"
-            self.params["userId"] = String(appUserIdSave)
-            
-            var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-            hud.labelText = "正在发送"
-            
-            manager.POST(followTalk_url,
-                parameters: self.params,
-                success: { (operation: AFHTTPRequestOperation!,
-                    responseObject: AnyObject!) in
-                    var json = JSON(responseObject)
-                    
-                    if "ok" == json["state"].stringValue {
-                        hud.labelText = "发送成功"
-//                        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "returnPage", userInfo: nil, repeats: false)
-                        
-                        if self.params["isOver"] == "yes" {
-                            (self.fromViewController as! TalkDetail).afterReply()
-                        }
 
+            
+            progress = MBProgressHUD.showHUDAddedTo(view, animated: true)
+            progress.labelText = "正在发送"
+            
+            if(self.image_array.count != 0){
+                
+                manager.POST(upload_url,
+                    parameters:nil,
+                    constructingBodyWithBlock: { (formData:AFMultipartFormData!) in
                         
-                    }else{
-                        self.sendButton?.enabled = true
-                        hud.hide(true)
-                        self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "Guide")
-                    }
-                    
-                },
-                failure: { (operation: AFHTTPRequestOperation!,
-                    error: NSError!) in
-                    println("Error: " + error.localizedDescription)
-                    self.sendButton?.enabled = true
-                    hud.hide(true)
-                    self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "Guide")
-            })
+                        for(var i=0;i<self.image_array.count;i++){
+                            var key = "file"+String(i)
+                            var value = "fileName"+String(i)+".jpg"
+                            var imageData = UIImageJPEGRepresentation(self.image_array[i], 0.0)
+                            
+                            formData.appendPartWithFileData(imageData, name: key, fileName: value, mimeType: "image/jpeg")
+                        }
+                        
+                        
+                    },
+                    success: { (operation: AFHTTPRequestOperation!,
+                        responseObject: AnyObject!) in
+                        var json = JSON(responseObject)
+                        if "ok" == json["state"].stringValue {
+                            println(json["msg"])
+                            self.content! += json["msg"].stringValue
+                            
+                            self.postTalkToServer()
+                            
+                        }else{
+                            self.sendButton?.enabled = true
+                            self.progress.removeFromSuperview()
+                            self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                        }
+                        
+                    },
+                    failure: { (operation: AFHTTPRequestOperation!,
+                        error: NSError!) in
+                        println("Error: " + error.localizedDescription)
+                        self.progress.removeFromSuperview()
+                        self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                })
+            }else{
+                self.postTalkToServer()
+            }
+        
+
         }
         
     }
     
+    
+    func postTalkToServer() {
+        
+        self.params["content"] = content
+        self.params["device"] = "ios"
+        self.params["userId"] = String(appUserIdSave)
+        
+        manager.POST(followTalk_url,
+            parameters: self.params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                var json = JSON(responseObject)
+                
+                if "ok" == json["state"].stringValue {
+                    self.progress.labelText = "发送成功"
+                    NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "returnPage", userInfo: nil, repeats: false)
+                    
+                    
+                }else{
+                    self.sendButton?.enabled = true
+                    self.progress.removeFromSuperview()
+                    self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "Guide")
+                }
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.sendButton?.enabled = true
+                self.progress.removeFromSuperview()
+                self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "Guide")
+        })
+    }
+    
+    
     func returnPage() {
+        if self.params["isOver"] == "yes" {
+            (self.fromViewController as! TalkDetail).afterReply()
+        }
         self.navigationController?.popViewControllerAnimated(true)
     }
     
