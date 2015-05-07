@@ -71,7 +71,7 @@ class friendsViewController: UICollectionViewController {
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.collectionView!.header.endRefreshing()
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }
 

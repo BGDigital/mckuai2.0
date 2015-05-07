@@ -316,12 +316,12 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 println("加入背包:\(responseObject)")
-                MCUtils.showCustomHUD(self.view, title: "添加成功", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "添加成功", imgName: "HUD_OK")
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                MCUtils.showCustomHUD(self.view, title: "添加失败,请重试", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "添加失败,请重试", imgName: "HUD_ERROR")
         })
     }
 

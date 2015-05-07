@@ -191,7 +191,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }
     
@@ -216,7 +216,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.footer.endRefreshing()
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }
     

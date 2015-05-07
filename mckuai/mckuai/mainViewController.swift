@@ -62,13 +62,31 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         MCUtils.mainNav = self.navigationController
         
         if isFirstLoad {
-            var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            h.labelText = MCUtils.TEXT_LOADING
-            h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
+            loadDataWithoutMJRefresh()
         }
-
+        
+        //网络状态
+        var reachabilityManager = AFNetworkReachabilityManager.sharedManager()
+        reachabilityManager.startMonitoring()
+        reachabilityManager.setReachabilityStatusChangeBlock({st in
+            switch st {
+            case .ReachableViaWiFi:
+                println("网络状态:WIFI")
+            case .ReachableViaWWAN:
+                println("网络状态:3G")
+            case .NotReachable:
+                println("网络状态:不可用")
+            default:
+                println("网络状态:火星")
+            }
+        })
     }
-
+    
+    func loadDataWithoutMJRefresh() {
+        var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        h.labelText = MCUtils.TEXT_LOADING
+        h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
+    }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
@@ -116,8 +134,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.tableView.tableHeaderView?.hidden = true
-                MCUtils.showEmptyView(self.tableView)
-//                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
         
     }
