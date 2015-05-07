@@ -84,7 +84,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func rightBarButtonItemClicked() {
         println("only louzhu")
-        
+        self.rightButton?.enabled = false
         if(self.rightButton?.selected == false){
            self.rightButton?.selected = true
            self.admin = "admin"
@@ -138,16 +138,111 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         self.view.addSubview(collect_btn)
     }
     
+    
+    func toCollectTalk() {
+        
+        
+        
+        let params = [
+            "userId":String(appUserIdSave),
+            "talkId":String(self.id)
+        ]
+        
+        manager.POST(toCollect_url,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                var json = JSON(responseObject)
+                
+                if "ok" == json["state"].stringValue {
+                    self.showCustomHUD(self.view, title: "帖子收藏成功", imgName: "HUD_OK")
+                    self.collect_btn.selected = true
+                    self.collect_btn.enabled = true
+                }else{
+                    self.collect_btn.enabled = true
+                    self.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "Guide")
+                }
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.collect_btn.enabled = true
+                self.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "Guide")
+        })
+        
+        
+    }
+    
+    func cancleCollectTalk() {
+        let params = [
+            "userId":String(appUserIdSave),
+            "talkId":String(self.id)
+        ]
+        
+        manager.POST(cancleCollect_url,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                var json = JSON(responseObject)
+                
+                if "ok" == json["state"].stringValue {
+                    self.showCustomHUD(self.view, title: "取消收藏成功", imgName: "HUD_OK")
+                    self.collect_btn.selected = false
+                    self.collect_btn.enabled = true
+                }else{
+                    self.collect_btn.enabled = true
+                    self.showCustomHUD(self.view, title: "取消收藏失败", imgName: "Guide")
+                }
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.collect_btn.enabled = true
+                self.showCustomHUD(self.view, title: "取消收藏失败", imgName: "Guide")
+        })
+    }
+    
     func toolBarFunc(sender:UIButton) {
         if(sender.tag == 0){
-            collect_btn.selected = true
-            if(!collect_btn.selected) {
+            
+            if(appUserIdSave == nil || appUserIdSave == 0) {
+                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
+                
+            }else{
+                
+                self.collect_btn.enabled = false
+                
+                if(self.collect_btn?.selected == false){
+                    toCollectTalk()
+                }else{
+                    cancleCollectTalk()
+                }
                 
             }
             
+
+            
         }else if(sender.tag == 1){
-            var img = UIImage(named: "1024")
-            ShareUtil.shareInitWithTextAndPicture(self, text: "麦快for我的世界2.0,需要分享的内容", image: img!, callDelegate: self)
+            var shareImg:UIImage!
+            var shareText:String!
+            
+            if let query = self.webView.stringByEvaluatingJavaScriptFromString("getShareParams()"){
+                var shareParams = MBProgress.getQueryDictionary(query)
+                shareText = shareParams["shareText"]?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+                if(shareParams["shareImg"] != nil && shareParams["shareImg"] != "empty"){
+                    
+                    UIImage(data: NSData(contentsOfURL: NSURL(string:shareParams["shareImg"]!)!)!)
+                }else{
+                    shareImg = UIImage(named: "1024")
+                }
+                if(shareText != nil && shareImg != nil){
+                    ShareUtil.shareInitWithTextAndPicture(self, text: "", image: shareImg!, callDelegate: self)
+                }
+                
+            }
+            
         }else if(sender.tag == 2){
             println("reply")
             
@@ -276,6 +371,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         }
         self.webView.scrollView.header.endRefreshing()
         initToolBar()
+        self.rightButton?.enabled = true
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
