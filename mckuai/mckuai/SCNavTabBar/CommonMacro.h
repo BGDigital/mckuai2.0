@@ -46,7 +46,7 @@
 #define DOT_COORDINATE                  0.0f
 #define STATUS_BAR_HEIGHT               20.0f
 #define BAR_ITEM_WIDTH_HEIGHT           30.0f
-#define NAVIGATION_BAR_HEIGHT           85.0f
+#define NAVIGATION_BAR_HEIGHT           80.0f
 #define TAB_TAB_HEIGHT                  49.0f
 #define TABLE_VIEW_ROW_HEIGHT           NAVIGATION_BAR_HEIGHT
 #define CONTENT_VIEW_HEIGHT_NO_TAB_BAR  (SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT)

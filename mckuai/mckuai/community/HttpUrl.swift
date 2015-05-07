@@ -24,6 +24,10 @@ let qqlogin_url = "http://192.168.99.116/interface.do?act=login"
 
 let register_url = "http://192.168.99.116/interface.do?act=register"
 
+let toCollect_url = "http://192.168.99.116/interface.do?act=toCollect"
+
+let cancleCollect_url = "http://192.168.99.116/interface.do?act=cancleCollect"
+
 class HttpUrl {
     
 }
