@@ -102,7 +102,7 @@
     // Load NavTabBar and content view to show on window
     _navTabBar = [[SCNavTabBar alloc] initWithFrame:CGRectMake(DOT_COORDINATE, DOT_COORDINATE, SCREEN_WIDTH, NAVIGATION_BAR_HEIGHT) showArrowButton:_showArrowButton];
     _navTabBar.delegate = self;
-    _navTabBar.backgroundColor = [UIColor colorWithRed:0.220f green:0.792f blue:0.353f alpha:1.00f];
+    _navTabBar.backgroundColor = [UIColor colorWithRed:0.247f green:0.812f blue:0.333f alpha:1.00f];
     _navTabBar.lineColor = _navTabBarLineColor;
     _navTabBar.itemTitles = _titles;
     _navTabBar.arrowImage = _navTabBarArrowImage;
