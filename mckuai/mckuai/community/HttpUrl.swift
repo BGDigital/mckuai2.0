@@ -8,25 +8,25 @@
 
 import Foundation
 
-let forum_url = "http://192.168.99.116/interface.do?act=forumList"
-let talk_url = "http://192.168.99.116/interface.do?act=talkList"
-let webView_url = "http://192.168.99.116/interface.do?act=talkOne"
+let forum_url = URL_MC+"act=forumList"
+let talk_url = URL_MC+"act=talkList"
+let webView_url = URL_MC+"act=talkOne"
 
-let upload_url = "http://192.168.99.116/interface.do?act=uploadImg"
+let upload_url = URL_MC+"act=uploadImg"
 
 
-let addTalk_url = "http://192.168.99.116/interface.do?act=addTalk"
-let followTalk_url = "http://192.168.99.116/interface.do?act=followTalk"
-let replyTalk_url = "http://192.168.99.116/interface.do?act=replyTalk"
+let addTalk_url = URL_MC+"act=addTalk"
+let followTalk_url = URL_MC+"act=followTalk"
+let replyTalk_url = URL_MC+"act=replyTalk"
 
-let login_url = "http://192.168.99.116/interface.do?act=userLogin"
-let qqlogin_url = "http://192.168.99.116/interface.do?act=login"
+let login_url = URL_MC+"act=userLogin"
+let qqlogin_url = URL_MC+"act=login"
 
-let register_url = "http://192.168.99.116/interface.do?act=register"
+let register_url = URL_MC+"act=register"
 
-let toCollect_url = "http://192.168.99.116/interface.do?act=toCollect"
+let toCollect_url = URL_MC+"act=toCollect"
 
-let cancleCollect_url = "http://192.168.99.116/interface.do?act=cancleCollect"
+let cancleCollect_url = URL_MC+"act=cancleCollect"
 
 class HttpUrl {
     

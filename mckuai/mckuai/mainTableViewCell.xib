@@ -61,9 +61,9 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKh-h0-Xiq">
-                                <rect key="frame" x="15" y="156" width="93" height="20"/>
+                                <rect key="frame" x="15" y="156" width="123" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="93" id="Z1k-R7-EeU"/>
+                                    <constraint firstAttribute="width" constant="123" id="Z1k-R7-EeU"/>
                                     <constraint firstAttribute="height" constant="20" id="dPP-5k-spm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>

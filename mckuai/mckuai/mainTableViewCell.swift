@@ -38,9 +38,10 @@ class mainTableViewCell: UITableViewCell {
     func update(json: JSON, iType: Int) {
         self.title.text = json["talkTitle"].stringValue
         self.title.sizeOfMultiLineLabel()
-        self.replys.setTitle(json["replyNum"].stringValue, forState: .Normal)
         switch iType {
         case 0:
+            self.replys.hidden = false
+            self.replys.setTitle(json["replyNum"].stringValue, forState: .Normal)
             self.userName.setTitle(json["userName"].stringValue, forState: .Normal)
             var headImg = json["headImg"].stringValue
             self.userName.sd_setImageWithURL(NSURL(string: headImg), forState: .Normal, placeholderImage: UIImage(named: "first_normal"), completed: { img,_,_,_ in
@@ -64,19 +65,19 @@ class mainTableViewCell: UITableViewCell {
                 self.liveStatus.setTitle("暂停直播", forState: .Normal)
             }
         default:
-            var icon = json["icon"].stringValue
-            
-            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "first_normal"), completed: { img,_,_,_ in
-                var rect = CGRectMake(0, 0, 20, 20)
-                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-                img.drawInRect(rect)
-                var newImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                self.userName.setImage(newImage, forState: .Normal)
-            })
-            
+            self.replys.hidden = true
+            var icon = json["headImg"].stringValue
+//            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "first_normal"), completed: { img,_,_,_ in
+//                var rect = CGRectMake(0, 0, 20, 20)
+//                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+//                img.drawInRect(rect)
+//                var newImage = UIGraphicsGetImageFromCurrentImageContext()
+//                UIGraphicsEndImageContext()
+//                self.userName.setImage(newImage, forState: .Normal)
+//            })
+
             //self.userName.setImage(MCUtils.getHeadImg(icon, rect: CGRectMake(0, 0, 20, 20)), forState: .Normal)
-            self.userName.setTitle(json["forumName"].stringValue, forState: .Normal)
+            self.userName.setTitle(json["userName"].stringValue, forState: .Normal)
             self.liveType.setTitle(json["replyNum"].stringValue, forState: .Normal)
             self.liveType.setImage(UIImage(named: "replys"), forState: .Normal)
             self.liveStatus.setTitle(MCUtils.compDate(json["replyTime"].stringValue), forState: .Normal)

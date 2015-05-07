@@ -61,7 +61,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 118
+        return 80
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

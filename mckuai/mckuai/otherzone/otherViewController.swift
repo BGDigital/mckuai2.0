@@ -168,7 +168,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         if self.mineType != "work" {
             return 100
         } else {
-            return 118
+            return 80
         }
 
     }

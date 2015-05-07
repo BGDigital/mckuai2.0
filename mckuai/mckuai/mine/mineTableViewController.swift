@@ -157,7 +157,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         if self.mineType != "work" {
             return 100
         } else {
-            return 118
+            return 80
         }
     }
 
@@ -218,7 +218,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         //开始刷新
         var param = [
             "act": "center",
-            "id": 6,
+            "id": 1,
             "page": 1,
             "type":self.mineType,
             "messageType": self.mineMsgType]
