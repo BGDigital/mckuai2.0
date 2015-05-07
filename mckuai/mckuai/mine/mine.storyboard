@@ -82,14 +82,14 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1t-fo-H7A">
-                                <rect key="frame" x="98" y="109" width="51" height="22"/>
-                                <state key="normal" title="设置" image="Guide">
+                                <rect key="frame" x="98" y="83" width="48" height="48"/>
+                                <state key="normal" image="mine_setting">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ikn-ZX-u7r">
-                                <rect key="frame" x="451" y="109" width="51" height="22"/>
-                                <state key="normal" title="分享" image="Guide">
+                                <rect key="frame" x="451" y="83" width="48" height="48"/>
+                                <state key="normal" image="mine_share">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -225,7 +225,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Guide" width="15" height="15"/>
         <image name="location" width="12" height="12"/>
+        <image name="mine_setting" width="48" height="48"/>
+        <image name="mine_share" width="48" height="48"/>
     </resources>
 </document>

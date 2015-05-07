@@ -140,23 +140,6 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
     }
     
     /**
-    获取用户头像,并缩小
-    
-    :param: url 用户头像URL
-    
-    :returns: 返回缩小后的用户头像Image
-    */
-    class func getHeadImg(url: String, rect: CGRect) -> UIImage {
-        var iv = UIImageView(frame: rect)
-        iv.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "Guide"))
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-        iv.image?.drawInRect(rect)
-        var newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-    
-    /**
     UITableView 空数据时显示的类型
     
     :param: tv 要显示内容的TableView

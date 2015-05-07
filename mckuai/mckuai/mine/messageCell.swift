@@ -21,6 +21,9 @@ class messageCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.username.imageView?.layer.masksToBounds = true
+        self.username.imageView?.layer.cornerRadius = 10
+        self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
         // Initialization code
     }
     
@@ -69,20 +72,20 @@ class messageCell: UITableViewCell {
                 var sText = self.getMsgType(json["type"].stringValue)
                 var str = json["userName"].stringValue + sText
                 self.username.setTitle(str, forState: .Normal)
-//                var Avatar = json["headImg"].stringValue
-//                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "Guide"), completed: { img,_,_,_ in
-//                    var rect = CGRectMake(0, 0, 20, 20)
-//                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-//                    img.drawInRect(rect)
-//                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
-//                    UIGraphicsEndImageContext()
-//                    self.username.setImage(newImage, forState: .Normal)
-//                })
+                var Avatar = json["headImg"].stringValue
+                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,_ in
+                    var rect = CGRectMake(0, 0, 20, 20)
+                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                    img.drawInRect(rect)
+                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    self.username.setImage(newImage, forState: .Normal)
+                })
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
                 setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
                 //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)
             default:  //system
-                self.username.setImage(UIImage(named: "Guide"), forState: .Normal)
+                self.username.setImage(UIImage.applicationCreateImageWithColor(UIColor.greenColor()), forState: .Normal)
                 self.username.setTitle("系统消息", forState: .Normal)
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
                 setLabelFrame(json["showText"].stringValue)

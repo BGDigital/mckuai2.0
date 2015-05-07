@@ -94,11 +94,11 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         self.times.setTitle(chat["insertTime"].stringValue, forState: .Normal)
         self.chatTitle.text = chat["title"].stringValue
         self.chatTitle.sizeOfMultiLineLabel()
-        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "Guide"))
+        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "Avatar"))
         self.userHeadImg.layer.masksToBounds = true
         self.userHeadImg.layer.cornerRadius = 10
         self.userLastSay.text = chat["speak"].stringValue
-        self.imageV.sd_setImageWithURL(NSURL(string: chat["icon"].stringValue), placeholderImage: UIImage(named: "Image"))
+        self.imageV.sd_setImageWithURL(NSURL(string: chat["icon"].stringValue), placeholderImage: UIImage(named: "loading"))
         
     }
     
