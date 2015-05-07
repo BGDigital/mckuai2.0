@@ -91,8 +91,8 @@
             button.selected = YES;
             [button setBackgroundColor:[UIColor colorWithRed:0.184f green:0.627f blue:0.267f alpha:1.00f]];
         }
-        button.frame = CGRectMake(buttonX, 5, 70, 70);
-        button.layer.cornerRadius = 35;
+        button.frame = CGRectMake(buttonX, 5, 50, 50);
+        button.layer.cornerRadius = 25;
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
