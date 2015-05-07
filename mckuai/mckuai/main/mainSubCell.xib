@@ -15,16 +15,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08l-GC-jbA">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08l-GC-jbA">
                         <rect key="frame" x="8" y="56" width="126" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="126" id="Yhh-Dt-Mtk"/>
+                            <constraint firstAttribute="height" constant="15" id="s56-hO-qVa"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="小小麦" image="Guide">
+                        <state key="normal" title="小小麦">
                             <color key="titleColor" red="0.69411764705882351" green="0.69803921568627447" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="s56-hO-qVa"/>
+                            </mask>
+                        </variation>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngm-cZ-i0w">
                         <rect key="frame" x="292" y="56" width="75" height="15"/>
@@ -89,7 +95,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Guide" width="15" height="15"/>
         <image name="replys" width="16" height="16"/>
     </resources>
 </document>

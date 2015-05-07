@@ -84,9 +84,9 @@
                                 </state>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUQ-aM-kyg">
-                                <rect key="frame" x="195" y="220" width="100" height="60"/>
+                                <rect key="frame" x="195" y="232" width="100" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="5Zh-bE-pHu"/>
+                                    <constraint firstAttribute="height" constant="50" id="5Zh-bE-pHu"/>
                                     <constraint firstAttribute="width" constant="100" id="Qvw-Q8-1qa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -99,10 +99,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFg-g7-Yja">
-                                <rect key="frame" x="305" y="220" width="100" height="60"/>
+                                <rect key="frame" x="305" y="232" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Odb-xc-mVb"/>
-                                    <constraint firstAttribute="height" constant="60" id="yGi-mv-4xL"/>
+                                    <constraint firstAttribute="height" constant="50" id="yGi-mv-4xL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="999">
@@ -131,12 +131,12 @@
                             <constraint firstAttribute="centerX" secondItem="3Qb-A1-AbJ" secondAttribute="centerX" id="PPw-lW-HL7"/>
                             <constraint firstAttribute="centerX" secondItem="xzN-dE-srM" secondAttribute="centerX" id="RMq-4I-USz"/>
                             <constraint firstItem="NbU-bn-eo4" firstAttribute="centerX" secondItem="3Qb-A1-AbJ" secondAttribute="centerX" id="SzD-MH-ch5"/>
-                            <constraint firstItem="ZdV-g6-g6K" firstAttribute="top" secondItem="nUQ-aM-kyg" secondAttribute="bottom" constant="20" id="TA0-vF-Fhv"/>
+                            <constraint firstItem="ZdV-g6-g6K" firstAttribute="top" secondItem="nUQ-aM-kyg" secondAttribute="bottom" constant="18" id="TA0-vF-Fhv"/>
                             <constraint firstItem="xzN-dE-srM" firstAttribute="top" secondItem="wCt-8P-xOR" secondAttribute="bottom" constant="50" id="VrX-0X-pAM"/>
-                            <constraint firstItem="ZdV-g6-g6K" firstAttribute="top" secondItem="FFg-g7-Yja" secondAttribute="bottom" constant="20" id="XWQ-Xz-uiO"/>
+                            <constraint firstItem="ZdV-g6-g6K" firstAttribute="top" secondItem="FFg-g7-Yja" secondAttribute="bottom" constant="18" id="XWQ-Xz-uiO"/>
                             <constraint firstItem="IYO-U3-Vnl" firstAttribute="trailing" secondItem="3Qb-A1-AbJ" secondAttribute="trailing" id="a0z-hi-KGf"/>
                             <constraint firstItem="nUQ-aM-kyg" firstAttribute="centerX" secondItem="NbU-bn-eo4" secondAttribute="centerX" constant="-55" id="e1k-tJ-RNz"/>
-                            <constraint firstItem="FFg-g7-Yja" firstAttribute="top" secondItem="IYO-U3-Vnl" secondAttribute="bottom" constant="1" id="fNn-Oe-4sy"/>
+                            <constraint firstItem="FFg-g7-Yja" firstAttribute="top" secondItem="IYO-U3-Vnl" secondAttribute="bottom" constant="13" id="fNn-Oe-4sy"/>
                             <constraint firstItem="FFg-g7-Yja" firstAttribute="leading" secondItem="NbU-bn-eo4" secondAttribute="trailing" constant="-174" id="ha7-gY-SAi"/>
                             <constraint firstItem="nUQ-aM-kyg" firstAttribute="top" secondItem="NbU-bn-eo4" secondAttribute="bottom" constant="-93" id="xD8-7d-7JL"/>
                             <constraint firstItem="IYO-U3-Vnl" firstAttribute="leading" secondItem="3Qb-A1-AbJ" secondAttribute="leading" id="xnq-ot-EAv"/>

@@ -90,7 +90,7 @@ class messageCell: UITableViewCell {
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
                 setLabelFrame(json["showText"].stringValue)
                 //如果是系统信息,添加一个小图标
-                addSystemNoteImg()
+                //addSystemNoteImg()
             }
         case "dynamic":
             var sText = self.getMsgType(json["type"].stringValue)
@@ -107,7 +107,7 @@ class messageCell: UITableViewCell {
         
         
         //var url = json["imgUrl"].stringValue
-        //self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder"))
+        //self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "loading"))
     }
     
     private func getMsgType(s: String) -> String {

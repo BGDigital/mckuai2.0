@@ -44,6 +44,10 @@ class backpackerViewController: UIViewController {
         self.tabBarController?.tabBar.hidden = true
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
+    }
+    
     func initSubView() {
         var rect = CGRectMake(0, 99, self.view.bounds.size.width, self.view.bounds.size.height-99)
         //麦友

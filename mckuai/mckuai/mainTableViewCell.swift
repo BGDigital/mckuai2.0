@@ -56,7 +56,7 @@ class mainTableViewCell: UITableViewCell {
             //self.userName.setImage(MCUtils.getHeadImg(headImg, rect: CGRectMake(0, 0, 20, 20)), forState: .Normal)
             self.liveType.setTitle(json["talkType"].stringValue, forState: .Normal)
             if let url = json["mobilePic"].string {
-                self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder"))
+                self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "loading"))
             }
             
             if json["isLive"].boolValue {
@@ -67,14 +67,14 @@ class mainTableViewCell: UITableViewCell {
         default:
             self.replys.hidden = true
             var icon = json["headImg"].stringValue
-//            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "first_normal"), completed: { img,_,_,_ in
-//                var rect = CGRectMake(0, 0, 20, 20)
-//                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-//                img.drawInRect(rect)
-//                var newImage = UIGraphicsGetImageFromCurrentImageContext()
-//                UIGraphicsEndImageContext()
-//                self.userName.setImage(newImage, forState: .Normal)
-//            })
+            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,_ in
+                var rect = CGRectMake(0, 0, 20, 20)
+                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                img.drawInRect(rect)
+                var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                self.userName.setImage(newImage, forState: .Normal)
+            })
 
             //self.userName.setImage(MCUtils.getHeadImg(icon, rect: CGRectMake(0, 0, 20, 20)), forState: .Normal)
             self.userName.setTitle(json["userName"].stringValue, forState: .Normal)
@@ -83,7 +83,7 @@ class mainTableViewCell: UITableViewCell {
             self.liveStatus.setTitle(MCUtils.compDate(json["replyTime"].stringValue), forState: .Normal)
             self.liveStatus.setImage(UIImage.applicationCreateImageWithColor(UIColor.whiteColor()), forState: .Normal)
             if let url = json["mobilePic"].string {
-                self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder"))
+                self.imageV.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "loading"))
             }
         }
     }

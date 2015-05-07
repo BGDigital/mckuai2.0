@@ -17,6 +17,7 @@ class friendsViewController: UICollectionViewController {
     var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
     var selectUserId: Int?
+    var hud: MBProgressHUD?
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
@@ -43,11 +44,16 @@ class friendsViewController: UICollectionViewController {
         self.collectionView!.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         
         if isFirstLoad {
-            var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            h.labelText = MCUtils.TEXT_LOADING
-            h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
+            loadDataWithoutMJRefresh()
         }
     }
+    
+    func loadDataWithoutMJRefresh() {
+        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud?.labelText = MCUtils.TEXT_LOADING
+        loadNewData()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -66,11 +72,13 @@ class friendsViewController: UICollectionViewController {
                 self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.collectionView?.header.endRefreshing()
+                self.hud?.hide(true)
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.collectionView!.header.endRefreshing()
+                self.hud?.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }

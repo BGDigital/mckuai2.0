@@ -16,6 +16,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     private let NAVBAR_CHANGE_POINT:CGFloat = 50
     private var manager = AFHTTPRequestOperationManager()
     var page: PageInfo!
+    var hud: MBProgressHUD?
     var isFirstLoad = true
     var json: JSON! {
         didSet {
@@ -104,9 +105,9 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func loadDataWithoutMJRefresh() {
-        var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        h.labelText = MCUtils.TEXT_LOADING
-        h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
+        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud?.labelText = MCUtils.TEXT_LOADING
+        loadNewData()
     }
     
     func customNavBackButton() {
@@ -183,8 +184,11 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         if !self.datasource.isEmpty {
+            self.tableView.tableHeaderView?.hidden = false
             return self.datasource.count
         } else {
+            self.tableView.tableHeaderView?.hidden = true
+            MCUtils.showEmptyView(self.tableView)
             return 0
         }
     }
@@ -232,11 +236,13 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.tableView.header.endRefreshing()
+                self.hud?.hide(true)
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
+                self.hud?.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }
@@ -275,7 +281,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
             break
         }
         //开始加载数据
-//        self.tableView.header.beginRefreshing()
+        //self.tableView.header.beginRefreshing()
         loadDataWithoutMJRefresh()
     }
     

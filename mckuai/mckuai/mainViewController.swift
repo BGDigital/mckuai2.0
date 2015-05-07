@@ -13,6 +13,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     let cellIdentifier = "mainTableViewCell"
     var manager = AFHTTPRequestOperationManager()
     var isFirstLoad = true   //是否初次加载
+    var hud: MBProgressHUD?
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
@@ -83,9 +84,9 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func loadDataWithoutMJRefresh() {
-        var h = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        h.labelText = MCUtils.TEXT_LOADING
-        h.showWhileExecuting("loadNewData", onTarget: self, withObject: nil, animated: true)
+        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud?.labelText = MCUtils.TEXT_LOADING
+        loadNewData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -128,12 +129,14 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.json = JSON(responseObject)
                 self.isFirstLoad = false
                 self.tableView.header.endRefreshing()
+                self.hud?.hide(true)
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.tableView.tableHeaderView?.hidden = true
+                self.hud?.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
         

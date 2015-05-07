@@ -60,8 +60,9 @@ class mineHeadViewController: UIViewController {
         parent.setBackgroundImage(selectedImg, forState: .Selected)
         parent.setTitleColor(UIColor.whiteColor(), forState: .Selected)
         parent.layer.masksToBounds = true
-        parent.layer.cornerRadius = 30  //圆角,对.Selected没有效果?
+        parent.layer.cornerRadius = 25  //圆角,对.Selected没有效果?
         parent.tintColor = UIColor.clearColor()
+        parent.titleEdgeInsets = UIEdgeInsetsMake(-10, 0, 0, 0)
         
         var lb = UILabel(frame: CGRectMake(0, btnMsg.bounds.size.height-20, btnMsg.bounds.size.width, 14))
         lb.text = aText
@@ -129,7 +130,7 @@ class mineHeadViewController: UIViewController {
         headImg = J["headImg"].stringValue
         nickname.text = J["nike"].stringValue
         if !headImg.isEmpty {
-            imageBg.sd_setImageWithURL(NSURL(string: headImg), placeholderImage: UIImage(named: "1024"), completed: {image, error, cacheType, imageURL in
+            imageBg.sd_setImageWithURL(NSURL(string: headImg), placeholderImage: UIImage(named: "Avatar"), completed: {image, error, cacheType, imageURL in
 //                self.roundProgressView.imageView = UIImageView(image: image)
                 self.imageBg.addBlurEffect(8, times: 1)
             })

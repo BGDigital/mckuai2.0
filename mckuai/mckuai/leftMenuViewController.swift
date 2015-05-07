@@ -32,7 +32,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         //这里加了个Header(用户信息)
         var header = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, headerHeight))
         var Avatar = UIImageView(frame: CGRectMake(15, 5, 40, 40))
-        Avatar.image = UIImage(named: "1024")
+        Avatar.image = UIImage(named: "Avatar")
         Avatar.backgroundColor = UIColor.clearColor()  //这句可有可无
         Avatar.layer.masksToBounds = true
         Avatar.layer.cornerRadius = 20

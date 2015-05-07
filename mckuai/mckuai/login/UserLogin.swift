@@ -153,7 +153,7 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                self.showCustomHUD(self.view, title: "登录失败", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "登录失败", imgName: "HUD_ERROR")
         })
 
         
@@ -244,7 +244,7 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
                     hud.hide(true)
-                    self.showCustomHUD(self.view, title: "登录失败", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "登录失败", imgName: "HUD_ERROR")
             })
             
             

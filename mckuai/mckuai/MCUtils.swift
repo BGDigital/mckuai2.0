@@ -65,11 +65,17 @@ static let COLOR_MAIN = "#4C4D4E"
 static let COLOR_SUB = "#B3B4B5"
 static let COLOR_GREEN = "#40C84D"
     
-static let TEXT_LOADING = "Loading..."
+static let TEXT_LOADING = "加载中..."
 
 static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
     
-    //功能函数
+    /**
+    显示HUD提示框
+    
+    :param: view    要显示HUD的窗口
+    :param: title   HUD的标题
+    :param: imgName 自定义HUD显示的图片
+    */
     class func showCustomHUD(view: UIView, title: String, imgName: String) {
         var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
         h.labelText = title
@@ -84,7 +90,13 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
         }
     }
     
-    //截取小数点后的数
+    /**
+    判断时间要用的函数
+    
+    :param: str 传如的字符串
+    
+    :returns: 处理过的字符串
+    */
     class func getStr(str: Double) -> String {
         let d = "\(str)"
         var result = ""
@@ -102,7 +114,13 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
         }
     }
     
-    //计算时间差
+    /**
+    计算当前时间与传入时间的时间差,并返回时间差
+    
+    :param: beginStr 从服务器上获取到的时间
+    
+    :returns: 处理过的时间差字符串
+    */
     class func compDate(beginStr: String) -> String {
         
         let formatter = NSDateFormatter()
@@ -147,17 +165,13 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
     class func showEmptyView(tv: UITableView) {
         var v = UIView(frame: tv.frame)
         
-//        let btnR = CGSize(width: 200, height: 30)
-//        let btnX = (v.bounds.size.width - btnR.width) / 2
-//        let btnY = v.bounds.size.height - 50
-//        var lb_msg = UIButton(frame: CGRectMake(btnX, btnY, btnR.width, btnR.height))
-//        lb_msg.setTitle("没有数据可用", forState: .Normal)
-//        lb_msg.backgroundColor = UIColor.redColor()
-//        //lb_msg.textAlignment = NSTextAlignment.Center
-//        lb_msg.sizeToFit()
-//        v.addSubview(lb_msg)
+        var img = UIImageView(image: UIImage(named: "load_error"))
+        let btnX = (v.bounds.size.width - img.frame.size.width) / 2
+        let btnY = (v.bounds.size.height - img.frame.size.height) / 2
+        img.frame = CGRectMake(btnX, btnY, img.frame.size.width, img.frame.size.height)
+        v.addSubview(img)
         
-        var lb = UILabel(frame: v.bounds)
+        var lb = UILabel(frame: CGRectMake(0, btnY+img.frame.size.height+10, v.bounds.size.width, 50))
         lb.text = "获取数据失败\n请稍后刷新重试"
         lb.numberOfLines = 2;
         lb.textAlignment = .Center;
@@ -171,6 +185,7 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
     //供其它界面调用  --他人的空间
     class func openOtherZone(nav: UINavigationController?, userId: Int) {
         var otherZone: otherViewController = otherViewController(uId: userId)
+        otherZone.hidesBottomBarWhenPushed = true
         if let n = nav {
             n.pushViewController(otherZone, animated: true)
         } else {
@@ -181,6 +196,7 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
     //--我的背包
     class func openBackPacker(nav: UINavigationController?, userId: Int) {
         var backpacker:backpackerViewController = backpackerViewController(uId: userId)
+        backpacker.hidesBottomBarWhenPushed = true
         if let n = nav {
             n.pushViewController(backpacker, animated: true)
         } else {

@@ -176,7 +176,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
-                self.showCustomHUD(self.view, title: "数据加载失败", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }
     

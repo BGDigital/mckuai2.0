@@ -38,7 +38,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         level.layer.cornerRadius = 10
         
         bag.setImage(UIImage(named: "backpacker_selected"), forState: .Selected)
-        imageV.sd_setImageWithURL(nil, placeholderImage: UIImage(named: "placeholder"))
+        imageV.sd_setImageWithURL(nil, placeholderImage: UIImage(named: "loading"))
         
         //添加事件
         nickname.userInteractionEnabled = true

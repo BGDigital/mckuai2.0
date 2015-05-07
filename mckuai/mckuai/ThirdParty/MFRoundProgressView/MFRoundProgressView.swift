@@ -22,7 +22,7 @@ class MFRoundProgressView: UIView {
         didSet {
             showPercent = imageUrl.isEmpty
             imageView.frame = CGRectMake(9, 9, self.frame.width-18, self.frame.height-18)
-            imageView.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: UIImage(named: "Guide"))
+            imageView.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: UIImage(named: "Avatar"))
             //imageView.frame = CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height-20)
             imageView.layer.masksToBounds = true
             imageView.layer.cornerRadius = (self.frame.width - 18) / 2
@@ -51,13 +51,13 @@ class MFRoundProgressView: UIView {
     //用户等级
     @IBInspectable var level:Int = 0 {
         didSet {
-            lb_level.frame = CGRectMake(8, 5, 25, 25)
-            lb_level.setTitle("lv." + String(level), forState: .Normal)
-            lb_level.titleLabel?.font = UIFont(name: lb_level.titleLabel!.font.fontName, size: 11)
-            lb_level.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            lb_level.frame = CGRectMake(8, 5, 24, 24)
             //圆角背景
-            lb_level.backgroundColor = UIColor(hexString: "#21D12B")
-            lb_level.layer.cornerRadius = 12.5
+            lb_level.setBackgroundImage(UIImage(named: "level_bg"), forState: .Normal)
+            lb_level.setTitle("lv." + String(level), forState: .Normal)
+            lb_level.titleLabel?.font = UIFont(name: lb_level.titleLabel!.font.fontName, size: 10)
+            lb_level.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+
 
             self.addSubview(lb_level)
             setNeedsDisplay()
