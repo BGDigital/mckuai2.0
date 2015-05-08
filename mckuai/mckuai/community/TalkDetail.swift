@@ -215,16 +215,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func toolBarFunc(sender:UIButton) {
         if(sender.tag == 0){
-            
-<<<<<<< Updated upstream
             if(appUserIdSave == 0) {
-                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
-                
-=======
-            if(appUserIdSave == nil || appUserIdSave == 0) {
 //                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                 NewLogin.showUserLoginView(self,returnIsShow: false)
->>>>>>> Stashed changes
             }else{
                 
                 self.collect_btn.enabled = false
@@ -262,14 +255,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             println("reply")
             
             
-<<<<<<< Updated upstream
             if(appUserIdSave == 0) {
-                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
-=======
-            if(appUserIdSave == nil || appUserIdSave == 0) {
 //                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                   NewLogin.showUserLoginView(self,returnIsShow: false)
->>>>>>> Stashed changes
                 
             }else{
                 
@@ -361,14 +349,10 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         if action == "reply" {
             println("Reply...........")
             self.textView.becomeFirstResponder()
-<<<<<<< Updated upstream
+
             if(appUserIdSave == 0) {
-                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
-=======
-            if(appUserIdSave == nil || appUserIdSave == 0) {
 //                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                  NewLogin.showUserLoginView(self,returnIsShow: false)
->>>>>>> Stashed changes
                 
             }
             

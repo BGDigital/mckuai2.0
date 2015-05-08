@@ -1028,6 +1028,7 @@
 				0B8671251AF9E23E00F3F63F /* HttpUrl.swift in Sources */,
 				E6518BED1ADD065E005A8C97 /* AppDelegate.swift in Sources */,
 				E6E979631AFCB6CF00BF3E3F /* customChatViewController.swift in Sources */,
+				0B73A7281AFBB4410074E1CE /* NewLogin.swift in Sources */,
 				E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */,
 				E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */,
 				E6A40CC71AFC57D500F19D75 /* UIView+Shake.swift in Sources */,

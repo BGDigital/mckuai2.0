@@ -82,16 +82,8 @@ class communityViewController: UIViewController {
     func rightBarButtonItemClicked() {
         print("send talk")
         
-<<<<<<< Updated upstream
         if(appUserIdSave == 0) {
-            UserLogin.showUserLoginView(presentNavigator: self.navigationController)
-=======
-        if(appUserIdSave == nil || appUserIdSave == 0) {
-//            userLoginView = UIStoryboard(name: "NewLogin", bundle: nil).instantiateViewControllerWithIdentifier("newLogin") as! NewLogin
-//            userLoginView.view.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height)
-//            userLoginView.superUIViewController = self
-//            self.navigationController?.view.addSubview(userLoginView.view)
->>>>>>> Stashed changes
+            //UserLogin.showUserLoginView(presentNavigator: self.navigationController)
             
              NewLogin.showUserLoginView(self,returnIsShow: true)
         }else{
