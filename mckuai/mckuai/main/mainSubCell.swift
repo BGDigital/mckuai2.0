@@ -57,7 +57,10 @@ class mainSubCell: UITableViewCell {
             self.username.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,url in
                 var rect = CGRectMake(0, 0, 20, 20)
                 UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-                img.drawInRect(rect)
+                if(img != nil){
+                    img.drawInRect(rect)
+                }
+                
                 var newImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 self.username.setImage(newImage, forState: .Normal)

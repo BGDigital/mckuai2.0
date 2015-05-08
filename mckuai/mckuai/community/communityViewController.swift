@@ -9,6 +9,8 @@
 import UIKit
 var currentForumName:String! = ""
 var forumName:Array<JSON>!
+
+var userLoginView:NewLogin!
 class communityViewController: UIViewController {
     
     var scrollPages = [UIViewController]()
@@ -80,9 +82,18 @@ class communityViewController: UIViewController {
     func rightBarButtonItemClicked() {
         print("send talk")
         
+<<<<<<< Updated upstream
         if(appUserIdSave == 0) {
             UserLogin.showUserLoginView(presentNavigator: self.navigationController)
+=======
+        if(appUserIdSave == nil || appUserIdSave == 0) {
+//            userLoginView = UIStoryboard(name: "NewLogin", bundle: nil).instantiateViewControllerWithIdentifier("newLogin") as! NewLogin
+//            userLoginView.view.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height)
+//            userLoginView.superUIViewController = self
+//            self.navigationController?.view.addSubview(userLoginView.view)
+>>>>>>> Stashed changes
             
+             NewLogin.showUserLoginView(self,returnIsShow: true)
         }else{
             SendTalk.showSendTalkPage(self.navigationController)
         }
@@ -127,10 +138,11 @@ class communityViewController: UIViewController {
     }
     
     override func viewWillDisappear(animated: Bool) {
-
+//        self.tabBarController?.tabBar.hidden = 
     }
     
     override func viewWillAppear(animated: Bool) {
+//        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         self.tabBarController?.tabBar.hidden = false
         if(currentForumName != ""){
             
@@ -156,7 +168,14 @@ class communityViewController: UIViewController {
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
+        
+        
+
+        
     }
+    
+    
+    
     
 
 
