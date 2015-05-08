@@ -81,7 +81,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
         self.tableView.footer.hidden = true
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -119,11 +119,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
     }
 
-    
-    func refreshTableView() {
-        println("刷新TableView")
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var color = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)
         var offsetY = scrollView.contentOffset.y

@@ -85,7 +85,15 @@ class messageCell: UITableViewCell {
                 setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
                 //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)
             default:  //system
-                self.username.setImage(UIImage(named: "Avatar"), forState: .Normal)
+                var Avatar = json["headImg"].stringValue
+                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,_ in
+                    var rect = CGRectMake(0, 0, 20, 20)
+                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                    img.drawInRect(rect)
+                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    self.username.setImage(newImage, forState: .Normal)
+                })
                 self.username.setTitle("系统消息", forState: .Normal)
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
                 setLabelFrame(json["showText"].stringValue)
@@ -93,8 +101,14 @@ class messageCell: UITableViewCell {
                 //addSystemNoteImg()
             }
         case "dynamic":
+            self.username.imageView?.layer.masksToBounds = false
             var sText = self.getMsgType(json["type"].stringValue)
             self.username.setTitle(sText, forState: .Normal)
+            if json["type"].stringValue == "talk_reply" {
+                self.username.setImage(UIImage(named: "mine_reply"), forState: .Normal)
+            } else {
+                self.username.setImage(UIImage(named: "mine_create"), forState: .Normal)
+            }
             self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
             setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
             //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)
@@ -116,6 +130,8 @@ class messageCell: UITableViewCell {
             return "  回复你的贴子"
         case "talk_reply":
             return "回复了"
+        case "talk_add":
+            return "创造了"
         default:
             return "  @了你"
         }
