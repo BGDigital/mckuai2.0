@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B73A7261AFBB42B0074E1CE /* NewLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B73A7251AFBB42B0074E1CE /* NewLogin.storyboard */; };
+		0B73A7281AFBB4410074E1CE /* NewLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73A7271AFBB4410074E1CE /* NewLogin.swift */; };
 		0B76F6341AFB688A00B4E043 /* TencentOpenApi_IOS_Bundle.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF85941AF12BE1005F08B2 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		0B8671231AF9E23E00F3F63F /* FollowTalk.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8671181AF9E23E00F3F63F /* FollowTalk.storyboard */; };
 		0B8671241AF9E23E00F3F63F /* FollowTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8671191AF9E23E00F3F63F /* FollowTalk.swift */; };
@@ -138,6 +140,8 @@
 
 /* Begin PBXFileReference section */
 		01A338F1C539FF6B80886F4A /* Pods-mckuai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mckuai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mckuai/Pods-mckuai.debug.xcconfig"; sourceTree = "<group>"; };
+		0B73A7251AFBB42B0074E1CE /* NewLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewLogin.storyboard; sourceTree = "<group>"; };
+		0B73A7271AFBB4410074E1CE /* NewLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLogin.swift; sourceTree = "<group>"; };
 		0B8671181AF9E23E00F3F63F /* FollowTalk.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FollowTalk.storyboard; path = community/FollowTalk.storyboard; sourceTree = "<group>"; };
 		0B8671191AF9E23E00F3F63F /* FollowTalk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowTalk.swift; path = community/FollowTalk.swift; sourceTree = "<group>"; };
 		0B86711A1AF9E23E00F3F63F /* HttpUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpUrl.swift; path = community/HttpUrl.swift; sourceTree = "<group>"; };
@@ -640,6 +644,8 @@
 				E6BF859B1AF12CB0005F08B2 /* UserLogin.swift */,
 				E6BF859C1AF12CB0005F08B2 /* UserRegister.storyboard */,
 				E6BF859D1AF12CB0005F08B2 /* UserRegister.swift */,
+				0B73A7251AFBB42B0074E1CE /* NewLogin.storyboard */,
+				0B73A7271AFBB4410074E1CE /* NewLogin.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -915,6 +921,7 @@
 				E6BF85D31AF12DA9005F08B2 /* UMSLoginViewController.xib in Resources */,
 				E6BF85A11AF12CB0005F08B2 /* UserRegister.storyboard in Resources */,
 				0B86712A1AF9E23E00F3F63F /* TalkDetail.storyboard in Resources */,
+				0B73A7261AFBB42B0074E1CE /* NewLogin.storyboard in Resources */,
 				E6518BF71ADD065E005A8C97 /* LaunchScreen.xib in Resources */,
 				E6BF85D61AF12DA9005F08B2 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				E6BF85CF1AF12DA9005F08B2 /* UMSCommentInputController.xib in Resources */,
@@ -1014,6 +1021,7 @@
 				0B8671261AF9E23E00F3F63F /* ImageUtil.swift in Sources */,
 				0B8671251AF9E23E00F3F63F /* HttpUrl.swift in Sources */,
 				E6518BED1ADD065E005A8C97 /* AppDelegate.swift in Sources */,
+				0B73A7281AFBB4410074E1CE /* NewLogin.swift in Sources */,
 				E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */,
 				E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */,
 				E692AA531AE9FA9E00577B3C /* UILabel+DynamicHeight.m in Sources */,
