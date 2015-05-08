@@ -62,22 +62,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if isFirstLoad {
             loadDataWithoutMJRefresh()
         }
+        MCUtils.checkNetWorkState()
         
-        //网络状态
-        var reachabilityManager = AFNetworkReachabilityManager.sharedManager()
-        reachabilityManager.startMonitoring()
-        reachabilityManager.setReachabilityStatusChangeBlock({st in
-            switch st {
-            case .ReachableViaWiFi:
-                println("网络状态:WIFI")
-            case .ReachableViaWWAN:
-                println("网络状态:3G")
-            case .NotReachable:
-                println("网络状态:不可用")
-            default:
-                println("网络状态:火星")
-            }
-        })
     }
     
     func loadDataWithoutMJRefresh() {
@@ -133,6 +119,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
+                MCUtils.showEmptyView(self.tableView, errorType: 2)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
         
@@ -170,7 +157,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         } else {
             //没有数据
-            MCUtils.showEmptyView(self.tableView)
+//            MCUtils.showEmptyView(self.tableView)
             return 0
         }
     }

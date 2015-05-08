@@ -75,10 +75,31 @@ static let COLOR_MAIN = "#4C4D4E"
 static let COLOR_SUB = "#B3B4B5"
 static let COLOR_GREEN = "#40C84D"
     
-static let TEXT_LOADING = "加载中..."
+static let TEXT_LOADING = "正在加载"
 
 static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
     
+    /**
+    检查网络状态
+    */
+    class func checkNetWorkState() {
+        //网络状态
+        AFNetworkReachabilityManager.sharedManager().startMonitoring()
+        AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock({st in
+            switch st {
+            case .ReachableViaWiFi:
+                println("网络状态:WIFI")
+            case .ReachableViaWWAN:
+                println("网络状态:3G")
+            case .NotReachable:
+                println("网络状态:不可用")
+            default:
+                println("网络状态:火星")
+            }
+        })
+        AFNetworkReachabilityManager.sharedManager().stopMonitoring()
+
+    }
     /**
     显示HUD提示框
     
@@ -171,23 +192,31 @@ static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc31
     UITableView 空数据时显示的类型
     
     :param: tv 要显示内容的TableView
+    errorType: 1,空数据时; 2,加载失败
     */
-    class func showEmptyView(tv: UITableView) {
+    class func showEmptyView(tv: UITableView, errorType: Int) {
         var v = UIView(frame: tv.frame)
-        
-        var img = UIImageView(image: UIImage(named: "load_error"))
-        let btnX = (v.bounds.size.width - img.frame.size.width) / 2
-        let btnY = (v.bounds.size.height - img.frame.size.height) / 2
-        img.frame = CGRectMake(btnX, btnY, img.frame.size.width, img.frame.size.height)
+        var imgName: String!
+        var text: String!
+        if errorType == 1 {
+            imgName = "load_empty"
+            text = "还没有数据哦"
+        } else {
+            imgName = "load_error"
+            text = "获取数据失败,请稍后刷新重试"
+        }
+        var img = UIImageView(image: UIImage(named: imgName))
+        let btnX = (v.bounds.size.width - img.bounds.size.width) / 2
+        let btnY = (v.bounds.size.height - img.bounds.size.height-30) / 2
+        img.frame = CGRectMake(btnX, btnY, img.bounds.size.width, img.bounds.size.height)
         v.addSubview(img)
         
-        var lb = UILabel(frame: CGRectMake(0, btnY+img.frame.size.height+10, v.bounds.size.width, 50))
-        lb.text = "获取数据失败\n请稍后刷新重试"
+        var lb = UILabel(frame: CGRectMake(0, btnY+img.frame.size.height+10, v.bounds.size.width, 20))
+        lb.text = text
         lb.numberOfLines = 2;
         lb.textAlignment = .Center;
         lb.textColor = UIColor.lightGrayColor()
         v.addSubview(lb)
-        
         tv.backgroundView = v
         tv.separatorStyle = UITableViewCellSeparatorStyle.None
     }

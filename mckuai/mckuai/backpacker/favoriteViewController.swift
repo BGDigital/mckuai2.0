@@ -101,6 +101,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
+                MCUtils.showEmptyView(self.tableView, errorType: 2)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }
@@ -109,7 +110,6 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
         println("开始加载\(self.page.currentPage+1)页")
         var dict = ["act":"collectTalk", "id": appUserIdSave, "page": page.currentPage+1]
         //println("加载:\(self.liveType),\(self.liveOrder)======")
-        isFirstLoad = false
         //开始刷新
         manager.GET(URL_MC,
             parameters: dict,
@@ -158,7 +158,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
-            MCUtils.showEmptyView(self.tableView)
+            MCUtils.showEmptyView(self.tableView, errorType: 1)
             return 0
         }
     }

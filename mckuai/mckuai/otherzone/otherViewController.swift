@@ -185,7 +185,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         if !self.datasource.isEmpty {
             return self.datasource.count
         } else {
-            MCUtils.showEmptyView(self.tableView)
+//            MCUtils.showEmptyView(self.tableView)
             return 0
         }
     }

@@ -256,7 +256,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
-            MCUtils.showEmptyView(self.tableView)
+//            MCUtils.showEmptyView(self.tableView)
             return 0
         }
     }
