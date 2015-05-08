@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--Chat List View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="oko-ig-dWs">
             <objects>
-                <viewController restorationIdentifier="chatViewController" storyboardIdentifier="chatViewController" id="xHX-R8-csm" customClass="RCChatListViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="chatViewController" storyboardIdentifier="chatViewController" id="xHX-R8-csm" customClass="chatViewController" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YlN-pq-mih"/>
                         <viewControllerLayoutGuide type="bottom" id="IkY-9D-u4d"/>

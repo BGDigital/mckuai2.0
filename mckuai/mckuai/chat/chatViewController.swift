@@ -19,13 +19,11 @@ class chatViewController: RCChatListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //customNavBackButton()
-        // Do any additional setup after loading the view.
+        customNavBackButton()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
         
     }
     
@@ -36,32 +34,63 @@ class chatViewController: RCChatListViewController {
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         
-//        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
-//        back.tintColor = UIColor.whiteColor()
-//        self.navigationItem.leftBarButtonItem = back
+        var back = UIBarButtonItem(image: UIImage(named: "sidemenu"), style: UIBarButtonItemStyle.Bordered, target: self, action: "leftBarButtonItemPressed:")
+        back.tintColor = UIColor.whiteColor()
+        self.navigationItem.leftBarButtonItem = back
     }
     
-//    @IBAction func beginChat(sender: AnyObject) {
-//        RCIM.connectWithToken(MCUtils.RC_token,
-//            completion: {userId in
-//                println("Login Successrull:\(userId)")
-//                var v: RCChatListViewController = RCIM.sharedRCIM().createConversationList(nil)
-//                v.hidesBottomBarWhenPushed = true
-//                //self.navigationController?.pushViewController(v, animated: true)
-//            },
-//            error: {status in
-//                println("Login Faild. \(status)")
-//        })
-//    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func leftBarButtonItemPressed(sender: AnyObject!) {
+        println("打开菜单")
     }
-    */
-
+    
+    override func rightBarButtonItemPressed(sender: AnyObject!) {
+        //跳转好友列表界面，可是是融云提供的UI组件，也可以是自己实现的UI
+        var temp: RCSelectPersonViewController = RCSelectPersonViewController()
+        //控制多选
+        temp.isMultiSelect = true
+        temp.portaitStyle = RCUserAvatarStyle.Cycle
+        var nav = UINavigationController(rootViewController: temp)
+        //导航和的配色保持一直
+        nav.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        temp.delegate = self
+        self.presentViewController(nav, animated: true, completion: nil)
+        //self.tabBarController?.tabBar.hidden = true
+    }
+    
+    override func startPrivateChat(userInfo: RCUserInfo!) {
+        if let c: customChatViewController = self.getChatController(userInfo.userId, conversationType: .ConversationType_PRIVATE) as? customChatViewController {
+            self.addChatController(c)
+            c.currentTarget = userInfo.userId
+            c.currentTargetName = userInfo.name
+            c.conversationType = .ConversationType_PRIVATE
+            self.navigationController?.pushViewController(c, animated: true)
+        } else {
+            var chat = RCChatViewController()
+            chat.portraitStyle = .Cycle
+            chat.hidesBottomBarWhenPushed = true
+            chat.currentTarget = userInfo.userId
+            chat.currentTargetName = userInfo.name
+            chat.conversationType = .ConversationType_PRIVATE
+            self.navigationController?.pushViewController(chat, animated: true)
+        }
+    }
+    
+    override func onSelectedTableRow(conversation: RCConversation!) {
+        //该方法目的延长会话聊天UI的生命周期
+        if let c: customChatViewController = self.getChatController(conversation.targetId, conversationType: conversation.conversationType) as? customChatViewController {
+            self.addChatController(c)
+            c.currentTarget = conversation.targetId
+            c.conversationType = conversation.conversationType
+            c.currentTargetName = conversation.conversationTitle
+            self.navigationController?.pushViewController(c, animated: true)
+        } else {
+        var chat = customChatViewController()
+            chat.portraitStyle = .Cycle
+            chat.hidesBottomBarWhenPushed = true
+            chat.currentTarget = conversation.targetId
+            chat.conversationType = conversation.conversationType
+            chat.currentTargetName = conversation.conversationTitle
+            self.navigationController?.pushViewController(chat, animated: true)
+        }
+    }
 }

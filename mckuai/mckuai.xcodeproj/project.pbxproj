@@ -125,6 +125,7 @@
 		E6DDF4BC1AF0824500339E75 /* other.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DDF4BB1AF0824500339E75 /* other.storyboard */; };
 		E6DDF4BF1AF0829000339E75 /* otherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4BE1AF0829000339E75 /* otherViewController.swift */; };
 		E6DDF4C11AF082EA00339E75 /* otherHeadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DDF4C01AF082EA00339E75 /* otherHeadViewController.swift */; };
+		E6E979631AFCB6CF00BF3E3F /* customChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E979621AFCB6CF00BF3E3F /* customChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,6 +328,7 @@
 		E6DDF4BB1AF0824500339E75 /* other.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = other.storyboard; path = otherzone/other.storyboard; sourceTree = "<group>"; };
 		E6DDF4BE1AF0829000339E75 /* otherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = otherViewController.swift; path = otherzone/otherViewController.swift; sourceTree = "<group>"; };
 		E6DDF4C01AF082EA00339E75 /* otherHeadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = otherHeadViewController.swift; path = otherzone/otherHeadViewController.swift; sourceTree = "<group>"; };
+		E6E979621AFCB6CF00BF3E3F /* customChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = customChatViewController.swift; path = chat/customChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -610,6 +612,7 @@
 			children = (
 				E6B204411AE6A63C00EB11B4 /* chat.storyboard */,
 				E6B204431AE6A66300EB11B4 /* chatViewController.swift */,
+				E6E979621AFCB6CF00BF3E3F /* customChatViewController.swift */,
 			);
 			name = chat;
 			sourceTree = "<group>";
@@ -1017,6 +1020,7 @@
 				0B8671261AF9E23E00F3F63F /* ImageUtil.swift in Sources */,
 				0B8671251AF9E23E00F3F63F /* HttpUrl.swift in Sources */,
 				E6518BED1ADD065E005A8C97 /* AppDelegate.swift in Sources */,
+				E6E979631AFCB6CF00BF3E3F /* customChatViewController.swift in Sources */,
 				E6DDF4AC1AEF662400339E75 /* CollectionCell.swift in Sources */,
 				E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */,
 				E6A40CC71AFC57D500F19D75 /* UIView+Shake.swift in Sources */,
