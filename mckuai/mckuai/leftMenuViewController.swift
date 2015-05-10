@@ -29,14 +29,14 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         if Defaults.hasKey(D_USER_ID) {
             appUserIdSave = Defaults[D_USER_ID].int!
             appUserLevel = 8
-            appUserPic = ""
-            appUserNickName = "一叶之秋"
+//            appUserPic = ""
+//            appUserNickName = "一叶之秋"
             appUserAddr = "成都市"
 
 //            appUserLevel = Defaults[D_USER_LEVEL].int!
-//            appUserPic = Defaults[D_USER_ARATAR].string!
+            appUserPic = Defaults[D_USER_ARATAR].string!
 //            appUserAddr = Defaults[D_CURRENTCITY].string!
-//            appUserNickName = Defaults[D_USER_NICKNAME].string!
+            appUserNickName = Defaults[D_USER_NICKNAME].string!
 //            appUserAddr = Defaults[D_CURRENTCITY].string!
         }
 
@@ -53,6 +53,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         //这里加了个Header(用户信息)
         var header = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, headerHeight))
         Avatar = UIImageView(frame: CGRectMake(15, 5, 40, 40))
+        println(appUserPic)
         Avatar.sd_setImageWithURL(NSURL(string: appUserPic), placeholderImage: UIImage(named: "Avatar"))
         Avatar.layer.borderWidth = 1
         Avatar.layer.borderColor = UIColor.whiteColor().CGColor
@@ -108,9 +109,9 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         
         self.view.addSubview(self.tableView)
     }
-    
+        
     @IBAction func userLogin() {
-        UserLogin.showUserLoginView(presentNavigator: nil)
+        UserLogin.showUserLoginView(presentNavigator: nil, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()
     }
@@ -172,9 +173,18 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                     appUserAddr = ""
                     appUserNickName = ""
                     //刷新界面
+                    self.Avatar.image = UIImage(named: "Avatar")
                     self.username.hidden = true
                     self.level.hidden = true
                     self.btnLogin.hidden = false
+                    //刷新主界面
+                    var mainCV = (MCUtils.mainHeadView as! mainHeaderViewController)
+                    mainCV.roundProgressView.imageUrl = "1"
+                    mainCV.nickname.hidden = true
+                    mainCV.level.hidden = true
+                    mainCV.locationCity.hidden = true
+                    mainCV.bag.hidden = true
+                    mainCV.btnLogin.hidden = false
                 }
                 alert.showWarning("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏贴子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
             } else {
@@ -218,4 +228,5 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titles.count
     }
+    
 }

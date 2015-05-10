@@ -70,21 +70,25 @@ class PageInfo {
 
 class MCUtils {
 
-//一些通用的系统常量
-static var TB: UITabBarController!
-//这里存储一个首页的NavigationController,侧边菜单用
-static var mainNav: UINavigationController?
-//RondCloud
-static let RC_token = "dxcm0lr7Egt+GZp6DerjqOeLBPbf3gS4wMl0dLcWBkT2IBDBKobyAFDYl2T1/6H0d1ljiW3e/f4="
-    
-static let COLOR_NavBG = "#43D152"
-static let COLOR_MAIN = "#4C4D4E"
-static let COLOR_SUB = "#B3B4B5"
-static let COLOR_GREEN = "#40C84D"
-    
-static let TEXT_LOADING = "正在加载"
+    //一些通用的系统常量
+    static var TB: UITabBarController!
+    //侧滑菜单栏
+    static var leftView: UIViewController!
+    //主界面的HeadView
+    static var mainHeadView: UIViewController!
+    //这里存储一个首页的NavigationController,侧边菜单用
+    static var mainNav: UINavigationController?
+    //RondCloud
+    static let RC_token = "dxcm0lr7Egt+GZp6DerjqOeLBPbf3gS4wMl0dLcWBkT2IBDBKobyAFDYl2T1/6H0d1ljiW3e/f4="
+        
+    static let COLOR_NavBG = "#43D152"
+    static let COLOR_MAIN = "#4C4D4E"
+    static let COLOR_SUB = "#B3B4B5"
+    static let COLOR_GREEN = "#40C84D"
+        
+    static let TEXT_LOADING = "正在加载"
 
-static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
+    static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
     
     
     class func setNavBack() {

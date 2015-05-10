@@ -58,6 +58,11 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="PIu-gd-JDU"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qj8-bT-NLt" customClass="MFRoundProgressView" customModule="mckuai" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="60" height="60"/>
@@ -79,10 +84,10 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="od5-If-XNm">
-                                        <rect key="frame" x="192" y="17" width="43" height="18"/>
+                                        <rect key="frame" x="192" y="17" width="45" height="15"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="43" id="TIz-bI-ZSQ"/>
-                                            <constraint firstAttribute="height" constant="18" id="hZN-19-5Zp"/>
+                                            <constraint firstAttribute="width" constant="45" id="TIz-bI-ZSQ"/>
+                                            <constraint firstAttribute="height" constant="15" id="hZN-19-5Zp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="LV. 22">

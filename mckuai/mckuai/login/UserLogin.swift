@@ -9,9 +9,19 @@
 import Foundation
 import UIKit
 
+protocol LoginProtocol {
+    /**
+    登录成功后的协议
+    
+    :returns: Void
+    */
+    func onLoginSuccessfull() -> Void
+}
+
 class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     var manager = AFHTTPRequestOperationManager()
+    var Delegate: LoginProtocol?
     
     var rightButton:UIButton?
 //    let ITEM_WIDTH:CGFloat = 45
@@ -122,7 +132,9 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                 h = nil
         }
     }
-    
+    /**
+    麦块自己的登录系统
+    */
     func mckuaiLoginFunction() {
         let params = [
             "userName":self.userName.text,
@@ -159,7 +171,7 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     //是否记住登录信息(用户名,密码)
                     let D_ISREMEMBERME = "isRememberMe"
                     */
-                    
+                    self.Delegate?.onLoginSuccessfull()
                      self.navigationController?.popViewControllerAnimated(true)
                 }
                 
@@ -224,7 +236,7 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             var nickName:String = userInfo["nickname"] as! String!
             var gender:String = userInfo["gender"] as! String!
             var headImg:String = userInfo["figureurl_qq_2"] as! String!
-            println(nickName)
+            println("\(nickName), \(gender), \(headImg)")
             
             let params = [
                 "accessToken": accessToken,
@@ -247,12 +259,18 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                         var userId = json["dataObject"].intValue
                         //保存登录信息
                         Defaults[D_USER_ID] = userId
+                        Defaults[D_USER_NICKNAME] = nickName
+                        Defaults[D_USER_ARATAR] = headImg
+                        
                         appUserIdSave = userId
+                        appUserNickName = nickName
+                        appUserPic = headImg
                         if let nav = self.navigationController {
                             self.navigationController?.popViewControllerAnimated(true)
                         } else {
                             MCUtils.mainNav?.popViewControllerAnimated(true)
                         }
+                        self.Delegate?.onLoginSuccessfull()
                     }
                     
                 },
@@ -295,8 +313,9 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
 
     
-    class func showUserLoginView(presentNavigator ctl:UINavigationController?){
+    class func showUserLoginView(presentNavigator ctl:UINavigationController?, aDelegate: LoginProtocol){
         var userLoginView = UIStoryboard(name: "UserLogin", bundle: nil).instantiateViewControllerWithIdentifier("userLogin") as! UserLogin
+        userLoginView.Delegate = aDelegate
         if (ctl != nil) {
             ctl?.pushViewController(userLoginView, animated: true)
         } else {

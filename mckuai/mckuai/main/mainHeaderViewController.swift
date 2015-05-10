@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mainHeaderViewController: UIViewController, CityProtocol {
+class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     
     var cityList: cityListViewController!
     var mineFrm: mineTableViewController!
@@ -35,10 +35,15 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         
         //圆角背景
         level.backgroundColor = UIColor(hexString: "#30A243")
-        level.layer.cornerRadius = 10
+        level.layer.cornerRadius = 7
         
         bag.setImage(UIImage(named: "backpacker_selected"), forState: .Selected)
         imageV.sd_setImageWithURL(nil, placeholderImage: UIImage(named: "loading"))
+        
+        //用户头像
+        self.roundProgressView.progressLineWidth = 1
+        self.roundProgressView.progressColor = UIColor(hexString: "#32FD2F")!
+        self.roundProgressView.progressBackgroundColor = UIColor.whiteColor()
         
         //添加事件
         nickname.userInteractionEnabled = true
@@ -71,13 +76,10 @@ class mainHeaderViewController: UIViewController, CityProtocol {
             self.btnLogin.hidden = true
             
             var p = user["process"].floatValue * 100
-            self.roundProgressView.progressLineWidth = 1
-            self.roundProgressView.progressColor = UIColor(hexString: "#32FD2F")!
-            self.roundProgressView.progressBackgroundColor = UIColor.whiteColor()
             self.roundProgressView.percent = CGFloat(p)
             self.roundProgressView.imageUrl = user["headImg"].stringValue
             self.nickname.text = user["nike"].stringValue
-            self.level.setTitle(user["level"].stringValue, forState: .Normal)
+            self.level.setTitle("LV."+user["level"].stringValue, forState: .Normal)
             if !user["addr"].stringValue.isEmpty {
                 locationCity.setTitle(user["addr"].stringValue, forState: .Normal)
             } else {
@@ -104,7 +106,7 @@ class mainHeaderViewController: UIViewController, CityProtocol {
     }
     
     @IBAction func userLogin() {
-        UserLogin.showUserLoginView(presentNavigator: self.nav)
+        UserLogin.showUserLoginView(presentNavigator: self.nav, aDelegate: self)
     }
     
     @IBAction func openBackPacker() {
@@ -146,7 +148,32 @@ class mainHeaderViewController: UIViewController, CityProtocol {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func onLoginSuccessfull() {
+        println("登录成功,刷新界面,主界面")
+        self.nickname.hidden = false
+        self.level.hidden = false
+        self.locationCity.hidden = false
+        self.bag.hidden = false
+        self.btnLogin.hidden = true
+        
+        self.roundProgressView.percent = 0
+        self.roundProgressView.imageUrl = appUserPic
+        self.nickname.text = appUserNickName
+        self.level.setTitle("LV.0", forState: .Normal)
+        
+        //leftViewController
+        var leftCV = (MCUtils.leftView as! leftMenuViewController)
+        leftCV.username.hidden = false
+        leftCV.level.hidden = false
+        leftCV.btnLogin.hidden = true
 
+        leftCV.Avatar.sd_setImageWithURL(NSURL(string: appUserPic), placeholderImage: UIImage(named: "Avatar"))
+        leftCV.username.text = appUserNickName
+        leftCV.level.setTitle("LV."+String(appUserLevel), forState: .Normal)
+        leftCV.btnLogin.hidden = true
+    }
+    
     /*
     // MARK: - Navigation
 

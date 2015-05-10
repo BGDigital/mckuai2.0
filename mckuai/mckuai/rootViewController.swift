@@ -36,6 +36,7 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         
         self.contentViewController = MCUtils.TB
         self.leftMenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
+        MCUtils.leftView = self.leftMenuViewController
         //这里不需要右边栏
         //self.rightMenuViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
         //self.backgroundImage = UIImage(named: "Image")

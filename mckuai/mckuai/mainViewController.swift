@@ -14,6 +14,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var manager = AFHTTPRequestOperationManager()
     var isFirstLoad = true   //是否初次加载
     var hud: MBProgressHUD?
+    var loginVC: UserLogin!
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
@@ -63,7 +64,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             loadDataWithoutMJRefresh()
         }
         MCUtils.checkNetWorkState()
-        
     }
     
     func loadDataWithoutMJRefresh() {
@@ -94,6 +94,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //添加Header
         head = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainHeaderViewController") as! mainHeaderViewController
+        MCUtils.mainHeadView = head
         head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 235)
         head.setNavi(self.navigationController)
         tableView.tableHeaderView = head.view
