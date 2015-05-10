@@ -11,7 +11,7 @@ import UIKit
 class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewDelegate, UITableViewDataSource {
     
     let cellHeight: CGFloat = 50
-    let headerHeight: CGFloat = 50
+    let headerHeight: CGFloat = 80
     var tableView: UITableView!
     let titles = ["新手任务", "我的背包", "分享给好友", "评价APP", "软件设置", "退出登录"]
     let images = ["newuser", "backpacker", "share", "pingfen", "setting", "logout"]
@@ -20,6 +20,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     var username: UILabel!
     var level: UIButton!
     var btnLogin: UIButton!
+    var btnSearch: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,8 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         var header = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, headerHeight))
         Avatar = UIImageView(frame: CGRectMake(15, 5, 40, 40))
         Avatar.sd_setImageWithURL(NSURL(string: appUserPic), placeholderImage: UIImage(named: "Avatar"))
+        Avatar.layer.borderWidth = 1
+        Avatar.layer.borderColor = UIColor.whiteColor().CGColor
         Avatar.layer.masksToBounds = true
         Avatar.layer.cornerRadius = 20
         header.addSubview(Avatar)
@@ -79,6 +82,17 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
         header.addSubview(btnLogin)
         
+        btnSearch = UIButton(frame: CGRectMake(15, 55, self.view.bounds.size.width-15-120, 25))
+        btnSearch.backgroundColor = UIColor.blackColor()
+        btnSearch.layer.borderColor = UIColor.whiteColor().CGColor
+        btnSearch.layer.borderWidth = 1
+        btnSearch.alpha = 0.2
+        btnSearch.setTitle("搜索", forState: .Normal)
+        btnSearch.titleLabel?.font = UIFont(name: btnSearch.titleLabel!.font.fontName, size: 14)
+        btnSearch.titleLabel!.textAlignment = NSTextAlignment.Left
+        btnSearch.addTarget(self, action: "showSearch", forControlEvents: .TouchUpInside)
+        header.addSubview(btnSearch)
+        
         header.backgroundColor = UIColor.clearColor()
         tableView.tableHeaderView = header
         
@@ -97,6 +111,12 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     
     @IBAction func userLogin() {
         UserLogin.showUserLoginView(presentNavigator: nil)
+        //隐藏菜单
+        self.sideMenuViewController.hideMenuViewController()
+    }
+    
+    @IBAction func showSearch() {
+        UIAlertView(title: "", message: "搜索", delegate: self, cancelButtonTitle: "确定").show()
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()
     }
