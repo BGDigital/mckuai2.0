@@ -150,7 +150,8 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             break
         case 3:
             //评价APP
-            break
+            //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/sandman/id388887746?mt=8&uo=4"]];
+            UIApplication.sharedApplication().openURL(NSURL(string: URL_APPSTORE)!)
         case 4:
             //设置
             break
