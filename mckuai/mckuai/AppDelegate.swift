@@ -14,11 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     var window: UIWindow?
     var launchView: UIView!
     
-    private func IS_IOS7() ->Bool
-    { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 7.0 }
-    private func IS_IOS8() -> Bool
-    { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0 }
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //缓存,不知道有没有用

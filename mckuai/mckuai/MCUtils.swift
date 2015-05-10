@@ -8,6 +8,11 @@
 
 import Foundation
 
+func IS_IOS7() ->Bool
+    { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 7.0 }
+func IS_IOS8() -> Bool
+    { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0 }
+
 let tencentAppKey = "101155101"
 
 //本地配置文件

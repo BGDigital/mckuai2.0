@@ -77,7 +77,11 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setupTableView() {
-        self.tableView = UITableView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height), style: UITableViewStyle.Plain)
+        if IS_IOS8() {
+            self.tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
+        } else {
+            self.tableView = UITableView(frame: CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-(64+44)), style: UITableViewStyle.Plain)
+        }
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
         tableView.delegate = self
         tableView.dataSource = self
@@ -90,7 +94,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //添加Header
         head = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainHeaderViewController") as! mainHeaderViewController
-        head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 245)
+        head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 235)
         head.setNavi(self.navigationController)
         tableView.tableHeaderView = head.view
         
