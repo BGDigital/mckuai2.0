@@ -77,7 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     }
     
     func loadLaunchView() {
-        self.window?.makeKeyAndVisible()
         launchView = NSBundle.mainBundle().loadNibNamed("LaunchScreen", owner: nil, options: nil)[0] as! UIView
         launchView.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height)
         self.window?.addSubview(launchView)

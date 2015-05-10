@@ -15,10 +15,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-QP-hHi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="live_cell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="O0c-MS-O9N">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Xj-dp-nxk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
@@ -45,7 +45,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6o2-i9-2oT">
-                                <rect key="frame" x="154" y="158" width="68" height="16"/>
+                                <rect key="frame" x="153" y="158" width="70" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="生存直播 " image="life">
                                     <color key="titleColor" red="0.64313725489999995" green="0.64705882349999999" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,6 +54,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bk3-vh-xT9">
                                 <rect key="frame" x="281" y="158" width="82" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="g2j-e8-VOt"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="正在直播" image="live">
                                     <color key="titleColor" red="0.64313725489999995" green="0.64705882349999999" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -74,9 +77,6 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYO-wS-A5a">
                                 <rect key="frame" x="15" y="102" width="345" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="345" id="Gie-jh-A52"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -92,15 +92,13 @@
                             <constraint firstItem="bk3-vh-xT9" firstAttribute="top" secondItem="5Xj-dp-nxk" secondAttribute="bottom" constant="9" id="AeN-3l-wBH"/>
                             <constraint firstItem="lKh-h0-Xiq" firstAttribute="top" secondItem="4Iw-Yc-srH" secondAttribute="bottom" constant="7" id="BIQ-LZ-H9T"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="centerY" secondItem="AuI-QP-hHi" secondAttribute="centerY" id="EpD-fF-3nv"/>
-                            <constraint firstItem="bk3-vh-xT9" firstAttribute="leading" secondItem="O0c-MS-O9N" secondAttribute="trailing" constant="-94" id="FEq-oY-Qlt"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="top" secondItem="AuI-QP-hHi" secondAttribute="top" id="FGw-JR-ges"/>
                             <constraint firstItem="5Xj-dp-nxk" firstAttribute="trailing" secondItem="bk3-vh-xT9" secondAttribute="trailing" constant="12" id="GfD-Mf-zR8"/>
-                            <constraint firstItem="O0c-MS-O9N" firstAttribute="centerX" secondItem="5Xj-dp-nxk" secondAttribute="centerX" id="ZKW-Q6-5eh"/>
+                            <constraint firstItem="lKh-h0-Xiq" firstAttribute="top" secondItem="EYO-wS-A5a" secondAttribute="bottom" constant="33" id="SJS-F5-NB4"/>
+                            <constraint firstItem="bk3-vh-xT9" firstAttribute="leading" secondItem="O0c-MS-O9N" secondAttribute="trailing" constant="-94" id="e86-mY-J1L"/>
                             <constraint firstItem="4Iw-Yc-srH" firstAttribute="trailing" secondItem="5Xj-dp-nxk" secondAttribute="trailing" id="f1h-UL-UVo"/>
-                            <constraint firstItem="EYO-wS-A5a" firstAttribute="centerX" secondItem="4Iw-Yc-srH" secondAttribute="centerX" id="fKs-3N-FXe"/>
                             <constraint firstItem="4Iw-Yc-srH" firstAttribute="leading" secondItem="5Xj-dp-nxk" secondAttribute="leading" id="gnP-VS-cAW"/>
                             <constraint firstItem="6o2-i9-2oT" firstAttribute="top" secondItem="5Xj-dp-nxk" secondAttribute="bottom" constant="9" id="nVI-RN-fkM"/>
-                            <constraint firstItem="EYO-wS-A5a" firstAttribute="top" secondItem="4Iw-Yc-srH" secondAttribute="bottom" constant="-47" id="ojB-yx-RWn"/>
                             <constraint firstItem="5Xj-dp-nxk" firstAttribute="top" secondItem="AuI-QP-hHi" secondAttribute="top" id="rSu-1C-XF9"/>
                             <constraint firstAttribute="trailing" secondItem="O0c-MS-O9N" secondAttribute="trailing" id="rzw-6x-ty6"/>
                             <constraint firstItem="O0c-MS-O9N" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" id="uHx-Xc-dwq"/>
@@ -112,7 +110,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="AuI-QP-hHi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CfD-Ty-NI4"/>
-                    <constraint firstAttribute="bottom" secondItem="AuI-QP-hHi" secondAttribute="bottom" constant="-1" id="bfk-n9-mht"/>
+                    <constraint firstAttribute="bottom" secondItem="AuI-QP-hHi" secondAttribute="bottom" id="bfk-n9-mht"/>
                     <constraint firstItem="AuI-QP-hHi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jlJ-tY-A7o"/>
                     <constraint firstAttribute="trailing" secondItem="AuI-QP-hHi" secondAttribute="trailing" id="wlJ-Ix-uT3"/>
                 </constraints>
@@ -129,8 +127,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="life" width="12" height="12"/>
-        <image name="live" width="12" height="12"/>
+        <image name="life" width="14" height="14"/>
+        <image name="live" width="14" height="14"/>
         <image name="live_ shadow" width="4" height="149"/>
         <image name="live_cell_bg" width="10" height="190"/>
         <image name="live_replys" width="11" height="11"/>
