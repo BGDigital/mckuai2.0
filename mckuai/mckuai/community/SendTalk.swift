@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
@@ -67,7 +67,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initNavigation()
+        setRightBarButtonItem()
         
         initBigKinds()
         
@@ -387,25 +387,6 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
             self.small_last.selected = false
         }
         self.small_last = sender
-    }
-    
-    
-    
-    func initNavigation() {
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
-        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
-        back.tintColor = UIColor.whiteColor()
-        self.navigationItem.leftBarButtonItem = back
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
-        setRightBarButtonItem()
-    }
-    
-    
-    func backToPage() {
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     

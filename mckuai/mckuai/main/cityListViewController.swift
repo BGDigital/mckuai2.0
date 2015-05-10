@@ -13,7 +13,7 @@ protocol CityProtocol {
     func onSelectCity(selectedCity: String)
 }
 
-class cityListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate, UIGestureRecognizerDelegate {
+class cityListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate {
     var manager = AFHTTPRequestOperationManager()
     //用于定位服务管理类，它能够给我们提供位置信息和高度信息，也可以监控设备进入或离开某个区域，还可以获得设备的运行方向
     let locationManager : CLLocationManager = CLLocationManager()
@@ -40,23 +40,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         
         getCityData()
         setupTableView()
-        customNavBackButton()
-    }
-    
-    func customNavBackButton() {
-        //设置标题颜色
         self.navigationItem.title = "定位"
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-        
-        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
-        back.tintColor = UIColor.whiteColor()
-        self.navigationItem.leftBarButtonItem = back
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
-    }
-    
-    func backToMain() {
-        self.navigationController?.popViewControllerAnimated(true)
     }
 
     func getCityData() {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
     var params = [String: String]()
@@ -36,20 +36,12 @@ class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDel
         sendButton.target = self
         sendButton.action = Selector("send")
         self.navigationItem.rightBarButtonItem = sendButton
-        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
-        back.tintColor = UIColor.whiteColor()
-        self.navigationItem.leftBarButtonItem = back
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
         initTextView()
         initimage()
         
         
         
         // Do any additional setup after loading the view.
-    }
-    
-    func backToPage() {
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func initTextView() {

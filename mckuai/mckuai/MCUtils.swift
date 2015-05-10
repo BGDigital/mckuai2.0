@@ -79,6 +79,25 @@ static let TEXT_LOADING = "正在加载"
 
 static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
     
+    
+    class func setNavBack() {
+        //
+        var navigationBar = UINavigationBar.appearance()
+        //返回按钮的箭头颜色
+        navigationBar.tintColor = UIColor.whiteColor()
+        //设置标题颜色 白色
+        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
+        navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
+        //设置返回按钮的样式
+        var img = UIImage(named: "nav_back")
+        img?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        navigationBar.backIndicatorImage = img
+        navigationBar.backIndicatorTransitionMaskImage = img
+        var backItem = UIBarButtonItem.appearance()
+        var offset = UIOffset(horizontal: -500, vertical: -500)
+        backItem.setBackButtonTitlePositionAdjustment(offset, forBarMetrics: .Default)
+    }
+    
     /**
     检查网络状态
     */

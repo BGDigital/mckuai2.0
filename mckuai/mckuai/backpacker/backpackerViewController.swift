@@ -8,7 +8,7 @@
 
 import UIKit
 
-class backpackerViewController: UIViewController, UIGestureRecognizerDelegate {
+class backpackerViewController: UIViewController {
 
     var segmentedControl: HMSegmentedControl!
     var favorite: favoriteViewController!
@@ -29,8 +29,9 @@ class backpackerViewController: UIViewController, UIGestureRecognizerDelegate {
         self.hidesBottomBarWhenPushed = true  //这句在pop回来的时候没有效果
         self.view.backgroundColor = UIColor.whiteColor()
         initSegmentedControl()
-        customNavBackButton()
         initSubView()
+        //设置标题颜色
+        self.navigationItem.title = "背包"
         // Do any additional setup after loading the view.
     }
 
@@ -66,24 +67,6 @@ class backpackerViewController: UIViewController, UIGestureRecognizerDelegate {
         favorite.view.frame = rect
         self.view.addSubview(favorite.view)
     }
-    
-    func customNavBackButton() {
-        //设置标题颜色
-        self.navigationItem.title = "背包"
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-        
-        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
-        back.tintColor = UIColor.whiteColor()
-        self.navigationItem.leftBarButtonItem = back
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
-    }
-    
-    
-    func backToMain() {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-
     
     func initSegmentedControl() {
         segmentedControl = HMSegmentedControl(sectionTitles: ["贴子", "麦友"])

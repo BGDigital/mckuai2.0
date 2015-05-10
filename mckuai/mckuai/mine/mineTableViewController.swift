@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MineProtocol, UIGestureRecognizerDelegate {
+class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MineProtocol {
     var tableView: UITableView!
     var isFirstLoad = true
     var mineType = "message"
@@ -86,9 +86,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         setupViews()
         
-        customNavBackButton()
-        
-        
         if isFirstLoad {
             loadDataWithoutMJRefresh()
         }
@@ -100,24 +97,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         loadNewData()
     }
 
-    
-    func customNavBackButton() {
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-        //设置标题颜色 白色
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-        
-        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
-        back.tintColor = UIColor.whiteColor()
-        self.navigationItem.leftBarButtonItem = back
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
-    }
-    
-    func backToMain() {
-        self.navigationController?.popViewControllerAnimated(true)
-        //设置主界面
-        self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
-    }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var color = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)

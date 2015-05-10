@@ -8,7 +8,7 @@
 
 import UIKit
 
-class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OtherProtocol, UIGestureRecognizerDelegate {
+class otherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OtherProtocol {
 
     private var tableView: UITableView!
     private var otherhead: otherHeadViewController!
@@ -95,7 +95,6 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.hidesBottomBarWhenPushed = true
         setupViews()
         showPopWindow()
-        customNavBackButton()
         
         if isFirstLoad {
             loadDataWithoutMJRefresh()
@@ -106,24 +105,6 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud?.labelText = MCUtils.TEXT_LOADING
         loadNewData()
-    }
-    
-    func customNavBackButton() {
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-        //设置标题颜色 白色
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-        
-        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToMain")
-        back.tintColor = UIColor.whiteColor()
-        self.navigationItem.leftBarButtonItem = back
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
-    }
-    
-    func backToMain() {
-        self.navigationController?.popViewControllerAnimated(true)
-        //设置主界面
-        //self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

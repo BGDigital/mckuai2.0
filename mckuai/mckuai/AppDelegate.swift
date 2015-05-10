@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         let appversion = majorVersion as! String
         MobClick.setAppVersion(appversion)
         
-        
+        MCUtils.setNavBack()
         return true
     }
     
