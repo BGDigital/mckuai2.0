@@ -101,7 +101,6 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
-                MCUtils.showEmptyView(self.tableView, errorType: 2)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
     }
@@ -158,7 +157,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
-            MCUtils.showEmptyView(self.tableView, errorType: 1)
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "什么也没有,下拉刷新试试?")
             return 0
         }
     }
@@ -179,5 +178,21 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
         let d = self.datasource[indexPath.row] as JSON
         cell?.update(d)
         return cell!
+    }
+    
+    // 提交编辑样式
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if UITableViewCellEditingStyle.Delete == editingStyle {
+            /**
+            注意：此处的方法顺序不能够颠倒
+            
+            界面上的内容显示是基于数组的，所有要显示之前，我们需要先把数据的内容搞定
+            */
+            // 1.删除数据
+            self.datasource.removeAtIndex(indexPath.row)
+            // 2.刷新数据
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+            
+        }
     }
 }

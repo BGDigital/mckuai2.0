@@ -97,7 +97,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         self.times.setTitle(chat["insertTime"].stringValue, forState: .Normal)
         self.chatTitle.text = chat["title"].stringValue
         self.chatTitle.sizeOfMultiLineLabel()
-        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "Avatar"))
+        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "SmallAvatar"))
         self.userHeadImg.layer.masksToBounds = true
         self.userHeadImg.layer.cornerRadius = 10
         self.userLastSay.text = chat["speak"].stringValue

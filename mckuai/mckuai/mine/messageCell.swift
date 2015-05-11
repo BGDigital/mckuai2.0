@@ -73,7 +73,7 @@ class messageCell: UITableViewCell {
                 var str = json["userName"].stringValue + sText
                 self.username.setTitle(str, forState: .Normal)
                 var Avatar = json["headImg"].stringValue
-                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,_ in
+                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,_ in
                     var rect = CGRectMake(0, 0, 20, 20)
                     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
                     img.drawInRect(rect)
@@ -86,7 +86,7 @@ class messageCell: UITableViewCell {
                 //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)
             default:  //system
                 var Avatar = json["headImg"].stringValue
-                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,_ in
+                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,_ in
                     var rect = CGRectMake(0, 0, 20, 20)
                     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
                     img.drawInRect(rect)

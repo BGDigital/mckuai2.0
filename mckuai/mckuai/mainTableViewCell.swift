@@ -67,7 +67,7 @@ class mainTableViewCell: UITableViewCell {
         default:
             self.replys.hidden = true
             var icon = json["headImg"].stringValue
-            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,_ in
+            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,_ in
                 var rect = CGRectMake(0, 0, 20, 20)
                 UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
                 img.drawInRect(rect)

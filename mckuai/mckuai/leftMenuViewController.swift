@@ -117,7 +117,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     }
     
     @IBAction func showSearch() {
-        UIAlertView(title: "", message: "搜索", delegate: self, cancelButtonTitle: "确定").show()
+        MCUtils.showSearchView(MCUtils.mainNav)
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()
     }

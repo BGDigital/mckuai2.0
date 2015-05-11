@@ -52,6 +52,13 @@ var appUserNickName: String = ""
 var appUserPic: String = ""
 var appUserAddr: String = ""
 
+//默认用户头像
+var DefaultUserAvatar_big = UIImage(named: "Avatar")
+var DefaultUserAvatar_small = UIImage(named: "SmallAvatar")
+var Load_Empty = UIImage(named: "load_empty")
+var Load_Error = UIImage(named: "load_error")
+var Loading = UIImage(named: "loading")
+
 //PageInfo 用于下拉刷新
 class PageInfo {
     var currentPage: Int = 0
@@ -79,7 +86,7 @@ class MCUtils {
     //这里存储一个首页的NavigationController,侧边菜单用
     static var mainNav: UINavigationController?
     //RondCloud
-    static let RC_token = "dxcm0lr7Egt+GZp6DerjqOeLBPbf3gS4wMl0dLcWBkT2IBDBKobyAFDYl2T1/6H0d1ljiW3e/f4="
+    static let RC_token = "ZIGaV25p4j0yEaTJoHFrHxuBCTxypfvhAwu2X8sXMLwKxdzFrTlE+6UsVCte1Y3bvCaTfXlThBl26u7eHxoTrA=="
         
     static let COLOR_NavBG = "#43D152"
     static let COLOR_MAIN = "#4C4D4E"
@@ -87,8 +94,9 @@ class MCUtils {
     static let COLOR_GREEN = "#40C84D"
         
     static let TEXT_LOADING = "正在加载"
+    static let TEXT_SEARCH = "搜索中..."
 
-    static let URL_LAUNCH = "http://f.hiphotos.baidu.com/image/pic/item/e1fe9925bc315c60191d32308fb1cb1348547760.jpg"
+    static let URL_LAUNCH = "http://cdn.mckuai.com/app_start.png"
     
     
     class func setNavBack() {
@@ -224,25 +232,16 @@ class MCUtils {
     :param: tv 要显示内容的TableView
     errorType: 1,空数据时; 2,加载失败
     */
-    class func showEmptyView(tv: UITableView, errorType: Int) {
+    class func showEmptyView(tv: UITableView, aImg: UIImage, aText: String) {
         var v = UIView(frame: tv.frame)
-        var imgName: String!
-        var text: String!
-        if errorType == 1 {
-            imgName = "load_empty"
-            text = "还没有数据哦"
-        } else {
-            imgName = "load_error"
-            text = "获取数据失败,请稍后刷新重试"
-        }
-        var img = UIImageView(image: UIImage(named: imgName))
+        var img = UIImageView(image: aImg)
         let btnX = (v.bounds.size.width - img.bounds.size.width) / 2
         let btnY = (v.bounds.size.height - img.bounds.size.height-30) / 2
         img.frame = CGRectMake(btnX, btnY, img.bounds.size.width, img.bounds.size.height)
         v.addSubview(img)
         
         var lb = UILabel(frame: CGRectMake(0, btnY+img.frame.size.height+10, v.bounds.size.width, 20))
-        lb.text = text
+        lb.text = aText
         lb.numberOfLines = 2;
         lb.textAlignment = .Center;
         lb.textColor = UIColor.lightGrayColor()
@@ -272,6 +271,18 @@ class MCUtils {
             self.mainNav?.pushViewController(backpacker, animated: true)
         }
     }
+    
+    /**
+    显示搜索页
+    
+    :param: ctl 主界面的NavigationController
+    */
+    class func showSearchView(ctl:UINavigationController?){
+        var searchView = UIStoryboard(name: "search", bundle: nil).instantiateViewControllerWithIdentifier("SearchViewController") as! SearchViewController
+        var nav = UINavigationController(rootViewController: searchView)
+        MCUtils.leftView.presentViewController(nav, animated: true, completion: nil)
+    }
+
 }
 
 /**

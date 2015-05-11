@@ -76,15 +76,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         launchView.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height)
         self.window?.addSubview(launchView)
         
-        var imageV = UIImageView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height-100))
-        
-        // 加载网络图片
-        imageV.sd_setImageWithURL(NSURL(string: MCUtils.URL_LAUNCH), placeholderImage: nil)
-        
+        var imageV = UIImageView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height))
         launchView.addSubview(imageV)
+        // 加载网络图片
+        imageV.sd_setImageWithURL(NSURL(string: MCUtils.URL_LAUNCH), placeholderImage: UIImage(named: "Default_LaunchImg"))
+        
         self.window?.bringSubviewToFront(launchView)
         //显示3秒杀
-        Async.main(after: 1, block: {self.removeLaunchView()})
+        Async.main(after: 3, block: {self.removeLaunchView()})
         //NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeLaunchView", userInfo: nil, repeats: false)
     }
     
@@ -125,6 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         user1.portraitUri = ""
         arr.addObject(user1)
         
+        var user2 = RCUserInfo(userId: "2", name: "陈强", portrait: "这个是啥")
+        arr.addObject(user2)
+        
+        var user3 = RCUserInfo(userId: "6", name: "邱兴福", portrait: "这个是啥")
+        arr.addObject(user3)
+        
         return arr as [AnyObject]
     }
     
@@ -138,6 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
             
             return completion(u)
         }
+        
         
         return completion(nil)
     }

@@ -54,7 +54,7 @@ class mainSubCell: UITableViewCell {
         self.title.sizeOfMultiLineLabel()
         var icon = json["headImg"].stringValue
         if !icon.isEmpty {
-            self.username.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "Avatar"), completed: { img,_,_,url in
+            self.username.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,url in
                 var rect = CGRectMake(0, 0, 20, 20)
                 UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
                 if(img != nil){
