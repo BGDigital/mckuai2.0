@@ -194,7 +194,8 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                
+                MCUtils.showEmptyView(self.tableView, aImg: Load_Error!, aText: "哇哦~,加载数据出问题了")
         })
     }
     
@@ -256,7 +257,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
-//            MCUtils.showEmptyView(self.tableView)
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有帖子,快下拉刷新试试?")
             return 0
         }
     }

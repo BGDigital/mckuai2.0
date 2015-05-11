@@ -18,12 +18,6 @@ let tencentAppKey = "101155101"
 //本地配置文件
 //引导页
 let ISFIRSTRUN = "isFirstRun"
-//城市信息
-//是否已上传城市信息
-let D_ISUPADDR = "isUpCity"
-//当前城市
-let D_CURRENTCITY = "CurrentCity"
-
 //用户信息
 //用户ID
 let D_USER_ID = "appUserIdSave"
@@ -33,6 +27,13 @@ let D_USER_NICKNAME = "NickName"
 let D_USER_LEVEL = "UserLevel"
 //用户头像
 let D_USER_ARATAR = "UserAvatar"
+//用户定位
+let D_USER_ADDR = "UserAddress"
+//RongCloud_ID
+let D_USER_RC_ID = "UserRongCloud_ID"
+//RondCloud_Token
+let D_USER_RC_TOKEN = "UserRongCloud_Token"
+
 //登录名-email
 let D_USER_LOGINNAME = "LoginName"
 //登录密码
@@ -51,6 +52,8 @@ var appUserLevel: Int = 0
 var appUserNickName: String = ""
 var appUserPic: String = ""
 var appUserAddr: String = ""
+var appUserRCID: String = ""
+var appUserRCToken: String = ""
 
 //默认用户头像
 var DefaultUserAvatar_big = UIImage(named: "Avatar")

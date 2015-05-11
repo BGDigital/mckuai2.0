@@ -98,6 +98,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 235)
         head.setNavi(self.navigationController)
         tableView.tableHeaderView = head.view
+        //初始化的时候隐藏head
+        self.tableView.tableHeaderView?.hidden = true
         
         self.view.addSubview(tableView)
         
@@ -124,7 +126,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                self.tableView.tableHeaderView?.hidden = true
+                MCUtils.showEmptyView(self.tableView, aImg: Load_Error!, aText: "哇哦~,加载数据出问题了")
         })
         
     }
@@ -138,6 +141,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if !self.datasource.isEmpty && !self.datasource.isEmpty {
             return 2
         } else {
+            self.tableView.tableHeaderView?.hidden = true
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有贴子,快下拉刷新试试?")
             return 0
         }
     }
@@ -152,6 +157,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !self.datasource.isEmpty && !self.datasource.isEmpty {
+            self.tableView.tableHeaderView?.hidden = false
             self.tableView.backgroundView = nil
             switch (section) {
             case 0:
@@ -160,8 +166,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return self.datasource.count
             }
         } else {
-            //没有数据
-//            MCUtils.showEmptyView(self.tableView)
+            self.tableView.tableHeaderView?.hidden = true
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有贴子,快下拉刷新试试?")
             return 0
         }
     }

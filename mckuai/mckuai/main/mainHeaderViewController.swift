@@ -140,7 +140,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     
     func onSelectCity(selectedCity: String) {
         //保存到本地
-        Defaults[D_CURRENTCITY] = selectedCity
+        Defaults[D_USER_ADDR] = selectedCity
         locationCity.setTitle(selectedCity, forState: .Normal)
     }
     
@@ -161,6 +161,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         self.roundProgressView.imageUrl = appUserPic
         self.nickname.text = appUserNickName
         self.level.setTitle("LV.0", forState: .Normal)
+        self.locationCity.setTitle(appUserAddr, forState: .Normal)
         
         //leftViewController
         var leftCV = (MCUtils.leftView as! leftMenuViewController)
@@ -168,10 +169,20 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         leftCV.level.hidden = false
         leftCV.btnLogin.hidden = true
 
-        leftCV.Avatar.sd_setImageWithURL(NSURL(string: appUserPic), placeholderImage: UIImage(named: "Avatar"))
+        leftCV.Avatar.sd_setImageWithURL(NSURL(string: appUserPic), placeholderImage: DefaultUserAvatar_big!, completed: {(img,_,_,_) in
+                leftCV.Avatar.image = img
+        })
         leftCV.username.text = appUserNickName
         leftCV.level.setTitle("LV."+String(appUserLevel), forState: .Normal)
         leftCV.btnLogin.hidden = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.roundProgressView.percent = 0
+        self.roundProgressView.imageUrl = appUserPic
+        self.nickname.text = appUserNickName
+        self.level.setTitle("LV.0", forState: .Normal)
+        self.locationCity.setTitle(appUserAddr, forState: .Normal)
     }
     
     /*

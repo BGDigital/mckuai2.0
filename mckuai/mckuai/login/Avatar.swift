@@ -17,7 +17,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
     
     var isLocationPic = false
     
-    var hud:MBProgressHUD!
+    var hud:MBProgressHUD?
     
     var chosedAvatar:String?{
         didSet{
@@ -105,7 +105,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
     }
     
     func uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection(picker: UzysAssetsPickerController!) {
-        var alertView = UIAlertView(title: "", message: "图片已达到上限", delegate: self, cancelButtonTitle: "确定").show()
+        UIAlertView(title: "", message: "图片已达到上限", delegate: self, cancelButtonTitle: "确定").show()
     }
     
     
@@ -149,12 +149,12 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     var json = JSON(responseObject)
                     
                     if "ok" == json["state"].stringValue {
-                        self.hud.hide(true)
+                        self.hud?.hide(true)
                         MCUtils.showCustomHUD(self.view, title: "保存信息成功", imgName: "Guide")
                         isLoginout = true
                         self.navigationController?.popViewControllerAnimated(true)
                     }else{
-                        self.hud.hide(true)
+                        self.hud?.hide(true)
                         MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "Guide")
                     }
                     
@@ -162,7 +162,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
-                    self.hud.hide(true)
+                    self.hud?.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "Guide")
             })
             
@@ -178,7 +178,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
         if(self.isLocationPic == true){
             
             hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-            hud.labelText = "保存中"
+            hud?.labelText = "保存中..."
             manager.POST(upload_url,
                 parameters:nil,
                 constructingBodyWithBlock: { (formData:AFMultipartFormData!) in
@@ -198,7 +198,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                         self.postHeadInfoToServer()
                         
                     }else{
-                        self.hud.hide(true)
+                        self.hud?.hide(true)
                         MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
                     }
                     
@@ -206,7 +206,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
-                    self.hud.hide(true)
+                    self.hud?.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
             })
         }else{

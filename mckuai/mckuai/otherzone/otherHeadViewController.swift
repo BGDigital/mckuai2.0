@@ -42,7 +42,7 @@ class otherHeadViewController: UIViewController {
         btnDynamic.selected = true
         lastSelected = btnDynamic
         //所在城市
-        if let city = Defaults[D_CURRENTCITY].string {
+        if let city = Defaults[D_USER_ADDR].string {
             locationCity.setTitle(city, forState: .Normal)
         } else {
             locationCity.setTitle("未定位", forState: .Normal)

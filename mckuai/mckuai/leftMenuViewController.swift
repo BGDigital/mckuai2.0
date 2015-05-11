@@ -31,13 +31,12 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             appUserLevel = 8
             //appUserPic = ""
             //appUserNickName = "一叶之秋"
-            appUserAddr = "成都市"
+//            appUserAddr = "成都市"
 
-//            appUserLevel = Defaults[D_USER_LEVEL].int!
+            appUserLevel = Defaults[D_USER_LEVEL].int!
             appUserPic = Defaults[D_USER_ARATAR].string!
-//            appUserAddr = Defaults[D_CURRENTCITY].string!
             appUserNickName = Defaults[D_USER_NICKNAME].string!
-//            appUserAddr = Defaults[D_CURRENTCITY].string!
+            appUserAddr = Defaults[D_USER_ADDR].string!
         }
 
         self.tableView = UITableView(frame: CGRectMake(0, (self.view.frame.size.height-cellHeight*7-headerHeight) / 2, self.view.frame.size.width, cellHeight*7+headerHeight), style: UITableViewStyle.Plain)
@@ -166,14 +165,14 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                     Defaults.remove(D_USER_ARATAR)
                     Defaults.remove(D_USER_LEVEL)
                     Defaults.remove(D_USER_NICKNAME)
-                    Defaults.remove(D_CURRENTCITY)
+                    Defaults.remove(D_USER_ADDR)
                     appUserIdSave = 0
                     appUserLevel = 0
                     appUserPic = ""
                     appUserAddr = ""
                     appUserNickName = ""
                     //刷新界面
-                    self.Avatar.image = UIImage(named: "Avatar")
+                    self.Avatar.image = DefaultUserAvatar_big
                     self.username.hidden = true
                     self.level.hidden = true
                     self.btnLogin.hidden = false

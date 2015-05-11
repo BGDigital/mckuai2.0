@@ -157,11 +157,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         if(placemark.locality != nil){
             tempString = tempString +  placemark.locality + "\n"
             self.currentCity.setTitle(placemark.locality, forState: .Normal)
-            //Defaults.remove(D_ISUPADDR)
-            if !Defaults.hasKey(D_ISUPADDR) {
-                println("用户地址没有上传,开始上传")
-                self.upAddrToServer(placemark.locality)
-            }
+            self.upAddrToServer(placemark.locality)
             //保存到本地
             Delegate?.onSelectCity(placemark.locality)
         }
@@ -182,18 +178,22 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func upAddrToServer(city: String) {
-        var dict = ["act":"updateAddr","id":appUserIdSave,"addr":city]
-        manager.POST(URL_MC,
-            parameters: dict,
-            success: { (operation: AFHTTPRequestOperation!,
-                responseObject: AnyObject!) in
-                println(responseObject)
-                Defaults[D_ISUPADDR] = true
-            },
-            failure: { (operation: AFHTTPRequestOperation!,
-                error: NSError!) in
-                println("func upAddrToServer,Error: " + error.localizedDescription)
-        })
+        if appUserAddr != city {
+            println("城市信息不同,上传")
+            var dict = ["act":"updateAddr","id":appUserIdSave,"addr":city]
+            manager.POST(URL_MC,
+                parameters: dict,
+                success: { (operation: AFHTTPRequestOperation!,
+                    responseObject: AnyObject!) in
+                    println(responseObject)
+                },
+                failure: { (operation: AFHTTPRequestOperation!,
+                    error: NSError!) in
+                    println("func upAddrToServer,Error: " + error.localizedDescription)
+            })
+        } else {
+            println("城市信息相同,不用上传")
+        }
     }
 
     
@@ -237,7 +237,9 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         var key: AnyObject = self.keys.objectAtIndex(indexPath.section)
-        Delegate?.onSelectCity((self.cities.objectForKey(key)?.objectAtIndex(indexPath.row) as? String)!)
+        var city = self.cities.objectForKey(key)?.objectAtIndex(indexPath.row) as! String
+        self.upAddrToServer(city)
+        Delegate?.onSelectCity(city)
         //back
         //self.dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)

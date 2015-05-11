@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
-class UserInfo: UIViewController, UIAlertViewDelegate {
+class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     var manager = AFHTTPRequestOperationManager()
+    var cityList: cityListViewController!
     
     @IBOutlet weak var headImg_view: UIView!
 
@@ -30,7 +31,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate {
             if let u = user{
                 userName.text = u["nike"].stringValue
 
-                addr.text = u["addr"].stringValue
+//                addr.text = u["addr"].stringValue
                 
                 image = UIImageView(frame: CGRectMake(self.view.frame.size.width-80-25, 44+22+8, 80, 80))
                 image.sd_setImageWithURL(NSURL(string: u["headImg"].stringValue))
@@ -76,7 +77,16 @@ class UserInfo: UIViewController, UIAlertViewDelegate {
     }
     
     func toAddrFunction() {
-        
+        cityList = cityListViewController()
+        cityList.hidesBottomBarWhenPushed = true
+        cityList.Delegate = self
+        self.navigationController?.pushViewController(cityList, animated: true)
+    }
+    
+    func onSelectCity(selectedCity: String) {
+        //保存到本地
+        Defaults[D_USER_ADDR] = selectedCity
+        self.addr.text = selectedCity
     }
     override func viewWillAppear(animated: Bool) {
 //        self.tabBarController?.tabBar.hidden = false
@@ -126,8 +136,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate {
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
-            var userDefault = NSUserDefaults.standardUserDefaults()
-            userDefault.removeObjectForKey("appUserIdSave")
+            Defaults.remove(D_USER_ID)
             appUserIdSave = 0
             isLoginout = true
             println("用户已退出！")
