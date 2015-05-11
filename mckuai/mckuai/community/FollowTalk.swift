@@ -9,11 +9,9 @@
 import Foundation
 import UIKit
 
-<<<<<<< Updated upstream
-class FollowTalk: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-=======
+
 class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerControllerDelegate, UIGestureRecognizerDelegate {
->>>>>>> Stashed changes
+
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
     var params = [String: String]()

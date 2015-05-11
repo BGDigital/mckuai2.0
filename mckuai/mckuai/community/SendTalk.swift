@@ -9,11 +9,9 @@
 import Foundation
 import UIKit
 
-<<<<<<< Updated upstream
-class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-=======
+
 class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAssetsPickerControllerDelegate, UIGestureRecognizerDelegate {
->>>>>>> Stashed changes
+
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
