@@ -48,7 +48,6 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clearColor()
-        self.hidesBottomBarWhenPushed = true
         //初始化uiwebview
          initWebView()
          setRightBarButtonItem()
@@ -56,9 +55,15 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     override func viewDidAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
         self.navigationController?.navigationBar.lt_reset()
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
+        
+    override func viewDidDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
+    }
+
     
     func setRightBarButtonItem() {
         self.rightButton = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton

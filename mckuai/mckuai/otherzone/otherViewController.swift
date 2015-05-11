@@ -92,13 +92,20 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hidesBottomBarWhenPushed = true
         setupViews()
         showPopWindow()
         
         if isFirstLoad {
             loadDataWithoutMJRefresh()
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
     }
     
     func loadDataWithoutMJRefresh() {
