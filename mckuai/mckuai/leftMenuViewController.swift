@@ -29,8 +29,8 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         if Defaults.hasKey(D_USER_ID) {
             appUserIdSave = Defaults[D_USER_ID].int!
             appUserLevel = 8
-//            appUserPic = ""
-//            appUserNickName = "一叶之秋"
+            //appUserPic = ""
+            //appUserNickName = "一叶之秋"
             appUserAddr = "成都市"
 
 //            appUserLevel = Defaults[D_USER_LEVEL].int!
@@ -111,7 +111,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     }
         
     @IBAction func userLogin() {
-        UserLogin.showUserLoginView(presentNavigator: nil, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
+        NewLogin.showUserLoginView(MCUtils.mainNav, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()
     }
@@ -155,7 +155,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             UIApplication.sharedApplication().openURL(NSURL(string: URL_APPSTORE)!)
         case 4:
             //设置
-            break
+            UserInfo.showUserInfoView(self.navigationController)
         default:
             if appUserIdSave != 0 {
                 let alert = SCLAlertView()

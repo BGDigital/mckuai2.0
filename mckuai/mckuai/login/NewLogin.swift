@@ -5,6 +5,15 @@
 //  Created by 陈强 on 15/5/7.
 //  Copyright (c) 2015年 XingfuQiu. All rights reserved.
 //
+protocol LoginProtocol {
+    /**
+    登录成功后的协议
+    
+    :returns: Void
+    */
+    func onLoginSuccessfull() -> Void
+}
+
 
 import Foundation
 import UIKit
@@ -14,8 +23,8 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
     var manager = AFHTTPRequestOperationManager()
     var tencentOAuth:TencentOAuth!
     var permissionsArray=["get_user_info","get_simple_userinfo"]
-    var superUIViewController:UIViewController!
-    var isShow:Bool = true
+    var presentNavigator: UINavigationController?
+    var Delegate: LoginProtocol?
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var passWord: UITextField!
@@ -42,21 +51,13 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
     }
     
     func backToPage() {
-            dismissKeyboard()
+        Async.userInitiated {
             NSNotificationCenter.defaultCenter().removeObserver(self)
-            UIView.animateWithDuration(0.3,
-                animations : {
-                    self.view.frame.origin = CGPoint(x: 0,y: self.view.frame.size.height)
-                },
-                completion : {_ in
-                    self.view.removeFromSuperview()
-                    if(self.isShow){
-                        self.superUIViewController.tabBarController?.tabBar.hidden = false
-                        
-                    }
-                    
-                }
-            )
+            self.dismissKeyboard()
+        }.main{
+            self.presentNavigator?.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
     }
     
     func dismissKeyboard(){
@@ -89,7 +90,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
     @IBAction func toRegister(sender: UIButton) {
         self.backToPage()
         
-        UserRegister.showUserRegisterView(presentNavigator: self.superUIViewController.navigationController)
+        UserRegister.showUserRegisterView(presentNavigator: self.presentNavigator)
     }
     
     func mckuaiLoginFunction() {
@@ -110,6 +111,8 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
                     //保存登录信息
                     Defaults["D_USERID"] = userId
                     appUserIdSave = userId
+                    
+                    self.Delegate?.onLoginSuccessfull()
                     self.backToPage()
                 }
                 
@@ -186,8 +189,15 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
                         var userId = json["dataObject"].intValue
                         //保存登录信息
                         Defaults[D_USER_ID] = userId
+                        Defaults[D_USER_NICKNAME] = nickName
+                        Defaults[D_USER_ARATAR] = headImg
+                        
                         appUserIdSave = userId
+                        appUserNickName = nickName
+                        appUserPic = headImg
                         hud.hide(true)
+                        
+                        self.Delegate?.onLoginSuccessfull()
                         self.backToPage()
                     }else{
                         hud.hide(true)
@@ -233,39 +243,15 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
         
         UIView.commitAnimations()
     }
-    
-//    override func viewWillDisappear(animated: Bool) {
-//
-//        NSNotificationCenter.defaultCenter().removeObserver(self)
-//    }
-//    override func viewWillAppear(animated: Bool) {
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
-//    }
-    
-    
-    class func showUserLoginView(fromViewController:UIViewController,returnIsShow:Bool){
+        
+    class func showUserLoginView(ctl:UINavigationController?, aDelegate: LoginProtocol?){
         userLoginView = UIStoryboard(name: "NewLogin", bundle: nil).instantiateViewControllerWithIdentifier("newLogin") as! NewLogin
-        userLoginView.view.frame.origin = CGPoint(x: 0,y: userLoginView.view.frame.size.height)
-        userLoginView.superUIViewController = fromViewController
-        userLoginView.isShow = returnIsShow
-        fromViewController.tabBarController?.tabBar.hidden = true
-        fromViewController.navigationController?.view.addSubview(userLoginView.view)
+        userLoginView.presentNavigator = ctl
+        userLoginView.Delegate = aDelegate
         NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidShowLogin:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidHiddenLogin:", name: UIKeyboardWillHideNotification, object: nil)
-        UIView.animateWithDuration(0.3,
-            animations : {
-                userLoginView.view.frame.origin = CGPoint(x: 0,y: 0)
-            },
-            completion : {_ in
-
-            }
-        )
-        
-        
-        
+        ctl?.presentViewController(userLoginView, animated: true, completion: nil)
     }
-    
     
     
 

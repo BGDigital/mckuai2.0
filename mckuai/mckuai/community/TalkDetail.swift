@@ -203,8 +203,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     func toolBarFunc(sender:UIButton) {
         if(sender.tag == 0){
             if(appUserIdSave == 0) {
-//                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
-                NewLogin.showUserLoginView(self,returnIsShow: false)
+               NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+                //NewLogin.showUserLoginView(self,returnIsShow: false, aDelegate: nil)
             }else{
                 
                 self.collect_btn.enabled = false
@@ -245,8 +245,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
 
             if(appUserIdSave == 0) {
-//                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
-                  NewLogin.showUserLoginView(self,returnIsShow: false)
+                NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+                //NewLogin.showUserLoginView(self,returnIsShow: false, aDelegate: nil)
             }else{
                 
                 if let query = self.webView.stringByEvaluatingJavaScriptFromString("getParameters()"){
@@ -339,7 +339,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 //
 
             if(appUserIdSave == 0) {
-                 NewLogin.showUserLoginView(self,returnIsShow: false)
+                NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+//                NewLogin.showUserLoginView(self,returnIsShow: false, aDelegate: nil)
             }else{
                self.textView.becomeFirstResponder() 
             }

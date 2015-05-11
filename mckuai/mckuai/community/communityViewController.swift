@@ -84,7 +84,7 @@ class communityViewController: UIViewController {
         
 
         if( appUserIdSave == 0) {
-           NewLogin.showUserLoginView(self,returnIsShow: true)
+           NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
         }else{
             SendTalk.showSendTalkPage(self.navigationController)
         }

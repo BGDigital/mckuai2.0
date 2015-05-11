@@ -9,19 +9,10 @@
 import Foundation
 import UIKit
 
-protocol LoginProtocol {
-    /**
-    登录成功后的协议
-    
-    :returns: Void
-    */
-    func onLoginSuccessfull() -> Void
-}
-
 class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     var manager = AFHTTPRequestOperationManager()
-    var Delegate: LoginProtocol?
+
     
     var rightButton:UIButton?
 //    let ITEM_WIDTH:CGFloat = 45
@@ -171,7 +162,6 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     //是否记住登录信息(用户名,密码)
                     let D_ISREMEMBERME = "isRememberMe"
                     */
-                    self.Delegate?.onLoginSuccessfull()
                      self.navigationController?.popViewControllerAnimated(true)
                 }
                 
@@ -270,7 +260,6 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                         } else {
                             MCUtils.mainNav?.popViewControllerAnimated(true)
                         }
-                        self.Delegate?.onLoginSuccessfull()
                     }
                     
                 },
@@ -291,7 +280,6 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     class func showUserLoginView(presentNavigator ctl:UINavigationController?, aDelegate: LoginProtocol){
         var userLoginView = UIStoryboard(name: "UserLogin", bundle: nil).instantiateViewControllerWithIdentifier("userLogin") as! UserLogin
-        userLoginView.Delegate = aDelegate
         if (ctl != nil) {
             ctl?.pushViewController(userLoginView, animated: true)
         } else {

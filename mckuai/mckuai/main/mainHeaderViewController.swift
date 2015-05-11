@@ -106,7 +106,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     }
     
     @IBAction func userLogin() {
-        UserLogin.showUserLoginView(presentNavigator: self.nav, aDelegate: self)
+        NewLogin.showUserLoginView(self.nav, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
     }
     
     @IBAction func openBackPacker() {

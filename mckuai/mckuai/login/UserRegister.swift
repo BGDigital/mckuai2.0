@@ -20,7 +20,6 @@ class UserRegister: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         userName.delegate = self
         passWord.delegate = self
         nickName.delegate = self

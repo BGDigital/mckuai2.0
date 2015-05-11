@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserInfo: UIViewController,UIGestureRecognizerDelegate,UIAlertViewDelegate {
+class UserInfo: UIViewController, UIAlertViewDelegate {
     var manager = AFHTTPRequestOperationManager()
     
     @IBOutlet weak var headImg_view: UIView!
@@ -45,7 +45,6 @@ class UserInfo: UIViewController,UIGestureRecognizerDelegate,UIAlertViewDelegate
         super.viewDidLoad()
         self.headImg.hidden = true
         
-        initNavigation()
         loadData(true)
         var toHeadImg = UITapGestureRecognizer(target: self, action: "toHeadImgFunction")
         self.headImg_view.addGestureRecognizer(toHeadImg)
@@ -84,6 +83,8 @@ class UserInfo: UIViewController,UIGestureRecognizerDelegate,UIAlertViewDelegate
     }
     
     override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBar.lt_reset()
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         loadData(false)
     }
     
@@ -119,21 +120,6 @@ class UserInfo: UIViewController,UIGestureRecognizerDelegate,UIAlertViewDelegate
         })
     }
     
-    func initNavigation() {
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
-        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
-        back.tintColor = UIColor.whiteColor()
-        self.navigationItem.leftBarButtonItem = back
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self    // 启用 swipe back
-    }
-    
-    func backToPage() {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
     @IBAction func exit(){
         UIAlertView(title: "提示", message: "你确定要注销吗？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定").show()
     }
@@ -163,9 +149,8 @@ class UserInfo: UIViewController,UIGestureRecognizerDelegate,UIAlertViewDelegate
         if (ctl != nil) {
             ctl?.pushViewController(userInfo, animated: true)
         } else {
-            ctl?.presentViewController(userInfo, animated: true, completion: nil)
+            MCUtils.mainNav?.pushViewController(userInfo, animated: true)
         }
-        
         
     }
     
