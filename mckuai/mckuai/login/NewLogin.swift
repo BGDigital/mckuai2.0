@@ -9,16 +9,26 @@
 import Foundation
 import UIKit
 
-class NewLogin: UIViewController {
-    
+class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
+    var superNavigation:UINavigationController!
+    var manager = AFHTTPRequestOperationManager()
+    var tencentOAuth:TencentOAuth!
+    var permissionsArray=["get_user_info","get_simple_userinfo"]
     var superUIViewController:UIViewController!
     var isShow:Bool = true
+    @IBOutlet weak var userName: UITextField!
+    
+    @IBOutlet weak var passWord: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        //设置navigation
+        //设置navigation
         initNavigation()
-        
-        // Do any additional setup after loading the view.
+        tencentOAuth = TencentOAuth(appId: tencentAppKey, andDelegate: self)
+        userName.delegate = self
+        passWord.delegate = self
+        var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        self.view.addGestureRecognizer(tapDismiss)
     }
     
     
@@ -28,57 +38,221 @@ class NewLogin: UIViewController {
         closeLogin.setImage(UIImage(named: "nav_back"), forState: UIControlState.Normal)
         closeLogin.addTarget(self, action: "backToPage", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(closeLogin)
-//        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor().colorWithAlphaComponent(0))
-        
-//        self.navigationController?.navigationBar.hidden = true
-        
-//        var back = UIBarButtonItem(image: UIImage(named: "nav_back"), style: UIBarButtonItemStyle.Bordered, target: self, action: "backToPage")
-//        back.tintColor = UIColor.whiteColor()
-//        self.navigationItem.leftBarButtonItem = back
+
     }
     
     func backToPage() {
+            dismissKeyboard()
+            NSNotificationCenter.defaultCenter().removeObserver(self)
             UIView.animateWithDuration(0.3,
                 animations : {
-                    self.view.frame.origin = CGPoint(x: 0,y: UIScreen.mainScreen().bounds.size.height)
+                    self.view.frame.origin = CGPoint(x: 0,y: self.view.frame.size.height)
                 },
                 completion : {_ in
-                    
+                    self.view.removeFromSuperview()
                     if(self.isShow){
                         self.superUIViewController.tabBarController?.tabBar.hidden = false
-                        self.view.removeFromSuperview()
+                        
                     }
                     
-//                    self.view.removeFromSuperview()
                 }
             )
     }
     
-    
-    override func viewWillAppear(animated: Bool) {
-       
+    func dismissKeyboard(){
+        userName.resignFirstResponder()
+        passWord.resignFirstResponder()
     }
+    
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func showCustomHUD(view: UIView, title: String, imgName: String) {
+        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        h.labelText = title
+        h.mode = MBProgressHUDMode.CustomView
+        h.customView = UIImageView(image: UIImage(named: imgName))
+        h.showAnimated(true, whileExecutingBlock: { () -> Void in
+            sleep(2)
+            return
+            }) { () -> Void in
+                h.removeFromSuperview()
+                h = nil
+        }
+    }
+    @IBAction func toRegister(sender: UIButton) {
+        self.backToPage()
+        
+        UserRegister.showUserRegisterView(presentNavigator: self.superUIViewController.navigationController)
+    }
+    
+    func mckuaiLoginFunction() {
+        let params = [
+            "userName":self.userName.text,
+            "passWord":self.passWord.text,
+            
+        ]
+        
+        manager.POST(login_url,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                var json = JSON(responseObject)
+                println(responseObject)
+                if "ok" == json["state"].stringValue {
+                    var userId = json["dataObject"].intValue
+                    //保存登录信息
+                    Defaults["D_USERID"] = userId
+                    appUserIdSave = userId
+                    self.backToPage()
+                }
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                self.showCustomHUD(self.view, title: "登录失败", imgName: "HUD_ERROR")
+        })
+    }
+    
+    @IBAction func noQqLoginAction(sender: UIButton) {
+        if(!self.userName.text.isEmpty && !self.passWord.text.isEmpty) {
+            println(self.userName.text)
+            mckuaiLoginFunction()
+        }else {
+            MCUtils.showCustomHUD(self.view, title: "登录信息不能为空", imgName: "Guide")
+        }
+    }
+    @IBAction func qqLoginAction(sender: UIButton) {
+        tencentOAuth.authorize(permissionsArray,inSafari:false)
+    }
+    
+    func tencentDidLogin(){
+        if (tencentOAuth.accessToken != nil)
+        {
+            tencentOAuth.getUserInfo()
+        }else
+        {
+            println("登录不成功 没有获取accesstoken");
+        }
+    }
+    
+    func tencentDidNotLogin(cancelled:Bool){
+        if (cancelled){
+            println("用户取消登录")
+        }else{
+            println("登录失败")
+        }
+    }
+    
+    func tencentDidNotNetWork(){
+        println("无网络连接，请设置网络")
+    }
+    
+    func getUserInfoResponse(response:APIResponse){
+        if(response.retCode == 0){
+            var userInfo = response.jsonResponse;
+            var accessToken = tencentOAuth.accessToken as String!
+            var openId = tencentOAuth.openId as String!
+            var nickName:String = userInfo["nickname"] as! String!
+            var gender:String = userInfo["gender"] as! String!
+            var headImg:String = userInfo["figureurl_qq_2"] as! String!
+            println(nickName)
+            
+            let params = [
+                "accessToken": accessToken,
+                "openId": openId,
+                "nickName": nickName,
+                "gender": gender,
+                "headImg": headImg,
+            ]
+            
+            var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+            hud.labelText = "登录中"
+            
+            manager.POST(qqlogin_url,
+                parameters: params,
+                success: { (operation: AFHTTPRequestOperation!,
+                    responseObject: AnyObject!) in
+                    var json = JSON(responseObject)
+                    
+                    if "ok" == json["state"].stringValue {
+                        var userId = json["dataObject"].intValue
+                        //保存登录信息
+                        Defaults[D_USER_ID] = userId
+                        appUserIdSave = userId
+                        hud.hide(true)
+                        self.backToPage()
+                    }else{
+                        hud.hide(true)
+                        self.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
+                    }
+                    
+                },
+                failure: { (operation: AFHTTPRequestOperation!,
+                    error: NSError!) in
+                    println("Error: " + error.localizedDescription)
+                    hud.hide(true)
+                    self.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
+            })
+        }else{
+            println(response.errorMsg)
+        }
+        
+        
+    }
+    
+    func keyboardDidShowLogin(notification:NSNotification) {
+        var userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        var v : NSValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        
+        var keyHeight = v.CGRectValue().size.height
+        var duration = userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as! NSNumber
+        var curve:NSNumber = userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as! NSNumber
+        var temp:UIViewAnimationCurve = UIViewAnimationCurve(rawValue: curve.integerValue)!
+        UIView.animateWithDuration(duration.doubleValue, animations: {
+            UIView.setAnimationBeginsFromCurrentState(true)
+            UIView.setAnimationCurve(temp)
+            self.view.frame.origin = CGPoint(x: 0, y: -keyHeight)
+//            self.containerView.frame = CGRectMake(0, self.view.frame.size.height-keyHeight-150, self.view.bounds.size.width, 150)
+            
+        })
+
+    }
+    
+    func keyboardDidHiddenLogin(notification:NSNotification) {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.25)
+        self.view.frame.origin = CGPoint(x: 0, y: 0)
+        
+        UIView.commitAnimations()
+    }
+    
+//    override func viewWillDisappear(animated: Bool) {
+//
+//        NSNotificationCenter.defaultCenter().removeObserver(self)
+//    }
+//    override func viewWillAppear(animated: Bool) {
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
+//    }
+    
+    
     class func showUserLoginView(fromViewController:UIViewController,returnIsShow:Bool){
-//        var userLoginView = UIStoryboard(name: "NewLogin", bundle: nil).instantiateViewControllerWithIdentifier("newLogin") as! NewLogin
-//        if (ctl != nil) {
-//            ctl?.pushViewController(userLoginView, animated: true)
-//        } else {
-//            ctl?.presentViewController(userLoginView, animated: true, completion: nil)
-//        }
-        
-        
         userLoginView = UIStoryboard(name: "NewLogin", bundle: nil).instantiateViewControllerWithIdentifier("newLogin") as! NewLogin
-        userLoginView.view.frame = CGRectMake(0,UIScreen.mainScreen().bounds.size.height,UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height)
+        userLoginView.view.frame.origin = CGPoint(x: 0,y: userLoginView.view.frame.size.height)
         userLoginView.superUIViewController = fromViewController
         userLoginView.isShow = returnIsShow
         fromViewController.tabBarController?.tabBar.hidden = true
         fromViewController.navigationController?.view.addSubview(userLoginView.view)
+        NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidShowLogin:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidHiddenLogin:", name: UIKeyboardWillHideNotification, object: nil)
         UIView.animateWithDuration(0.3,
             animations : {
                 userLoginView.view.frame.origin = CGPoint(x: 0,y: 0)

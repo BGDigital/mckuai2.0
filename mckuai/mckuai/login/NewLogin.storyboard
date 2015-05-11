@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -26,6 +26,9 @@
                                 <state key="normal" image="qq_icon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="qqLoginAction:" destination="FfR-qf-pJh" eventType="touchUpInside" id="E6S-HL-4Py"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhF-16-mtU">
                                 <rect key="frame" x="134" y="251" width="106" height="29"/>
@@ -34,6 +37,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="qqLoginAction:" destination="FfR-qf-pJh" eventType="touchUpInside" id="Zcl-bs-GsT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0j-RR-gLi">
                                 <rect key="frame" x="0.0" y="597" width="375" height="70"/>
@@ -47,6 +53,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="noQqLoginAction:" destination="FfR-qf-pJh" eventType="touchUpInside" id="xep-sJ-r0j"/>
+                                </connections>
                             </button>
                             <view alpha="0.89999999999999991" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9w-NH-PbC">
                                 <rect key="frame" x="0.0" y="488" width="375" height="50"/>
@@ -114,6 +123,9 @@
                                 <state key="normal" image="go_register">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="toRegister:" destination="FfR-qf-pJh" eventType="touchUpInside" id="pTk-0H-hhf"/>
+                                </connections>
                             </button>
                             <view alpha="0.89999999999999991" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mY6-q5-f0G">
                                 <rect key="frame" x="0.0" y="434" width="375" height="50"/>
@@ -225,6 +237,10 @@
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="passWord" destination="4tX-d0-gVq" id="pKO-9l-WPt"/>
+                        <outlet property="userName" destination="mBT-Ik-yYg" id="dSS-hJ-pOT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tFP-BZ-BKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

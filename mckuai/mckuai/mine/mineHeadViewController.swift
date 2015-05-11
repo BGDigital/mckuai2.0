@@ -141,5 +141,8 @@ class mineHeadViewController: UIViewController {
         }
     }
 
+    @IBAction func setUserInfoAction(sender: UIButton) {
+        UserInfo.showUserInfoView(MCUtils.mainNav)
+    }
 
 }

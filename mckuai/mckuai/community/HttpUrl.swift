@@ -28,6 +28,9 @@ let toCollect_url = URL_MC+"act=toCollect"
 
 let cancleCollect_url = URL_MC+"act=cancleCollect"
 
+let getUser_url = URL_MC+"act=getUser"
+let saveUser_url = URL_MC+"act=saveUser"
+
 class HttpUrl {
     
 }

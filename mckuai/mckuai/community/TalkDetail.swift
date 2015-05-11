@@ -242,10 +242,11 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             println("reply")
             
             
+
+
             if(appUserIdSave == 0) {
 //                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                   NewLogin.showUserLoginView(self,returnIsShow: false)
-                
             }else{
                 
                 if let query = self.webView.stringByEvaluatingJavaScriptFromString("getParameters()"){
@@ -335,12 +336,12 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         self.params = param;
         if action == "reply" {
             println("Reply...........")
-            self.textView.becomeFirstResponder()
+//
 
             if(appUserIdSave == 0) {
-//                UserLogin.showUserLoginView(presentNavigator: self.navigationController)
                  NewLogin.showUserLoginView(self,returnIsShow: false)
-                
+            }else{
+               self.textView.becomeFirstResponder() 
             }
             
         }
@@ -541,11 +542,6 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             
         })
         
-        //        UIView.beginAnimations(nil, context: nil)
-        //        UIView.setAnimationDuration(0.25)
-        //        self.containerView.alpha = 1
-        //        self.containerView.frame = CGRectMake(0, self.view.frame.size.height-keyHeight-150, self.view.bounds.size.width, 150)
-        //        UIView.commitAnimations()
     }
     
     func keyboardDidHidden(notification:NSNotification) {

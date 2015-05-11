@@ -24,3 +24,5 @@
 #import "RCChatViewController.h"
 #import "RCChatListViewController.h"
 
+#import "UzysAssetsPickerController.h"
+

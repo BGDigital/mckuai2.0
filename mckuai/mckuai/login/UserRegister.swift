@@ -114,7 +114,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                     userDefault.setInteger(userId, forKey: "appUserIdSave")
                     userDefault.synchronize()
                     appUserIdSave = userId
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popViewControllerAnimated(true)
                 }else{
                     hud.hide(true)
                     self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "Guide")

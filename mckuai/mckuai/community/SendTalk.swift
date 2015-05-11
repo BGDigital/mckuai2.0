@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
+<<<<<<< Updated upstream
 class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+=======
+class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAssetsPickerControllerDelegate, UIGestureRecognizerDelegate {
+>>>>>>> Stashed changes
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
@@ -174,43 +178,100 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
         if(self.image_button.count >= 5){
             self.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "Guide")
         }else{
-            var sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
-            if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
-                sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            }
-            var picker = UIImagePickerController()
+//            var sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
+//            if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
+//                sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+//            }
+//            var picker = UIImagePickerController()
+//            picker.delegate = self
+//            picker.allowsEditing = true//设置可编辑
+//            picker.sourceType = sourceType
+//            self.presentViewController(picker, animated: true, completion: nil)//进入照相界面
+            
+            var appearanceConfig = UzysAppearanceConfig()
+            appearanceConfig.finishSelectionButtonColor = UIColor.greenColor()
+            UzysAssetsPickerController.setUpAppearanceConfig(appearanceConfig)
+            
+            var picker = UzysAssetsPickerController()
             picker.delegate = self
-            picker.allowsEditing = true//设置可编辑
-            picker.sourceType = sourceType
-            self.presentViewController(picker, animated: true, completion: nil)//进入照相界面
+            picker.maximumNumberOfSelectionVideo = 0;
+            picker.maximumNumberOfSelectionPhoto = 4-self.image_array.count;
+            
+            self.presentViewController(picker, animated: true, completion: nil)
         }
 
         
     }
     
-     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
-        println("choose--------->>")
-        println(info)
+    
+    func uzysAssetsPickerController(picker: UzysAssetsPickerController!, didFinishPickingAssets assets: [AnyObject]!) {
         
-        var image_x = CGFloat(image_button.count-1)*(self.pic_wight+10)
+        if(assets.count != 0){
+            var assets_array = assets as NSArray
+            assets_array.enumerateObjectsUsingBlock({ obj, index, stop in
+                println(index)
+                var representation:ALAsset = obj as! ALAsset
+                var returnImg = UIImage(CGImage: representation.thumbnail().takeUnretainedValue())
+                
+                
+                var image_x = CGFloat(self.image_button.count-1)*(self.pic_wight+10)
+                
+                var img_btn = UIButton(frame: CGRectMake(image_x, self.addPic.frame.origin.y
+                    , self.pic_wight, self.pic_wight))
+                
+                img_btn.setImage(returnImg, forState: UIControlState.Normal)
+                img_btn.addTarget(self, action: "removeImg:", forControlEvents: UIControlEvents.TouchUpInside)
+                img_btn.tag = self.image_button_tag++
+                self.image_button.insert(img_btn, atIndex: self.image_button.count-1)
+                self.image_array += [returnImg!]
+                self.image_button.last!.frame.origin.x = self.image_button.last!.frame.origin.x+self.pic_wight+10
+                self.content_view.addSubview(img_btn)
+                
+            })
+        }
         
-        var img_btn = UIButton(frame: CGRectMake(image_x, self.addPic.frame.origin.y
-            , self.pic_wight, self.pic_wight))
         
-        var img = info[UIImagePickerControllerEditedImage] as! UIImage
-        img_btn.setImage(img, forState: UIControlState.Normal)
-        img_btn.addTarget(self, action: "removeImg:", forControlEvents: UIControlEvents.TouchUpInside)
-        img_btn.tag = self.image_button_tag++
-        
-        image_button.insert(img_btn, atIndex: image_button.count-1)
-//        image_array += [ImageUtil.thumbnailWithImageWithoutScale(img, asize: CGSize(width: 620, height: 350))]
-        image_array += [img]
-        image_button.last!.frame.origin.x = image_button.last!.frame.origin.x+self.pic_wight+10
-        self.content_view.addSubview(img_btn)
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        
-        
+        //        if(assets[0].valueForProperty(ALAssetPropertyType).isEqualToString(ALAssetTypePhoto)){
+        //            [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        //                ALAsset *representation = obj;
+        //
+        //                UIImage *img = [UIImage imageWithCGImage:representation.defaultRepresentation.fullResolutionImage
+        //                scale:representation.defaultRepresentation.scale
+        //                orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
+        //
+        //                }];
+        //        }
     }
+    
+    
+    func uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection(picker: UzysAssetsPickerController!) {
+        var alertView = UIAlertView(title: "", message: "图片已达到上限", delegate: self, cancelButtonTitle: "确定").show()
+    }
+
+    
+//     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
+//        println("choose--------->>")
+//        println(info)
+//        
+//        var image_x = CGFloat(image_button.count-1)*(self.pic_wight+10)
+//        
+//        var img_btn = UIButton(frame: CGRectMake(image_x, self.addPic.frame.origin.y
+//            , self.pic_wight, self.pic_wight))
+//        
+//        var img = info[UIImagePickerControllerEditedImage] as! UIImage
+//        img_btn.setImage(img, forState: UIControlState.Normal)
+//        img_btn.addTarget(self, action: "removeImg:", forControlEvents: UIControlEvents.TouchUpInside)
+//        img_btn.tag = self.image_button_tag++
+//        
+//        image_button.insert(img_btn, atIndex: image_button.count-1)
+////        image_array += [ImageUtil.thumbnailWithImageWithoutScale(img, asize: CGSize(width: 620, height: 350))]
+//        image_array += [img]
+//        image_button.last!.frame.origin.x = image_button.last!.frame.origin.x+self.pic_wight+10
+//        self.content_view.addSubview(img_btn)
+//        picker.dismissViewControllerAnimated(true, completion: nil)
+//        
+//        
+//    }
     
     func removeImg(sender:UIButton) {
         var selected_index:Int = 0
@@ -232,17 +293,17 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
 
     }
     
-     func imagePickerControllerDidCancel(picker: UIImagePickerController){
-        
-        
-        println("cancel--------->>")
-        
-        
-        
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        
-        
-    }
+//     func imagePickerControllerDidCancel(picker: UIImagePickerController){
+//        
+//        
+//        println("cancel--------->>")
+//        
+//        
+//        
+//        picker.dismissViewControllerAnimated(true, completion: nil)
+//        
+//        
+//    }
     
     func dismissKeyboard(){
         self.textView.resignFirstResponder()
@@ -443,8 +504,8 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImageP
             return
         }
         
-        if(content_post == nil || content_post.isEmpty || content_post == "内容" || count(content_post)<5){
-            self.showCustomHUD(self.view, title: "发帖内容不能少于5个字符", imgName:  "Guide")
+        if(content_post == nil || content_post.isEmpty || content_post == "内容" || count(content_post)<15){
+            self.showCustomHUD(self.view, title: "发帖内容不能少于15个字符", imgName:  "Guide")
             self.rightButton?.enabled = true
             return
         }

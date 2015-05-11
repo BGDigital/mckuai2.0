@@ -280,30 +280,6 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     hud.hide(true)
                     self.showCustomHUD(self.view, title: "登录失败", imgName: "HUD_ERROR")
             })
-            
-            
-            
-//            APIClient.sharedInstance.qqLoginByPost(self.view, accessToken: accessToken, openId: openId, nickName: nickName, gender: gender, headImg: headImg,success: { (json) -> Void in
-//                println(json)
-//                if json["state"].stringValue == "ok" {
-//                    println("从服务器登录成功")
-//                    var userId = json["dataObject"].intValue
-//                    //保存登录信息
-//                    var userDefault = NSUserDefaults.standardUserDefaults()
-//                    userDefault.setInteger(userId, forKey: "appUserIdSave")
-//                    userDefault.synchronize()
-//                    
-//                    appUserIdSave = userId
-//                    isLoginout = true
-//                    self.navigationController?.popToRootViewControllerAnimated(true)
-//
-//                    
-//                }else{
-//                    var alertView = UIAlertView(title: "登录失败!请稍候再试", message: "", delegate: self, cancelButtonTitle: "确定")
-//                    alertView.show()
-//                }
-//                
-//                }, failure: { (error) -> Void in })
         }else{
             println(response.errorMsg)
         }

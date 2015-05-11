@@ -267,5 +267,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         //开始加载数据
         loadDataWithoutMJRefresh()
     }
+    
+    
 
 }
