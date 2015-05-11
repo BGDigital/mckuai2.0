@@ -29,27 +29,28 @@ class messageCell: UITableViewCell {
     
     private func setHtmlText(title: String, text: String) {
         var html: NSString = "<font size = 4, color=#A2A3A4>"+title+"</font><br><font size=4, color=#4D4E4F>" + text + "</font>"
-//        var commentsRequested: NSAttributedString!
-//        Async.background {
-//            commentsRequested = NSAttributedString(
-//                data: html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
-//                options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-//                documentAttributes: nil,
-//                error: nil)
-//        } .main {
-//            self.message.attributedText = commentsRequested
-//        }
-        //let commentsQueue:dispatch_queue_t = dispatch_queue_create("comments queue", nil)
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-            let commentsRequested = NSAttributedString(
+        var commentsRequested: NSAttributedString!
+        Async.background {
+            commentsRequested = NSAttributedString(
                 data: html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
                 options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
                 documentAttributes: nil,
                 error: nil)
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.message.attributedText = commentsRequested
-            })
-        })
+        } .main {
+            self.message.attributedText = commentsRequested
+        }
+        //let commentsQueue:dispatch_queue_t = dispatch_queue_create("comments queue", nil)
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//            let commentsRequested = NSAttributedString(
+//                data: html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+//                options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+//                documentAttributes: nil,
+//                error: nil)
+//            dispatch_async(dispatch_get_main_queue(), {
+//                self.message.attributedText = commentsRequested
+//            })
+//        })
     }
 
     private func setLabelFrame(str: String) {

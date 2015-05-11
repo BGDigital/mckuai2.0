@@ -113,6 +113,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         self.scrollViewDidScroll(self.tableView)
     }
     
@@ -149,7 +150,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
             self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
-//            MCUtils.showEmptyView(self.tableView)
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "你还没有发布作品,快去社区发贴吧")
             return 0
         }
     }

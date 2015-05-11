@@ -13,7 +13,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
-    var webView:UIWebView!
+    var webView: UIWebView!
     var url:NSURL!
     var firstLoad:Bool = true
     var page_btn:UIButton!
@@ -27,7 +27,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     var rightButton:UIButton?
     let item_wight:CGFloat = 80
     let item_height:CGFloat = 44
-    var admin:String = ""
+    var admin:String = "all"
 
     var id:String! {
         didSet {
@@ -47,21 +47,16 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         //初始化uiwebview
          initWebView()
          setRightBarButtonItem()
          initReplyBar();
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = true
-        self.navigationController?.navigationBar.lt_reset()
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-    }
-        
     override func viewDidDisappear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+        self.webView.delegate = nil
     }
 
     
@@ -287,16 +282,21 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     
     override func viewWillDisappear(animated: Bool) {
-//        self.tabBarController?.tabBar.hidden = false
         NSNotificationCenter.defaultCenter().removeObserver(self)
-//        self.tabBarController?.tabBar.hidden = true
     }
     override func viewWillAppear(animated: Bool) {
-//        self.tabBarController?.tabBar.hidden = true
         //注册键盘通知事件
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
-//        self.tabBarController?.tabBar.hidden = true
+        
+        self.tabBarController?.tabBar.hidden = true
+        self.navigationController?.navigationBar.lt_reset()
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBar.lt_reset()
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
     
     func showCustomHUD(view: UIView, title: String, imgName: String) {
@@ -384,18 +384,22 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     func initWebView() {
-        webView = UIWebView(frame: self.view.bounds)
-        var request = NSURLRequest(URL: url)
-        webView.loadRequest(request)
+        if IS_IOS8() {
+            webView = UIWebView(frame: self.view.bounds)
+        } else {
+            webView = UIWebView(frame: CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64))
+        }
         webView.delegate = self
         webView.backgroundColor = UIColor.whiteColor()
+
+        var request = NSURLRequest(URL: url)
+        webView.loadRequest(request)
+        
         self.webView.scrollView.addLegendHeaderWithRefreshingBlock({self.reloadView()})
         self.view.addSubview(webView)
     }
     
     func reloadView() {
-//        var request = NSURLRequest(URL: url)
-//        webView.loadRequest(request)
         self.webView.reload()
     }
     class func showTalkDetailPage(fromNavigation:UINavigationController?,id:String){

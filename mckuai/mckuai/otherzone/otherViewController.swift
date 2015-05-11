@@ -173,7 +173,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         if !self.datasource.isEmpty {
             return self.datasource.count
         } else {
-//            MCUtils.showEmptyView(self.tableView)
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "这家伙太懒了,什么也没有")
             return 0
         }
     }
