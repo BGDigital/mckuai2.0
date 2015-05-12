@@ -107,10 +107,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
                 var json = JSON(responseObject)
                 println(responseObject)
                 if "ok" == json["state"].stringValue {
-                    var userId = json["dataObject"].intValue
-                    //保存登录信息
-                    Defaults["D_USERID"] = userId
-                    appUserIdSave = userId
+                    MCUtils.AnalysisUserInfo(json)
                     
                     self.Delegate?.onLoginSuccessfull()
                     self.backToPage()
@@ -129,7 +126,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
             println(self.userName.text)
             mckuaiLoginFunction()
         }else {
-            MCUtils.showCustomHUD(self.view, title: "登录信息不能为空", imgName: "Guide")
+            MCUtils.showCustomHUD(self.view, title: "登录信息不能为空", imgName: "HUD_ERROR")
         }
     }
     @IBAction func qqLoginAction(sender: UIButton) {
@@ -187,7 +184,10 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
                     var json = JSON(responseObject)
                     
                     if "ok" == json["state"].stringValue {
+
                         self.AnalysisUserInfo(json["dataObject"])
+
+
                         hud.hide(true)
                         
                         self.Delegate?.onLoginSuccessfull()
@@ -222,7 +222,8 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
         var nickName = j["nickName"].stringValue
         var userLevel = j["level"].intValue
         var RC_token = j["token", "token"].stringValue
-        var RC_ID = j["token", "userId"].stringValue
+        var RC_ID = j["userName"].stringValue
+        var process = j["process"].floatValue
         
         //保存登录信息
         Defaults[D_USER_ID] = userId
@@ -232,6 +233,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
         Defaults[D_USER_ADDR] = userAddr
         Defaults[D_USER_RC_ID] = RC_ID
         Defaults[D_USER_RC_TOKEN] = RC_token
+        Defaults[D_USER_PROCESS] = process
         
         appUserIdSave = userId
         appUserNickName = nickName
@@ -240,6 +242,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
         appUserLevel = userLevel
         appUserRCID = RC_ID
         appUserRCToken = RC_token
+        appUserProcess = process
     }
     
     func keyboardDidShowLogin(notification:NSNotification) {

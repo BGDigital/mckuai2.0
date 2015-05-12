@@ -12,7 +12,7 @@ let forum_url = URL_MC+"act=forumList"
 let talk_url = URL_MC+"act=talkList"
 let webView_url = URL_MC+"act=talkOne"
 
-let upload_url = "http://www.mckuai.com/group.do?"+"act=uploadImg"
+let upload_url = URL_MC+"act=uploadImg"
 
 
 let addTalk_url = URL_MC+"act=addTalk"
@@ -25,6 +25,8 @@ let qqlogin_url = URL_MC+"act=login"
 let register_url = URL_MC+"act=register"
 
 let toCollect_url = URL_MC+"act=toCollect"
+
+let isCollect_url = URL_MC+"act=isCollect"
 
 let cancleCollect_url = URL_MC+"act=cancleCollect"
 

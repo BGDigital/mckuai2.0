@@ -107,16 +107,14 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                 var json = JSON(responseObject)
                 
                 if "ok" == json["state"].stringValue {
-                    var userId = json["dataObject"].intValue
                     //保存登录信息
-                    var userDefault = NSUserDefaults.standardUserDefaults()
-                    userDefault.setInteger(userId, forKey: "appUserIdSave")
-                    userDefault.synchronize()
-                    appUserIdSave = userId
+                    
+                    MCUtils.AnalysisUserInfo(json)
+                    
                     self.navigationController?.popViewControllerAnimated(true)
                 }else{
                     hud.hide(true)
-                    self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
                 }
                 
             },
@@ -124,7 +122,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 hud.hide(true)
-                self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
         })
         
         
