@@ -161,19 +161,23 @@ class MCUtils {
     /**
     检查网络状态
     */
-    class func checkNetWorkState() {
+    class func checkNetWorkState() -> Void {
         //网络状态
         AFNetworkReachabilityManager.sharedManager().startMonitoring()
         AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock({st in
             switch st {
             case .ReachableViaWiFi:
                 println("网络状态:WIFI")
+                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你在WIFI网络下面,随便畅玩吧", type: .Success)
             case .ReachableViaWWAN:
                 println("网络状态:3G")
+                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你正在使用流量上网,悠着点哦", type: .Warning)
             case .NotReachable:
                 println("网络状态:不可用")
+                TSMessage.showNotificationWithTitle("出错啦~!", subtitle: "网络状态异常,请检查网络连接", type: .Error)
             default:
                 println("网络状态:火星")
+                TSMessage.showNotificationWithTitle("出错啦~!", subtitle: "网络状态异常,请检查网络连接", type: .Error)
             }
         })
         AFNetworkReachabilityManager.sharedManager().stopMonitoring()
@@ -187,17 +191,23 @@ class MCUtils {
     :param: imgName 自定义HUD显示的图片
     */
     class func showCustomHUD(view: UIView, title: String, imgName: String) {
-        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        h.labelText = title
-        h.mode = MBProgressHUDMode.CustomView
-        h.customView = UIImageView(image: UIImage(named: imgName))
-        h.showAnimated(true, whileExecutingBlock: { () -> Void in
-            sleep(2)
-            return
-            }) { () -> Void in
-                h.removeFromSuperview()
-                h = nil
+        if "HUD_ERROR" == imgName {
+            TSMessage.showNotificationWithTitle(title, type: .Error)
+        } else {
+            TSMessage.showNotificationWithTitle(title, type: .Success)
         }
+//        
+//        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
+//        h.labelText = title
+//        h.mode = MBProgressHUDMode.CustomView
+//        h.customView = UIImageView(image: UIImage(named: imgName))
+//        h.showAnimated(true, whileExecutingBlock: { () -> Void in
+//            sleep(2)
+//            return
+//            }) { () -> Void in
+//                h.removeFromSuperview()
+//                h = nil
+//        }
     }
     
     /**

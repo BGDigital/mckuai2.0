@@ -67,21 +67,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func showCustomHUD(view: UIView, title: String, imgName: String) {
-        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        h.labelText = title
-        h.mode = MBProgressHUDMode.CustomView
-        h.customView = UIImageView(image: UIImage(named: imgName))
-        h.showAnimated(true, whileExecutingBlock: { () -> Void in
-            sleep(2)
-            return
-            }) { () -> Void in
-                h.removeFromSuperview()
-                h = nil
-        }
-    }
-    
+        
     @IBAction func registerUserInfo(sender: UIButton) {
         println("注册用户")
         
@@ -114,7 +100,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                     self.navigationController?.popViewControllerAnimated(true)
                 }else{
                     hud.hide(true)
-                    self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
                 }
                 
             },
@@ -122,7 +108,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 hud.hide(true)
-                self.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
         })
         
         

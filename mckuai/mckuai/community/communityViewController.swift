@@ -91,20 +91,6 @@ class communityViewController: UIViewController {
       
     }
     
-    func showCustomHUD(view: UIView, title: String, imgName: String) {
-        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        h.labelText = title
-        h.mode = MBProgressHUDMode.CustomView
-        h.customView = UIImageView(image: UIImage(named: imgName))
-        h.showAnimated(true, whileExecutingBlock: { () -> Void in
-            sleep(2)
-            return
-            }) { () -> Void in
-                h.removeFromSuperview()
-                h = nil
-        }
-    }
-    
     class func setForumListData() {
         AFHTTPRequestOperationManager().GET(forum_url,
             parameters: nil,

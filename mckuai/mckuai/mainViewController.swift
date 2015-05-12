@@ -63,6 +63,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if isFirstLoad {
             loadDataWithoutMJRefresh()
         }
+        
         MCUtils.checkNetWorkState()
     }
     
@@ -134,6 +135,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
                 self.tableView.tableHeaderView?.hidden = true
+                TSMessage.showNotificationWithTitle("出错了", subtitle: "连接服务器异常,请与管理员联系", type: .Error)
                 MCUtils.showEmptyView(self.tableView, aImg: Load_Error!, aText: "哇哦~,加载数据出问题了")
         })
         

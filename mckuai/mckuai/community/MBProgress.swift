@@ -9,20 +9,6 @@
 import Foundation
 class MBProgress {
     
-    class func showCustomHUD(view: UIView, title: String, imgName: String) {
-        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        h.labelText = title
-        h.mode = MBProgressHUDMode.CustomView
-        h.customView = UIImageView(image: UIImage(named: imgName))
-        h.showAnimated(true, whileExecutingBlock: { () -> Void in
-            sleep(2)
-            return
-            }) { () -> Void in
-                h.removeFromSuperview()
-                h = nil
-        }
-    }
-    
     //将url 的querystring 分离成dictionary
     
     class func getQueryDictionary(query:String) -> [String:String]{

@@ -54,32 +54,16 @@ class Profile:UIViewController, UIAlertViewDelegate {
                 if "ok" == json["state"].stringValue {
                     self.user = json["dataObject"]
                 }else{
-                    self.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
                 }
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                self.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
         })
     }
-    
-    
-    func showCustomHUD(view: UIView, title: String, imgName: String) {
-        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        h.labelText = title
-        h.mode = MBProgressHUDMode.CustomView
-        h.customView = UIImageView(image: UIImage(named: imgName))
-        h.showAnimated(true, whileExecutingBlock: { () -> Void in
-            sleep(2)
-            return
-            }) { () -> Void in
-                h.removeFromSuperview()
-                h = nil
-        }
-    }
-    
     
 
     class func loadProfile(ctl:UINavigationController){

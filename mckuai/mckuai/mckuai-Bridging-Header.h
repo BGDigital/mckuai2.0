@@ -18,6 +18,7 @@
 #import "UMSocialQQHandler.h"
 #import "UMSocialWechatHandler.h"
 #import "MobClick.h"
+#import "TSMessage.h"
 
 //Rongcloud
 #import "RCIM.h"
