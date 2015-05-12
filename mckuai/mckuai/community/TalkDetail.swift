@@ -314,6 +314,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
         //注册键盘通知事件
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
@@ -324,6 +325,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     override func viewDidAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
         self.navigationController?.navigationBar.lt_reset()
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
@@ -433,7 +435,6 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     class func showTalkDetailPage(fromNavigation:UINavigationController?,id:String){
         var talkDetail = UIStoryboard(name: "TalkDetail", bundle: nil).instantiateViewControllerWithIdentifier("talkDetail") as! TalkDetail
-        
         talkDetail.id = id
         if (fromNavigation != nil) {
             fromNavigation?.pushViewController(talkDetail, animated: true)

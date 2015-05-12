@@ -164,8 +164,9 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        println(self.datasource)
         let id = self.datasource[indexPath.row]["id"].stringValue
-        TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+        TalkDetail.showTalkDetailPage(MCUtils.mainNav, id: id)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -180,6 +181,9 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
         return cell!
     }
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
     // 提交编辑样式
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if UITableViewCellEditingStyle.Delete == editingStyle {
@@ -188,11 +192,38 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
             
             界面上的内容显示是基于数组的，所有要显示之前，我们需要先把数据的内容搞定
             */
-            // 1.删除数据
-            self.datasource.removeAtIndex(indexPath.row)
-            // 2.刷新数据
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
-            
+            //通知服务器
+            var talkId = self.datasource[indexPath.row]["id"].stringValue
+            var row = indexPath.row
+            self.cancleCollect(talkId, row: row)
         }
+    }
+    /**
+    取消收藏贴子
+    
+    :param: talkId 贴子ID
+    :param: row    删除的Row
+    */
+    func cancleCollect(talkId: String, row: Int) {
+        var dict = ["act":"cancleCollect", "id": appUserIdSave, "talkId": talkId]
+        manager.POST(URL_MC,
+            parameters: dict,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                var result = JSON(responseObject)
+                println(result["msg"].stringValue)
+                if "ok" == result["state"].stringValue {
+                    // 1.删除数据
+                    self.datasource.removeAtIndex(row)
+                    // 2.刷新数据
+                    self.tableView.reloadData()
+                } else {
+                    MCUtils.showCustomHUD(self.view, title: result["msg"].stringValue, imgName: "HUD_ERROR")
+                }
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+        })
     }
 }

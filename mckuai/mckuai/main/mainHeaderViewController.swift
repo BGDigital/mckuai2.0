@@ -124,10 +124,11 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     @IBAction func openMineSB() {
         println("打开个人中心")
         //mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
-        
-        mineFrm = mineTableViewController()
-        mineFrm.hidesBottomBarWhenPushed = true
-        self.nav?.pushViewController(mineFrm, animated: true) //这个显示效果有问题
+        if appUserIdSave != 0 {
+            mineFrm = mineTableViewController()
+            mineFrm.hidesBottomBarWhenPushed = true
+            self.nav?.pushViewController(mineFrm, animated: true) //这个显示效果有问题
+        }
     }
     
     @IBAction func openCityList(sender: UIButton) {

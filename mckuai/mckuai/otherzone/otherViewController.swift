@@ -18,6 +18,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     var page: PageInfo!
     var hud: MBProgressHUD?
     var isFirstLoad = true
+    var btnAttention: UIButton!
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
@@ -93,7 +94,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        showPopWindow()
+        getAttentionStatus()
         
         if isFirstLoad {
             loadDataWithoutMJRefresh()
@@ -272,16 +273,17 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     //显示弹出出的选项
-    func showPopWindow() {
-        var view = UIView(frame: CGRectMake(0, self.view.bounds.size.height-50, self.view.bounds.size.width, 50))
+    func showPopWindow(btnText: String, btnTag: Int) {
+        var view = UIView(frame: CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 50))
         view.backgroundColor = UIColor.blackColor()
         
         //button1
-        var btn1 = UIButton(frame: CGRectMake(0, 0, self.view.bounds.size.width/2, 50))
-        btn1.setImage(UIImage(named: "backpacker_add"), forState: .Normal)
-        btn1.setTitle("加入背包", forState: .Normal)
-        btn1.addTarget(self, action: "btn1Click", forControlEvents: UIControlEvents.TouchUpInside)
-        view.addSubview(btn1)
+        btnAttention = UIButton(frame: CGRectMake(0, 0, self.view.bounds.size.width/2, 50))
+        btnAttention.setImage(UIImage(named: "backpacker_add"), forState: .Normal)
+        btnAttention.setTitle(btnText, forState: .Normal)
+        btnAttention.tag = btnTag
+        btnAttention.addTarget(self, action: "btn1Click:", forControlEvents: UIControlEvents.TouchUpInside)
+        view.addSubview(btnAttention)
         
         //button2
         var btn2 = UIButton(frame: CGRectMake(self.view.bounds.size.width/2, 0, self.view.bounds.size.width/2, 50))
@@ -289,31 +291,73 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         btn2.setTitle("和TA聊天", forState: .Normal)
         view.addSubview(btn2)
         
-        //渐入效果
-        view.alpha = 0
-        self.view.addSubview(view)
-        UIView.animateWithDuration(0.5, animations: {
-            view.alpha = 1
+        //View 上移效果
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            //上移值
+            let upValue:CGFloat=50
+            self.view.addSubview(view)
+            //accountView上移
+            var accountFrame:CGRect=view.frame
+            accountFrame.origin.y=accountFrame.origin.y-upValue
+            view.frame=accountFrame
         })
     }
     
-    //加入背包
-    @IBAction func btn1Click() {
+    func getAttentionStatus() {
         var param = [
-            "act": "attention",
-            "ownerId": 6,
+            "act": "isAttention",
+            "ownerId": appUserIdSave,
+            "otherId": self.UserId!]
+        manager.GET(URL_MC,
+            parameters: param,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                //println("背包,isAttention:\(responseObject)")
+                var result = JSON(responseObject)
+                if "ok" == result["state"].stringValue {
+                    //已被关注
+                    self.showPopWindow("移除背包", btnTag: 1)
+                } else {
+                    //未被关注
+                    self.showPopWindow("加入背包", btnTag: 2)
+                }
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+        })
+    }
+    
+    /**
+    把用户加入背包
+    */
+    @IBAction func btn1Click(sender: UIButton) {
+        doAttention(sender.tag)
+    }
+    
+    /**
+    从背包中取消关注用户
+    
+    :param: iTag 1:取消关注, 2:添加关注
+    */
+    func doAttention(iTag: Int) {
+        var param = [
+            "act": iTag == 1 ? "cancleAttention" : "attention",
+            "ownerId": appUserIdSave,
             "otherId": self.UserId!]
         manager.POST(URL_MC,
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
-                println("加入背包:\(responseObject)")
-                MCUtils.showCustomHUD(self.view, title: "添加成功", imgName: "HUD_OK")
+                println("背包:\(responseObject)")
+                self.btnAttention.setTitle(iTag == 1 ? "加入背包" : "移除背包", forState: .Normal)
+                self.btnAttention.tag = iTag == 1 ? 2 : 1
+                MCUtils.showCustomHUD(self.view, title: "操作成功", imgName: "HUD_OK")
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                MCUtils.showCustomHUD(self.view, title: "添加失败,请重试", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD(self.view, title: "操作失败,请重试", imgName: "HUD_ERROR")
         })
     }
 

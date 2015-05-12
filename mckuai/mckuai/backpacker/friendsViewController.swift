@@ -134,57 +134,15 @@ class friendsViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! CollectionCell
-        cell.selected = true
-        cell.contentView.layer.borderColor = UIColor.redColor().CGColor
-        cell.contentView.layer.borderWidth = 2
         self.selectUserId = cell.userId
-        showPopWindow()
-    }
-    
-    override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? CollectionCell {
-            cell.selected = false
-            cell.contentView.layer.borderColor = UIColor.clearColor().CGColor
-            cell.contentView.layer.borderWidth = 2
-        }
-    }
-    
-    //显示弹出出的选项
-    func showPopWindow() {
-        var view = UIView(frame: CGRectMake(0, self.view.bounds.size.height-50, self.view.bounds.size.width, 50))
-        view.backgroundColor = UIColor.blackColor()
         
-        //button1
-        var btn1 = UIButton(frame: CGRectMake(0, 0, self.view.bounds.size.width/2, 50))
-        btn1.setImage(UIImage(named: "backpacker_bag"), forState: .Normal)
-        btn1.setTitle("去TA的家", forState: .Normal)
-        btn1.addTarget(self, action: "btn1Click", forControlEvents: UIControlEvents.TouchUpInside)
-        view.addSubview(btn1)
-        
-        //button2
-        var btn2 = UIButton(frame: CGRectMake(self.view.bounds.size.width/2, 0, self.view.bounds.size.width/2, 50))
-        btn2.setImage(UIImage(named: "backpacker_chat"), forState: .Normal)
-        btn2.setTitle("和TA聊天", forState: .Normal)
-        view.addSubview(btn2)
-        
-        //渐入效果
-        view.alpha = 0
-        self.view.addSubview(view)
-        UIView.animateWithDuration(0.5, animations: {
-            view.alpha = 1
-        })
+        MCUtils.openOtherZone(self.nav, userId: selectUserId!)
     }
     
     func setNavi(navi: UINavigationController?) {
         self.nav = navi
     }
     
-    @IBAction func btn1Click() {
-        MCUtils.openOtherZone(self.nav, userId: selectUserId!)
-//        otherZone = otherViewController(uId: self.selectUserId!)
-//        self.nav?.pushViewController(otherZone, animated: true)
-    }
-
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
     override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
