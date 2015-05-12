@@ -71,7 +71,7 @@
     _navgationTabBar.showsHorizontalScrollIndicator = NO;
     [self addSubview:_navgationTabBar];
     
-    [self viewShowShadow:self shadowRadius:10.0f shadowOpacity:10.0f];
+//    [self viewShowShadow:self shadowRadius:10.0f shadowOpacity:10.0f];
 }
 
 - (void)showLineWithButtonWidth:(CGFloat)width

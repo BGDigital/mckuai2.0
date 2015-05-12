@@ -149,20 +149,32 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     var json = JSON(responseObject)
                     
                     if "ok" == json["state"].stringValue {
-                        self.hud?.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "保存信息成功", imgName: "Guide")
+
+                        if(self.hud != nil){
+                            self.hud?.hide(true)
+                        }
+
+                        MCUtils.showCustomHUD(self.view, title: "保存信息成功", imgName: "HUD_OK")
                         isLoginout = true
                         self.navigationController?.popViewControllerAnimated(true)
                     }else{
-                        self.hud?.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "Guide")
+
+                        if(self.hud != nil){
+                            self.hud?.hide(true)
+                        }
+
+                        MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
                     }
                     
                 },
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
-                    self.hud?.hide(true)
+
+                    if(self.hud != nil){
+                        self.hud?.hide(true)
+                    }
+
                     MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "Guide")
             })
             
@@ -210,6 +222,8 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
             })
         }else{
+            hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+            hud?.labelText = "保存中"
             self.postHeadInfoToServer()
         }
         

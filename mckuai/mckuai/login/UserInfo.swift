@@ -140,7 +140,6 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
             appUserIdSave = 0
             isLoginout = true
             println("用户已退出！")
-//            self.navigationController?.popToRootViewControllerAnimated(true)
             self.navigationController?.popViewControllerAnimated(true)
         }
     }

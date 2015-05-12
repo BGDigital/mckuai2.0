@@ -262,6 +262,7 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                         }
                     }
                     
+                    
                 },
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in

@@ -40,6 +40,10 @@ let D_USER_LOGINNAME = "LoginName"
 let D_USER_LOGINPWD = "LoginPwd"
 //是否记住登录信息(用户名,密码)
 let D_USER_ISREMEMBERME = "isRememberMe"
+//用户进度
+let D_USER_PROCESS = "UserProcess"
+
+
 
 //mckuai网络接口
 //主接口地址-域名
@@ -54,6 +58,8 @@ var appUserPic: String = ""
 var appUserAddr: String = ""
 var appUserRCID: String = ""
 var appUserRCToken: String = ""
+var appUserProcess :Float = 0.0
+
 
 //默认用户头像
 var DefaultUserAvatar_big = UIImage(named: "Avatar")
@@ -61,6 +67,7 @@ var DefaultUserAvatar_small = UIImage(named: "SmallAvatar")
 var Load_Empty = UIImage(named: "load_empty")
 var Load_Error = UIImage(named: "load_error")
 var Loading = UIImage(named: "loading")
+
 
 //PageInfo 用于下拉刷新
 class PageInfo {
@@ -102,6 +109,37 @@ class MCUtils {
     static let URL_LAUNCH = "http://cdn.mckuai.com/app_start.png"
     
     
+    
+    class func AnalysisUserInfo(j: JSON) {
+        var userId = j["id"].intValue
+        var userAddr = j["addr"].stringValue
+        var Avatar = j["headImg"].stringValue
+        var nickName = j["nickName"].stringValue
+        var userLevel = j["level"].intValue
+        var RC_token = j["token", "token"].stringValue
+        var RC_ID = j["userName"].stringValue
+        var process = j["process"].floatValue
+        
+        //保存登录信息
+        Defaults[D_USER_ID] = userId
+        Defaults[D_USER_LEVEL] = userLevel
+        Defaults[D_USER_NICKNAME] = nickName
+        Defaults[D_USER_ARATAR] = Avatar
+        Defaults[D_USER_ADDR] = userAddr
+        Defaults[D_USER_RC_ID] = RC_ID
+        Defaults[D_USER_RC_TOKEN] = RC_token
+        Defaults[D_USER_PROCESS] = process
+        
+        appUserIdSave = userId
+        appUserNickName = nickName
+        appUserPic = Avatar
+        appUserAddr = userAddr
+        appUserLevel = userLevel
+        appUserRCID = RC_ID
+        appUserRCToken = RC_token
+        appUserProcess = process
+    }
+
     class func setNavBack() {
         //
         var navigationBar = UINavigationBar.appearance()

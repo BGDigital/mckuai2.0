@@ -132,6 +132,35 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         self.view.addSubview(reply_btn)
         self.view.addSubview(share_btn)
         self.view.addSubview(collect_btn)
+        
+        
+        if(appUserIdSave != 0){
+            let params = [
+                "userId":String(stringInterpolationSegment: appUserIdSave),
+                "talkId":String(self.id)
+            ]
+            
+            manager.POST(isCollect_url,
+                parameters: params,
+                success: { (operation: AFHTTPRequestOperation!,
+                    responseObject: AnyObject!) in
+                    var json = JSON(responseObject)
+                    
+                    if "ok" == json["state"].stringValue {
+                        self.collect_btn.selected = true
+                    }
+                    
+                },
+                failure: { (operation: AFHTTPRequestOperation!,
+                    error: NSError!) in
+                    println("Error: " + error.localizedDescription)
+                    
+            })
+            
+        }
+        
+ 
+        
     }
     
     
@@ -230,10 +259,10 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     
                     UIImage(data: NSData(contentsOfURL: NSURL(string:shareParams["shareImg"]!)!)!)
                 }else{
-                    shareImg = UIImage(named: "1024")
+                    shareImg = UIImage(named: "guidepage1")
                 }
                 if(shareText != nil && shareImg != nil){
-                    ShareUtil.shareInitWithTextAndPicture(self, text: "", image: shareImg!, callDelegate: self)
+                    ShareUtil.shareInitWithTextAndPicture(self, text: shareText, image: shareImg!, callDelegate: self)
                 }
                 
             }
