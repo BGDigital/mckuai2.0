@@ -16,13 +16,13 @@ class SearchUserCell: UITableViewCell {
     @IBOutlet weak var userAddr: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.userLevel.backgroundColor = UIColor(hexString: "#FDAA33")
+        self.userLevel.backgroundColor = UIColor(hexString: "#FCAA38")
         self.userLevel.layer.masksToBounds = true
         self.userLevel.layer.cornerRadius = 7
         
         self.userAvatar.layer.masksToBounds = true
-        self.userAvatar.layer.cornerRadius = 30
-        self.userAvatar.layer.borderColor = UIColor(hexString: "#FFFFFF", alpha: 0.8)?.CGColor
+        self.userAvatar.layer.cornerRadius = 25
+        self.userAvatar.layer.borderColor = UIColor(hexString: "#000000", alpha: 0.1)!.CGColor
         self.userAvatar.layer.borderWidth = 1
         //self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
         
@@ -33,6 +33,7 @@ class SearchUserCell: UITableViewCell {
     }
     
     func update(j: JSON) {
+//        println(j)
         self.userAvatar.sd_setImageWithURL(NSURL(string: j["headImg"].stringValue), placeholderImage: DefaultUserAvatar_big!)
         self.userNick.text = j["nike"].stringValue
         self.userLevel.text = "LV."+j["level"].stringValue

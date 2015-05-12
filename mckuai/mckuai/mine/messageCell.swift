@@ -83,8 +83,11 @@ class messageCell: UITableViewCell {
                     self.username.setImage(newImage, forState: .Normal)
                 })
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
-                setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
-                //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)
+                if IS_IOS8() {
+                    setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
+                } else {
+                    self.message.text = "《" + json["talkTitle"].stringValue + "》" + "\n" + json["cont"].stringValue
+                }
             default:  //system
                 var Avatar = json["headImg"].stringValue
                 self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,_ in
@@ -111,8 +114,11 @@ class messageCell: UITableViewCell {
                 self.username.setImage(UIImage(named: "mine_create"), forState: .Normal)
             }
             self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
-            setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
-            //setLabelFrame("《" + json["talkTitle"].stringValue + "》\n" + json["cont"].stringValue)
+            if IS_IOS8() {
+                setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
+            } else {
+                self.message.text = "《" + json["talkTitle"].stringValue + "》" + "\n" + json["cont"].stringValue
+            }
         case "work":
             break
         default:

@@ -241,7 +241,11 @@ class MCUtils {
         let btnX = (v.bounds.size.width - img.bounds.size.width) / 2
         var btnY: CGFloat!
         if let headHeight = tv.tableHeaderView?.bounds.size.height {
-            btnY = (v.bounds.size.height + headHeight - img.bounds.size.height+30) / 2
+            if tv.tableHeaderView?.hidden == false {
+                btnY = (v.bounds.size.height + headHeight - img.bounds.size.height+30) / 2
+            } else {
+                btnY = (v.bounds.size.height - img.bounds.size.height+30) / 2
+            }
         } else {
             btnY = (v.bounds.size.height - img.bounds.size.height+30) / 2
         }

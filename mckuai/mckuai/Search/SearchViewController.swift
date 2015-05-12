@@ -30,7 +30,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
-    
     var datasource: Array<JSON> = Array() {
         didSet {
             self.tableView.reloadData()
@@ -51,8 +50,18 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(animated: Bool) {
+//        searchBar.becomeFirstResponder()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        searchBar.resignFirstResponder()
+    }
+    
     func onSearch() {
         //开始刷新
+        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud?.labelText = MCUtils.TEXT_SEARCH
         var dict = ["act":"search", "type": searchType, "key": searchKey]
         manager.GET(URL_MC,
             parameters: dict,
@@ -65,6 +74,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.hud?.hide(true)
+                self.datasource.removeAll(keepCapacity: false)
+                MCUtils.showEmptyView(self.tableView, aImg: Load_Error!, aText: "获取数据出错")
         })
     }
     
@@ -95,20 +106,24 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-//
+        onSearch()
+        searchBar.resignFirstResponder()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchKey = searchText
         
-        onSearch()
     }
     
     /**
     初始化TableView
     */
     func setupTableView() {
-        self.tableView = UITableView(frame: CGRectMake(0, 35, self.view.bounds.size.width, self.view.bounds.size.height-35), style: UITableViewStyle.Plain)
+        if IS_IOS8() {
+            self.tableView = UITableView(frame: CGRectMake(0, 35, self.view.bounds.size.width, self.view.bounds.size.height-35), style: UITableViewStyle.Plain)
+        } else {
+            self.tableView = UITableView(frame: CGRectMake(0, 99, self.view.bounds.size.width, self.view.bounds.size.height-99), style: UITableViewStyle.Plain)
+        }
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
         tableView.delegate = self
         tableView.dataSource = self
@@ -143,6 +158,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        searchBar.resignFirstResponder()
+        return indexPath
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -174,6 +194,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let nib: NSArray = NSBundle.mainBundle().loadNibNamed("SearchUserCell", owner: self, options: nil)
                 cell = nib.lastObject as? SearchUserCell
             }
+            println("index:\(indexPath.row), count:\(self.datasource.count)")
             let d = self.datasource[indexPath.row] as JSON
             cell?.update(d)
             return cell!
@@ -188,7 +209,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func initSegmentedControl() {
         segmentedControl = HMSegmentedControl(sectionTitles: ["贴子", "麦友"])
         segmentedControl.frame = CGRectMake(0, 64, self.view.frame.size.width, 35)
-        
         
         segmentedControl.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleWidth
         segmentedControl.backgroundColor = UIColor.whiteColor()
@@ -213,8 +233,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         if !searchKey.isEmpty {
-            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            hud?.labelText = MCUtils.TEXT_SEARCH
             onSearch()
         }
     }
