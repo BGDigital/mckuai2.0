@@ -175,7 +175,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                         self.hud?.hide(true)
                     }
 
-                    MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "Guide")
+                    MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
             })
             
         }
@@ -211,7 +211,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                         
                     }else{
                         self.hud?.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                        MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
                     }
                     
                 },
@@ -219,7 +219,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
                     self.hud?.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                    MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
             })
         }else{
             hud = MBProgressHUD.showHUDAddedTo(view, animated: true)

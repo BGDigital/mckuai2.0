@@ -114,14 +114,14 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
                 if "ok" == json["state"].stringValue {
                     self.user = json["dataObject"]
                 }else{
-                    MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "Guide")
+                    MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
                 }
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "Guide")
+                MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
         })
     }
     

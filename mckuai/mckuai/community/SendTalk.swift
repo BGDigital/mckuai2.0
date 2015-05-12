@@ -174,7 +174,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         println("addpics")
         
         if(self.image_button.count >= 5){
-            self.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "Guide")
+            self.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "HUD_ERROR")
         }else{
 //            var sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
 //            if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
@@ -485,25 +485,25 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         content_post = self.textView.text
         
         if(forumName_post == nil || forumName_post.isEmpty){
-            self.showCustomHUD(self.view, title: "请选择版块类型", imgName:  "Guide")
+            self.showCustomHUD(self.view, title: "请选择版块类型", imgName:  "HUD_ERROR")
             self.rightButton?.enabled = true
             return
         }
         
         if(talkTypeName_post == nil || talkTypeName_post.isEmpty){
-            self.showCustomHUD(self.view, title: "请选择帖子类型", imgName:  "Guide")
+            self.showCustomHUD(self.view, title: "请选择帖子类型", imgName:  "HUD_ERROR")
             self.rightButton?.enabled = true
             return
         }
         
         if(talkTitle_post == nil || talkTitle_post.isEmpty || count(talkTitle_post)<5){
-            self.showCustomHUD(self.view, title: "帖子标题不能少于5个字符", imgName:  "Guide")
+            self.showCustomHUD(self.view, title: "帖子标题不能少于5个字符", imgName:  "HUD_ERROR")
             self.rightButton?.enabled = true
             return
         }
         
         if(content_post == nil || content_post.isEmpty || content_post == "内容" || count(content_post)<15){
-            self.showCustomHUD(self.view, title: "发帖内容不能少于15个字符", imgName:  "Guide")
+            self.showCustomHUD(self.view, title: "发帖内容不能少于15个字符", imgName:  "HUD_ERROR")
             self.rightButton?.enabled = true
             return
         }
@@ -542,7 +542,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                     }else{
                         self.rightButton?.enabled = true
                         self.progress.removeFromSuperview()
-                        self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                        self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
                     }
                     
                 },
@@ -551,7 +551,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                     println("Error: " + error.localizedDescription)
                     self.rightButton?.enabled = true
                     self.progress.removeFromSuperview()
-                    self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
             })
         }else{
             self.postTalkToServer()
@@ -590,7 +590,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                 }else{
                     self.rightButton?.enabled = true
                     self.progress.removeFromSuperview()
-                    self.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "HUD_ERROR")
                 }
 
             },
@@ -599,7 +599,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                 println("Error: " + error.localizedDescription)
                 self.rightButton?.enabled = true
                 self.progress.removeFromSuperview()
-                self.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "HUD_ERROR")
         })
         
         

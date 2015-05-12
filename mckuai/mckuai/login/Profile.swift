@@ -54,14 +54,14 @@ class Profile:UIViewController, UIAlertViewDelegate {
                 if "ok" == json["state"].stringValue {
                     self.user = json["dataObject"]
                 }else{
-                    self.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
                 }
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                self.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
         })
     }
     

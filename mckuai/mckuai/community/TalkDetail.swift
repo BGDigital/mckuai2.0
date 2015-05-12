@@ -411,7 +411,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        MBProgress.showCustomHUD(self.view, title: "出错啦,加载失败", imgName: "Guide")
+        MBProgress.showCustomHUD(self.view, title: "出错啦,加载失败", imgName: "HUD_ERROR")
     }
     
     func initWebView() {
@@ -500,7 +500,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         self.sendButton.enabled = false
         var replyContext = self.textView.text
         if(replyContext == nil || replyContext.isEmpty){
-            self.showCustomHUD(self.view, title: "回复的内容不能为空", imgName:  "Guide")
+            self.showCustomHUD(self.view, title: "回复的内容不能为空", imgName:  "HUD_ERROR")
             self.sendButton.enabled = true
             return
         }
@@ -531,7 +531,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     }else{
                         self.rightButton?.enabled = true
                         hud.hide(true)
-                        self.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "Guide")
+                        self.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "HUD_ERROR")
                     }
                     
                 },
@@ -540,7 +540,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     println("Error: " + error.localizedDescription)
                     self.rightButton?.enabled = true
                     hud.hide(true)
-                    self.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "HUD_ERROR")
             })
             
             

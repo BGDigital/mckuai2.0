@@ -134,7 +134,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     
     func addPicAction() {
         if(self.image_button.count >= 5){
-            self.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "Guide")
+            self.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "HUD_ERROR")
         }else{
 //            var sourceType = UIImagePickerControllerSourceType.PhotoLibrary
 //            if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
@@ -250,7 +250,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         self.sendButton.enabled = false
         content = self.textView.text
         if(content == nil || content.isEmpty || content == "内容..."){
-            self.showCustomHUD(self.view, title: "跟贴的内容不能为空", imgName:  "Guide")
+            self.showCustomHUD(self.view, title: "跟贴的内容不能为空", imgName:  "HUD_ERROR")
             self.sendButton.enabled = true
             return
         }
@@ -292,7 +292,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                         }else{
                             self.sendButton?.enabled = true
                             self.progress.removeFromSuperview()
-                            self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                            self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
                         }
                         
                     },
@@ -300,7 +300,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                         error: NSError!) in
                         println("Error: " + error.localizedDescription)
                         self.progress.removeFromSuperview()
-                        self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "Guide")
+                        self.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
                 })
             }else{
                 self.postTalkToServer()
@@ -332,7 +332,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                 }else{
                     self.sendButton?.enabled = true
                     self.progress.removeFromSuperview()
-                    self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "HUD_ERROR")
                 }
                 
             },
@@ -341,7 +341,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                 println("Error: " + error.localizedDescription)
                 self.sendButton?.enabled = true
                 self.progress.removeFromSuperview()
-                self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "HUD_ERROR")
         })
     }
     

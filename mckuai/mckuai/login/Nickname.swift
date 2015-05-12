@@ -80,12 +80,12 @@ class Nickname:UIViewController,UIGestureRecognizerDelegate {
                     
                     if "ok" == json["state"].stringValue {
                         hud.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "保存信息成功", imgName: "Guide")
+                        MCUtils.showCustomHUD(self.view, title: "保存信息成功", imgName: "HUD_OK")
                         isLoginout = true
                         self.navigationController?.popViewControllerAnimated(true)
                     }else{
                         hud.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "Guide")
+                        MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
                     }
                     
                 },
@@ -93,7 +93,7 @@ class Nickname:UIViewController,UIGestureRecognizerDelegate {
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
                     hud.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "Guide")
+                    MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
             })
             
             
