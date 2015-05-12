@@ -156,7 +156,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     self.collect_btn.enabled = true
                 }else{
                     self.collect_btn.enabled = true
-                    self.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "HUD_ERROR")
                 }
                 
             },
@@ -164,7 +164,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.collect_btn.enabled = true
-                self.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "HUD_ERROR")
         })
         
         
@@ -188,7 +188,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     self.collect_btn.enabled = true
                 }else{
                     self.collect_btn.enabled = true
-                    self.showCustomHUD(self.view, title: "取消收藏失败", imgName: "Guide")
+                    self.showCustomHUD(self.view, title: "取消收藏失败", imgName: "HUD_ERROR")
                 }
                 
             },
@@ -196,7 +196,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.collect_btn.enabled = true
-                self.showCustomHUD(self.view, title: "取消收藏失败", imgName: "Guide")
+                self.showCustomHUD(self.view, title: "取消收藏失败", imgName: "HUD_ERROR")
         })
     }
     
@@ -335,7 +335,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
         if action == "viewuser" && param["id"] != nil{
             if let id = param["id"]!.toInt(){
-                
+                MCUtils.openOtherZone(self.navigationController, userId: id)
             }
         }
         self.params = param;

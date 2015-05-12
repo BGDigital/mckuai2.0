@@ -171,6 +171,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         if !self.datasource.isEmpty {
+            self.tableView.backgroundView = nil
             return self.datasource.count
         } else {
             MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "这家伙太懒了,什么也没有")
