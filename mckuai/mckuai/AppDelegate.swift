@@ -119,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     func getFriends() -> [AnyObject]! {
         var arr = NSMutableArray()
         var user1 = RCUserInfo()
-        user1.userId = "kyly"
+        user1.userId = "859F416027050C8AE33367423A986ED1"
         user1.name = "麻哥"
         user1.portraitUri = ""
         arr.addObject(user1)
@@ -127,19 +127,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         var user2 = RCUserInfo(userId: "2", name: "陈强", portrait: "这个是啥")
         arr.addObject(user2)
         
-        var user3 = RCUserInfo(userId: "6", name: "邱兴福", portrait: "这个是啥")
+        var user3 = RCUserInfo(userId: "1", name: "kun", portrait: "这个是啥")
         arr.addObject(user3)
+        
+        
         
         return arr as [AnyObject]
     }
     
     //获取用户信息方法
     func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
-        if userId == "kyly" {
+        if userId == "859F416027050C8AE33367423A986ED1" {
             var u = RCUserInfo()
-            u.userId = "kyly"
+            u.userId = "859F416027050C8AE33367423A986ED1"
             u.name = "麻哥"
-            u.portraitUri = ""
+            u.portraitUri = "https://wt-avatars.oss.aliyuncs.com/40/91e8fae8-3d2a-43e5-b056-298d77879361.jpg"
             
             return completion(u)
         }

@@ -29,6 +29,10 @@ class mainSubCell: UITableViewCell {
         
         //底部线
         self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
+        var line1 = UIView(frame: CGRectMake(0, self.frame.size.height-6, self.frame.size.width, 1))
+        line1.backgroundColor = UIColor(hexString: "#E1E3E5")
+        self.addSubview(line1)
+        
         var line = UIView(frame: CGRectMake(0, self.frame.size.height-5, self.frame.size.width, 5))
         line.backgroundColor = UIColor(hexString: "#EFF0F2")
         self.addSubview(line)

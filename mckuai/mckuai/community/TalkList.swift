@@ -113,7 +113,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     func initTableView() {
         var v = UIView(frame: CGRectMake(0, 45, self.view.bounds.size.width, self.view.bounds.size.height-192))
         self.tableView = UITableView(frame: CGRectMake(0, 0, v.frame.size.width, v.frame.size.height), style: UITableViewStyle.Plain)
-        println(self.view.bounds.size)
+//        println(self.view.bounds.size)
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
         tableView.delegate = self
         tableView.dataSource = self
