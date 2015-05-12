@@ -8,7 +8,7 @@
 
 import UIKit
 
-class liveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class liveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate{
 
     var tableView: UITableView!
     var segmentedControl: HMSegmentedControl!
@@ -137,39 +137,99 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func showLiveType() {
-        var alertController = UIAlertController(title: "直播类型", message: "选择你感兴趣的直播类型", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        var cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
-        var deleteAction = UIAlertAction(title: "生存直播", style: UIAlertActionStyle.Default, handler: {a in
-            self.liveType = a.title
+        if (NSClassFromString("UIAlertController") != nil) {
+            var alertController = UIAlertController(title: "直播类型", message: "选择你感兴趣的直播类型", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            var cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
+            var liveAction = UIAlertAction(title: "生存直播", style: UIAlertActionStyle.Default, handler: {a in
+                self.liveType = a.title
+                println(self.liveType)
+                self.navigationItem.rightBarButtonItem?.title = "生存"
+                self.loadDataWithoutMJRefresh()
+            })
+            
+            var archiveAction = UIAlertAction(title: "极限直播", style: UIAlertActionStyle.Default, handler: {a in
+                self.liveType = a.title
+                println(self.liveType)
+                self.navigationItem.rightBarButtonItem?.title = "极限"
+                self.loadDataWithoutMJRefresh()
+            })
+            
+            var allAction = UIAlertAction(title: "全部直播", style: UIAlertActionStyle.Default, handler: {a in
+                self.liveType = ""
+                println(self.liveType)
+                self.navigationItem.rightBarButtonItem?.title = "全部"
+                self.loadDataWithoutMJRefresh()
+            })
+            
+            var mapAction = UIAlertAction(title: "地图直播", style: UIAlertActionStyle.Default, handler: {a in
+                self.liveType = a.title
+                println(self.liveType)
+                self.navigationItem.rightBarButtonItem?.title = "地图"
+                self.loadDataWithoutMJRefresh()
+            })
+            
+            var novelAction = UIAlertAction(title: "小说直播", style: UIAlertActionStyle.Default, handler: {a in
+                self.liveType = a.title
+                println(self.liveType)
+                self.navigationItem.rightBarButtonItem?.title = "小说"
+                self.loadDataWithoutMJRefresh()
+            })
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(liveAction)
+            alertController.addAction(archiveAction)
+            alertController.addAction(mapAction)
+            alertController.addAction(novelAction)
+            alertController.addAction(allAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            //iOS7
+            var alertView = UIAlertView()
+            alertView.delegate = self
+            alertView.title = "直播类型"
+            alertView.message = "选择你感兴趣的直播类型"
+            alertView.addButtonWithTitle("生存直播")
+            alertView.addButtonWithTitle("极限直播")
+            alertView.addButtonWithTitle("地图直播")
+            alertView.addButtonWithTitle("小说直播")
+            alertView.addButtonWithTitle("全部直播")
+            alertView.addButtonWithTitle("取消")
+            alertView.show()
+        }
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        switch buttonIndex {
+        case 0:
+            self.liveType = "生存直播"
             println(self.liveType)
             self.navigationItem.rightBarButtonItem?.title = "生存"
             self.loadDataWithoutMJRefresh()
-            //self.tableView.header.beginRefreshing()
-        })
-        
-        var archiveAction = UIAlertAction(title: "极限直播", style: UIAlertActionStyle.Default, handler: {a in
-            self.liveType = a.title
+        case 1:
+            self.liveType = "极限直播"
             println(self.liveType)
             self.navigationItem.rightBarButtonItem?.title = "极限"
             self.loadDataWithoutMJRefresh()
-            //self.tableView.header.beginRefreshing()
-        })
-        
-        var allAction = UIAlertAction(title: "全部直播", style: UIAlertActionStyle.Default, handler: {a in
+        case 2:
+            self.liveType = "地图直播"
+            println(self.liveType)
+            self.navigationItem.rightBarButtonItem?.title = "地图"
+            self.loadDataWithoutMJRefresh()
+        case 3:
+            self.liveType = "小说直播"
+            println(self.liveType)
+            self.navigationItem.rightBarButtonItem?.title = "小说"
+            self.loadDataWithoutMJRefresh()
+        case 4:
             self.liveType = ""
             println(self.liveType)
             self.navigationItem.rightBarButtonItem?.title = "全部"
             self.loadDataWithoutMJRefresh()
-            //self.tableView.header.beginRefreshing()
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(deleteAction)
-        alertController.addAction(archiveAction)
-        alertController.addAction(allAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
+        default:
+            break
+        }
     }
     
     func loadNewData() {
