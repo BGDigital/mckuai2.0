@@ -183,17 +183,18 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
                 parameters: params,
                 success: { (operation: AFHTTPRequestOperation!,
                     responseObject: AnyObject!) in
-//                    println(responseObject)
-                    var json = JSON(responseObject)
-                    
-                    if "ok" == json["state"].stringValue {
-                        self.AnalysisUserInfo(json["dataObject"])
-                        hud.hide(true)
-                        
-                        self.Delegate?.onLoginSuccessfull()
-                        self.backToPage()
-                    }else{
-                        hud.hide(true)
+                    //println(responseObject)'
+                    hud.hide(true)
+                    if (responseObject != nil)  {
+                        var json = JSON(responseObject)
+                        if "ok" == json["state"].stringValue {
+                            self.AnalysisUserInfo(json["dataObject"])
+                            self.Delegate?.onLoginSuccessfull()
+                            self.backToPage()
+                        }else{
+                            self.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
+                        }
+                    } else {
                         self.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
                     }
                     
