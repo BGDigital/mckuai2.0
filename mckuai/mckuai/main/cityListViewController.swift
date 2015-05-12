@@ -98,12 +98,15 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     func initLocationManager() {
         println("初始化LocationManager...")
         //这句一定要加上,只要需要的时候使用定位
-        locationManager.requestWhenInUseAuthorization()
+        if IS_IOS8() {
+            //iOS8需要加上这句话
+            locationManager.requestWhenInUseAuthorization()
+        }
         locationManager.delegate = self
         //设备使用电池供电时最高的精度
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //精确到1000米,距离过滤器，定义了设备移动后获得位置信息的最小距离
-        locationManager.distanceFilter = kCLLocationAccuracyKilometer
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        //精确到1000米,距离过滤器，定义了设备移动后获得位置信息的最小距离(百米)
+        locationManager.distanceFilter = kCLLocationAccuracyHundredMeters
         //开始定位
         locationManager.startUpdatingLocation()
     }
@@ -127,7 +130,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             if placemarks.count > 0 {
-                let pm = placemarks[0] as! CLPlacemark
+                let pm = placemarks.last as! CLPlacemark
                 self.displayLocationInfo(pm)
             } else {
                 println("Problem with the date recieved from geocoder")
@@ -151,16 +154,23 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         thoroughfare:市民广场
         subThoroughfare:(null)
         */
-        
+        println(placemark)
         var tempString : String = ""
         //城市
-        if(placemark.locality != nil){
-            tempString = tempString +  placemark.locality + "\n"
-            self.currentCity.setTitle(placemark.locality, forState: .Normal)
-            self.upAddrToServer(placemark.locality)
-            //保存到本地
-            Delegate?.onSelectCity(placemark.locality)
+        var city: String!
+        if placemark.locality == nil {
+            //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+            city = placemark.administrativeArea;
+        } else {
+            city = placemark.locality
         }
+
+        tempString = tempString +  city + "\n"
+        self.currentCity.setTitle(city, forState: .Normal)
+        self.upAddrToServer(city)
+        //保存到本地
+        Delegate?.onSelectCity(city)
+
         //邮编
         if(placemark.postalCode != nil){
             tempString = tempString +  placemark.postalCode + "\n"
