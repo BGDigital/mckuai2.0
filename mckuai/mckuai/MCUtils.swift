@@ -22,9 +22,11 @@ let ISFIRSTRUN = "isFirstRun"
 //用户ID
 let D_USER_ID = "appUserIdSave"
 //用户昵称
-let D_USER_NICKNAME = "NickName"
+let D_USER_NICKNAME = "UserNickName"
 //用户等级
 let D_USER_LEVEL = "UserLevel"
+//用户进度
+let D_USER_PROCESS = "UserProcess"
 //用户头像
 let D_USER_ARATAR = "UserAvatar"
 //用户定位
@@ -33,15 +35,13 @@ let D_USER_ADDR = "UserAddress"
 let D_USER_RC_ID = "UserRongCloud_ID"
 //RondCloud_Token
 let D_USER_RC_TOKEN = "UserRongCloud_Token"
-
 //登录名-email
 let D_USER_LOGINNAME = "LoginName"
 //登录密码
 let D_USER_LOGINPWD = "LoginPwd"
 //是否记住登录信息(用户名,密码)
 let D_USER_ISREMEMBERME = "isRememberMe"
-//用户进度
-let D_USER_PROCESS = "UserProcess"
+
 
 
 
@@ -58,7 +58,7 @@ var appUserPic: String = ""
 var appUserAddr: String = ""
 var appUserRCID: String = ""
 var appUserRCToken: String = ""
-var appUserProcess :Float = 0.0
+var appUserProcess: Float = 0.0
 
 
 //默认用户头像
@@ -137,7 +137,7 @@ class MCUtils {
         appUserLevel = userLevel
         appUserRCID = RC_ID
         appUserRCToken = RC_token
-        appUserProcess = process
+        appUserProcess = process * 100
     }
 
     class func setNavBack() {

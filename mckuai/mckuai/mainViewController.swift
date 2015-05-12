@@ -56,7 +56,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //设置标题颜色
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Guide"), style: UIBarButtonItemStyle.Bordered, target: self, action: "rightBarButtonItemClicked")
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Guide"), style: UIBarButtonItemStyle.Bordered, target: self, action: "rightBarButtonItemClicked")
         setupTableView()
         MCUtils.mainNav = self.navigationController
         
@@ -72,6 +72,9 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         loadNewData()
     }
     
+    /**
+    搜索界面
+    */
     func rightBarButtonItemClicked() {
         MCUtils.showSearchView(self.navigationController)
     }

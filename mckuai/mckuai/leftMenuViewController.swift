@@ -28,13 +28,9 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         //获取用户信息
         if Defaults.hasKey(D_USER_ID) {
             appUserIdSave = Defaults[D_USER_ID].int!
-            appUserLevel = 8
-            //appUserPic = ""
-            //appUserNickName = "一叶之秋"
-//            appUserAddr = "成都市"
-
-            appUserLevel = Defaults[D_USER_LEVEL].int!
             appUserPic = Defaults[D_USER_ARATAR].string!
+            appUserLevel = Defaults[D_USER_LEVEL].int!
+            appUserProcess = Float(Defaults[D_USER_PROCESS].double!)
             appUserNickName = Defaults[D_USER_NICKNAME].string!
             appUserAddr = Defaults[D_USER_ADDR].string!
         }
@@ -158,7 +154,6 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         default:
             if appUserIdSave != 0 {
                 let alert = SCLAlertView()
-    //            alert.addButton("确定注销", target:self, selector:Selector("firstButton"))
                 alert.addButton("确定注销") {
                     //清除数据
                     Defaults.remove(D_USER_ID)
@@ -166,6 +161,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                     Defaults.remove(D_USER_LEVEL)
                     Defaults.remove(D_USER_NICKNAME)
                     Defaults.remove(D_USER_ADDR)
+                    Defaults.remove(D_USER_PROCESS)
                     appUserIdSave = 0
                     appUserLevel = 0
                     appUserPic = ""

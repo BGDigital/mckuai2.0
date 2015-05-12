@@ -214,10 +214,11 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
     }
     */
     func AnalysisUserInfo(j: JSON) {
+        //println(j)
         var userId = j["id"].intValue
         var userAddr = j["addr"].stringValue
         var Avatar = j["headImg"].stringValue
-        var nickName = j["nickName"].stringValue
+        var nickName = j["nike"].stringValue
         var userLevel = j["level"].intValue
         var RC_token = j["token", "token"].stringValue
         var RC_ID = j["userName"].stringValue
@@ -240,7 +241,8 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
         appUserLevel = userLevel
         appUserRCID = RC_ID
         appUserRCToken = RC_token
-        appUserProcess = process
+        appUserProcess = process * 100
+        println("appUserNickName:\(appUserNickName)")
     }
     
     func keyboardDidShowLogin(notification:NSNotification) {

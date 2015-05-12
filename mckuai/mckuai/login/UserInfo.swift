@@ -14,14 +14,9 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     var cityList: cityListViewController!
     
     @IBOutlet weak var headImg_view: UIView!
-
-
     @IBOutlet weak var userName_view: UIView!
-    
     @IBOutlet weak var passWord_view: UIView!
-    
     @IBOutlet weak var addr_view: UIView!
-    
     @IBOutlet weak var headImg: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var addr: UILabel!
@@ -31,7 +26,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
             if let u = user{
                 userName.text = u["nike"].stringValue
 
-//                addr.text = u["addr"].stringValue
+                addr.text = u["addr"].stringValue
                 
                 image = UIImageView(frame: CGRectMake(self.view.frame.size.width-80-25, 44+22+8, 80, 80))
                 image.sd_setImageWithURL(NSURL(string: u["headImg"].stringValue))

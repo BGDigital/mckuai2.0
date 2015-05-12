@@ -60,7 +60,7 @@ class mineHeadViewController: UIViewController {
         parent.setBackgroundImage(selectedImg, forState: .Selected)
         parent.setTitleColor(UIColor.whiteColor(), forState: .Selected)
         parent.layer.masksToBounds = true
-        parent.layer.cornerRadius = 25  
+        parent.layer.cornerRadius = 25
         parent.tintColor = UIColor.clearColor()
         parent.titleEdgeInsets = UIEdgeInsetsMake(-10, 0, 0, 0)
         

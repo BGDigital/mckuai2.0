@@ -54,7 +54,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         bag.addTarget(self, action: "openBackPacker", forControlEvents: UIControlEvents.TouchUpInside)
         
         //登录按钮
-        btnLogin = UIButton(frame: CGRectMake(75, 22, 100, 30))
+        btnLogin = UIButton(frame: CGRectMake(75, 30, 100, 30))
         btnLogin.setTitle("登录更精彩", forState: .Normal)
         btnLogin.titleLabel?.font = UIFont(name: btnLogin.titleLabel!.font.fontName, size: 14)
         btnLogin.backgroundColor = UIColor(hexString: "#30A243")
@@ -158,10 +158,10 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         self.bag.hidden = false
         self.btnLogin.hidden = true
         
-        self.roundProgressView.percent = 0
+        self.roundProgressView.percent = CGFloat(appUserProcess)
         self.roundProgressView.imageUrl = appUserPic
         self.nickname.text = appUserNickName
-        self.level.setTitle("LV.0", forState: .Normal)
+        self.level.setTitle("LV.\(appUserLevel)", forState: .Normal)
         self.locationCity.setTitle(appUserAddr, forState: .Normal)
         
         //leftViewController
@@ -171,7 +171,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         leftCV.btnLogin.hidden = true
 
         leftCV.Avatar.sd_setImageWithURL(NSURL(string: appUserPic), placeholderImage: DefaultUserAvatar_big!, completed: {(img,_,_,_) in
-                leftCV.Avatar.image = img
+            leftCV.Avatar.image = img
         })
         leftCV.username.text = appUserNickName
         leftCV.level.setTitle("LV."+String(appUserLevel), forState: .Normal)
@@ -179,10 +179,10 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.roundProgressView.percent = 0
+        self.roundProgressView.percent = CGFloat(appUserProcess)
         self.roundProgressView.imageUrl = appUserPic
         self.nickname.text = appUserNickName
-        self.level.setTitle("LV.0", forState: .Normal)
+        self.level.setTitle("LV.\(appUserLevel)", forState: .Normal)
         self.locationCity.setTitle(appUserAddr, forState: .Normal)
     }
     

@@ -40,7 +40,7 @@ class chatViewController: RCChatListViewController {
     }
     
     override func leftBarButtonItemPressed(sender: AnyObject!) {
-        println("打开菜单")
+        //
     }
     
     override func rightBarButtonItemPressed(sender: AnyObject!) {
