@@ -293,7 +293,6 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                 self.postTalkToServer()
             }
         
-
         }
         
     }

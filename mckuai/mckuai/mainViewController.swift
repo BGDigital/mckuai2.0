@@ -134,9 +134,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
-                self.tableView.tableHeaderView?.hidden = true
-                TSMessage.showNotificationWithTitle("出错了", subtitle: "连接服务器异常,请与管理员联系", type: .Error)
-                MCUtils.showEmptyView(self.tableView, aImg: Load_Error!, aText: "哇哦~,加载数据出问题了")
+                TSMessage.showNotificationWithTitle("掉线了?", subtitle: "请确认网络是否连通,检查网络设置.", type: .Error)
         })
         
     }
@@ -148,6 +146,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if !self.datasource.isEmpty && !self.datasource.isEmpty {
+            self.tableView.tableHeaderView?.hidden = false
             return 2
         } else {
             self.tableView.tableHeaderView?.hidden = true

@@ -26,24 +26,30 @@ class mainSubCell: UITableViewCell {
         
         imgJian.hidden = true
         imgJing.hidden = true
+        self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
         
         //底部线
-        self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
-        var line1 = UIView(frame: CGRectMake(0, self.frame.size.height-6, self.frame.size.width, 1))
+        var linetop = UIView(frame: CGRectMake(0, self.frame.size.height-0.5, self.frame.size.width, 0.5))
+        linetop.backgroundColor = UIColor(hexString: "#E1E3E5")
+        self.addSubview(linetop)
+        
+        var line1 = UIView(frame: CGRectMake(0, 8, self.frame.size.width, 0.5))
         line1.backgroundColor = UIColor(hexString: "#E1E3E5")
         self.addSubview(line1)
         
-        var line = UIView(frame: CGRectMake(0, self.frame.size.height-5, self.frame.size.width, 5))
+        var line = UIView(frame: CGRectMake(0, 0, self.frame.size.width, 8))
         line.backgroundColor = UIColor(hexString: "#EFF0F2")
         self.addSubview(line)
     }
     
     func update(json: JSON) {
+//        println(json)
         self.title.text = json["talkTitle"].stringValue
         self.title.sizeOfMultiLineLabel()
-        var icon = json["headImg"].stringValue
-        if !icon.isEmpty {
-            self.username.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,url in
+        var imgPath = json["headImg"].string != nil ? json["headImg"].stringValue : json["icon"].stringValue
+        var disName = json["userName"].string != nil ? json["userName"].stringValue : json["forumName"].stringValue
+        if !imgPath.isEmpty {
+            self.username.sd_setImageWithURL(NSURL(string: imgPath), forState: .Normal, placeholderImage: DefaultUserAvatar_small, completed: { img,_,_,url in
                 var rect = CGRectMake(0, 0, 20, 20)
                 UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
                 if(img != nil){
@@ -55,7 +61,7 @@ class mainSubCell: UITableViewCell {
                 self.username.setImage(newImage, forState: .Normal)
             })
         }
-        self.username.setTitle(json["userName"].stringValue, forState: .Normal)
+        self.username.setTitle(disName, forState: .Normal)
         self.replys.setTitle(json["replyNum"].stringValue, forState: .Normal)
         self.times.text = MCUtils.compDate(json["replyTime"].stringValue)
         imgJian.hidden = "1" == json["isDing"].stringValue

@@ -12,7 +12,7 @@ let forum_url = URL_MC+"act=forumList"
 let talk_url = URL_MC+"act=talkList"
 let webView_url = URL_MC+"act=talkOne"
 
-let upload_url = URL_MC+"act=uploadImg"
+let upload_url = "http://www.mckuai.com/act=uploadImg"
 
 
 let addTalk_url = URL_MC+"act=addTalk"
