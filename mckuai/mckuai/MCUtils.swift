@@ -47,6 +47,7 @@ let D_USER_ISREMEMBERME = "isRememberMe"
 
 //mckuai网络接口
 //主接口地址-域名
+//221.237.152.39:8081
 let URL_MC = "http://221.237.152.39:8081/interface.do?"
 //app store页面
 let URL_APPSTORE = "itms-apps://itunes.apple.com/cn/app/mai-kuaifor-wo-de-shi-jie/id955748107?mt=8"

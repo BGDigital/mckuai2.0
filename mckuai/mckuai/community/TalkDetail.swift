@@ -20,6 +20,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     var collect_btn:UIButton!
     var share_btn:UIButton!
     var reply_btn:UIButton!
+    var shang_btn:UIButton!
+    
     var btn_wight:CGFloat = 48
     var btn_height:CGFloat = 48
     
@@ -56,7 +58,6 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     override func viewDidDisappear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
-        self.webView.delegate = nil
     }
 
     
@@ -97,26 +98,25 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     func initToolBar() {
-//        page_btn = UIButton(frame: CGRectMake(10
-//            , self.view.bounds.height-btn_height-10, btn_wight, btn_height))
-//        page_btn.backgroundColor = UIColor.blackColor()
-//        page_btn.layer.cornerRadius = 25
-//        page_btn.setTitle("2/6", forState: UIControlState.Normal)
-//        page_btn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+
 
         reply_btn = UIButton(frame: CGRectMake(self.view.bounds.width-48-10,self.view.bounds.height-btn_height-20, 48, 48))
-//        reply_btn.layer.cornerRadius = 25
-//        reply_btn.backgroundColor = UIColor.blackColor()
+
         reply_btn.setBackgroundImage(UIImage(named: "reply_icon"), forState: UIControlState.Normal)
-//        reply_btn.setBackgroundImage(UIImage(named: "first_selected"), forState: UIControlState.Selected)
-        
-        share_btn = UIButton(frame: CGRectMake(self.view.bounds.width-48-10-40-48,self.view.bounds.height-btn_height-20, 48, 48))
-//        share_btn.layer.cornerRadius = 25
-//        share_btn.backgroundColor = UIColor.blackColor()
+        share_btn = UIButton(frame: CGRectMake(self.view.bounds.width-48-10-48-10,self.view.bounds.height-btn_height-20, 48, 48))
         share_btn.setBackgroundImage(UIImage(named: "share_icon"), forState: UIControlState.Normal)
         collect_btn = UIButton(frame: CGRectMake(10, self.view.bounds.height-btn_height-20, 48, 48))
-//        collect_btn.layer.cornerRadius = 25
-//        collect_btn.backgroundColor = UIColor.blackColor()
+        
+        shang_btn = UIButton(frame: CGRectMake(self.view.bounds.width-48-10-48-48-10-10, self.view.bounds.height-btn_height-18, 45, 45))
+        shang_btn.layer.cornerRadius = self.shang_btn.frame.width/2
+        shang_btn.backgroundColor = UIColor.blackColor()
+        shang_btn.layer.masksToBounds = true
+        shang_btn.layer.borderColor = UIColor.whiteColor().CGColor
+        shang_btn.layer.borderWidth = 1.0
+        shang_btn.setTitle("赏", forState: UIControlState.Normal)
+        shang_btn.setTitle("已赏", forState: UIControlState.Disabled)
+        shang_btn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        shang_btn.setTitleColor(UIColor.redColor(), forState: UIControlState.Disabled)
         
         collect_btn.setBackgroundImage(UIImage(named: "collect_normal"), forState: UIControlState.Normal)
         collect_btn.setBackgroundImage(UIImage(named: "collect_selected"), forState: UIControlState.Selected)
@@ -128,11 +128,20 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         reply_btn.tag = 2
         reply_btn.addTarget(self, action: "toolBarFunc:", forControlEvents: UIControlEvents.TouchUpInside)
         
+        shang_btn.tag = 3
+        shang_btn.addTarget(self, action: "toolBarFunc:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
+        
+        
+        
+        
+        
 //        self.view.addSubview(page_btn)
         self.view.addSubview(reply_btn)
         self.view.addSubview(share_btn)
         self.view.addSubview(collect_btn)
-        
+        self.view.addSubview(shang_btn)
         
         if(appUserIdSave != 0){
             let params = [
@@ -147,7 +156,16 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     var json = JSON(responseObject)
                     
                     if "ok" == json["state"].stringValue {
-                        self.collect_btn.selected = true
+                        
+                        if(json["msg"].stringValue.componentsSeparatedByString("collect").count>1) {
+                            self.collect_btn.selected = true
+                        }
+                        if(json["msg"].stringValue.componentsSeparatedByString("dashang").count>1) {
+//                            self.shang_btn.selected = true
+                            self.shang_btn.enabled = false
+                        }
+                        
+                        
                     }
                     
                 },
@@ -269,13 +287,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             
         }else if(sender.tag == 2){
             println("reply")
-            
-            
-
-
             if(appUserIdSave == 0) {
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
-                //NewLogin.showUserLoginView(self,returnIsShow: false, aDelegate: nil)
             }else{
                 
                 if let query = self.webView.stringByEvaluatingJavaScriptFromString("getParameters()"){
@@ -286,9 +299,45 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 }
                
             }
-            
-            
-            
+        }else if(sender.tag == 3){
+            if(appUserIdSave == 0) {
+                NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+            }else{
+                
+                if(self.shang_btn.selected == false){
+                    
+                    let params = [
+                        "userId":String(stringInterpolationSegment: appUserIdSave),
+                        "talkId":String(self.id)
+                    ]
+                    
+                    manager.POST(daShang_url,
+                        parameters: params,
+                        success: { (operation: AFHTTPRequestOperation!,
+                            responseObject: AnyObject!) in
+                            var json = JSON(responseObject)
+                            
+                            if "ok" == json["state"].stringValue {
+                                self.shang_btn.enabled = false
+                                MCUtils.showCustomHUD(self.view, title: "真土豪", imgName: "HUD_OK")
+                                self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
+                            }else{
+                                MCUtils.showCustomHUD(self.view, title: json["msg"].stringValue, imgName: "HUD_ERROR")
+                            }
+                            
+                        },
+                        failure: { (operation: AFHTTPRequestOperation!,
+                            error: NSError!) in
+                            println("Error: " + error.localizedDescription)
+                            
+                    })
+
+                    
+                }else{
+                    MCUtils.showCustomHUD(self.view, title: "土豪,砖石再多也只能打赏一次", imgName: "HUD_OK")
+                }
+                
+            }
         }
     }
     
@@ -315,7 +364,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = true
-        //注册键盘通知事件
+//        //注册键盘通知事件
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
         
@@ -358,11 +407,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         self.params = param;
         if action == "reply" {
             println("Reply...........")
-//
-
             if(appUserIdSave == 0) {
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
-//                NewLogin.showUserLoginView(self,returnIsShow: false, aDelegate: nil)
             }else{
                self.textView.becomeFirstResponder() 
             }
@@ -380,7 +426,6 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func webViewDidStartLoad(webView: UIWebView) {
         if firstLoad {
-//            self.showCustomHUD(self.view, title: "正在加载", imgName: "Guide")
             progress = MBProgressHUD.showHUDAddedTo(view, animated: true)
             progress.labelText = "正在加载"
         }
@@ -397,6 +442,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+        progress.hide(true)
         MCUtils.showCustomHUD(self.view, title: "出错啦,加载失败", imgName: "HUD_ERROR")
     }
     

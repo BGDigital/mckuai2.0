@@ -12,7 +12,9 @@ let forum_url = URL_MC+"act=forumList"
 let talk_url = URL_MC+"act=talkList"
 let webView_url = URL_MC+"act=talkOne"
 
-let upload_url = "http://www.mckuai.com/act=uploadImg"
+
+let upload_url = "http://www.mckuai.com/group.do?"+"act=uploadImg"
+
 
 
 let addTalk_url = URL_MC+"act=addTalk"
@@ -32,6 +34,8 @@ let cancleCollect_url = URL_MC+"act=cancleCollect"
 
 let getUser_url = URL_MC+"act=getUser"
 let saveUser_url = URL_MC+"act=saveUser"
+
+let daShang_url = URL_MC+"act=daShang"
 
 class HttpUrl {
     

@@ -186,8 +186,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
             assets_array.enumerateObjectsUsingBlock({ obj, index, stop in
                 println(index)
                 var representation:ALAsset = obj as! ALAsset
-                var returnImg = UIImage(CGImage: representation.thumbnail().takeUnretainedValue())
-                
+                var returnImg = UIImage(CGImage: representation.defaultRepresentation().fullResolutionImage().takeUnretainedValue(), scale:CGFloat(representation.defaultRepresentation().scale()), orientation:UIImageOrientation(rawValue: representation.defaultRepresentation().orientation().rawValue)!)
                 
                 var image_x = CGFloat(self.image_button.count-1)*(self.pic_wight+10)
                 
