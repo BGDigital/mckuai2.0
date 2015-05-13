@@ -94,6 +94,7 @@
 		E6B204401AE6A56000EB11B4 /* live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B2043F1AE6A56000EB11B4 /* live.storyboard */; };
 		E6B204421AE6A63C00EB11B4 /* chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B204411AE6A63C00EB11B4 /* chat.storyboard */; };
 		E6B204441AE6A66300EB11B4 /* chatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B204431AE6A66300EB11B4 /* chatViewController.swift */; };
+		E6B34E251B03956600FCB8D4 /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B34E231B03956600FCB8D4 /* libUMessage_Sdk_1.1.0.a */; };
 		E6B7175E1ADECE1D00684E83 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7175D1ADECE1D00684E83 /* mainViewController.swift */; };
 		E6B717601ADECE7400684E83 /* liveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7175F1ADECE7400684E83 /* liveViewController.swift */; };
 		E6B717621ADED22D00684E83 /* leftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B717611ADED22D00684E83 /* leftMenuViewController.swift */; };
@@ -303,6 +304,8 @@
 		E6B2043F1AE6A56000EB11B4 /* live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = live.storyboard; path = live/live.storyboard; sourceTree = "<group>"; };
 		E6B204411AE6A63C00EB11B4 /* chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = chat.storyboard; path = chat/chat.storyboard; sourceTree = "<group>"; };
 		E6B204431AE6A66300EB11B4 /* chatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = chatViewController.swift; path = chat/chatViewController.swift; sourceTree = "<group>"; };
+		E6B34E231B03956600FCB8D4 /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
+		E6B34E241B03956600FCB8D4 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		E6B4FA961ADD07C900664D6C /* mckuai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mckuai-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6B7175D1ADECE1D00684E83 /* mainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		E6B7175F1ADECE7400684E83 /* liveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liveViewController.swift; sourceTree = "<group>"; };
@@ -403,6 +406,7 @@
 				E68F468C1AF13E34001DEA99 /* OpenGLES.framework in Frameworks */,
 				E68F468D1AF13E34001DEA99 /* QuartzCore.framework in Frameworks */,
 				E68F468E1AF13E34001DEA99 /* UIKit.framework in Frameworks */,
+				E6B34E251B03956600FCB8D4 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				E6BF85F71AF131B4005F08B2 /* CoreTelephony.framework in Frameworks */,
 				E6BF85F91AF131C8005F08B2 /* libsqlite3.dylib in Frameworks */,
 				E6BF85F51AF13171005F08B2 /* libstdc++.dylib in Frameworks */,
@@ -533,6 +537,7 @@
 		E6518BDE1ADD065E005A8C97 = {
 			isa = PBXGroup;
 			children = (
+				E6B34E221B03956600FCB8D4 /* UMessage_Sdk_1.1.0 */,
 				E68F46421AF13D37001DEA99 /* Headers */,
 				E68F466B1AF13D37001DEA99 /* libiOS_IMKit_v1_4_6.a */,
 				E68F466C1AF13D37001DEA99 /* RongCloud.bundle */,
@@ -712,6 +717,15 @@
 				0B8671221AF9E23E00F3F63F /* TalkList.swift */,
 			);
 			name = community;
+			sourceTree = "<group>";
+		};
+		E6B34E221B03956600FCB8D4 /* UMessage_Sdk_1.1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				E6B34E231B03956600FCB8D4 /* libUMessage_Sdk_1.1.0.a */,
+				E6B34E241B03956600FCB8D4 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
 		E6BF85981AF12CB0005F08B2 /* login */ = {
@@ -1302,6 +1316,7 @@
 					"$(PROJECT_DIR)/mckuai/Wechat",
 					"$(PROJECT_DIR)/mckuai",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1334,6 +1349,7 @@
 					"$(PROJECT_DIR)/mckuai/Wechat",
 					"$(PROJECT_DIR)/mckuai",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

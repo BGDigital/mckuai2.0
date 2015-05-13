@@ -115,13 +115,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         
 //        UMeng
         UMessage.registerDeviceToken(deviceToken)
-//        UMessage.addAlias(UMFeedback.uuid(), type: UMFeedback.messageType()) { (responseObject, error) -> Void in
-//            if error != nil {
-//                println("E:\(error)")
-//            } else {
-//                println("OK:\(responseObject)")
-//            }
-//        }
+        //反馈推送
+        UMessage.addAlias(UMFeedback.uuid(), type: UMFeedback.messageType()) { (responseObject, error) -> Void in
+            if error != nil {
+                println("E:\(error)")
+            } else {
+                println("OK:\(responseObject)")
+            }
+        }
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
