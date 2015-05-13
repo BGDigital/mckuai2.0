@@ -289,6 +289,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         var btn2 = UIButton(frame: CGRectMake(self.view.bounds.size.width/2, 0, self.view.bounds.size.width/2, 50))
         btn2.setImage(UIImage(named: "backpacker_chat"), forState: .Normal)
         btn2.setTitle("和TA聊天", forState: .Normal)
+        btn2.addTarget(self, action: "btn2Click", forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(btn2)
         
         //View 上移效果
@@ -333,6 +334,15 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     */
     @IBAction func btn1Click(sender: UIButton) {
         doAttention(sender.tag)
+    }
+    
+    @IBAction func btn2Click() {
+        var chat = RCChatViewController()
+        chat.portraitStyle = .Cycle
+        chat.currentTarget = self.User["name"].stringValue
+        chat.currentTargetName = self.User["nike"].stringValue
+        chat.conversationType = .ConversationType_PRIVATE
+        MCUtils.mainNav?.pushViewController(chat, animated: true)
     }
     
     /**

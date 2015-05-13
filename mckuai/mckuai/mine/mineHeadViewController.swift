@@ -67,7 +67,7 @@ class mineHeadViewController: UIViewController {
         var lb = UILabel(frame: CGRectMake(0, btnMsg.bounds.size.height-20, btnMsg.bounds.size.width, 14))
         lb.text = aText
         lb.font = UIFont(name: lb.font.fontName, size: 12)
-        lb.textColor = UIColor(hexString: "#BCABA8")
+        lb.textColor = UIColor(hexString: "#FFFFFF") //#BCABA8
         lb.highlightedTextColor = UIColor.whiteColor()
         lb.textAlignment = .Center
         parent.addSubview(lb)

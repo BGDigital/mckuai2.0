@@ -33,6 +33,8 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             appUserProcess = Float(Defaults[D_USER_PROCESS].double!)
             appUserNickName = Defaults[D_USER_NICKNAME].string!
             appUserAddr = Defaults[D_USER_ADDR].string!
+            appUserRCID = Defaults[D_USER_RC_ID].string!
+            appUserRCToken = Defaults[D_USER_RC_TOKEN].string!
         }
 
         self.tableView = UITableView(frame: CGRectMake(0, (self.view.frame.size.height-cellHeight*7-headerHeight) / 2, self.view.frame.size.width, cellHeight*7+headerHeight), style: UITableViewStyle.Plain)

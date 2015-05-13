@@ -18,7 +18,7 @@ protocol LoginProtocol {
 import Foundation
 import UIKit
 
-class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
+class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     var superNavigation:UINavigationController!
     var manager = AFHTTPRequestOperationManager()
     var tencentOAuth:TencentOAuth!
@@ -98,6 +98,19 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
                     
                     self.Delegate?.onLoginSuccessfull()
                     self.backToPage()
+                    
+                    if !appUserRCToken.isEmpty {
+                        //RongCloud
+                        RCIM.initWithAppKey(RC_AppKey, deviceToken: nil)
+                        RCIM.connectWithToken(appUserRCToken,
+                            completion: {userId in
+                                println("RongCloud Login Successrull:\(userId)")
+                            },
+                            error: {status in
+                                println("RongCloud Login Faild. \(status)")
+                        })
+                        Async.background({MCUtils.GetFriendsList()})
+                    }
                 }
                 
             },
@@ -167,13 +180,28 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
                 parameters: params,
                 success: { (operation: AFHTTPRequestOperation!,
                     responseObject: AnyObject!) in
-                    //println(responseObject)'
+                    println(responseObject)
                     hud.hide(true)
                     if (responseObject != nil)  {
                         var json = JSON(responseObject)
                         if "ok" == json["state"].stringValue {
-                            self.AnalysisUserInfo(json["dataObject"])
+                            MCUtils.AnalysisUserInfo(json["dataObject"])
                             self.Delegate?.onLoginSuccessfull()
+                            
+                            if !appUserRCToken.isEmpty {
+                                //RongCloud
+                                RCIM.initWithAppKey(RC_AppKey, deviceToken: nil)
+                                RCIM.connectWithToken(appUserRCToken,
+                                    completion: {userId in
+                                        println("RongCloud Login Successrull:\(userId)")
+                                    },
+                                    error: {status in
+                                        println("RongCloud Login Faild. \(status)")
+                                })
+                                Async.background({MCUtils.GetFriendsList()})
+                            }
+
+                            
                             self.backToPage()
                         }else{
                             MCUtils.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
@@ -192,44 +220,6 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
         }else{
             println(response.errorMsg)
         }
-    }
-    /*
-    {
-    dataObject={
-    addr="\U6210\U90fd\U5e02";continueLogin=1;headImg="http://cdn.mckuai.com/images/iphone/13.png";id=6;isImport=0;isLock=0;lastLoginIp="221.237.152.39";lastLoginMesTime="2015-04-10 17:10:08.353";lastLoginTime="2015-04-22 12:22:35.447";loginKey="6c5f6730-ba4c-4637-8f1b-b3fdb79a8743";loginNum=134;messageNum=2;nickName="\U4e00\U53f6\U4e4b\U79cb";regTime="2014-10-21 17:04:23.15";sex="\U7537";token="{\"code\":200,\"userId\":\"8A92E0F6637743BC4A46260D1C924B10\",\"token\":\"dEiesBe0EQgqnbrTi2zbRBuBCTxypfvhAwu2X8sXMLwKxdzFrTlE+/1kY+Ua428Mr6TkHea9v0hi0U0/xIGplqN/GkR+XvLz4BUeryLmo+Vs9YdNawos3e+/tN2kgVD+duru3h8aE6w=\"}";userName=8A92E0F6637743BC4A46260D1C924B10;userType=qq;
-    };state=ok;
-    }
-    */
-    func AnalysisUserInfo(j: JSON) {
-        //println(j)
-        var userId = j["id"].intValue
-        var userAddr = j["addr"].stringValue
-        var Avatar = j["headImg"].stringValue
-        var nickName = j["nike"].stringValue
-        var userLevel = j["level"].intValue
-        var RC_token = j["token", "token"].stringValue
-        var RC_ID = j["userName"].stringValue
-        var process = j["process"].floatValue
-        
-        //保存登录信息
-        Defaults[D_USER_ID] = userId
-        Defaults[D_USER_LEVEL] = userLevel
-        Defaults[D_USER_NICKNAME] = nickName
-        Defaults[D_USER_ARATAR] = Avatar
-        Defaults[D_USER_ADDR] = userAddr
-        Defaults[D_USER_RC_ID] = RC_ID
-        Defaults[D_USER_RC_TOKEN] = RC_token
-        Defaults[D_USER_PROCESS] = process
-        
-        appUserIdSave = userId
-        appUserNickName = nickName
-        appUserPic = Avatar
-        appUserAddr = userAddr
-        appUserLevel = userLevel
-        appUserRCID = RC_ID
-        appUserRCToken = RC_token
-        appUserProcess = process * 100
-        println("appUserNickName:\(appUserNickName)")
     }
     
     func keyboardDidShowLogin(notification:NSNotification) {

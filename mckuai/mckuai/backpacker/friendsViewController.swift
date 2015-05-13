@@ -17,6 +17,7 @@ class friendsViewController: UICollectionViewController {
     var isFirstLoad = true
     var manager = AFHTTPRequestOperationManager()
     var selectUserId: Int?
+    var selectUserName: String?
     var hud: MBProgressHUD?
     var json: JSON! {
         didSet {

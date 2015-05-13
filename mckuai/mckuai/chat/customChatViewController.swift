@@ -29,6 +29,21 @@ class customChatViewController: RCChatViewController {
 //        self.presentViewController(nav, animated: true, completion: nil)
 //        //self.tabBarController?.tabBar.hidden = true
 //    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.lt_reset()
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBar.lt_reset()
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        self.tabBarController?.tabBar.hidden = true
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -19,6 +19,7 @@ let qq_AppKey = "78b7e42e255512d6492dfd135037c91c"
 let wx_AppId = "wx49ba2c7147d2368d"
 let wx_AppKey = "85aa75ddb9b37d47698f24417a373134"
 let share_url = "http://www.mckuai.com"
+let RC_AppKey = "k51hidwq1fb4b"
 
 //本地配置文件
 //引导页
@@ -54,6 +55,8 @@ let D_USER_ISREMEMBERME = "isRememberMe"
 //主接口地址-域名
 //221.237.152.39:8081
 let URL_MC = "http://221.237.152.39:8081/interface.do?"
+//上传头像/图片
+let upload_url = "http://www.mckuai.com/group.do?"+"act=uploadImg"
 //app store页面
 let URL_APPSTORE = "itms-apps://itunes.apple.com/cn/app/mai-kuaifor-wo-de-shi-jie/id955748107?mt=8"
 //保存的用户ID
@@ -101,8 +104,8 @@ class MCUtils {
     static var mainHeadView: UIViewController!
     //这里存储一个首页的NavigationController,侧边菜单用
     static var mainNav: UINavigationController?
-    //RondCloud 
-    static let RC_token = "KJPYD42FHj91JLtq7wNKwv3bPJDLg44cYKMsP2Rgy42WcvywI31Z3pH783WhZQtcdwhO1K5Rw3b/gp8IF+FkRQ=="
+    //RongCloud 好友列表
+    static var friendList = NSMutableArray()
         
     static let COLOR_NavBG = "#43D152"
     static let COLOR_MAIN = "#4C4D4E"
@@ -114,16 +117,52 @@ class MCUtils {
 
     static let URL_LAUNCH = "http://cdn.mckuai.com/app_start.png"
     
+    /**
+    获取融云好友列表
+    */
+    class func GetFriendsList() {
+        if appUserIdSave != 0 {
+            var dict = ["act":"attentionUser", "id": appUserIdSave, "page": 1]
+            AFHTTPRequestOperationManager().GET(URL_MC,
+                parameters: dict,
+                success: { (operation: AFHTTPRequestOperation!,
+                    responseObject: AnyObject!) in
+                    println(responseObject)
+                    var json = JSON(responseObject)
+                    if "ok" == json["state"].stringValue {
+                        if let d = json["dataObject", "data"].array {
+                            //重新获取好友信息,先清空之前的列表
+                            MCUtils.friendList.removeAllObjects()
+                            for j in d {
+                                var user = RCUserInfo()
+                                user.userId = j["name"].stringValue
+                                user.name = j["nike"].stringValue
+                                user.portraitUri = j["headImg"].stringValue
+                                MCUtils.friendList.addObject(user)
+                            }
+                        }
+                    }
+                },
+                failure: { (operation: AFHTTPRequestOperation!,
+                    error: NSError!) in
+                    println("Error: " + error.localizedDescription)
+            })
+        }
+    }
     
+    /**
+    保存用户配置信息
     
+    :param: j JSON
+    */
     class func AnalysisUserInfo(j: JSON) {
         var userId = j["id"].intValue
         var userAddr = j["addr"].stringValue
         var Avatar = j["headImg"].stringValue
-        var nickName = j["nickName"].stringValue
+        var nickName = j["nike"].stringValue
         var userLevel = j["level"].intValue
-        var RC_token = j["token", "token"].stringValue
-        var RC_ID = j["userName"].stringValue
+        var RC_token = j["token"].stringValue
+        var RC_ID = j["name"].stringValue
         var process = j["process"].floatValue
         
         //保存登录信息

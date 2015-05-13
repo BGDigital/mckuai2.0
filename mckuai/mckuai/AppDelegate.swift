@@ -19,22 +19,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         self.window?.makeKeyAndVisible()
         //启动页面加载广告
         loadLaunchView()
-        //RongCloud
-        initRongCloud()
+        Async.background({
         //RongCloud登录
-        RCIM.connectWithToken(MCUtils.RC_token,
-            completion: {userId in
-                println("Login Successrull:\(userId)")
-            },
-            error: {status in
-                println("Login Faild. \(status)")
-        })
-        
+        if !appUserRCToken.isEmpty {
+            //RongCloud
+            self.initRongCloud()
+            
+            RCIM.connectWithToken(appUserRCToken,
+                completion: {userId in
+                    println("RongCloud Login Successrull:\(userId)")
+                },
+                error: {status in
+                    println("RongCloud Login Faild. \(status)")
+            })
+
+            MCUtils.GetFriendsList()
+        }
         //UMeng反馈
         UMFeedback.setAppkey(UMAppKey)
         //UM推送
         UMessage.startWithAppkey(UMAppKey, launchOptions: launchOptions)
-        initNotificationPush()
+        self.initNotificationPush()
         //友盟分享
         UMSocialData.setAppKey(UMAppKey)
         UMSocialQQHandler.setQQWithAppId(qq_AppId, appKey: qq_AppKey, url: share_url)
@@ -49,8 +54,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         MobClick.setAppVersion(appversion)
         
         MCUtils.setNavBack()
+            })
         return true
     }
+    
+    //加载Rongcloud
+    func initRongCloud() {
+        RCIM.initWithAppKey(RC_AppKey, deviceToken: nil)
+        
+        //设置用户信息
+        RCIM.setUserInfoFetcherWithDelegate(self, isCacheUserInfo: false)
+        //设置好友信息
+        RCIM.setFriendsFetcherWithDelegate(self)
+    }
+
+    
     func initNotificationPush() {
         //注册苹果推送
         if IS_IOS8() {
@@ -83,15 +101,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         //当前APP渠道
         UMessage.setChannel("App Store")
     }
-    //加载Rongcloud
-    func initRongCloud() {
-        RCIM.initWithAppKey("k51hidwq1fb4b", deviceToken: nil)
-        
-        //设置用户信息
-        RCIM.setUserInfoFetcherWithDelegate(self, isCacheUserInfo: false)
-        //设置好友信息
-        RCIM.setFriendsFetcherWithDelegate(self)
-    }
 
     // 收到本地通知
     func application(application: UIApplication , didReceiveLocalNotification notification: UILocalNotification ) {
@@ -103,8 +112,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         println(userInfo)
         if IS_IOS8() {
-            if (identifier == "declineAction") {}
-            else if (identifier == "answerAction") {}
+            if (identifier == "declineAction") {
+                println("declineAction")
+            }
+            else if (identifier == "answerAction") {
+                println("answerAction")
+            }
         }
     }
     
@@ -156,39 +169,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         launchView.removeFromSuperview()
     }
     
-    //获取好友列表方法
+    //获取好友列表方法  --好友列表
     func getFriends() -> [AnyObject]! {
-        var arr = NSMutableArray()
-        var user1 = RCUserInfo()
-        user1.userId = "859F416027050C8AE33367423A986ED1"
-        user1.name = "麻哥"
-        user1.portraitUri = ""
-        arr.addObject(user1)
-        
-        var user2 = RCUserInfo(userId: "2", name: "陈强", portrait: "这个是啥")
-        arr.addObject(user2)
-        
-        var user3 = RCUserInfo(userId: "6", name: "邱兴福", portrait: "这个是啥")
-        arr.addObject(user3)
-        
-        
-        
-        return arr as [AnyObject]
+        //开始刷新
+        return MCUtils.friendList as [AnyObject]
     }
     
-    //获取用户信息方法
+    //获取用户信息方法 --会话聊天
     func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
-        if userId == "859F416027050C8AE33367423A986ED1" {
-            var u = RCUserInfo()
-            u.userId = "859F416027050C8AE33367423A986ED1"
-            u.name = "麻哥"
-            u.portraitUri = "https://wt-avatars.oss.aliyuncs.com/40/91e8fae8-3d2a-43e5-b056-298d77879361.jpg"
-            
-            return completion(u)
+        var inList = false
+        for u in MCUtils.friendList {
+            var user = u as! RCUserInfo
+            if user.userId == userId {
+                inList = true
+                return completion(user)
+            }
         }
         
-        
-        return completion(nil)
+        if !inList {
+            return completion(nil)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

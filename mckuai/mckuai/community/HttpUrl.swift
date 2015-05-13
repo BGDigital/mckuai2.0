@@ -12,11 +12,6 @@ let forum_url = URL_MC+"act=forumList"
 let talk_url = URL_MC+"act=talkList"
 let webView_url = URL_MC+"act=talkOne"
 
-
-let upload_url = "http://www.mckuai.com/group.do?"+"act=uploadImg"
-
-
-
 let addTalk_url = URL_MC+"act=addTalk"
 let followTalk_url = URL_MC+"act=followTalk"
 let replyTalk_url = URL_MC+"act=replyTalk"
