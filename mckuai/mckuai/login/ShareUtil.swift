@@ -10,12 +10,6 @@
 import Foundation
 import UIKit
 
-let UMAppKey = "5538b66767e58e1165003a77"
-let qq_AppId = "101155101"
-let qq_AppKey = "78b7e42e255512d6492dfd135037c91c"
-let wx_AppId = "wx49ba2c7147d2368d"
-let wx_AppKey = "85aa75ddb9b37d47698f24417a373134"
-let share_url = "http://www.mckuai.com"
 let shareToNames : [AnyObject] = [UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline]
 class ShareUtil {
     

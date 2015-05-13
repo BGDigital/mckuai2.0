@@ -90,3 +90,16 @@
 #define COCOAPODS_VERSION_MINOR_TSMessages 9
 #define COCOAPODS_VERSION_PATCH_TSMessages 12
 
+// UMengFeedback
+#define COCOAPODS_POD_AVAILABLE_UMengFeedback
+#define COCOAPODS_VERSION_MAJOR_UMengFeedback 2
+#define COCOAPODS_VERSION_MINOR_UMengFeedback 2
+#define COCOAPODS_VERSION_PATCH_UMengFeedback 0
+
+// UMengMessage
+#define COCOAPODS_POD_AVAILABLE_UMengMessage
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 1.1.0.2.
+

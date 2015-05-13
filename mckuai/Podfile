@@ -8,6 +8,8 @@ pod 'RESideMenu', '~> 4.0.7'
 pod 'MJRefresh'
 pod "AFNetworking", "~> 2.0"
 pod "TSMessages"
+pod 'UMengMessage', '~> 1.1.0.1'
+pod 'UMengFeedback', '~> 2.2'
 end
 
 target 'mckuaiTests' do

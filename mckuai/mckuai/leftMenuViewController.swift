@@ -147,7 +147,17 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         case 3:
             //评价APP
             //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/sandman/id388887746?mt=8&uo=4"]];
-            UIApplication.sharedApplication().openURL(NSURL(string: URL_APPSTORE)!)
+            let alert = SCLAlertView()
+            alert.addButton("给个好评", action: {
+                UIApplication.sharedApplication().openURL(NSURL(string: URL_APPSTORE)!)
+            })
+            alert.addButton("我要吐槽", action: {
+                var feedbackView = UMFeedback.feedbackViewController()
+                feedbackView.hidesBottomBarWhenPushed = true
+                MCUtils.mainNav?.pushViewController(feedbackView, animated: true)
+            })
+            alert.showInfo("评价麦块", subTitle: "麦块的发展离不开大家的支持,希望大家多多给麦块好评", closeButtonTitle: "取消", duration: 0)
+            
         case 4:
             //设置
             UserInfo.showUserInfoView(self.navigationController)
@@ -183,7 +193,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                 }
                 alert.showWarning("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏贴子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
             } else {
-                SCLAlertView().showWarning("注销登录", subTitle: "无效操作,你还没有登录", closeButtonTitle: "确定", duration: 0)
+                SCLAlertView().showError("注销登录", subTitle: "无效操作,你还没有登录", closeButtonTitle: "确定", duration: 0)
             }
         }
         //隐藏菜单

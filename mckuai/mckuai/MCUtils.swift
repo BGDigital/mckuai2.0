@@ -13,7 +13,12 @@ func IS_IOS7() ->Bool
 func IS_IOS8() -> Bool
     { return (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0 }
 
-let tencentAppKey = "101155101"
+let UMAppKey = "5538b66767e58e1165003a77"
+let qq_AppId = "101155101"
+let qq_AppKey = "78b7e42e255512d6492dfd135037c91c"
+let wx_AppId = "wx49ba2c7147d2368d"
+let wx_AppKey = "85aa75ddb9b37d47698f24417a373134"
+let share_url = "http://www.mckuai.com"
 
 //本地配置文件
 //引导页
@@ -96,8 +101,8 @@ class MCUtils {
     static var mainHeadView: UIViewController!
     //这里存储一个首页的NavigationController,侧边菜单用
     static var mainNav: UINavigationController?
-    //RondCloud
-    static let RC_token = "ZIGaV25p4j0yEaTJoHFrHxuBCTxypfvhAwu2X8sXMLwKxdzFrTlE+6UsVCte1Y3bvCaTfXlThBl26u7eHxoTrA=="
+    //RondCloud 
+    static let RC_token = "KJPYD42FHj91JLtq7wNKwv3bPJDLg44cYKMsP2Rgy42WcvywI31Z3pH783WhZQtcdwhO1K5Rw3b/gp8IF+FkRQ=="
         
     static let COLOR_NavBG = "#43D152"
     static let COLOR_MAIN = "#4C4D4E"

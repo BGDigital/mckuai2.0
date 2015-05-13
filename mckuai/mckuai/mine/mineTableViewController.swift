@@ -186,8 +186,10 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let id = self.datasource[indexPath.row]["id"].stringValue
-        TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+        if self.mineMsgType != "system" {
+            let id = self.datasource[indexPath.row]["id"].stringValue
+            TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+        }
     }
     
     func loadNewData() {

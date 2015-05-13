@@ -36,7 +36,7 @@ class UserLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         qqLogin.setBackgroundImage(UIImage(named: "user_login_normal"), forState: UIControlState.Normal)
         qqLogin.setBackgroundImage(UIImage(named: "user_login_press"), forState: UIControlState.Highlighted)//按下去时,selected被选中时
         
-        tencentOAuth = TencentOAuth(appId: tencentAppKey, andDelegate: self)
+        tencentOAuth = TencentOAuth(appId: qq_AppId, andDelegate: self)
         
         
         userName.delegate = self

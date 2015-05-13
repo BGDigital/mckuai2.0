@@ -33,7 +33,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate {
         super.viewDidLoad()
         //设置navigation
         initNavigation()
-        tencentOAuth = TencentOAuth(appId: tencentAppKey, andDelegate: self)
+        tencentOAuth = TencentOAuth(appId: qq_AppId, andDelegate: self)
         userName.delegate = self
         passWord.delegate = self
         var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
