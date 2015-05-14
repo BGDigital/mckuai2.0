@@ -12,7 +12,7 @@ protocol MineProtocol {
     func onRefreshDataSource(iType: Int, iMsgType: Int)
 }
 
-class mineHeadViewController: UIViewController {
+class mineHeadViewController: UIViewController, UMSocialUIDelegate {
 
     @IBOutlet weak var imageBg: SABlurImageView!
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
@@ -139,6 +139,17 @@ class mineHeadViewController: UIViewController {
         btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)
         btnWork.setTitle(J["workNum"].stringValue, forState: .Normal)
         }
+    }
+    
+    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
+        if(response.responseCode.value == UMSResponseCodeSuccess.value) {
+//            MCUtils.showCustomHUD(self, title: "分享成功", imgName: "HUD_OK")
+        }
+    }
+    
+    @IBAction func onShare(sender: AnyObject) {
+        //
+//        ShareUtil.shareInitWithTextAndPicture(self, text: "我的麦块信息", image: DefaultShareImg!, callDelegate: self)
     }
 
     @IBAction func setUserInfoAction(sender: UIButton) {

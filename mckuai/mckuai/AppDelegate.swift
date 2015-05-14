@@ -37,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         }
         //UMeng反馈
         UMFeedback.setAppkey(UMAppKey)
+        UMFeedback.setLogEnabled(true)
+        UMFeedback.sharedInstance().setFeedbackViewController(UMFeedback.feedbackViewController(), shouldPush: true)
+            
         //UM推送
         UMessage.startWithAppkey(UMAppKey, launchOptions: launchOptions)
         self.initNotificationPush()
@@ -131,9 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         //反馈推送
         UMessage.addAlias(UMFeedback.uuid(), type: UMFeedback.messageType()) { (responseObject, error) -> Void in
             if error != nil {
-                println("E:\(error)")
-            } else {
-                println("OK:\(responseObject)")
+                println("addAlias Error:\(error)")
             }
         }
     }

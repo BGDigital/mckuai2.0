@@ -73,9 +73,12 @@ var appUserProcess: Float = 0.0
 //默认用户头像
 var DefaultUserAvatar_big = UIImage(named: "Avatar")
 var DefaultUserAvatar_small = UIImage(named: "SmallAvatar")
+//HUDImg
 var Load_Empty = UIImage(named: "load_empty")
 var Load_Error = UIImage(named: "load_error")
 var Loading = UIImage(named: "loading")
+//默认分享图片
+var DefaultShareImg = UIImage(named: "share_default")
 
 
 //PageInfo 用于下拉刷新
@@ -127,7 +130,7 @@ class MCUtils {
                 parameters: dict,
                 success: { (operation: AFHTTPRequestOperation!,
                     responseObject: AnyObject!) in
-                    println(responseObject)
+//                    println(responseObject)
                     var json = JSON(responseObject)
                     if "ok" == json["state"].stringValue {
                         if let d = json["dataObject", "data"].array {
