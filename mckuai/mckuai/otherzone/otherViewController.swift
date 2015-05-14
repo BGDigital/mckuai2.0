@@ -310,7 +310,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 var result = JSON(responseObject)
                 if "ok" == result["state"].stringValue {
                     //已被关注
-                    self.showPopWindow("移除背包", btnTag: 1)
+                    self.showPopWindow("移出背包", btnTag: 1)
                 } else {
                     //未被关注
                     self.showPopWindow("加入背包", btnTag: 2)
@@ -356,7 +356,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 println("背包:\(responseObject)")
-                self.btnAttention.setTitle(iTag == 1 ? "加入背包" : "移除背包", forState: .Normal)
+                self.btnAttention.setTitle(iTag == 1 ? "加入背包" : "移出背包", forState: .Normal)
                 self.btnAttention.tag = iTag == 1 ? 2 : 1
                 MCUtils.showCustomHUD(self.view, title: "操作成功", imgName: "HUD_OK")
             },

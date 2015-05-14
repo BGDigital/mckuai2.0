@@ -9,7 +9,7 @@
 import UIKit
 
 class chatViewController: RCChatListViewController {
-
+    
     class func mainRoot()->UIViewController{
         var main = UIStoryboard(name: "chat", bundle: nil).instantiateViewControllerWithIdentifier("chatViewController") as! RCChatListViewController
         //tabbar
@@ -40,7 +40,7 @@ class chatViewController: RCChatListViewController {
     }
     
     override func leftBarButtonItemPressed(sender: AnyObject!) {
-        //
+        self.sideMenuViewController.presentLeftMenuViewController()
     }
     
     override func rightBarButtonItemPressed(sender: AnyObject!) {
@@ -57,6 +57,7 @@ class chatViewController: RCChatListViewController {
         //self.tabBarController?.tabBar.hidden = true
     }
     
+    //这个是选择好友来聊天
     override func startPrivateChat(userInfo: RCUserInfo!) {
         if let c: customChatViewController = self.getChatController(userInfo.userId, conversationType: .ConversationType_PRIVATE) as? customChatViewController {
             self.addChatController(c)
@@ -75,6 +76,7 @@ class chatViewController: RCChatListViewController {
         }
     }
     
+    //这个是在会话列表里面打开
     override func onSelectedTableRow(conversation: RCConversation!) {
         //该方法目的延长会话聊天UI的生命周期
         if let c: customChatViewController = self.getChatController(conversation.targetId, conversationType: conversation.conversationType) as? customChatViewController {
@@ -95,9 +97,11 @@ class chatViewController: RCChatListViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         MobClick.beginLogPageView("chatView")
     }
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         MobClick.endLogPageView("chatView")
     }
     

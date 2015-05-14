@@ -11,7 +11,7 @@ import UIKit
 //系统版本
 var osVersion:Double=8.0
 
-class rootViewController: RESideMenu, RESideMenuDelegate {
+class rootViewController: RESideMenu, RESideMenuDelegate, UITabBarControllerDelegate {
 
     var guideView: GuidePageController!
     
@@ -33,6 +33,7 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         MCUtils.TB.tabBar.tintColor = UIColor(red: 0.212, green: 0.804, blue: 0.380, alpha: 1.00)
         MCUtils.TB.viewControllers = [main, second, third, four]
         MCUtils.TB.hidesBottomBarWhenPushed = true
+        MCUtils.TB.delegate = self
         
         self.contentViewController = MCUtils.TB
         self.leftMenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
@@ -47,7 +48,14 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
         self.backgroundImage = bg.image!
         self.delegate = self;
     }
-
+    
+    //这里是为了获取当前TabBar里面的NavigationController
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        if viewController.isKindOfClass(UINavigationController) {
+            MCUtils.mainNav = viewController as? UINavigationController
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
