@@ -18,44 +18,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         //启动页面加载广告
         loadLaunchView()
         Async.background({
-            println("多线程调用三方库")
-        //RongCloud登录
-        if !appUserRCToken.isEmpty {
-            //RongCloud
-            self.initRongCloud()
-            
-            RCIM.connectWithToken(appUserRCToken,
-                completion: {userId in
-                    println("RongCloud Login Successrull:\(userId)")
-                    //显示rongcloud未读消息
-                    MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
-                },
-                error: {status in
-                    println("RongCloud Login Faild. \(status)")
-            })
+            println("多线程调用三方库.")
+            //RongCloud登录
+            if !appUserRCToken.isEmpty {
+                //RongCloud
+                self.initRongCloud()
+                
+                RCIM.connectWithToken(appUserRCToken,
+                    completion: {userId in
+                        println("RongCloud Login Successrull:\(userId)")
+                        //显示rongcloud未读消息
+                        MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
+                    },
+                    error: {status in
+                        println("RongCloud Login Faild. \(status)")
+                })
 
-            MCUtils.GetFriendsList()
-        }
-        //UMeng反馈
-        UMFeedback.setAppkey(UMAppKey)
-        UMFeedback.setLogEnabled(true)
-        UMFeedback.sharedInstance().setFeedbackViewController(UMFeedback.feedbackViewController(), shouldPush: true)
+                MCUtils.GetFriendsList()
+            }
+            //UMeng反馈
+            UMFeedback.setAppkey(UMAppKey)
+            UMFeedback.setLogEnabled(true)
+            UMFeedback.sharedInstance().setFeedbackViewController(UMFeedback.feedbackViewController(), shouldPush: true)
+                
+            //UM推送
+            UMessage.startWithAppkey(UMAppKey, launchOptions: launchOptions)
+            self.initNotificationPush()
+            //友盟分享
+            UMSocialData.setAppKey(UMAppKey)
+            UMSocialQQHandler.setQQWithAppId(qq_AppId, appKey: qq_AppKey, url: share_url)
+            UMSocialWechatHandler.setWXAppId(wx_AppId, appSecret: wx_AppKey, url: share_url)
             
-        //UM推送
-        UMessage.startWithAppkey(UMAppKey, launchOptions: launchOptions)
-        self.initNotificationPush()
-        //友盟分享
-        UMSocialData.setAppKey(UMAppKey)
-        UMSocialQQHandler.setQQWithAppId(qq_AppId, appKey: qq_AppKey, url: share_url)
-        UMSocialWechatHandler.setWXAppId(wx_AppId, appSecret: wx_AppKey, url: share_url)
-        
-        // 友盟统计 nil为空时 默认appstore渠道 不同渠道 统计数据都算到第一个安装渠道
-        MobClick.startWithAppkey(UMAppKey, reportPolicy: BATCH, channelId: nil)
-        //版本号
-        let infoDictionary = NSBundle.mainBundle().infoDictionary
-        let majorVersion: AnyObject? = infoDictionary!["CFBundleShortVersionString"]
-        let appversion = majorVersion as! String
-        MobClick.setAppVersion(appversion)
+            // 友盟统计 nil为空时 默认appstore渠道 不同渠道 统计数据都算到第一个安装渠道
+            MobClick.startWithAppkey(UMAppKey, reportPolicy: BATCH, channelId: nil)
+            //版本号
+            let infoDictionary = NSBundle.mainBundle().infoDictionary
+            let majorVersion: AnyObject? = infoDictionary!["CFBundleShortVersionString"]
+            let appversion = majorVersion as! String
+            MobClick.setAppVersion(appversion)
             })
         
         application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
