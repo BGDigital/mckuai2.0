@@ -7,11 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "sidemenu_bg.png"
+      "filename" : "侧边栏bg.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "麦块app 2- 侧边栏.png"
     }
   ],
   "info" : {

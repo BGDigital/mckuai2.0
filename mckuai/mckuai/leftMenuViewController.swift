@@ -11,10 +11,10 @@ import UIKit
 class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewDelegate, UITableViewDataSource, UMSocialUIDelegate {
     
     let cellHeight: CGFloat = 50
-    let headerHeight: CGFloat = 80
+    let headerHeight: CGFloat = 85
     var tableView: UITableView!
-    let titles = ["新手任务", "我的背包", "分享给好友", "评价APP", "软件设置", "退出登录"]
-    let images = ["newuser", "backpacker", "share", "pingfen", "setting", "logout"]
+    let titles = ["我的背包", "分享给好友", "评价APP", "软件设置", "退出登录"]
+    let images = ["backpacker", "share", "pingfen", "setting", "logout"]
     
     var Avatar: UIImageView!
     var username: UILabel!
@@ -80,7 +80,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
         header.addSubview(btnLogin)
         
-        btnSearch = UIButton(frame: CGRectMake(15, 55, self.view.bounds.size.width-15-120, 25))
+        btnSearch = UIButton(frame: CGRectMake(15, 55, self.view.bounds.size.width-15-120, 30))
         btnSearch.backgroundColor = UIColor.blackColor()
         btnSearch.layer.borderColor = UIColor.whiteColor().CGColor
         btnSearch.layer.borderWidth = 1
@@ -139,9 +139,9 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        switch (indexPath.row) {
+        switch (indexPath.row+1) {
         case 0:
-            //新手任务
+            //新手任务  这个取消了
             MobClick.event("leftMenuView", attributes: ["Type":"NewUser"])
 //            self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
 //            self.sideMenuViewController.hideMenuViewController()
