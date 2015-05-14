@@ -227,8 +227,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
 
     }
     
-    func segmentSelected(sender: HMSegmentedControl) {
-        println("segment selected:\(sender.selectedSegmentIndex)")
+    func segmentSelected(sender: HMSegmentedControl) {   
         if(sender.selectedSegmentIndex == 0){
             self.type = "lastChangeTime"
         }else if(sender.selectedSegmentIndex == 1){
@@ -236,6 +235,9 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
         }else{
             self.type = "isDing"
         }
+        
+         MobClick.event("talkList",attributes: ["type":self.type])
+        
         self.tableView.legendHeader.beginRefreshing()
         self.loadNewData()
     }

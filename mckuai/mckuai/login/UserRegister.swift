@@ -71,6 +71,8 @@ class UserRegister: UIViewController,UITextFieldDelegate {
     @IBAction func registerUserInfo(sender: UIButton) {
         println("注册用户")
         
+        MobClick.event("registerPage", attributes: ["type":"register","result":"all"])
+        
         if(self.userName.text == nil || self.passWord.text == nil || self.nickName.text == nil || self.userName.text == "注册邮箱" || self.passWord.text == "密码" || self.nickName.text == "用户昵称" ){
             var alertView = UIAlertView(title: "输入的信息不能为空", message: "", delegate: self, cancelButtonTitle: "确定")
             alertView.show()
@@ -98,9 +100,12 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                     MCUtils.AnalysisUserInfo(json)
                     
                     self.navigationController?.popViewControllerAnimated(true)
+                    MobClick.event("registerPage", attributes: ["type":"register","result":"success"])
                 }else{
                     hud.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
+                    
+                    MobClick.event("registerPage", attributes: ["type":"register","result":"error"])
                 }
                 
             },
@@ -109,6 +114,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                 println("Error: " + error.localizedDescription)
                 hud.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
+                MobClick.event("registerPage", attributes: ["type":"register","result":"error"])
         })
         
  

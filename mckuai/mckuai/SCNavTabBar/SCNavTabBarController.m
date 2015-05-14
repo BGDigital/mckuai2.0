@@ -204,6 +204,10 @@
 - (void)itemDidSelectedWithIndex:(NSInteger)index
 
 {
+    NSString *intToString = [NSString stringWithFormat:@"%d",index];
+    NSDictionary *dict = @{@"type":@"forum",@"index":intToString};
+    [MobClick event:@"community" attributes:dict];
+    
     NSLog(@"%ld",(long)index);
     [(TalkList *)_subViewControllers[index] updateTableView];
     [_mainView setContentOffset:CGPointMake(index * SCREEN_WIDTH, DOT_COORDINATE) animated:_scrollAnimation];
