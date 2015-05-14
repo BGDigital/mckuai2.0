@@ -149,19 +149,12 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
     
     func addPicAction() {
         println("addpics")
-        
+        MobClick.event("sendTalkPage", attributes: ["type":"addPic","result":"all"])
         if(self.image_button.count >= 5){
             MCUtils.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "HUD_ERROR")
         }else{
-//            var sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
-//            if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
-//                sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-//            }
-//            var picker = UIImagePickerController()
-//            picker.delegate = self
-//            picker.allowsEditing = true//设置可编辑
-//            picker.sourceType = sourceType
-//            self.presentViewController(picker, animated: true, completion: nil)//进入照相界面
+            
+            
             
             var appearanceConfig = UzysAppearanceConfig()
             appearanceConfig.finishSelectionButtonColor = UIColor.greenColor()
@@ -248,6 +241,8 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
 //    }
     
     func removeImg(sender:UIButton) {
+        
+        MobClick.event("sendTalkPage", attributes: ["type":"removePic"])
         var selected_index:Int = 0
         println(sender.tag)
         for(var i=0;i<self.image_button.count;i++) {
@@ -447,7 +442,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         println("send talk")
         
 
-        
+        MobClick.event("sendTalkPage", attributes: ["type":"send","result":"all"])
         
         self.rightButton?.enabled = false
 
@@ -512,13 +507,14 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                     if "ok" == json["state"].stringValue {
                         println(json["msg"])
                         self.content_post! += json["msg"].stringValue
-                        
+                        MobClick.event("sendTalkPage", attributes: ["type":"addPic","result":"success"])
                         self.postTalkToServer()
                         
                     }else{
                         self.rightButton?.enabled = true
                         self.progress.removeFromSuperview()
                         MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                        MobClick.event("sendTalkPage", attributes: ["type":"addPic","result":"error"])
                     }
                     
                 },
@@ -528,7 +524,9 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                     self.rightButton?.enabled = true
                     self.progress.removeFromSuperview()
                     MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                    MobClick.event("sendTalkPage", attributes: ["type":"addPic","result":"error"])
             })
+            
         }else{
             self.postTalkToServer()
         }
@@ -559,14 +557,18 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                     println(json["msg"])
                     var addTalkId = json["msg"].stringValue
                     self.progress.labelText = "发送成功"
-
+                    MobClick.event("community",attributes: ["type":"sendTalk","result":"success"])
                     NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "returnPage", userInfo: nil, repeats: false)
 //                    self.navigationController?.popViewControllerAnimated(true)
+                    
+                    MobClick.event("sendTalkPage", attributes: ["type":"send","result":"success"])
                     
                 }else{
                     self.rightButton?.enabled = true
                     self.progress.removeFromSuperview()
                     MCUtils.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "HUD_ERROR")
+                    MobClick.event("community",attributes: ["type":"sendTalk","result":"error"])
+                    MobClick.event("sendTalkPage", attributes: ["type":"send","result":"error"])
                 }
 
             },
@@ -576,6 +578,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                 self.rightButton?.enabled = true
                 self.progress.removeFromSuperview()
                 MCUtils.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "HUD_ERROR")
+                MobClick.event("sendTalkPage", attributes: ["type":"send","result":"error"])
         })
         
         

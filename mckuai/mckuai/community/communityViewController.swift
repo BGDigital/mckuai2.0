@@ -82,6 +82,7 @@ class communityViewController: UIViewController {
     func rightBarButtonItemClicked() {
         print("send talk")
         
+        MobClick.event("community",attributes: ["type":"sendTalk"])
 
         if( appUserIdSave == 0) {
            NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)

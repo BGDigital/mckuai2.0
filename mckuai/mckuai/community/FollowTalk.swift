@@ -120,18 +120,13 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     }
     
     func addPicAction() {
+        
+        MobClick.event("followTalkPage", attributes: ["type":"addpic","result":"all"])
         if(self.image_button.count >= 5){
             MCUtils.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "HUD_ERROR")
         }else{
-//            var sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-//            if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
-//                sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-//            }
-//            var picker = UIImagePickerController()
-//            picker.delegate = self
-//            picker.allowsEditing = true//设置可编辑
-//            picker.sourceType = sourceType
-//            self.presentViewController(picker, animated: true, completion: nil)//进入照相界面
+            
+            
             
             var appearanceConfig = UzysAppearanceConfig()
             appearanceConfig.finishSelectionButtonColor = UIColor.greenColor()
@@ -234,6 +229,8 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     func send() {
         
         
+        MobClick.event("followTalkPage", attributes: ["type":"send","result":"all"])
+        
         self.sendButton.enabled = false
         content = self.textView.text
         if(content == nil || content.isEmpty || content == "内容..."){
@@ -275,11 +272,12 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                             self.content! += json["msg"].stringValue
                             
                             self.postTalkToServer()
-                            
+                            MobClick.event("followTalkPage", attributes: ["type":"addpic","result":"success"])
                         }else{
                             self.sendButton?.enabled = true
                             self.progress.removeFromSuperview()
                             MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                            MobClick.event("followTalkPage", attributes: ["type":"addpic","result":"error"])
                         }
                         
                     },
@@ -288,6 +286,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                         println("Error: " + error.localizedDescription)
                         self.progress.removeFromSuperview()
                         MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                        MobClick.event("followTalkPage", attributes: ["type":"addpic","result":"error"])
                 })
             }else{
                 self.postTalkToServer()
@@ -313,12 +312,13 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                 if "ok" == json["state"].stringValue {
                     self.progress.labelText = "发送成功"
                     NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "returnPage", userInfo: nil, repeats: false)
-                    
+                    MobClick.event("followTalkPage", attributes: ["type":"send","result":"success"])
                     
                 }else{
                     self.sendButton?.enabled = true
                     self.progress.removeFromSuperview()
                     MCUtils.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "HUD_ERROR")
+                    MobClick.event("followTalkPage", attributes: ["type":"send","result":"error"])
                 }
                 
             },
@@ -328,6 +328,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                 self.sendButton?.enabled = true
                 self.progress.removeFromSuperview()
                 MCUtils.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "HUD_ERROR")
+                MobClick.event("followTalkPage", attributes: ["type":"send","result":"error"])
         })
     }
     

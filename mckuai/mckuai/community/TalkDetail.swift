@@ -92,6 +92,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             self.url = NSURL(string: webView_url+"&id="+id+"&admin="+admin)
         }
         
+        MobClick.event("talkDetail", attributes: ["type":"watchLouzhu"])
+        
         var request = NSURLRequest(URL: url)
         webView.loadRequest(request)
         
@@ -249,6 +251,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func toolBarFunc(sender:UIButton) {
         if(sender.tag == 0){
+            
+            MobClick.event("talkDetail", attributes: ["type":"collect"])
+            
             if(appUserIdSave == 0) {
                NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
                 //NewLogin.showUserLoginView(self,returnIsShow: false, aDelegate: nil)
@@ -267,6 +272,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
             
         }else if(sender.tag == 1){
+            
+            MobClick.event("talkDetail", attributes: ["type":"shareTalk"])
+            
             var shareImg:UIImage!
             var shareText:String!
             
@@ -287,6 +295,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             }
             
         }else if(sender.tag == 2){
+            MobClick.event("talkDetail", attributes: ["type":"followTalk"])
             println("reply")
             if(appUserIdSave == 0) {
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
@@ -301,6 +310,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                
             }
         }else if(sender.tag == 3){
+            MobClick.event("talkDetail", attributes: ["type":"daShang"])
             if(appUserIdSave == 0) {
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
             }else{
@@ -393,10 +403,16 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         if action == "viewuser" && param["id"] != nil{
             if let id = param["id"]!.toInt(){
                 MCUtils.openOtherZone(self.navigationController, userId: id)
+                
+                MobClick.event("talkDetail", attributes: ["type":"clickHeadImg"])
+                
             }
         }
         self.params = param;
         if action == "reply" {
+            
+            MobClick.event("talkDetail", attributes: ["type":"replyJs"])
+            
             println("Reply...........")
             if(appUserIdSave == 0) {
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
@@ -406,6 +422,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             
         }
         if action == "toForumList" && param["forumName"] != nil {
+            
+            MobClick.event("talkDetail", attributes: ["type":"toForumList"])
+            
             currentForumName = param["forumName"]
             if(self.navigationController?.tabBarController?.selectedIndex == 3){
                 self.navigationController?.popViewControllerAnimated(true)
@@ -514,12 +533,14 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func cancleReply() {
         println("cancleReply")
+        
+        MobClick.event("talkDetail", attributes: ["type":"cancleReplyButton"])
         self.textView.resignFirstResponder()
     }
     
     func sendReply() {
         println("sendReply")
-        
+        MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"all"])
         self.sendButton.enabled = false
         var replyContext = self.textView.text
         if(replyContext == nil || replyContext.isEmpty){
@@ -550,11 +571,12 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                         if self.params["isOver"] == "yes" {
                            self.afterReply()
                         }
-
+                        MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"success"])
                     }else{
                         self.rightButton?.enabled = true
                         hud.hide(true)
                         MCUtils.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "HUD_ERROR")
+                        MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"error"])
                     }
                     
                 },
@@ -564,6 +586,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     self.rightButton?.enabled = true
                     hud.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "HUD_ERROR")
+                    MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"error"])
             })
             
             
@@ -573,6 +596,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     func dismissKeyboard(){
+        MobClick.event("talkDetail", attributes: ["type":"cancleReplyOther"])
         self.textView.resignFirstResponder()
     }
     

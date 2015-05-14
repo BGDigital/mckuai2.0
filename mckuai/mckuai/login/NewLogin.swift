@@ -75,7 +75,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     
     @IBAction func toRegister(sender: UIButton) {
-        MobClick.event("gotoRegister", attributes: ["type":"putong"])
+        MobClick.event("qqLoginPage",attributes: ["type":"toRegister"])
         self.backToPage()
         
         UserRegister.showUserRegisterView(presentNavigator: self.presentNavigator)
@@ -123,6 +123,9 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     }
     
     @IBAction func noQqLoginAction(sender: UIButton) {
+        
+        MobClick.event("qqLoginPage",attributes: ["type":"noQQ"])
+        
         if(!self.userName.text.isEmpty && !self.passWord.text.isEmpty) {
             println(self.userName.text)
             mckuaiLoginFunction()
@@ -132,7 +135,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     }
     @IBAction func qqLoginAction(sender: UIButton) {
         
-        MobClick.event("qqLogin")
+        MobClick.event("qqLoginPage",attributes: ["type":"qq"])
         tencentOAuth.authorize(permissionsArray,inSafari:false)
     }
     
@@ -148,8 +151,10 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     func tencentDidNotLogin(cancelled:Bool){
         if (cancelled){
+            MobClick.event("qqLoginPage",attributes: ["type":"qqCancle"])
             println("用户取消登录")
         }else{
+            MobClick.event("qqLoginPage",attributes: ["type":"qqLoginError"])
             println("登录失败")
         }
     }
