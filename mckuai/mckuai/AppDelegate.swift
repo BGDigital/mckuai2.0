@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
                 completion: {userId in
                     println("RongCloud Login Successrull:\(userId)")
                     //显示rongcloud未读消息
-                    MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil                    
+                    MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
                 },
                 error: {status in
                     println("RongCloud Login Faild. \(status)")
@@ -146,6 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         println("didReceiveRemoteNotification:\(userInfo)")
         UMessage.didReceiveRemoteNotification(userInfo)
+//        UMFeedback.didReceiveRemoteNotification(userInfo)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
