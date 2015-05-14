@@ -128,17 +128,9 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.scrollViewDidScroll(self.tableView)
-        self.tabBarController?.tabBar.hidden = true
-    }
+
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.lt_reset()
-        self.tabBarController?.tabBar.hidden = false
-    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -369,6 +361,19 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 println("Error: " + error.localizedDescription)
                 MCUtils.showCustomHUD(self.view, title: "操作失败,请重试", imgName: "HUD_ERROR")
         })
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+            MobClick.beginLogPageView("otherView")
+            super.viewWillAppear(animated)
+            self.scrollViewDidScroll(self.tableView)
+            self.tabBarController?.tabBar.hidden = true
+    }
+    override func viewWillDisappear(animated: Bool) {
+            MobClick.endLogPageView("otherView")
+            super.viewWillDisappear(animated)
+            self.navigationController?.navigationBar.lt_reset()
+            self.tabBarController?.tabBar.hidden = false
     }
 
 }

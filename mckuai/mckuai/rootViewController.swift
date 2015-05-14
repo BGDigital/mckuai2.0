@@ -118,5 +118,12 @@ class rootViewController: RESideMenu, RESideMenuDelegate {
     func sideMenu(sideMenu: RESideMenu!, didHideMenuViewController menuViewController: UIViewController!) {
         //println("didHideMenuViewController")
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("rootView")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("rootView")
+    }
 }
 

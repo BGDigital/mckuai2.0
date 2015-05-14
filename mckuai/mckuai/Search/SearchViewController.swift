@@ -52,6 +52,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(animated: Bool) {
 //        searchBar.becomeFirstResponder()
+        MobClick.beginLogPageView("searchView")
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -235,6 +236,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if !searchKey.isEmpty {
             onSearch()
         }
+    }
+    
+
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("searchView")
     }
 
 }

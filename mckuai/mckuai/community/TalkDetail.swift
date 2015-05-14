@@ -277,10 +277,10 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     
                     UIImage(data: NSData(contentsOfURL: NSURL(string:shareParams["shareImg"]!)!)!)
                 }else{
-                    shareImg = UIImage(named: "guidepage1")
+                    shareImg = UIImage(named: "share_default")
                 }
                 if(shareText != nil && shareImg != nil){
-                    ShareUtil.shareInitWithTextAndPicture(self, text: shareText, image: shareImg!, callDelegate: self)
+                    ShareUtil.shareInitWithTextAndPicture(self, text: shareText, image: shareImg!,shareUrl:"http://www.mckuai.com/thread-"+id+".html", callDelegate: self)
                 }
                 
             }
@@ -359,19 +359,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    override func viewWillAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = true
-//        //注册键盘通知事件
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
-        
-        self.tabBarController?.tabBar.hidden = true
-        self.navigationController?.navigationBar.lt_reset()
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-    }
+
+
     
     override func viewDidAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = true
@@ -632,6 +621,24 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             self.webView.stringByEvaluatingJavaScriptFromString("addReplyHtml()");
         }
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+            MobClick.beginLogPageView("talkDetail")
+            self.tabBarController?.tabBar.hidden = true
+            //        //注册键盘通知事件
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
+            
+            self.tabBarController?.tabBar.hidden = true
+            self.navigationController?.navigationBar.lt_reset()
+            self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("talkDetail")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+
     }
     
 

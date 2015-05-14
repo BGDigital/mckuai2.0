@@ -83,9 +83,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
         Defaults[D_USER_ADDR] = selectedCity
         self.addr.text = selectedCity
     }
-    override func viewWillAppear(animated: Bool) {
-//        self.tabBarController?.tabBar.hidden = false
-    }
+
     
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.lt_reset()
@@ -155,6 +153,14 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
             MCUtils.mainNav?.pushViewController(userInfo, animated: true)
         }
         
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("userInfoSet")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("userInfoSet")
     }
     
 }

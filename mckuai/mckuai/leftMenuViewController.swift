@@ -236,4 +236,11 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         return titles.count
     }
     
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("leftMenuView")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("leftMenuView")
+    }
+    
 }

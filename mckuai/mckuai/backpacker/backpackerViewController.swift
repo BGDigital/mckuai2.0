@@ -40,10 +40,7 @@ class backpackerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-        self.tabBarController?.tabBar.hidden = true
-    }
+
     
     override func viewDidDisappear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
@@ -113,5 +110,14 @@ class backpackerViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewWillAppear(animated: Bool) {
+            MobClick.beginLogPageView("backpackerView")
+            self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+            self.tabBarController?.tabBar.hidden = true
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("backpackerView")
+    }
 
 }

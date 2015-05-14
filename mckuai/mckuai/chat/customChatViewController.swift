@@ -30,10 +30,7 @@ class customChatViewController: RCChatViewController {
 //        //self.tabBarController?.tabBar.hidden = true
 //    }
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBar.lt_reset()
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-    }
+
     
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.lt_reset()
@@ -49,4 +46,16 @@ class customChatViewController: RCChatViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("customChatView")
+        self.navigationController?.navigationBar.lt_reset()
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("customChatView")
+    }
+    
+    
+
 }

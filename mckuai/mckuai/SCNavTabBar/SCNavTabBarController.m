@@ -161,7 +161,7 @@
 {
     [_navTabBar itemPressedSwift:currentIndex];
     
-        //获取测试设备id
+//        获取测试设备id
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
 //    NSString *deviceID = nil;

@@ -254,4 +254,12 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         //self.dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("cityListView")
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("cityListView")
+    }
 }

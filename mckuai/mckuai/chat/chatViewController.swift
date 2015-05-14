@@ -93,4 +93,13 @@ class chatViewController: RCChatListViewController {
             self.navigationController?.pushViewController(chat, animated: true)
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("chatView")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("chatView")
+    }
+    
+    
 }
