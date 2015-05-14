@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         //启动页面加载广告
         loadLaunchView()
         Async.background({
+            println("多线程调用三方库")
         //RongCloud登录
         if !appUserRCToken.isEmpty {
             //RongCloud
@@ -55,9 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         let majorVersion: AnyObject? = infoDictionary!["CFBundleShortVersionString"]
         let appversion = majorVersion as! String
         MobClick.setAppVersion(appversion)
-        
-        MCUtils.setNavBack()
             })
+        MCUtils.setNavBack()
         return true
     }
     

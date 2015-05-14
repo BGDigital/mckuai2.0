@@ -8,7 +8,7 @@
 
 import UIKit
 
-class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewDelegate, UITableViewDataSource {
+class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewDelegate, UITableViewDataSource, UMSocialUIDelegate {
     
     let cellHeight: CGFloat = 50
     let headerHeight: CGFloat = 80
@@ -108,12 +108,14 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     }
         
     @IBAction func userLogin() {
+        MobClick.event("leftMenuView", attributes: ["Type":"Login"])
         NewLogin.showUserLoginView(MCUtils.mainNav, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()
     }
     
     @IBAction func showSearch() {
+        MobClick.event("leftMenuView", attributes: ["Type":"Search"])
         MCUtils.showSearchView(MCUtils.mainNav)
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()
@@ -124,7 +126,14 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
+        if(response.responseCode.value == UMSResponseCodeSuccess.value) {
+            MCUtils.showCustomHUD(self.view, title: "分享成功", imgName: "HUD_OK")
+            MobClick.event("Share", attributes: ["Address":"leftView", "Type": "Success"])
+        }
+    }
+    
     // MARK: - Table view data source
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -133,27 +142,35 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         switch (indexPath.row) {
         case 0:
             //新手任务
+            MobClick.event("leftMenuView", attributes: ["Type":"NewUser"])
 //            self.sideMenuViewController.setContentViewController(MCUtils.TB, animated: true)
 //            self.sideMenuViewController.hideMenuViewController()
             break
         case 1:
+            MobClick.event("leftMenuView", attributes: ["Type":"MyBag"])
             //我的背包
             if appUserIdSave != 0 {
                 MCUtils.openBackPacker(self.navigationController, userId: appUserIdSave)
             } else {
-                SCLAlertView().showWarning("提示", subTitle: "登录后才能打开背包,先登录吧", closeButtonTitle: "确定", duration: 0)
+                TSMessage.showNotificationWithTitle("提示", subtitle: "亲,你要登录麦块后才能打开背包,先去登录吧", type: .Warning)
             }
         case 2:
+            MobClick.event("leftMenuView", attributes: ["Type":"Share"])
             //分享给好友
-            break
+            var url = "http://www.mckuai.com/down.html"
+            println(url)
+            MobClick.event("Share", attributes: ["Address":"侧边栏", "Type": "start"])
+            ShareUtil.shareInitWithTextAndPicture(MCUtils.TB, text: "麦块我的世界盒子", image: DefaultShareImg!, shareUrl: url, callDelegate: self)
         case 3:
             //评价APP
             //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/sandman/id388887746?mt=8&uo=4"]];
             let alert = SCLAlertView()
             alert.addButton("给个好评", action: {
                 UIApplication.sharedApplication().openURL(NSURL(string: URL_APPSTORE)!)
+                MobClick.event("leftMenuView", attributes: ["Type":"toAppStore"])
             })
             alert.addButton("我要吐槽", action: {
+                MobClick.event("leftMenuView", attributes: ["Type":"toFeedBack"])
                 var feedbackView = UMFeedback.feedbackViewController()
                 feedbackView.hidesBottomBarWhenPushed = true
                 MCUtils.mainNav?.pushViewController(feedbackView, animated: true)
@@ -162,8 +179,10 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             
         case 4:
             //设置
+            MobClick.event("leftMenuView", attributes: ["Type":"Setting"])
             UserInfo.showUserInfoView(self.navigationController)
         default:
+            MobClick.event("leftMenuView", attributes: ["Type":"Logout"])
             if appUserIdSave != 0 {
                 let alert = SCLAlertView()
                 alert.addButton("确定注销") {
@@ -195,8 +214,8 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                 }
                 alert.showWarning("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏贴子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
             } else {
-                SCLAlertView().showError("注销登录", subTitle: "无效操作,你还没有登录", closeButtonTitle: "确定", duration: 0)
-            }
+                TSMessage.showNotificationWithTitle("提示", subtitle: "你还没有登录,要登录后才可以注销哦", type: .Warning)
+           }
         }
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()

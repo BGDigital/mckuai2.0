@@ -39,7 +39,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 self.User = self.json["dataObject", "user"] as JSON
                 
             }
-            otherhead.RefreshHead(User)
+            otherhead.RefreshHead(User, parent: self)
             self.tableView.reloadData()
         }
     }
@@ -93,6 +93,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hidesBottomBarWhenPushed = true
         setupViews()
         getAttentionStatus()
         
@@ -325,11 +326,14 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     把用户加入背包
     */
     @IBAction func btn1Click(sender: UIButton) {
+        MobClick.event("OtherCenter", attributes: ["Type":"toBag"])
         doAttention(sender.tag)
     }
     
     @IBAction func btn2Click() {
+        MobClick.event("OtherCenter", attributes: ["Type":"toChat"])
         var chat = RCChatViewController()
+        chat.hidesBottomBarWhenPushed = true
         chat.portraitStyle = .Cycle
         chat.currentTarget = self.User["name"].stringValue
         chat.currentTargetName = self.User["nike"].stringValue

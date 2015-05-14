@@ -22,6 +22,7 @@ class mineHeadViewController: UIViewController, UMSocialUIDelegate {
     @IBOutlet weak var btnDynamic: UIButton!
     @IBOutlet weak var btnWork: UIButton!
     var Delegate: MineProtocol?
+    var parentVC: UIViewController!
     
     var lastSelected: UIButton!
     var segmentedControl: HMSegmentedControl!
@@ -104,10 +105,12 @@ class mineHeadViewController: UIViewController, UMSocialUIDelegate {
         }
         lastSelected = sender
         if sender.tag != 1 {
+            MobClick.event("mineCenter", attributes: ["Type":sender.tag == 2 ? "Dynamic" : "Work"])
             segmentedControl.hidden = true
             self.smallType = 2
             //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300)
         } else {
+            MobClick.event("mineCenter", attributes: ["Type":"Message"])
             segmentedControl.hidden = false
             self.smallType = 0
             //self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
@@ -122,11 +125,13 @@ class mineHeadViewController: UIViewController, UMSocialUIDelegate {
     }
 
     //外面调用的函数
-    func RefreshHead(J: JSON) {
+    func RefreshHead(J: JSON, parent: UIViewController) {
         //圆形头像
+        self.parentVC = parent
         roundProgressView.percent = CGFloat(J["process"].floatValue * 100)
         self.roundProgressView.imageUrl = J["headImg"].stringValue
         self.roundProgressView.level = J["level"].intValue
+        self.userId = J["id"].intValue
         headImg = J["headImg"].stringValue
         nickname.text = J["nike"].stringValue
         if !headImg.isEmpty {
@@ -143,16 +148,21 @@ class mineHeadViewController: UIViewController, UMSocialUIDelegate {
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
         if(response.responseCode.value == UMSResponseCodeSuccess.value) {
-//            MCUtils.showCustomHUD(self, title: "分享成功", imgName: "HUD_OK")
+            MobClick.event("Share", attributes: ["Address":"个人中心", "Type": "Success"])
+            MCUtils.showCustomHUD(self.view, title: "分享成功", imgName: "HUD_OK")
         }
     }
     
     @IBAction func onShare(sender: AnyObject) {
-        //
-//        ShareUtil.shareInitWithTextAndPicture(self, text: "我的麦块信息", image: DefaultShareImg!, callDelegate: self)
+        MobClick.event("mineCenter", attributes: ["Type":"Share"])
+        var url = "http://www.mckuai.com/u/\(userId)"
+        println(url)
+        MobClick.event("Share", attributes: ["Address":"个人中心", "Type": "start"])
+        ShareUtil.shareInitWithTextAndPicture(parentVC, text: "我的麦块", image: DefaultShareImg!, shareUrl: url, callDelegate: self)
     }
 
     @IBAction func setUserInfoAction(sender: UIButton) {
+        MobClick.event("mineCenter", attributes: ["Type":"Setting"])
         UserInfo.showUserInfoView(MCUtils.mainNav)
     }
 

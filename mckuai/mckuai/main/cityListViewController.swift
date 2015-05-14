@@ -92,6 +92,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func getLoactionCity() {
+        MobClick.event("CityListView", attributes: ["Type":"GPS"])
         initLocationManager()
     }
     
@@ -245,7 +246,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
      }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        MobClick.event("CityListView", attributes: ["Type":"Normal"])
         var key: AnyObject = self.keys.objectAtIndex(indexPath.section)
         var city = self.cities.objectForKey(key)?.objectAtIndex(indexPath.row) as! String
         self.upAddrToServer(city)

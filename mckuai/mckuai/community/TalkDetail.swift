@@ -280,6 +280,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     shareImg = UIImage(named: "share_default")
                 }
                 if(shareText != nil && shareImg != nil){
+                    MobClick.event("Share", attributes: ["Address":"详情页", "Type": "start"])
                     ShareUtil.shareInitWithTextAndPicture(self, text: shareText, image: shareImg!,shareUrl:"http://www.mckuai.com/thread-"+id+".html", callDelegate: self)
                 }
                 
@@ -334,7 +335,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
                     
                 }else{
-                    MCUtils.showCustomHUD(self.view, title: "土豪,砖石再多也只能打赏一次", imgName: "HUD_OK")
+                    MCUtils.showCustomHUD(self.view, title: "土豪,钻石再多也只能打赏一次", imgName: "HUD_OK")
                 }
                 
             }
@@ -343,7 +344,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
         if(response.responseCode.value == UMSResponseCodeSuccess.value) {
-            println("回调ok");
+            MCUtils.showCustomHUD(self.view, title: "分享成功", imgName: "HUD_OK")
+            MobClick.event("Share", attributes: ["Address":"详细页", "Type": "Success"])
         }
     }
     

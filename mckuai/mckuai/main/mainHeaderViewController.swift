@@ -106,14 +106,16 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     }
     
     @IBAction func userLogin() {
+        MobClick.event("mainView", attributes: ["Type":"Login"])
         NewLogin.showUserLoginView(self.nav, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
     }
     
     @IBAction func openBackPacker() {
+        MobClick.event("mainView", attributes: ["Type":"MyBag"])
         if appUserIdSave != 0 {
             MCUtils.openBackPacker(self.nav!, userId: appUserIdSave)
         } else {
-            SCLAlertView().showWarning("提示", subTitle: "登录后才能打开背包,先登录吧", closeButtonTitle: "确定", duration: 0)
+            TSMessage.showNotificationWithTitle("提示", subtitle: "亲,你要登录麦块后才能打开背包,先去登录吧", type: .Warning)
         }
     }
     
@@ -123,6 +125,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     
     @IBAction func openMineSB() {
         println("打开个人中心")
+        MobClick.event("mainView", attributes: ["Type":"MineCenter"])
         //mineFrm = mineTableViewController.initializationMine() as! mineTableViewController
         if appUserIdSave != 0 {
             mineFrm = mineTableViewController()
@@ -133,6 +136,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     
     @IBAction func openCityList(sender: UIButton) {
         println("打开城市列表")
+        MobClick.event("mainView", attributes: ["Type":"CityList"])
         cityList = cityListViewController()
         cityList.hidesBottomBarWhenPushed = true
         cityList.Delegate = self

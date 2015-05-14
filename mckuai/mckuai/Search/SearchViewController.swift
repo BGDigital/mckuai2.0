@@ -60,6 +60,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func onSearch() {
+        MobClick.event("SearchView", attributes: ["Type":"onSearch"])
         //开始刷新
         hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud?.labelText = MCUtils.TEXT_SEARCH
@@ -228,8 +229,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         println("segment selected:\(sender.selectedSegmentIndex)")
         switch (sender.selectedSegmentIndex) {
         case 0:
+            MobClick.event("SearchView", attributes: ["Type":"talk"])
             searchType = "talk"
         default:
+            MobClick.event("SearchView", attributes: ["Type":"people"])
             searchType = "people"
         }
         

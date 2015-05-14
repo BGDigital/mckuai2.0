@@ -37,7 +37,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
                 }
                 self.User = self.json["dataObject", "user"] as JSON
             }
-            head.RefreshHead(User)
+            head.RefreshHead(User, parent: self)
             self.tableView.reloadData()
         }
     }

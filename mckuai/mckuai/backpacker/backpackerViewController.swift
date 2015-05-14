@@ -87,11 +87,13 @@ class backpackerViewController: UIViewController {
         println("segment selected:\(sender.selectedSegmentIndex)")
         switch (sender.selectedSegmentIndex) {
         case 0:
+            MobClick.event("MyBag", attributes: ["Type":"favorite"])
             friends.view.hidden = true
             favorite.view.hidden = false
             self.view.bringSubviewToFront(favorite.view)
             break
         case 1:
+            MobClick.event("MyBag", attributes: ["Type":"friends"])
             friends.view.hidden = false
             favorite.view.hidden = true
             self.view.bringSubviewToFront(friends.view)

@@ -12,7 +12,7 @@ protocol OtherProtocol {
     func onRefreshDataSource(iType: Int)
 }
 
-class otherHeadViewController: UIViewController {
+class otherHeadViewController: UIViewController, UMSocialUIDelegate {
 
     
     @IBOutlet weak var imageBg: SABlurImageView!
@@ -25,6 +25,7 @@ class otherHeadViewController: UIViewController {
     var lastSelected: UIButton!
     var headImg: String!
     var userId = 0
+    var parentVC: UIViewController!
     var userLevel = 0
     var username = ""
     
@@ -74,7 +75,7 @@ class otherHeadViewController: UIViewController {
             lastSelected.selected = false
         }
         lastSelected = sender
-        
+        MobClick.event("OtherCenter", attributes: ["Type": sender.tag == 1 ? "Dynamic" : "Work"])
         bigType = sender.tag
         Delegate?.onRefreshDataSource(bigType)
     }
@@ -85,13 +86,15 @@ class otherHeadViewController: UIViewController {
     }
     
     //外面调用的函数
-    func RefreshHead(J: JSON) {
+    func RefreshHead(J: JSON, parent: UIViewController) {
         //圆形头像
+        self.parentVC = parent
         roundProgressView.percent = CGFloat(J["process"].floatValue * 100)
         roundProgressView.imageUrl = J["headImg"].stringValue
         self.roundProgressView.level = J["level"].intValue
         headImg = J["headImg"].stringValue
         nickname.text = J["nike"].stringValue
+        self.userId = J["id"].intValue
         if !headImg.isEmpty {
             imageBg.sd_setImageWithURL(NSURL(string: headImg), placeholderImage: UIImage(named: "Avatar"), completed: {image, error, cacheType, imageURL in
                 //self.roundProgressView.imageView = UIImageView(image: image)
@@ -101,5 +104,21 @@ class otherHeadViewController: UIViewController {
         btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)
         btnWork.setTitle(J["workNum"].stringValue, forState: .Normal)
     }
+    
+    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
+        if(response.responseCode.value == UMSResponseCodeSuccess.value) {
+            MCUtils.showCustomHUD(self.view, title: "分享成功", imgName: "HUD_OK")
+            MobClick.event("Share", attributes: ["Address":"他人空间", "Type": "Success"])
+        }
+    }
+    
+    @IBAction func onShare(sender: AnyObject) {
+        MobClick.event("OtherCenter", attributes: ["Type":"Share"])
+        var url = "http://www.mckuai.com/u/\(userId)"
+        println(url)
+        MobClick.event("Share", attributes: ["Address":"他人空间", "Type": "start"])
+        ShareUtil.shareInitWithTextAndPicture(parentVC, text: "我的麦块", image: DefaultShareImg!, shareUrl: url, callDelegate: self)
+    }
+
 
 }
