@@ -63,8 +63,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if isFirstLoad {
             loadDataWithoutMJRefresh()
         }
-        
-        MCUtils.checkNetWorkState()
     }
     
     func loadDataWithoutMJRefresh() {
@@ -132,7 +130,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
-                TSMessage.showNotificationWithTitle("掉线了?", subtitle: "请确认网络是否连通,检查网络设置.", type: .Error)
+                MCUtils.checkNetWorkState()
+                MCUtils.showEmptyView(self.tableView, aImg: Load_Error!, aText: "哇哦~,加载数据出问题了")
         })
         
     }

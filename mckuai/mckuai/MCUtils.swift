@@ -216,10 +216,10 @@ class MCUtils {
             switch st {
             case .ReachableViaWiFi:
                 println("网络状态:WIFI")
-                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你在WIFI网络下面,随便畅玩吧", type: .Success)
+//                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你在WIFI网络下面,随便畅玩吧", type: .Success)
             case .ReachableViaWWAN:
                 println("网络状态:3G")
-                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你正在使用流量上网,悠着点哦", type: .Warning)
+                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你正在使用流量上网,且玩且珍惜吧", type: .Warning)
             case .NotReachable:
                 println("网络状态:不可用")
                 TSMessage.showNotificationWithTitle("出错啦~!", subtitle: "网络状态异常,请检查网络连接", type: .Error)
@@ -338,22 +338,22 @@ class MCUtils {
         var btnY: CGFloat!
         if let headHeight = tv.tableHeaderView?.bounds.size.height {
             if tv.tableHeaderView?.hidden == false {
-                btnY = (v.bounds.size.height + headHeight - img.bounds.size.height+30) / 2
+                btnY = (v.bounds.size.height + headHeight - img.bounds.size.height) / 2
             } else {
-                btnY = (v.bounds.size.height - img.bounds.size.height+30) / 2
+                btnY = (v.bounds.size.height - img.bounds.size.height) / 2
             }
         } else {
-            btnY = (v.bounds.size.height - img.bounds.size.height+30) / 2
+            btnY = (v.bounds.size.height - img.bounds.size.height) / 2
         }
         img.frame = CGRectMake(btnX, btnY, img.bounds.size.width, img.bounds.size.height)
         v.addSubview(img)
         
-        var lb = UILabel(frame: CGRectMake(0, btnY+img.frame.size.height+10, v.bounds.size.width, 20))
-        lb.text = aText
-        lb.numberOfLines = 2;
-        lb.textAlignment = .Center;
-        lb.textColor = UIColor.lightGrayColor()
-        v.addSubview(lb)
+//        var lb = UILabel(frame: CGRectMake(0, btnY+img.frame.size.height+10, v.bounds.size.width, 20))
+//        lb.text = aText
+//        lb.numberOfLines = 2;
+//        lb.textAlignment = .Center;
+//        lb.textColor = UIColor.lightGrayColor()
+//        v.addSubview(lb)
         tv.backgroundView = v
         tv.separatorStyle = UITableViewCellSeparatorStyle.None
     }

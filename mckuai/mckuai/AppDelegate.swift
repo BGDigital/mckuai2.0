@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     func initNotificationPush() {
         //注册苹果推送
         if IS_IOS8() {
-//            //register remoteNotification types
+            //register remoteNotification types
 //            var action1 = UIMutableUserNotificationAction()
 //            action1.identifier = "action1_identifier"
 //            action1.title = "Accept"
@@ -91,7 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
 //            var categorys = UIMutableUserNotificationCategory()
 //            categorys.identifier = "categorys1"  //这一组动作的唯一标识
 //            categorys.setActions([action1, action2], forContext: .Default)
-            
+//            let categroies: NSSet = NSSet(object: categorys)
+//            
             var settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert , categories: nil)
             UMessage.registerRemoteNotificationAndUserNotificationSettings(settings)
         } else {
@@ -99,8 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         }
         //调试日志
         UMessage.setLogEnabled(true)
-        //自动清空角标
-        UMessage.setBadgeClear(true)
         //当前APP渠道
         UMessage.setChannel("App Store")
     }
