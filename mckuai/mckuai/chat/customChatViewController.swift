@@ -30,8 +30,6 @@ class customChatViewController: RCChatViewController {
 //        //self.tabBarController?.tabBar.hidden = true
 //    }
     
-
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.navigationBar.lt_reset()

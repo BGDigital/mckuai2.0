@@ -332,7 +332,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func btn2Click() {
         MobClick.event("OtherCenter", attributes: ["Type":"toChat"])
-        var chat = RCChatViewController()
+        var chat = customChatViewController()
         chat.hidesBottomBarWhenPushed = true
         chat.portraitStyle = .Cycle
         chat.currentTarget = self.User["name"].stringValue

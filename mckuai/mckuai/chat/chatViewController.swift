@@ -30,7 +30,7 @@ class chatViewController: RCChatListViewController {
     func customNavBackButton() {
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         //设置标题颜色
-        self.navigationItem.title = "聊天"
+        self.setNavigationTitle("聊天", textColor: UIColor.whiteColor())
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         
@@ -66,7 +66,8 @@ class chatViewController: RCChatListViewController {
             c.conversationType = .ConversationType_PRIVATE
             self.navigationController?.pushViewController(c, animated: true)
         } else {
-            var chat = RCChatViewController()
+//            var chat = RCChatViewController()
+            var chat = customChatViewController()
             chat.portraitStyle = .Cycle
             chat.hidesBottomBarWhenPushed = true
             chat.currentTarget = userInfo.userId
@@ -86,7 +87,7 @@ class chatViewController: RCChatListViewController {
             c.currentTargetName = conversation.conversationTitle
             self.navigationController?.pushViewController(c, animated: true)
         } else {
-        var chat = customChatViewController()
+            var chat = customChatViewController()
             chat.portraitStyle = .Cycle
             chat.hidesBottomBarWhenPushed = true
             chat.currentTarget = conversation.targetId

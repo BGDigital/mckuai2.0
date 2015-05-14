@@ -15,8 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     var launchView: UIView!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        self.window?.makeKeyAndVisible()
         //启动页面加载广告
         loadLaunchView()
         Async.background({
@@ -29,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
             RCIM.connectWithToken(appUserRCToken,
                 completion: {userId in
                     println("RongCloud Login Successrull:\(userId)")
+                    //显示rongcloud未读消息
+                    MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil                    
                 },
                 error: {status in
                     println("RongCloud Login Faild. \(status)")
@@ -57,7 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         let appversion = majorVersion as! String
         MobClick.setAppVersion(appversion)
             })
+        
+        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         MCUtils.setNavBack()
+        self.window?.makeKeyAndVisible()
         return true
     }
     
@@ -106,13 +109,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
 
     // 收到本地通知
     func application(application: UIApplication , didReceiveLocalNotification notification: UILocalNotification ) {
-        var alertView = UIAlertView (title: " 系统本地通知 " , message: notification.alertBody , delegate: nil , cancelButtonTitle: " 返回 " )
-        alertView.show ()
+        println("本地通知:\(notification)")
+        MCUtils.RCTabBarItem.badgeValue = "\(RCIM.sharedRCIM().totalUnreadCount)"
+//        var alertView = UIAlertView (title: " 系统本地通知 " , message: notification.alertBody , delegate: nil , cancelButtonTitle: " 返回 " )
+//        alertView.show ()
     }
     
     //处理收到的远程推送消息
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
-        println(userInfo)
+        println("handleActionWithIdentifier:\(userInfo)")
         if IS_IOS8() {
             if (identifier == "declineAction") {
                 println("declineAction")
@@ -162,7 +167,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         self.window?.bringSubviewToFront(launchView)
         //显示3秒杀
         Async.main(after: 3, block: {self.removeLaunchView()})
-        //NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeLaunchView", userInfo: nil, repeats: false)
     }
     
     func removeLaunchView() {
@@ -190,13 +194,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
             return completion(nil)
         }
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
+        application.applicationIconBadgeNumber = RCIM.sharedRCIM().totalUnreadCount
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }

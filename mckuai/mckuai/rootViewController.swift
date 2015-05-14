@@ -29,6 +29,8 @@ class rootViewController: RESideMenu, RESideMenuDelegate, UITabBarControllerDele
         var third = chatViewController.mainRoot()
         var four = communityViewController.mainRoot()
         
+        MCUtils.RCTabBarItem = third.tabBarItem
+        
         MCUtils.TB = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("contentViewController") as! UITabBarController
         MCUtils.TB.tabBar.tintColor = UIColor(red: 0.212, green: 0.804, blue: 0.380, alpha: 1.00)
         MCUtils.TB.viewControllers = [main, second, third, four]
@@ -53,6 +55,9 @@ class rootViewController: RESideMenu, RESideMenuDelegate, UITabBarControllerDele
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         if viewController.isKindOfClass(UINavigationController) {
             MCUtils.mainNav = viewController as? UINavigationController
+            if tabBarController.selectedIndex == 2{
+                MCUtils.RCTabBarItem.badgeValue = nil
+            }
         }
     }
     

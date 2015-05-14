@@ -101,6 +101,7 @@ class MCUtils {
 
     //一些通用的系统常量
     static var TB: UITabBarController!
+    static var RCTabBarItem: UITabBarItem!
     //侧滑菜单栏
     static var leftView: UIViewController!
     //主界面的HeadView

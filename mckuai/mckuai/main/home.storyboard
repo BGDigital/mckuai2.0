@@ -214,6 +214,7 @@
                         <outlet property="bag" destination="P8c-DR-jBO" id="K4G-eD-vO8"/>
                         <outlet property="chatTitle" destination="xFd-QZ-zbd" id="xgU-uC-fYb"/>
                         <outlet property="imageV" destination="kEy-aD-rvb" id="KjB-05-k1E"/>
+                        <outlet property="imgView" destination="868-YO-PVl" id="LkL-vH-ma3"/>
                         <outlet property="level" destination="od5-If-XNm" id="BOi-Ae-9d2"/>
                         <outlet property="locationCity" destination="a0K-Fu-ERJ" id="OxS-De-Ln8"/>
                         <outlet property="nickname" destination="grs-bx-qWy" id="qcK-Uz-JM7"/>

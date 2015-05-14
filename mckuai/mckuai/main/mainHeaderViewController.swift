@@ -21,6 +21,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     @IBOutlet weak var times: UIButton!
     @IBOutlet weak var chatTitle: UILabel!
     @IBOutlet weak var imageV: UIImageView!
+    @IBOutlet weak var imgView: UIView!
     @IBOutlet weak var bag: UIButton!
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var level: UIButton!
@@ -49,10 +50,16 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         nickname.userInteractionEnabled = true
         var tapNickName = UITapGestureRecognizer(target: self, action: "openMineSB")
         nickname.addGestureRecognizer(tapNickName)
+        
+        roundProgressView.userInteractionEnabled = true
         var tapRoundHead = UITapGestureRecognizer(target: self, action: "openMineSB")
         roundProgressView.addGestureRecognizer(tapRoundHead)
-        bag.addTarget(self, action: "openBackPacker", forControlEvents: UIControlEvents.TouchUpInside)
         
+        imgView.userInteractionEnabled = true
+        var tapChatRoom = UITapGestureRecognizer(target: self, action: "joinChatRoom")
+        imgView.addGestureRecognizer(tapChatRoom)
+        
+        bag.addTarget(self, action: "openBackPacker", forControlEvents: UIControlEvents.TouchUpInside)
         //登录按钮
         btnLogin = UIButton(frame: CGRectMake(75, 30, 100, 30))
         btnLogin.setTitle("登录更精彩", forState: .Normal)
@@ -63,6 +70,19 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         self.view.addSubview(btnLogin)
         btnLogin.hidden = true
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func joinChatRoom() {
+        MobClick.event("mainView", attributes: ["Type":"ChatRoom"])
+        // 启动聊天室，与启动单聊等类似
+        var temp: RCChatViewController = customChatViewController()
+        temp.hidesBottomBarWhenPushed = true
+        temp.currentTarget = "999";
+        temp.conversationType = .ConversationType_CHATROOM; // 传入聊天室类型
+        temp.enableSettings = false;
+        temp.currentTargetName = "麦块之家";
+        
+        self.nav?.pushViewController(temp, animated: true)
     }
     
     func setData(user: JSON!, chat: JSON!) {
@@ -131,6 +151,9 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
             mineFrm = mineTableViewController()
             mineFrm.hidesBottomBarWhenPushed = true
             self.nav?.pushViewController(mineFrm, animated: true) //这个显示效果有问题
+        } else {
+            MobClick.event("mainView", attributes: ["Type":"Login"])
+            NewLogin.showUserLoginView(self.nav, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
         }
     }
     
