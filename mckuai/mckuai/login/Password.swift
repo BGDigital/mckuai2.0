@@ -102,4 +102,13 @@ class Profile_Password:UIViewController,UIGestureRecognizerDelegate {
         
         ctl.pushViewController(edit_pass, animated: true)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("userInfoSetPassWord")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("userInfoSetPassWord")
+    }
+    
+    
 }

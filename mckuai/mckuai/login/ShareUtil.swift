@@ -13,7 +13,7 @@ import UIKit
 let shareToNames : [AnyObject] = [UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline]
 class ShareUtil {
     
-    class func shareInitWithTextAndPicture(controller: UIViewController,text:String,image:UIImage,callDelegate:UMSocialUIDelegate) {
+    class func shareInitWithTextAndPicture(controller: UIViewController,text:String,image:UIImage,shareUrl:String,callDelegate:UMSocialUIDelegate) {
         
         UMSocialConfig.setFinishToastIsHidden(true, position: UMSocialiToastPositionTop)
         
@@ -22,10 +22,10 @@ class ShareUtil {
         UMSocialData.defaultData().extConfig.wechatSessionData.title = "麦块for我的世界"
         UMSocialData.defaultData().extConfig.wechatTimelineData.title = "麦块for我的世界"
         
-        UMSocialData.defaultData().extConfig.qzoneData.url = "http://www.mckuai.com";
-        UMSocialData.defaultData().extConfig.qqData.url = "http://www.mckuai.com";
-        UMSocialData.defaultData().extConfig.wechatSessionData.url = "http://www.mckuai.com";
-        UMSocialData.defaultData().extConfig.wechatTimelineData.url = "http://www.mckuai.com";
+        UMSocialData.defaultData().extConfig.qzoneData.url = shareUrl;
+        UMSocialData.defaultData().extConfig.qqData.url = shareUrl;
+        UMSocialData.defaultData().extConfig.wechatSessionData.url = shareUrl;
+        UMSocialData.defaultData().extConfig.wechatTimelineData.url = shareUrl;
         UMSocialSnsService.presentSnsIconSheetView(controller, appKey: UMAppKey, shareText: text, shareImage: image, shareToSnsNames: shareToNames, delegate:callDelegate)
     }
     

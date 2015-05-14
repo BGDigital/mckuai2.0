@@ -114,43 +114,43 @@ class communityViewController: UIViewController {
 
     }
     
-    override func viewWillDisappear(animated: Bool) {
-//        self.tabBarController?.tabBar.hidden = 
-    }
+
     
-    override func viewWillAppear(animated: Bool) {
-//        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-        self.tabBarController?.tabBar.hidden = false
-        if(currentForumName != ""){
-            
-            var index = 0
-            
-            for(var i = 0;i<forumName.count;i++){
-                if(currentForumName == forumName[i]["id"].stringValue){
-                    index = i
-                    break
-                }
-            }
-            
-            println(index)
-            println(currentForumName)
-            topScrollView.setShowCurrentView(index)
-            currentForumName = ""
-        }
-        
-    }
+
     
     func setNavigation() {
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00))
-        
-        
-
-        
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+            MobClick.beginLogPageView("friendsView")
+            self.tabBarController?.tabBar.hidden = false
+            if(currentForumName != ""){
+                
+                var index = 0
+                
+                for(var i = 0;i<forumName.count;i++){
+                    if(currentForumName == forumName[i]["id"].stringValue){
+                        index = i
+                        break
+                    }
+                }
+                
+                println(index)
+                println(currentForumName)
+                topScrollView.setShowCurrentView(index)
+                currentForumName = ""
+            }
+
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("friendsView")
+    }
+
     
     
     

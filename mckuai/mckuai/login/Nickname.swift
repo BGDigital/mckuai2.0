@@ -95,19 +95,17 @@ class Nickname:UIViewController,UIGestureRecognizerDelegate {
                     hud.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
             })
-            
-            
-//            APIClient.sharedInstance.modifiyUserInfo(self.view, ctl: self.navigationController, param: dic, success:{
-//                (res:JSON?) in
-//                    println(res)
-//                    isLoginout = true
-//                }, failure: {
-//                (err:NSError) in
-//                    
-//                }
-//            )
            }
         }
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("userInfoSetNickName")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("userInfoSetNickName")
+    }
+    
+    
 }

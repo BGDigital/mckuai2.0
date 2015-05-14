@@ -80,9 +80,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         MCUtils.showSearchView(self.navigationController)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-    }
+
     
     func setupTableView() {
         if IS_IOS8() {
@@ -226,5 +224,14 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         live.frame = CGRectMake((self.view.bounds.size.width - img.size.width) / 2 , 0, img.size.width, img.size.height)
         v.addSubview(live)
         return v
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("mainView")
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("mainView")
     }
 }

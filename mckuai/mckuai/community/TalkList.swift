@@ -42,14 +42,6 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-
-        
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -246,6 +238,18 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
         }
         self.tableView.legendHeader.beginRefreshing()
         self.loadNewData()
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("talkList")
+
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("talkList")
+
+        
     }
     
 }

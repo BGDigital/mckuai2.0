@@ -111,16 +111,8 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-        self.scrollViewDidScroll(self.tableView)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.lt_reset()
-    }
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -271,6 +263,18 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         loadDataWithoutMJRefresh()
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("mineTableView")
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        self.scrollViewDidScroll(self.tableView)
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("mineTableView")
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.lt_reset()
+    }
     
 
 }

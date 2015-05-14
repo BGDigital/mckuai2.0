@@ -75,6 +75,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     
     @IBAction func toRegister(sender: UIButton) {
+        MobClick.event("gotoRegister", attributes: ["type":"putong"])
         self.backToPage()
         
         UserRegister.showUserRegisterView(presentNavigator: self.presentNavigator)
@@ -130,6 +131,8 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         }
     }
     @IBAction func qqLoginAction(sender: UIButton) {
+        
+        MobClick.event("qqLogin")
         tencentOAuth.authorize(permissionsArray,inSafari:false)
     }
     
@@ -257,6 +260,13 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         ctl?.presentViewController(userLoginView, animated: true, completion: nil)
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("userLogin")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("userLogin")
+    }
     
 
 

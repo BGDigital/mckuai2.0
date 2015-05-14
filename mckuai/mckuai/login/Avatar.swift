@@ -268,6 +268,15 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
         ctl.pushViewController(avatar_view, animated: true)
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("userInfoSetHeadImg")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("userInfoSetHeadImg")
+    }
+    
+    
 }
 
 class AvatarHolder:UICollectionViewCell{
@@ -279,5 +288,8 @@ class AvatarHolder:UICollectionViewCell{
             self.holder.sd_setImageWithURL(NSURL(string: url!))
         }
     }
+    
+    
+    
     
 }

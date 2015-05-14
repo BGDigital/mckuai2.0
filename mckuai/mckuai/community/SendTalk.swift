@@ -615,15 +615,8 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    override func viewWillAppear(animated: Bool) {
-        //注册键盘通知事件
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -637,6 +630,20 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
             fromNavigation?.presentViewController(sendTalk, animated: true, completion: nil)
         }
         
+    }
+    
+    
+    
+    override func viewWillAppear(animated: Bool) {
+            MobClick.beginLogPageView("sendTalk")
+            //注册键盘通知事件
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+            MobClick.endLogPageView("sendTalk")
+            NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 }

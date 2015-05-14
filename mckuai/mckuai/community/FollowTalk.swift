@@ -357,4 +357,14 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         
         
     }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("followTalk")
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("followTalk")
+    }
+    
 }

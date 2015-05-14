@@ -81,9 +81,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-    }
+
 
 
     override func didReceiveMemoryWarning() {
@@ -352,5 +350,14 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("liveView")
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("liveView")
+    }
 
 }

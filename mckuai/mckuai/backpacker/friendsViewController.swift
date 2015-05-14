@@ -158,5 +158,12 @@ class friendsViewController: UICollectionViewController {
     
     }
     */
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("friendsView")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("friendsView")
+    }
 
 }

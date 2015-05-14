@@ -226,4 +226,12 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
                 println("Error: " + error.localizedDescription)
         })
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("favoriteView")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("favoriteView")
+    }
+    
 }

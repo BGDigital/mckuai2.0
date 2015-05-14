@@ -111,27 +111,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                 MCUtils.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
         })
         
-        
-//        APIClient.sharedInstance.mckuaiRegisterByPost(self.view, userName: self.userName.text, passWord: self.passWord.text,nickName:self.nickName.text,success: { (json) -> Void in
-//            if json["state"].stringValue == "ok" {
-//                var userId = json["dataObject"].intValue
-//                //保存登录信息
-//                var userDefault = NSUserDefaults.standardUserDefaults()
-//                userDefault.setInteger(userId, forKey: "appUserIdSave")
-//                userDefault.synchronize()
-//                appUserIdSave = userId
-//                isLoginout = true
-//                //                    self.navigationController?.popViewControllerAnimated(true)
-//                self.navigationController?.popToRootViewControllerAnimated(true)
-//                
-//            }else{
-////                self.navigationController?.popToRootViewControllerAnimated(true)
-//                var msg = json["msg"].stringValue
-//                var alertView = UIAlertView(title: msg, message: "", delegate: self, cancelButtonTitle: "确定")
-//                alertView.show()
-//            }
-//            
-//            }, failure: { (error) -> Void in })
+ 
     }
     
     class func showUserRegisterView(presentNavigator ctl:UINavigationController?){
@@ -143,6 +123,14 @@ class UserRegister: UIViewController,UITextFieldDelegate {
         }
         
         
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        MobClick.beginLogPageView("userRegister")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        MobClick.endLogPageView("userRegister")
     }
     
 }
