@@ -1,11 +1,11 @@
 PODS:
   - AFNetworking (2.5.3):
-    - AFNetworking/NSURLConnection (= 2.5.3)
-    - AFNetworking/NSURLSession (= 2.5.3)
-    - AFNetworking/Reachability (= 2.5.3)
-    - AFNetworking/Security (= 2.5.3)
-    - AFNetworking/Serialization (= 2.5.3)
-    - AFNetworking/UIKit (= 2.5.3)
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
   - AFNetworking/NSURLConnection (2.5.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -25,7 +25,7 @@ PODS:
   - MJRefresh (1.4.6)
   - RESideMenu (4.0.7)
   - SDWebImage (3.7.2):
-    - SDWebImage/Core (= 3.7.2)
+    - SDWebImage/Core
   - SDWebImage/Core (3.7.2)
   - TSMessages (0.9.12):
     - HexColors
@@ -50,4 +50,4 @@ SPEC CHECKSUMS:
   TSMessages: 2a52642128d7ab15b46930c810b9c9403a2b58f3
   UMengFeedback: fa4cbef85478c68997433fc9e2338d55313b70e1
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.34.4
