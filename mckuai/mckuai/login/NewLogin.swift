@@ -82,7 +82,8 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     @IBAction func toRegister(sender: UIButton) {
         MobClick.event("qqLoginPage",attributes: ["type":"toRegister"])
-        self.backToPage()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        self.dismissKeyboard()
         
         UserRegister.showUserRegisterView(presentNavigator: self.presentNavigator)
     }
@@ -250,8 +251,6 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             UIView.setAnimationBeginsFromCurrentState(true)
             UIView.setAnimationCurve(temp)
             self.view.frame.origin = CGPoint(x: 0, y: -keyHeight)
-//            self.containerView.frame = CGRectMake(0, self.view.frame.size.height-keyHeight-150, self.view.bounds.size.width, 150)
-            
         })
 
     }
@@ -286,6 +285,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
         MobClick.beginLogPageView("userLogin")
     }
     override func viewWillDisappear(animated: Bool) {

@@ -25,7 +25,6 @@ class UserRegister: UIViewController,UITextFieldDelegate {
         nickName.delegate = self
         var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tapDismiss)
-        
         // Do any additional setup after loading the view.
     }
     
@@ -122,14 +121,12 @@ class UserRegister: UIViewController,UITextFieldDelegate {
     }
     
     class func showUserRegisterView(presentNavigator ctl:UINavigationController?){
-        Async.main({
-            var userRegisterView = UIStoryboard(name: "UserRegister", bundle: nil).instantiateViewControllerWithIdentifier("userRegister") as! UserRegister
-            if (ctl != nil) {
-                ctl?.pushViewController(userRegisterView, animated: true)
-            } else {
-                ctl?.presentViewController(userRegisterView, animated: true, completion: nil)
-            }
-        })
+        var userRegisterView = UIStoryboard(name: "UserRegister", bundle: nil).instantiateViewControllerWithIdentifier("userRegister") as! UserRegister
+        if (ctl != nil) {
+            ctl?.pushViewController(userRegisterView, animated: true)
+        } else {
+            ctl?.presentViewController(userRegisterView, animated: true, completion: nil)
+        }
         
     }
     

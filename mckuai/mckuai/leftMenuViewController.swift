@@ -37,7 +37,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             appUserRCToken = Defaults[D_USER_RC_TOKEN].string!
         }
 
-        self.tableView = UITableView(frame: CGRectMake(0, (self.view.frame.size.height-cellHeight*7-headerHeight) / 2, self.view.frame.size.width, cellHeight*7+headerHeight), style: UITableViewStyle.Plain)
+        self.tableView = UITableView(frame: CGRectMake(0, (self.view.frame.size.height-cellHeight * 6 - headerHeight) / 2, self.view.frame.size.width, cellHeight*7+headerHeight), style: UITableViewStyle.Plain)
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
         tableView.delegate = self
         tableView.dataSource = self
@@ -238,10 +238,11 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             cell?.selectedBackgroundView = UIView()
             cell?.textLabel?.text = titles[indexPath.row]
             cell?.imageView?.image = UIImage(named: images[indexPath.row])
-            var line = UIView(frame: CGRectMake(0, cell!.bounds.size.height-1, cell!.bounds.size.width, 0.5))
-            line.backgroundColor = UIColor.blackColor()
-            line.alpha = 0.15
-            cell?.addSubview(line)
+            //线
+//            var line = UIView(frame: CGRectMake(0, cell!.bounds.size.height-1, cell!.bounds.size.width, 0.5))
+//            line.backgroundColor = UIColor.blackColor()
+//            line.alpha = 0.15
+//            cell?.addSubview(line)
         }
         
         return cell!
