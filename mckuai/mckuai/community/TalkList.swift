@@ -63,6 +63,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
             }
             return self.data.count
         }else{
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有帖子,快下拉刷新试试?")
             return 0
         }
 
@@ -103,7 +104,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     
     func initTableView() {
-        var v = UIView(frame: CGRectMake(0, 45, self.view.bounds.size.width, self.view.bounds.size.height-192))
+        var v = UIView(frame: CGRectMake(0, 45, self.view.bounds.size.width, self.view.bounds.size.height-205))
         self.tableView = UITableView(frame: CGRectMake(0, 0, v.frame.size.width, v.frame.size.height), style: UITableViewStyle.Plain)
 //        println(self.view.bounds.size)
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin

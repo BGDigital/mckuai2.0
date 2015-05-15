@@ -22,9 +22,10 @@ class communityViewController: UIViewController {
     let item_wight:CGFloat = 21
     let item_height:CGFloat = 21
     
+    var reloadView:UIView!
     
     class func mainRoot()->UIViewController{
-        setForumListData()
+//        setForumListData()
         
         var main = UIStoryboard(name: "community", bundle: nil).instantiateViewControllerWithIdentifier("communityViewController") as! UIViewController
         main.tabBarItem = UITabBarItem(title: "社区", image: UIImage(named: "second_normal"), selectedImage: UIImage(named: "second_selected"))
@@ -33,11 +34,20 @@ class communityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setRightBarButtonItem()
-        
 //        //设置navigation
         setNavigation()
+        
+        self.setForumListData()
+
+
+
+        
+
+    }
+    
+    
+    func setForumTool(){
         if(forumName != nil){
             for(var i = 0;i<forumName.count;i++){
                 var viewTemp: TalkList! = UIStoryboard(name:"TalkList",bundle:nil).instantiateViewControllerWithIdentifier("talkList") as! TalkList
@@ -53,16 +63,13 @@ class communityViewController: UIViewController {
                 self.scrollPages += [viewTemp]
             }
         }
-
-        topScrollView = SCNavTabBarController()
-        topScrollView.subViewControllers = self.scrollPages as [AnyObject]
-        topScrollView.showArrowButton = false
-        topScrollView.addParentController(self)
-
-
         
-
+        topScrollView = SCNavTabBarController(subViewControllers: self.scrollPages as [AnyObject], andParentViewController: self, showArrowButton: false)
+        
+        self.topScrollView.view.frame.origin.y = 64
+        
     }
+    
     
     func setRightBarButtonItem() {
         self.rightButton = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton
@@ -92,7 +99,9 @@ class communityViewController: UIViewController {
       
     }
     
-    class func setForumListData() {
+     func setForumListData() {
+        var progress = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        progress.labelText = "正在加载"
         AFHTTPRequestOperationManager().GET(forum_url,
             parameters: nil,
             success: { (operation: AFHTTPRequestOperation!,
@@ -101,13 +110,43 @@ class communityViewController: UIViewController {
                 if "ok" == json["state"].stringValue {
                     forumName = json["dataObject"].array
                     println("setForumListData is successful")
+                    self.setForumTool()
+                }else{
+                    self.reloadDataView()
                 }
+                progress.hide(true)
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
+                progress.hide(true)
+                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                self.reloadDataView()
 
         })
+    }
+    
+    func reloadDataView(){
+        reloadView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        var img = UIImageView(image: Load_Empty!)
+        img.frame = CGRectMake((self.reloadView.frame.size.width-img.bounds.size.width)/2, (self.reloadView.frame.size.height-img.bounds.size.height)/2, img.bounds.size.width, img.bounds.size.height)
+        reloadView.addSubview(img)
+        
+        var lb = UILabel(frame: CGRectMake(0, img.frame.origin.y+img.frame.size.height+10, reloadView.bounds.size.width, 20))
+        lb.text = "囧～没数据,点击刷新试试"
+        lb.numberOfLines = 2;
+        lb.textAlignment = .Center;
+        lb.textColor = UIColor.lightGrayColor()
+        reloadView.addSubview(lb)
+        
+        var imgCick = UITapGestureRecognizer(target: self, action: "reloadViewClick")
+        self.reloadView.addGestureRecognizer(imgCick)
+        self.view.addSubview(reloadView)
+    }
+    
+    func reloadViewClick() {
+        self.reloadView.hidden = true
+        self.setForumListData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -128,6 +167,10 @@ class communityViewController: UIViewController {
     
     
     override func viewWillAppear(animated: Bool) {
+        if(self.topScrollView != nil){
+              self.topScrollView.view.frame.origin.y = 0
+        }
+      
             MobClick.beginLogPageView("friendsView")
             self.tabBarController?.tabBar.hidden = false
             if(currentForumName != ""){

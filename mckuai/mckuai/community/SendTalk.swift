@@ -317,6 +317,8 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                 self.small_height = btn_height
 
             }
+        }else{
+            self.rightButton?.enabled = false
         }
         
     }

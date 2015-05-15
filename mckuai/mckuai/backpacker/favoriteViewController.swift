@@ -205,7 +205,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     :param: row    删除的Row
     */
     func cancleCollect(talkId: String, row: Int) {
-        var dict = ["act":"cancleCollect", "id": appUserIdSave, "talkId": talkId]
+        var dict = ["act":"cancleCollect", "userId": appUserIdSave, "talkId": talkId]
         manager.POST(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,

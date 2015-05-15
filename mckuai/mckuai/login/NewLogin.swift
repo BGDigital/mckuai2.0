@@ -27,10 +27,17 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     var Delegate: LoginProtocol?
     @IBOutlet weak var userName: UITextField!
     
+    @IBOutlet weak var register_img: UIButton!
+    @IBOutlet weak var register_btn: UIButton!
+    @IBOutlet weak var hiddenView: UIView!
     @IBOutlet weak var passWord: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.hiddenView.frame
+
+        
         //设置navigation
         initNavigation()
         tencentOAuth = TencentOAuth(appId: qq_AppId, andDelegate: self)
@@ -40,6 +47,17 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         self.view.addGestureRecognizer(tapDismiss)
     }
     
+    @IBAction func changeLogin(sender: UIButton) {
+        self.register_btn.hidden = true
+        self.register_img.hidden = true
+        UIView.animateWithDuration(0.3, animations: {
+            self.hiddenView.hidden = false
+            self.hiddenView.frame.origin.y = self.view.frame.size.height - self.hiddenView.frame.size.height
+
+            
+        })
+        
+    }
     
     func initNavigation() {
         
