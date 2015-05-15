@@ -22,7 +22,7 @@ class MFRoundProgressView: UIView {
         didSet {
             showPercent = imageUrl.isEmpty
             imageView.frame = CGRectMake(9, 9, self.frame.width-18, self.frame.height-18)
-            imageView.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: UIImage(named: "Avatar"))
+            imageView.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: DefaultUserAvatar_big)
             //imageView.frame = CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height-20)
             imageView.layer.masksToBounds = true
             imageView.layer.cornerRadius = (self.frame.width - 18) / 2
