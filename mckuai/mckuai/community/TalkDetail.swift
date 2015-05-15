@@ -278,11 +278,13 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 var shareParams = MBProgress.getQueryDictionary(query)
                 shareText = shareParams["shareText"]?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
                 if(shareParams["shareImg"] != nil && shareParams["shareImg"] != "empty"){
-                    
-                    UIImage(data: NSData(contentsOfURL: NSURL(string:shareParams["shareImg"]!)!)!)
-                }else{
+                    shareImg = UIImage(data: NSData(contentsOfURL: NSURL(string:shareParams["shareImg"]!)!)!)
+                }
+                
+                if(shareImg == nil){
                     shareImg = UIImage(named: "share_default")
                 }
+                
                 if(shareText != nil && shareImg != nil){
                     MobClick.event("Share", attributes: ["Address":"详情页", "Type": "start"])
                     ShareUtil.shareInitWithTextAndPicture(self, text: shareText, image: shareImg!,shareUrl:"http://www.mckuai.com/thread-"+id+".html", callDelegate: self)
