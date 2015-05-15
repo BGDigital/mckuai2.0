@@ -92,7 +92,7 @@ class communityViewController: UIViewController {
         MobClick.event("community",attributes: ["type":"sendTalk"])
 
         if( appUserIdSave == 0) {
-           NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+           NewLogin.showUserLoginView(self.navigationController, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
         }else{
             SendTalk.showSendTalkPage(self.navigationController)
         }

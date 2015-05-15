@@ -100,8 +100,6 @@
 		E6B717621ADED22D00684E83 /* leftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B717611ADED22D00684E83 /* leftMenuViewController.swift */; };
 		E6BF85971AF12BE1005F08B2 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF85951AF12BE1005F08B2 /* TencentOpenAPI.framework */; };
 		E6BF859E1AF12CB0005F08B2 /* ShareUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF85991AF12CB0005F08B2 /* ShareUtil.swift */; };
-		E6BF859F1AF12CB0005F08B2 /* UserLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BF859A1AF12CB0005F08B2 /* UserLogin.storyboard */; };
-		E6BF85A01AF12CB0005F08B2 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF859B1AF12CB0005F08B2 /* UserLogin.swift */; };
 		E6BF85A11AF12CB0005F08B2 /* UserRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BF859C1AF12CB0005F08B2 /* UserRegister.storyboard */; };
 		E6BF85A21AF12CB0005F08B2 /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF859D1AF12CB0005F08B2 /* UserRegister.swift */; };
 		E6BF85C91AF12DA9005F08B2 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BF85A41AF12DA9005F08B2 /* libSocialQQ.a */; };
@@ -313,8 +311,6 @@
 		E6BF85941AF12BE1005F08B2 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		E6BF85951AF12BE1005F08B2 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		E6BF85991AF12CB0005F08B2 /* ShareUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareUtil.swift; sourceTree = "<group>"; };
-		E6BF859A1AF12CB0005F08B2 /* UserLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserLogin.storyboard; sourceTree = "<group>"; };
-		E6BF859B1AF12CB0005F08B2 /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		E6BF859C1AF12CB0005F08B2 /* UserRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserRegister.storyboard; sourceTree = "<group>"; };
 		E6BF859D1AF12CB0005F08B2 /* UserRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 		E6BF85A41AF12DA9005F08B2 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
@@ -738,8 +734,6 @@
 				0B4F8E6B1AFCB1BC002F7244 /* profile_layout.storyboard */,
 				0B4F8E6C1AFCB1BC002F7244 /* Profile.swift */,
 				E6BF85991AF12CB0005F08B2 /* ShareUtil.swift */,
-				E6BF859A1AF12CB0005F08B2 /* UserLogin.storyboard */,
-				E6BF859B1AF12CB0005F08B2 /* UserLogin.swift */,
 				E6BF859C1AF12CB0005F08B2 /* UserRegister.storyboard */,
 				E6BF859D1AF12CB0005F08B2 /* UserRegister.swift */,
 				0B73A7251AFBB42B0074E1CE /* NewLogin.storyboard */,
@@ -1012,7 +1006,6 @@
 				E6BF85CC1AF12DA9005F08B2 /* UMSocialLocalizable.strings in Resources */,
 				E68F466E1AF13D37001DEA99 /* RongCloud.bundle in Resources */,
 				E6B204401AE6A56000EB11B4 /* live.storyboard in Resources */,
-				E6BF859F1AF12CB0005F08B2 /* UserLogin.storyboard in Resources */,
 				E6D2C36B1AE1111500FF823E /* home.storyboard in Resources */,
 				E6B2043B1AE69E4C00EB11B4 /* mainSubCell.xib in Resources */,
 				0B8671301AF9E3A100F3F63F /* community.storyboard in Resources */,
@@ -1101,7 +1094,6 @@
 				0B4F8E6D1AFCB1BC002F7244 /* Avatar.swift in Sources */,
 				E603D6441ADE657700D93708 /* WobbleView.swift in Sources */,
 				0B8671241AF9E23E00F3F63F /* FollowTalk.swift in Sources */,
-				E6BF85A01AF12CB0005F08B2 /* UserLogin.swift in Sources */,
 				E6BF85A21AF12CB0005F08B2 /* UserRegister.swift in Sources */,
 				E603D6421ADE650C00D93708 /* AsyncLegacy.swift in Sources */,
 				E6DDF4BF1AF0829000339E75 /* otherViewController.swift in Sources */,

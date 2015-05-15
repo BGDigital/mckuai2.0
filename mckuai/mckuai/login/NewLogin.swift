@@ -34,7 +34,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hidesBottomBarWhenPushed = true
         self.hiddenView.hidden = true
         //设置navigation
 //        initNavigation()
@@ -54,15 +54,6 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         UIView.animateWithDuration(1, animations: { () -> Void in
             self.hiddenView.alpha = 1
         })
-    }
-    
-    func initNavigation() {
-        
-        var closeLogin = UIButton(frame: CGRectMake(10, 30, 21, 21))
-        closeLogin.setImage(UIImage(named: "nav_back"), forState: UIControlState.Normal)
-        closeLogin.addTarget(self, action: "backToPage", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(closeLogin)
-
     }
     
     func backToPage() {
@@ -291,10 +282,10 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.navigationController?.navigationBar.lt_setBackgroundColor(color?.colorWithAlphaComponent(0))
         })
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = true
         MobClick.beginLogPageView("userLogin")
     }
     override func viewWillDisappear(animated: Bool) {

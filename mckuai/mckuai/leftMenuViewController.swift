@@ -180,7 +180,11 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         case 4:
             //设置
             MobClick.event("leftMenuView", attributes: ["Type":"Setting"])
-            UserInfo.showUserInfoView(self.navigationController)
+            if appUserIdSave != 0 {
+                UserInfo.showUserInfoView(self.navigationController)
+            } else {
+                TSMessage.showNotificationWithTitle("提示", subtitle: "亲,你要登录麦块后才能修改信息,先去登录吧", type: .Warning)
+            }
         default:
             MobClick.event("leftMenuView", attributes: ["Type":"Logout"])
             if appUserIdSave != 0 {

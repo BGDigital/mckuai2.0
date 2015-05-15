@@ -251,7 +251,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             MobClick.event("talkDetail", attributes: ["type":"collect"])
             
             if(appUserIdSave == 0) {
-               NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+               NewLogin.showUserLoginView(self.navigationController, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
                 //NewLogin.showUserLoginView(self,returnIsShow: false, aDelegate: nil)
             }else{
                 
@@ -308,7 +308,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         }else if(sender.tag == 3){
             MobClick.event("talkDetail", attributes: ["type":"daShang"])
             if(appUserIdSave == 0) {
-                NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+                NewLogin.showUserLoginView(self.navigationController, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
             }else{
                 
                 if(self.shang_btn.selected == false){
@@ -411,7 +411,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             
             println("Reply...........")
             if(appUserIdSave == 0) {
-                NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
+                NewLogin.showUserLoginView(self.navigationController, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
             }else{
                self.textView.becomeFirstResponder()
             }

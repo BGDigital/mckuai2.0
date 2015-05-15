@@ -14,7 +14,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var manager = AFHTTPRequestOperationManager()
     var isFirstLoad = true   //是否初次加载
     var hud: MBProgressHUD?
-    var loginVC: UserLogin!
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
