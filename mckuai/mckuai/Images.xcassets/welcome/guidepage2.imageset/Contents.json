@@ -1,18 +1,24 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "guidepage2-1.png"
+      "filename" : "引导页2-6.png"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
+      "filename" : "引导页2-5.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
       "scale" : "3x",
-      "filename" : "guidepage2.png"
+      "filename" : "引导页2-6p.png"
     }
   ],
   "info" : {

@@ -26,19 +26,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
                 
                 RCIM.connectWithToken(appUserRCToken,
                     completion: {userId in
-                        println("RongCloud Login Successrull:\(userId)")
+//                        println("RongCloud Login Successrull:\(userId)")
                         //显示rongcloud未读消息
                         MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
                     },
                     error: {status in
-                        println("RongCloud Login Faild. \(status)")
+//                        println("RongCloud Login Faild. \(status)")
                 })
 
                 MCUtils.GetFriendsList()
             }
             //UMeng反馈
             UMFeedback.setAppkey(UMAppKey)
-            UMFeedback.setLogEnabled(true)
+            UMFeedback.setLogEnabled(false)
             UMFeedback.sharedInstance().setFeedbackViewController(UMFeedback.feedbackViewController(), shouldPush: true)
                 
             //UM推送
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
             MobClick.setAppVersion(appversion)
             })
         
-        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+//        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         MCUtils.setNavBack()
         self.window?.makeKeyAndVisible()
         return true
@@ -102,14 +102,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
             UMessage.registerForRemoteNotificationTypes(.Badge | .Alert | .Sound)
         }
         //调试日志
-        UMessage.setLogEnabled(true)
+        UMessage.setLogEnabled(false)
         //当前APP渠道
         UMessage.setChannel("App Store")
     }
 
     // 收到本地通知
     func application(application: UIApplication , didReceiveLocalNotification notification: UILocalNotification ) {
-        println("本地通知:\(notification)")
+//        println("本地通知:\(notification)")
         MCUtils.RCTabBarItem.badgeValue = "\(RCIM.sharedRCIM().totalUnreadCount)"
 //        var alertView = UIAlertView (title: " 系统本地通知 " , message: notification.alertBody , delegate: nil , cancelButtonTitle: " 返回 " )
 //        alertView.show ()
@@ -117,20 +117,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     
     //处理收到的远程推送消息
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
-        println("handleActionWithIdentifier:\(userInfo)")
+//        println("handleActionWithIdentifier:\(userInfo)")
         if IS_IOS8() {
             if (identifier == "declineAction") {
-                println("declineAction")
+//                println("declineAction")
             }
             else if (identifier == "answerAction") {
-                println("answerAction")
+//                println("answerAction")
             }
         }
     }
     
     //获取苹果推送权限成功
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        println("didRegisterForRemoteNotificationsWithDeviceToken:\(deviceToken)")
+//        println("didRegisterForRemoteNotificationsWithDeviceToken:\(deviceToken)")
         RCIM.sharedRCIM().setDeviceToken(deviceToken)
         
 //        UMeng
@@ -138,13 +138,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         //反馈推送
         UMessage.addAlias(UMFeedback.uuid(), type: UMFeedback.messageType()) { (responseObject, error) -> Void in
             if error != nil {
-                println("addAlias Error:\(error)")
+//                println("addAlias Error:\(error)")
             }
         }
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        println("didReceiveRemoteNotification:\(userInfo)")
+//        println("didReceiveRemoteNotification:\(userInfo)")
         UMessage.didReceiveRemoteNotification(userInfo)
 //        UMFeedback.didReceiveRemoteNotification(userInfo)
     }
@@ -152,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         //var alert:UIAlertView = UIAlertView(title: "", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
         //alert.show()
-        println(error.localizedDescription)
+//        println(error.localizedDescription)
     }
     
     func loadLaunchView() {

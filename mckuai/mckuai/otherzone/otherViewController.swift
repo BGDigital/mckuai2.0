@@ -102,14 +102,6 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = true
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = false
-    }
-    
     func loadDataWithoutMJRefresh() {
         hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud?.labelText = MCUtils.TEXT_LOADING
@@ -213,6 +205,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
+                println(responseObject)
                 self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.tableView.header.endRefreshing()
@@ -367,17 +360,25 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
         })
     }
     
+    override func viewDidAppear(animated: Bool) {
+        //View 渐隐
+        var navAlpha = 1
+        var color = UIColor(hexString: MCUtils.COLOR_NavBG)
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.navigationController?.navigationBar.lt_setBackgroundColor(color?.colorWithAlphaComponent(0))
+        })
+        self.tabBarController?.tabBar.hidden = true
+    }
+    
     override func viewWillAppear(animated: Bool) {
-        
             super.viewWillAppear(animated)
             self.scrollViewDidScroll(self.tableView)
-            self.tabBarController?.tabBar.hidden = true
             MobClick.beginLogPageView("otherView")
     }
     override func viewWillDisappear(animated: Bool) {
         
             super.viewWillDisappear(animated)
-            self.navigationController?.navigationBar.lt_reset()
+            self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
             self.tabBarController?.tabBar.hidden = false
         
             MobClick.endLogPageView("otherView")

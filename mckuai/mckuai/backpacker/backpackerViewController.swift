@@ -84,7 +84,7 @@ class backpackerViewController: UIViewController {
     }
     
     @IBAction func segmentSelected(sender: HMSegmentedControl) {
-        println("segment selected:\(sender.selectedSegmentIndex)")
+//        println("segment selected:\(sender.selectedSegmentIndex)")
         switch (sender.selectedSegmentIndex) {
         case 0:
             MobClick.event("MyBag", attributes: ["Type":"favorite"])

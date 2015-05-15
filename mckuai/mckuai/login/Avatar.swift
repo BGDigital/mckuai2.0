@@ -82,7 +82,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
         if(assets.count == 1){
             var assets_array = assets as NSArray
             assets_array.enumerateObjectsUsingBlock({ obj, index, stop in
-                println(index)
+//                println(index)
                 var representation:ALAsset = obj as! ALAsset
                 var returnImg = UIImage(CGImage: representation.thumbnail().takeUnretainedValue())
                 
@@ -171,7 +171,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                 },
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in
-                    println("Error: " + error.localizedDescription)
+//                    println("Error: " + error.localizedDescription)
 
                     if(self.hud != nil){
                         self.hud?.hide(true)
@@ -223,7 +223,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                 },
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in
-                    println("Error: " + error.localizedDescription)
+//                    println("Error: " + error.localizedDescription)
                     self.hud?.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
                     MobClick.event("headImgPage", attributes: ["type":"addPic","result":"error"])

@@ -35,11 +35,9 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.hiddenView.frame
-
-        
+        self.hiddenView.hidden = true
         //设置navigation
-        initNavigation()
+//        initNavigation()
         tencentOAuth = TencentOAuth(appId: qq_AppId, andDelegate: self)
         userName.delegate = self
         passWord.delegate = self
@@ -48,15 +46,14 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     }
     
     @IBAction func changeLogin(sender: UIButton) {
+        self.hiddenView.hidden = false
         self.register_btn.hidden = true
         self.register_img.hidden = true
-        UIView.animateWithDuration(0.3, animations: {
-            self.hiddenView.hidden = false
-            self.hiddenView.frame.origin.y = self.view.frame.size.height - self.hiddenView.frame.size.height
-
-            
+        //View
+        self.hiddenView.alpha = 0
+        UIView.animateWithDuration(1, animations: { () -> Void in
+            self.hiddenView.alpha = 1
         })
-        
     }
     
     func initNavigation() {
@@ -73,7 +70,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             NSNotificationCenter.defaultCenter().removeObserver(self)
             self.dismissKeyboard()
         }.main{
-            self.presentNavigator?.dismissViewControllerAnimated(true, completion: nil)
+            self.navigationController?.popViewControllerAnimated(true)
         }
         
     }
@@ -130,13 +127,15 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                         })
                         Async.background({MCUtils.GetFriendsList()})
                     }
+                } else {
+                    MCUtils.showCustomHUD(self.view, title: "用户名或密码错误,请检查后再试", imgName: "HUD_ERROR")
                 }
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                MCUtils.showCustomHUD(self.view, title: "登录失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD(self.view, title: "登录失败,请重试", imgName: "HUD_ERROR")
         })
     }
     
@@ -280,14 +279,27 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         userLoginView.Delegate = aDelegate
         NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidShowLogin:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidHiddenLogin:", name: UIKeyboardWillHideNotification, object: nil)
-        ctl?.presentViewController(userLoginView, animated: true, completion: nil)
+//        ctl?.presentViewController(userLoginView, animated: true, completion: nil)
+        ctl?.pushViewController(userLoginView, animated: true)
     }
     
     
+    override func viewDidAppear(animated: Bool) {
+        //View 渐隐
+        var navAlpha = 1
+        var color = UIColor(hexString: MCUtils.COLOR_NavBG)
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.navigationController?.navigationBar.lt_setBackgroundColor(color?.colorWithAlphaComponent(0))
+        })
+    }
+    
     override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
         MobClick.beginLogPageView("userLogin")
     }
     override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        self.tabBarController?.tabBar.hidden = false
         MobClick.endLogPageView("userLogin")
     }
     

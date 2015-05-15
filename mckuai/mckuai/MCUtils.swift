@@ -54,7 +54,7 @@ let D_USER_ISREMEMBERME = "isRememberMe"
 //mckuai网络接口
 //主接口地址-域名
 //221.237.152.39:8081
-let URL_MC = "http://221.237.152.39:8081/interface.do?"
+let URL_MC = "http://api.mckuai.com/interface.do?"
 //上传头像/图片
 let upload_url = "http://www.mckuai.com/group.do?"+"act=uploadImg"
 //app store页面
@@ -362,7 +362,6 @@ class MCUtils {
     //供其它界面调用  --他人的空间
     class func openOtherZone(nav: UINavigationController?, userId: Int) {
         var otherZone: otherViewController = otherViewController(uId: userId)
-        otherZone.hidesBottomBarWhenPushed = true
         if let n = nav {
             n.pushViewController(otherZone, animated: true)
         } else {
@@ -436,4 +435,3 @@ extension UIImage {
     }
     
 }
-

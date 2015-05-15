@@ -122,22 +122,25 @@ class UserRegister: UIViewController,UITextFieldDelegate {
     }
     
     class func showUserRegisterView(presentNavigator ctl:UINavigationController?){
-        var userRegisterView = UIStoryboard(name: "UserRegister", bundle: nil).instantiateViewControllerWithIdentifier("userRegister") as! UserRegister
-        if (ctl != nil) {
-            ctl?.pushViewController(userRegisterView, animated: true)
-        } else {
-            ctl?.presentViewController(userRegisterView, animated: true, completion: nil)
-        }
-        
+        Async.main({
+            var userRegisterView = UIStoryboard(name: "UserRegister", bundle: nil).instantiateViewControllerWithIdentifier("userRegister") as! UserRegister
+            if (ctl != nil) {
+                ctl?.pushViewController(userRegisterView, animated: true)
+            } else {
+                ctl?.presentViewController(userRegisterView, animated: true, completion: nil)
+            }
+        })
         
     }
     
     
     override func viewWillAppear(animated: Bool) {
         MobClick.beginLogPageView("userRegister")
+        self.tabBarController?.tabBar.hidden = true
     }
     override func viewWillDisappear(animated: Bool) {
         MobClick.endLogPageView("userRegister")
+        self.tabBarController?.tabBar.hidden = false
     }
     
 }

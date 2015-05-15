@@ -97,7 +97,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func initLocationManager() {
-        println("初始化LocationManager...")
+//        println("初始化LocationManager...")
         //这句一定要加上,只要需要的时候使用定位
         if IS_IOS8() {
             //iOS8需要加上这句话
@@ -117,7 +117,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         if let currentLocation : CLLocation = locations[0] as? CLLocation {
             var stringLongitude : NSString = NSString(format: "%0.8f", currentLocation.coordinate.longitude)
             var stringLatitude : NSString = NSString(format: "%0.8f", currentLocation.coordinate.latitude)
-            println("\(stringLatitude),\(stringLongitude)")
+//            println("\(stringLatitude),\(stringLongitude)")
         }
         //取到位置了,停止获取位置
         locationManager.stopUpdatingLocation()
@@ -126,7 +126,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
             
             if (error != nil) {
                 //println(“Reverse geocoder failed with error” + error.localizedDescription)
-                println("Reverse geocode failed with error")
+//                println("Reverse geocode failed with error")
                 return
             }
             
@@ -134,7 +134,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
                 let pm = placemarks.last as! CLPlacemark
                 self.displayLocationInfo(pm)
             } else {
-                println("Problem with the date recieved from geocoder")
+//                println("Problem with the date recieved from geocoder")
             }
             
         })
@@ -155,7 +155,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         thoroughfare:市民广场
         subThoroughfare:(null)
         */
-        println(placemark)
+//        println(placemark)
         var tempString : String = ""
         //城市
         var city: String!
@@ -180,30 +180,30 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         if(placemark.country != nil){
             tempString = tempString +  placemark.country + "\n"
         }
-        println(tempString)
+//        println(tempString)
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!){
-        println("locationManager,didFailWithError %@", error)
+//        println("locationManager,didFailWithError %@", error)
         var errorAlert : UIAlertView = UIAlertView(title: "Error", message: "Failed to get your location", delegate: nil, cancelButtonTitle: "OK")
     }
     
     func upAddrToServer(city: String) {
         if appUserAddr != city {
-            println("城市信息不同,上传")
+//            println("城市信息不同,上传")
             var dict = ["act":"updateAddr","id":appUserIdSave,"addr":city]
             manager.POST(URL_MC,
                 parameters: dict,
                 success: { (operation: AFHTTPRequestOperation!,
                     responseObject: AnyObject!) in
-                    println(responseObject)
+//                    println(responseObject)
                 },
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in
-                    println("func upAddrToServer,Error: " + error.localizedDescription)
+//                    println("func upAddrToServer,Error: " + error.localizedDescription)
             })
         } else {
-            println("城市信息相同,不用上传")
+//            println("城市信息相同,不用上传")
         }
     }
 

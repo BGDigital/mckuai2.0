@@ -14,6 +14,8 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     var mineFrm: mineTableViewController!
     var backpacker: backpackerViewController!
     var nav: UINavigationController?
+    var chatRoomId: String!
+    var chatRoomName: String!
     
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
     @IBOutlet weak var userHeadImg: UIImageView!
@@ -77,10 +79,10 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         // 启动聊天室，与启动单聊等类似
         var temp: RCChatViewController = customChatViewController()
         temp.hidesBottomBarWhenPushed = true
-        temp.currentTarget = "999";
+        temp.currentTarget = self.chatRoomId;
         temp.conversationType = .ConversationType_CHATROOM; // 传入聊天室类型
         temp.enableSettings = false;
-        temp.currentTargetName = "麦块之家";
+        temp.currentTargetName = self.chatRoomName;
         
         self.nav?.pushViewController(temp, animated: true)
     }
@@ -114,13 +116,16 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
             self.btnLogin.hidden = false
         }
         //聊天室
-        self.times.setTitle(chat["insertTime"].stringValue, forState: .Normal)
-        self.chatTitle.text = chat["title"].stringValue
+        self.chatRoomId = chat["id"].stringValue
+        self.chatRoomName = chat["name"].stringValue
+        var time = (chat["endTime"].stringValue as NSString).substringToIndex(16)
+        self.times.setTitle(time, forState: .Normal)
+        self.chatTitle.text = self.chatRoomName
         self.chatTitle.sizeOfMultiLineLabel()
         self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "SmallAvatar"))
         self.userHeadImg.layer.masksToBounds = true
         self.userHeadImg.layer.cornerRadius = 10
-        self.userLastSay.text = chat["speak"].stringValue
+        self.userLastSay.text = chat["lastSpeak"].stringValue
         self.imageV.sd_setImageWithURL(NSURL(string: chat["icon"].stringValue), placeholderImage: UIImage(named: "loading"))
         
     }

@@ -26,10 +26,10 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
                     allCount: self.json["dataObject", "allCount"].intValue)
                 if let d = self.json["dataObject", "data"].array {
                     if page.currentPage == 1 {
-                        println("刷新数据")
+//                        println("刷新数据")
                         self.datasource = d
                     } else {
-                        println("加载更多")
+//                        println("加载更多")
                         self.datasource = self.datasource + d
                     }
                 }
@@ -41,9 +41,9 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
         didSet {
             if self.datasource.count < page.allCount {
                 self.tableView.footer.hidden = self.datasource.count < page.pageSize
-                println("没有达到最大值 \(self.tableView.footer.hidden)")
+//                println("没有达到最大值 \(self.tableView.footer.hidden)")
             } else {
-                println("最大值了,noMoreData")
+//                println("最大值了,noMoreData")
                 self.tableView.footer.hidden = true
             }
 
@@ -98,7 +98,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
-                println("Error: " + error.localizedDescription)
+//                println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
@@ -106,7 +106,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func loadMoreData() {
-        println("开始加载\(self.page.currentPage+1)页")
+//        println("开始加载\(self.page.currentPage+1)页")
         var dict = ["act":"collectTalk", "id": appUserIdSave, "page": page.currentPage+1]
         //println("加载:\(self.liveType),\(self.liveOrder)======")
         //开始刷新
@@ -120,7 +120,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
-                println("Error: " + error.localizedDescription)
+//                println("Error: " + error.localizedDescription)
                 self.tableView.footer.endRefreshing()
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
         })
@@ -164,7 +164,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        println(self.datasource)
+//        println(self.datasource)
         let id = self.datasource[indexPath.row]["id"].stringValue
         TalkDetail.showTalkDetailPage(MCUtils.mainNav, id: id)
     }

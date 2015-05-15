@@ -109,7 +109,7 @@ class communityViewController: UIViewController {
                 var json:JSON! = JSON(responseObject)
                 if "ok" == json["state"].stringValue {
                     forumName = json["dataObject"].array
-                    println("setForumListData is successful")
+//                    println("setForumListData is successful")
                     self.setForumTool()
                 }else{
                     self.reloadDataView()
@@ -118,7 +118,7 @@ class communityViewController: UIViewController {
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
-                println("Error: " + error.localizedDescription)
+//                println("Error: " + error.localizedDescription)
                 progress.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
                 self.reloadDataView()
@@ -184,8 +184,8 @@ class communityViewController: UIViewController {
                     }
                 }
                 
-                println(index)
-                println(currentForumName)
+//                println(index)
+//                println(currentForumName)
                 topScrollView.setShowCurrentView(index)
                 currentForumName = ""
             }

@@ -180,8 +180,15 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let id = self.datasource[indexPath.row]["id"].stringValue
-        TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+        let talkId: String!
+        switch (indexPath.section) {
+        case 0:
+            talkId = self.liveData[indexPath.row]["id"].stringValue
+        default:
+            talkId = self.datasource[indexPath.row]["id"].stringValue
+        }
+
+        TalkDetail.showTalkDetailPage(self.navigationController, id: talkId)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -228,7 +235,6 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(animated: Bool) {
         MobClick.beginLogPageView("mainView")
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
-        
     }
     override func viewWillDisappear(animated: Bool) {
         MobClick.endLogPageView("mainView")

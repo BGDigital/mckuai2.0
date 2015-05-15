@@ -112,8 +112,6 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
 
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -263,17 +261,25 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         loadDataWithoutMJRefresh()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        //View 渐隐
+        var navAlpha = 1
+        var color = UIColor(hexString: MCUtils.COLOR_NavBG)
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.navigationController?.navigationBar.lt_setBackgroundColor(color?.colorWithAlphaComponent(0))
+        })
+    }
+
     
     override func viewWillAppear(animated: Bool) {
         MobClick.beginLogPageView("mineTableView")
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         self.scrollViewDidScroll(self.tableView)
     }
     override func viewWillDisappear(animated: Bool) {
         MobClick.endLogPageView("mineTableView")
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.lt_reset()
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
     
 
