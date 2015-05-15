@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     var launchView: UIView!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        self.window?.makeKeyAndVisible()
         //启动页面加载广告
         loadLaunchView()
         Async.background({
@@ -60,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         
 //        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         MCUtils.setNavBack()
-        self.window?.makeKeyAndVisible()
         return true
     }
     
@@ -163,7 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         var imageV = UIImageView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height))
         launchView.addSubview(imageV)
         // 加载网络图片
-        imageV.sd_setImageWithURL(NSURL(string: MCUtils.URL_LAUNCH), placeholderImage: UIImage(named: "Default_LaunchImg"))
+        imageV.sd_setImageWithURL(NSURL(string: MCUtils.URL_LAUNCH), placeholderImage: UIImage(named: "appLaunchImg"))
         
         self.window?.bringSubviewToFront(launchView)
         //显示3秒杀
@@ -171,7 +171,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     }
     
     func removeLaunchView() {
-        launchView.removeFromSuperview()
+        UIView.animateWithDuration(1, animations: { () -> Void in
+            self.launchView.alpha = 0
+        }) { _ in
+            self.launchView.removeFromSuperview()
+        }
     }
     
     //获取好友列表方法  --好友列表

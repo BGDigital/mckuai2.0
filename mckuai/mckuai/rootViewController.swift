@@ -99,7 +99,7 @@ class rootViewController: RESideMenu, RESideMenuDelegate, UITabBarControllerDele
     }
     
     func onClick(){
-        UIView.animateWithDuration(0.5,
+        UIView.animateWithDuration(1,
             animations : {
                 self.guideView.view.alpha = 0
             },
