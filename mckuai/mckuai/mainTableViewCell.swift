@@ -44,13 +44,15 @@ class mainTableViewCell: UITableViewCell {
             self.replys.setTitle(json["replyNum"].stringValue, forState: .Normal)
             self.userName.setTitle(json["userName"].stringValue, forState: .Normal)
             var headImg = json["headImg"].stringValue
-            self.userName.sd_setImageWithURL(NSURL(string: headImg), forState: .Normal, placeholderImage: UIImage(named: "first_normal"), completed: { img,_,_,_ in
-                var rect = CGRectMake(0, 0, 20, 20)
-                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-                img.drawInRect(rect)
-                var newImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                self.userName.setImage(newImage, forState: .Normal)
+            self.userName.sd_setImageWithURL(NSURL(string: headImg), forState: .Normal, placeholderImage: DefaultUserAvatar_small!, completed: { img,_,_,_ in
+                if img != nil {
+                    var rect = CGRectMake(0, 0, 20, 20)
+                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                    img.drawInRect(rect)
+                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    self.userName.setImage(newImage, forState: .Normal)
+                }
             })
             
             //self.userName.setImage(MCUtils.getHeadImg(headImg, rect: CGRectMake(0, 0, 20, 20)), forState: .Normal)
@@ -67,13 +69,15 @@ class mainTableViewCell: UITableViewCell {
         default:
             self.replys.hidden = true
             var icon = json["headImg"].stringValue
-            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,_ in
-                var rect = CGRectMake(0, 0, 20, 20)
-                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-                img.drawInRect(rect)
-                var newImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                self.userName.setImage(newImage, forState: .Normal)
+            self.userName.sd_setImageWithURL(NSURL(string: icon), forState: .Normal, placeholderImage: DefaultUserAvatar_small!, completed: { img,_,_,_ in
+                if img != nil {
+                    var rect = CGRectMake(0, 0, 20, 20)
+                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                    img.drawInRect(rect)
+                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    self.userName.setImage(newImage, forState: .Normal)
+                }
             })
 
             //self.userName.setImage(MCUtils.getHeadImg(icon, rect: CGRectMake(0, 0, 20, 20)), forState: .Normal)

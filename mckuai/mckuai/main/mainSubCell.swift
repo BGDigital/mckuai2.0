@@ -28,16 +28,16 @@ class mainSubCell: UITableViewCell {
         imgJing.hidden = true
         self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
         
-        //底部线
-        var linetop = UIView(frame: CGRectMake(0, self.frame.size.height-0.5, self.frame.size.width, 0.5))
+        //底部线  +50是为了滑动删除时样式的同步
+        var linetop = UIView(frame: CGRectMake(0, self.frame.size.height-0.5, self.frame.size.width+50, 0.5))
         linetop.backgroundColor = UIColor(hexString: "#E1E3E5")
         self.addSubview(linetop)
         
-        var line1 = UIView(frame: CGRectMake(0, 8, self.frame.size.width, 0.5))
+        var line1 = UIView(frame: CGRectMake(0, 8, self.frame.size.width+50, 0.5))
         line1.backgroundColor = UIColor(hexString: "#E1E3E5")
         self.addSubview(line1)
         
-        var line = UIView(frame: CGRectMake(0, 0, self.frame.size.width, 8))
+        var line = UIView(frame: CGRectMake(0, 0, self.frame.size.width+50, 8))
         line.backgroundColor = UIColor(hexString: "#EFF0F2")
         self.addSubview(line)
     }
@@ -50,15 +50,14 @@ class mainSubCell: UITableViewCell {
         var disName = json["userName"].string != nil ? json["userName"].stringValue : json["forumName"].stringValue
         if !imgPath.isEmpty {
             self.username.sd_setImageWithURL(NSURL(string: imgPath), forState: .Normal, placeholderImage: DefaultUserAvatar_small, completed: { img,_,_,url in
-                var rect = CGRectMake(0, 0, 20, 20)
-                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
                 if(img != nil){
-                    img.drawInRect(rect)
+                    var rect = CGRectMake(0, 0, 20, 20)
+                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                        img.drawInRect(rect)
+                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    self.username.setImage(newImage, forState: .Normal)
                 }
-                
-                var newImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                self.username.setImage(newImage, forState: .Normal)
             })
         }
         self.username.setTitle(disName, forState: .Normal)

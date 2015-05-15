@@ -74,13 +74,15 @@ class messageCell: UITableViewCell {
                 var str = json["userName"].stringValue + sText
                 self.username.setTitle(str, forState: .Normal)
                 var Avatar = json["headImg"].stringValue
-                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,_ in
-                    var rect = CGRectMake(0, 0, 20, 20)
-                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-                    img.drawInRect(rect)
-                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
-                    UIGraphicsEndImageContext()
-                    self.username.setImage(newImage, forState: .Normal)
+                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: DefaultUserAvatar_small!, completed: { img,_,_,_ in
+                    if img != nil {
+                        var rect = CGRectMake(0, 0, 20, 20)
+                        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                        img.drawInRect(rect)
+                        var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                        UIGraphicsEndImageContext()
+                        self.username.setImage(newImage, forState: .Normal)
+                    }
                 })
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
                 if IS_IOS8() {
@@ -90,13 +92,15 @@ class messageCell: UITableViewCell {
                 }
             default:  //system
                 var Avatar = json["headImg"].stringValue
-                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: UIImage(named: "SmallAvatar"), completed: { img,_,_,_ in
-                    var rect = CGRectMake(0, 0, 20, 20)
-                    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-                    img.drawInRect(rect)
-                    var newImage = UIGraphicsGetImageFromCurrentImageContext()
-                    UIGraphicsEndImageContext()
-                    self.username.setImage(newImage, forState: .Normal)
+                self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: DefaultUserAvatar_small!, completed: { img,_,_,_ in
+                    if img != nil {
+                        var rect = CGRectMake(0, 0, 20, 20)
+                        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                        img.drawInRect(rect)
+                        var newImage = UIGraphicsGetImageFromCurrentImageContext()
+                        UIGraphicsEndImageContext()
+                        self.username.setImage(newImage, forState: .Normal)
+                    }
                 })
                 self.username.setTitle("系统消息", forState: .Normal)
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
