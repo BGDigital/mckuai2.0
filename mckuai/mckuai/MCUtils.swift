@@ -26,7 +26,7 @@ let RC_AppKey = "k51hidwq1fb4b"
 let ISFIRSTRUN = "isFirstRun"
 //用户信息
 //用户ID
-let D_USER_ID = "appUserIdSave"
+let D_USER_ID = "UserLoginId"
 //用户昵称
 let D_USER_NICKNAME = "UserNickName"
 //用户等级
