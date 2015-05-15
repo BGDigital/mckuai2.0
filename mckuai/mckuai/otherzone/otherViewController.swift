@@ -368,16 +368,19 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func viewWillAppear(animated: Bool) {
-            MobClick.beginLogPageView("otherView")
+        
             super.viewWillAppear(animated)
             self.scrollViewDidScroll(self.tableView)
             self.tabBarController?.tabBar.hidden = true
+            MobClick.beginLogPageView("otherView")
     }
     override func viewWillDisappear(animated: Bool) {
-            MobClick.endLogPageView("otherView")
+        
             super.viewWillDisappear(animated)
             self.navigationController?.navigationBar.lt_reset()
             self.tabBarController?.tabBar.hidden = false
+        
+            MobClick.endLogPageView("otherView")
     }
 
 }

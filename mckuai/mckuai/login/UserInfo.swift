@@ -56,14 +56,17 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     }
     
     func toHeadImgFunction() {
+        MobClick.event("userSetPage", attributes: ["type":"headImg"])
         Avatar.changeAvatar(self.navigationController!,url:user!["headImg"].stringValue)
     }
     
     func toUserNameFunction() {
+        MobClick.event("userSetPage", attributes: ["type":"userName"])
         Nickname.changeNickname(self.navigationController!,uname:user!["nike"].stringValue)
     }
     
     func toPassWordFunction() {
+        MobClick.event("userSetPage", attributes: ["type":"passWord"])
         if user!["userType"].stringValue == "qq"{
             UIAlertView(title: "提示", message: "QQ用户不能修改密码", delegate: nil, cancelButtonTitle: "确定").show()
             return
@@ -72,6 +75,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     }
     
     func toAddrFunction() {
+        MobClick.event("userSetPage", attributes: ["type":"addr"])
         cityList = cityListViewController()
         cityList.hidesBottomBarWhenPushed = true
         cityList.Delegate = self
@@ -124,6 +128,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     }
     
     @IBAction func exit(){
+        MobClick.event("userSetPage", attributes: ["type":"exit"])
         UIAlertView(title: "提示", message: "你确定要注销吗？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定").show()
     }
     

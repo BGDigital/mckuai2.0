@@ -95,12 +95,13 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                 var json = JSON(responseObject)
                 
                 if "ok" == json["state"].stringValue {
+                    MobClick.event("registerPage", attributes: ["type":"register","result":"success"])
                     //保存登录信息
                     
                     MCUtils.AnalysisUserInfo(json)
                     
                     self.navigationController?.popViewControllerAnimated(true)
-                    MobClick.event("registerPage", attributes: ["type":"register","result":"success"])
+                    
                 }else{
                     hud.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")

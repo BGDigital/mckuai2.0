@@ -63,6 +63,8 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
     
     func addPicAction() {
         
+        MobClick.event("headImgPage", attributes: ["type":"addPic","result":"all"])
+        
         var appearanceConfig = UzysAppearanceConfig()
         appearanceConfig.finishSelectionButtonColor = UIColor.greenColor()
         UzysAssetsPickerController.setUpAppearanceConfig(appearanceConfig)
@@ -149,7 +151,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     var json = JSON(responseObject)
                     
                     if "ok" == json["state"].stringValue {
-
+                        MobClick.event("headImgPage", attributes: ["type":"savePic","result":"success"])
                         if(self.hud != nil){
                             self.hud?.hide(true)
                         }
@@ -162,7 +164,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                         if(self.hud != nil){
                             self.hud?.hide(true)
                         }
-
+                        MobClick.event("headImgPage", attributes: ["type":"savePic","result":"error"])
                         MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
                     }
                     
@@ -174,7 +176,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     if(self.hud != nil){
                         self.hud?.hide(true)
                     }
-
+                    MobClick.event("headImgPage", attributes: ["type":"savePic","result":"error"])
                     MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
             })
             
@@ -182,6 +184,8 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
     }
     
     func save(){
+        
+        MobClick.event("headImgPage", attributes: ["type":"savePic","result":"all"])
         if !isNew {
             self.navigationController?.popViewControllerAnimated(true)
             return
@@ -207,11 +211,13 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     if "ok" == json["state"].stringValue {
                         println(json["msg"])
                         self.chosedAvatar = json["msg"].stringValue
+                        MobClick.event("headImgPage", attributes: ["type":"addPic","result":"success"])
                         self.postHeadInfoToServer()
                         
                     }else{
                         self.hud?.hide(true)
                         MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                        MobClick.event("headImgPage", attributes: ["type":"addPic","result":"error"])
                     }
                     
                 },
@@ -220,6 +226,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     println("Error: " + error.localizedDescription)
                     self.hud?.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                    MobClick.event("headImgPage", attributes: ["type":"addPic","result":"error"])
             })
         }else{
             hud = MBProgressHUD.showHUDAddedTo(view, animated: true)

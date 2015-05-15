@@ -102,23 +102,19 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     func initToolBar() {
 
 
-        reply_btn = UIButton(frame: CGRectMake(self.view.bounds.width-48-10,self.view.bounds.height-btn_height-20, 48, 48))
+        reply_btn = UIButton(frame: CGRectMake(self.view.bounds.width-45-10,self.view.bounds.height-btn_height-20, 45, 45))
 
         reply_btn.setBackgroundImage(UIImage(named: "reply_icon"), forState: UIControlState.Normal)
-        share_btn = UIButton(frame: CGRectMake(self.view.bounds.width-48-10-48-10,self.view.bounds.height-btn_height-20, 48, 48))
+        share_btn = UIButton(frame: CGRectMake(self.view.bounds.width-45-10-45-10,self.view.bounds.height-btn_height-20, 45, 45))
         share_btn.setBackgroundImage(UIImage(named: "share_icon"), forState: UIControlState.Normal)
-        collect_btn = UIButton(frame: CGRectMake(10, self.view.bounds.height-btn_height-20, 48, 48))
+        collect_btn = UIButton(frame: CGRectMake(10, self.view.bounds.height-btn_height-20, 45, 45))
         
-        shang_btn = UIButton(frame: CGRectMake(self.view.bounds.width-48-10-48-48-10-10, self.view.bounds.height-btn_height-18, 45, 45))
-        shang_btn.layer.cornerRadius = self.shang_btn.frame.width/2
-        shang_btn.backgroundColor = UIColor.blackColor()
-        shang_btn.layer.masksToBounds = true
-        shang_btn.layer.borderColor = UIColor.whiteColor().CGColor
-        shang_btn.layer.borderWidth = 1.0
-        shang_btn.setTitle("赏", forState: UIControlState.Normal)
-        shang_btn.setTitle("已赏", forState: UIControlState.Disabled)
-        shang_btn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        shang_btn.setTitleColor(UIColor.redColor(), forState: UIControlState.Disabled)
+        shang_btn = UIButton(frame: CGRectMake(self.view.bounds.width-45-10-45-45-10-10, self.view.bounds.height-btn_height-20, 45, 45))
+        
+        shang_btn.setBackgroundImage(UIImage(named: "shang_normal"), forState: UIControlState.Normal)
+        shang_btn.setBackgroundImage(UIImage(named: "shang_selected"), forState: UIControlState.Selected)
+        shang_btn.setBackgroundImage(UIImage(named: "shang_selected"), forState: UIControlState.Disabled)
+
         
         collect_btn.setBackgroundImage(UIImage(named: "collect_normal"), forState: UIControlState.Normal)
         collect_btn.setBackgroundImage(UIImage(named: "collect_selected"), forState: UIControlState.Selected)
@@ -417,7 +413,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             if(appUserIdSave == 0) {
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: nil)
             }else{
-               self.textView.becomeFirstResponder() 
+               self.textView.becomeFirstResponder()
             }
             
         }
@@ -567,7 +563,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                         hud.hide(true)
                         MCUtils.showCustomHUD(self.view, title: "回复成功", imgName:  "HUD_OK")
                         self.sendButton.enabled = true
-                        
+                        self.textView.text = ""
                         if self.params["isOver"] == "yes" {
                            self.afterReply()
                         }
