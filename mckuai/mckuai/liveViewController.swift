@@ -237,7 +237,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
                     "orderField":self.liveOrder]
         //println("加载:\(self.liveType),\(self.liveOrder)======")
         //开始刷新
-        manager.GET(URL_MC,
+        manager.POST(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in

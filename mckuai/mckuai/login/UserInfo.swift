@@ -162,9 +162,12 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
+        
         MobClick.beginLogPageView("userInfoSet")
     }
     override func viewWillDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
         MobClick.endLogPageView("userInfoSet")
     }
     

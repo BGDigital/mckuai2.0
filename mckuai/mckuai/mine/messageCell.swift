@@ -29,6 +29,7 @@ class messageCell: UITableViewCell {
     
     private func setHtmlText(title: String, text: String) {
         var html: NSString = "<font size = 4, color=#A2A3A4>"+title+"</font><br><font size=4, color=#4D4E4F>" + text + "</font>"
+        println(html)
         var commentsRequested: NSAttributedString!
         Async.background {
             commentsRequested = NSAttributedString(

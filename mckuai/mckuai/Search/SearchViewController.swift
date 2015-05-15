@@ -65,7 +65,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud?.labelText = MCUtils.TEXT_SEARCH
         var dict = ["act":"search", "type": searchType, "key": searchKey]
-        manager.GET(URL_MC,
+        manager.POST(URL_MC,
             parameters: dict,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
