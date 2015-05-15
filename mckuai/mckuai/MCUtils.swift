@@ -54,7 +54,7 @@ let D_USER_ISREMEMBERME = "isRememberMe"
 //mckuai网络接口
 //主接口地址-域名
 //221.237.152.39:8081
-let URL_MC = "http://192.168.10.110/interface.do?"
+let URL_MC = "http://221.237.152.39:8081/interface.do?"
 //上传头像/图片
 let upload_url = "http://www.mckuai.com/group.do?"+"act=uploadImg"
 //app store页面
