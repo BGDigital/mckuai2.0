@@ -107,6 +107,14 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
             } else {
                 locationCity.setTitle("未定位", forState: .Normal)
             }
+            
+            //leftVC
+            var leftCV = (MCUtils.leftView as! leftMenuViewController)
+            leftCV.Avatar.sd_setImageWithURL(NSURL(string: user["headImg"].stringValue), placeholderImage: DefaultUserAvatar_big!, completed: {(img,_,_,_) in
+                leftCV.Avatar.image = img
+            })
+            leftCV.username.text = user["nike"].stringValue
+            leftCV.level.setTitle("LV."+String(user["level"].stringValue), forState: .Normal)
         } else {
             self.roundProgressView.imageUrl = "1" //任意值都可以
             self.nickname.hidden = true

@@ -62,7 +62,7 @@ class otherHeadViewController: UIViewController, UMSocialUIDelegate {
         var lb = UILabel(frame: CGRectMake(0, btnDynamic.bounds.size.height-20, btnDynamic.bounds.size.width, 14))
         lb.text = aText
         lb.font = UIFont(name: lb.font.fontName, size: 12)
-        lb.textColor = UIColor(hexString: "#BCABA8")
+        lb.textColor = UIColor(hexString: "#FFFFFF")
         lb.highlightedTextColor = UIColor.whiteColor()
         lb.textAlignment = .Center
         parent.addSubview(lb)
