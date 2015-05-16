@@ -24,6 +24,18 @@ class friendsViewController: UICollectionViewController {
             if "ok" == self.json["state"].stringValue {
                 if let d = self.json["dataObject", "data"].array {
                     self.datasource = d
+                    
+                    Async.background({
+                        //重新获取好友信息,先清空之前的列表
+                        MCUtils.friendList.removeAllObjects()
+                        for j in d {
+                            var user = RCUserInfo()
+                            user.userId = j["name"].stringValue
+                            user.name = j["nike"].stringValue
+                            user.portraitUri = j["headImg"].stringValue
+                            MCUtils.friendList.addObject(user)
+                        }
+                    })
                 }
             }
         }

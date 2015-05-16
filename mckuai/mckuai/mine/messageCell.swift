@@ -17,6 +17,7 @@ class messageCell: UITableViewCell {
     @IBOutlet weak var username: UIButton!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var message1: UILabel!
     var sysImg: UIImageView!
     
     override func awakeFromNib() {
@@ -27,9 +28,9 @@ class messageCell: UITableViewCell {
         // Initialization code
     }
     
+    //取消这个函数,不用了
     private func setHtmlText(title: String, text: String) {
         var html: NSString = "<font size = 4, color=#A2A3A4>"+title+"</font><br><font size=4, color=#4D4E4F>" + text + "</font>"
-//        println(html)
         var commentsRequested: NSAttributedString!
         Async.background {
             commentsRequested = NSAttributedString(
@@ -40,23 +41,23 @@ class messageCell: UITableViewCell {
         } .main {
             self.message.attributedText = commentsRequested
         }
-        //let commentsQueue:dispatch_queue_t = dispatch_queue_create("comments queue", nil)
-        
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-//            let commentsRequested = NSAttributedString(
-//                data: html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
-//                options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-//                documentAttributes: nil,
-//                error: nil)
-//            dispatch_async(dispatch_get_main_queue(), {
-//                self.message.attributedText = commentsRequested
-//            })
-//        })
     }
 
     private func setLabelFrame(str: String) {
+        self.message.numberOfLines = 2
+        self.message.textColor = UIColor(hexString: "#4C4D4E")
+        self.message1.hidden = true
+
         self.message.text = str
         self.message.sizeOfMultiLineLabel()
+    }
+    
+    private func setLabelFrame(str1: String, str2: String) {
+        self.message.numberOfLines = 1
+        self.message.textColor = UIColor(hexString: "#A4A5A6")
+        self.message1.hidden = false
+        self.message.text = "《" + str1 + "》"
+        self.message1.text = str2
     }
     
     private func addSystemNoteImg() {
@@ -86,11 +87,7 @@ class messageCell: UITableViewCell {
                     }
                 })
                 self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
-                if IS_IOS8() {
-                    setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
-                } else {
-                    self.message.text = "《" + json["talkTitle"].stringValue + "》" + "\n" + json["cont"].stringValue
-                }
+                setLabelFrame(json["talkTitle"].stringValue, str2: json["cont"].stringValue)
             default:  //system
                 var Avatar = json["headImg"].stringValue
                 self.username.sd_setImageWithURL(NSURL(string: Avatar), forState: .Normal, placeholderImage: DefaultUserAvatar_small!, completed: { img,_,_,_ in
@@ -119,11 +116,7 @@ class messageCell: UITableViewCell {
                 self.username.setImage(UIImage(named: "mine_create"), forState: .Normal)
             }
             self.time.text = MCUtils.compDate(json["insertTime"].stringValue)
-            if IS_IOS8() {
-                setHtmlText("《" + json["talkTitle"].stringValue + "》", text: json["cont"].stringValue)
-            } else {
-                self.message.text = "《" + json["talkTitle"].stringValue + "》" + "\n" + json["cont"].stringValue
-            }
+            setLabelFrame(json["talkTitle"].stringValue, str2: json["cont"].stringValue)
         case "work":
             break
         default:

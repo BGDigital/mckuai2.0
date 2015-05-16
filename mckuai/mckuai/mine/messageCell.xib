@@ -43,10 +43,19 @@
                         <color key="textColor" red="0.69019607843137254" green="0.69411764705882351" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载中..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSJ-dr-cuR">
-                        <rect key="frame" x="8" y="54" width="359" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载中..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSJ-dr-cuR">
+                        <rect key="frame" x="8" y="48" width="359" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.35294117647058826" green="0.35686274509803922" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.64313725490196083" green="0.6470588235294118" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjZ-le-5xh">
+                        <rect key="frame" x="8" y="69" width="359" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="NjZ-bO-wPx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -54,24 +63,22 @@
                 <constraints>
                     <constraint firstItem="b1y-jK-v8d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2bt-wQ-7N1"/>
                     <constraint firstItem="x57-6a-wMu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4Pv-FG-4xY"/>
+                    <constraint firstItem="WjZ-le-5xh" firstAttribute="top" secondItem="NSJ-dr-cuR" secondAttribute="bottom" constant="4" id="7wt-i1-IaC"/>
                     <constraint firstItem="g6Z-X1-aRh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="AHH-1u-3Pz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="WjZ-le-5xh" secondAttribute="trailing" id="GVv-lh-8PN"/>
+                    <constraint firstItem="WjZ-le-5xh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="HLO-In-Ko3"/>
                     <constraint firstItem="NSJ-dr-cuR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="HmO-39-vXv"/>
                     <constraint firstAttribute="trailing" secondItem="x57-6a-wMu" secondAttribute="trailing" id="OV0-D2-2ns"/>
-                    <constraint firstItem="NSJ-dr-cuR" firstAttribute="top" secondItem="g6Z-X1-aRh" secondAttribute="bottom" constant="17" id="Oi4-PH-LBC"/>
+                    <constraint firstItem="NSJ-dr-cuR" firstAttribute="top" secondItem="g6Z-X1-aRh" secondAttribute="bottom" constant="11" id="Oi4-PH-LBC"/>
                     <constraint firstItem="b1y-jK-v8d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="QFT-gh-8M3"/>
                     <constraint firstItem="g6Z-X1-aRh" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="m9h-hE-gxB"/>
-                    <constraint firstItem="x57-6a-wMu" firstAttribute="centerX" secondItem="NSJ-dr-cuR" secondAttribute="centerX" id="tRb-er-sWt"/>
                     <constraint firstItem="x57-6a-wMu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y2Q-VZ-LHe"/>
                     <constraint firstItem="NSJ-dr-cuR" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="zjb-jQ-ol9"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="tRb-er-sWt"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="message" destination="NSJ-dr-cuR" id="SgO-UV-fp5"/>
+                <outlet property="message1" destination="WjZ-le-5xh" id="wZ3-BG-RAA"/>
                 <outlet property="time" destination="g6Z-X1-aRh" id="zoz-Sc-4nf"/>
                 <outlet property="username" destination="b1y-jK-v8d" id="5uy-aI-c1N"/>
             </connections>
