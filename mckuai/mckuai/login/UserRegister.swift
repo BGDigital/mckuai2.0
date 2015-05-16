@@ -73,8 +73,7 @@ class UserRegister: UIViewController,UITextFieldDelegate {
         MobClick.event("registerPage", attributes: ["type":"register","result":"all"])
         
         if(self.userName.text == nil || self.passWord.text == nil || self.nickName.text == nil || self.userName.text == "注册邮箱" || self.passWord.text == "密码" || self.nickName.text == "用户昵称" ){
-            var alertView = UIAlertView(title: "输入的信息不能为空", message: "", delegate: self, cancelButtonTitle: "确定")
-            alertView.show()
+            TSMessage.showNotificationWithTitle("输入的信息不能为空", type: .Error)
             return
         }
         

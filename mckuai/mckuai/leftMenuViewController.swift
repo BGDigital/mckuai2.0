@@ -56,12 +56,18 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         Avatar.layer.borderColor = UIColor.whiteColor().CGColor
         Avatar.layer.masksToBounds = true
         Avatar.layer.cornerRadius = 20
+        Avatar.userInteractionEnabled = true
+        var tapAvatar = UITapGestureRecognizer(target: self, action: "openUserCenter")
+        Avatar.addGestureRecognizer(tapAvatar)
         header.addSubview(Avatar)
         
         username = UILabel(frame: CGRectMake(70, 0, self.view.frame.size.width-60, 20))
         username.text = appUserNickName
         username.textColor = UIColor.whiteColor()
         username.font = UIFont(name: "HelveticaNeue", size: 16)
+        username.userInteractionEnabled = true
+        var tapNickName = UITapGestureRecognizer(target: self, action: "openUserCenter")
+        username.addGestureRecognizer(tapNickName)
         header.addSubview(username)
         
         level = UIButton(frame: CGRectMake(70, 30, 45, 15))
@@ -70,6 +76,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         level.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
         level.backgroundColor = UIColor(hexString: "#000000", alpha: 0.3)
         level.layer.cornerRadius = 7
+        level.addTarget(self, action: "openUserCenter", forControlEvents: .TouchUpInside)
         header.addSubview(level)
     
         btnLogin = UIButton(frame: CGRectMake(70, 10, 100, 30))
@@ -105,6 +112,20 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         }
         
         self.view.addSubview(self.tableView)
+    }
+    
+    @IBAction func openUserCenter() {
+        if appUserIdSave != 0 {
+            MobClick.event("leftMenuView", attributes: ["Type":"MineCenter"])
+            var mineFrm = mineTableViewController()
+            mineFrm.hidesBottomBarWhenPushed = true
+            MCUtils.mainNav?.pushViewController(mineFrm, animated: true) //这个显示效果有问题
+        } else {
+            MobClick.event("leftMenuView", attributes: ["Type":"Login"])
+            NewLogin.showUserLoginView(MCUtils.mainNav, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
+        }
+        //隐藏菜单
+        self.sideMenuViewController.hideMenuViewController()
     }
         
     @IBAction func userLogin() {

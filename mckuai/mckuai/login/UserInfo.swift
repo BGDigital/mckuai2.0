@@ -68,7 +68,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     func toPassWordFunction() {
         MobClick.event("userSetPage", attributes: ["type":"passWord"])
         if user!["userType"].stringValue == "qq"{
-            UIAlertView(title: "提示", message: "QQ用户不能修改密码", delegate: nil, cancelButtonTitle: "确定").show()
+            TSMessage.showNotificationWithTitle("QQ用户不能修改密码", type: .Error)
             return
         }
         Profile_Password.changePass(self.navigationController!)

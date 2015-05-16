@@ -17,10 +17,10 @@ class ShareUtil {
         
         UMSocialConfig.setFinishToastIsHidden(true, position: UMSocialiToastPositionTop)
         
-        UMSocialData.defaultData().extConfig.qzoneData.title = "麦块for我的世界"
-        UMSocialData.defaultData().extConfig.qqData.title = "麦块for我的世界"
-        UMSocialData.defaultData().extConfig.wechatSessionData.title = "麦块for我的世界"
-        UMSocialData.defaultData().extConfig.wechatTimelineData.title = "麦块for我的世界"
+        UMSocialData.defaultData().extConfig.qzoneData.title = "麦块我的世界盒子"
+        UMSocialData.defaultData().extConfig.qqData.title = "麦块我的世界盒子"
+        UMSocialData.defaultData().extConfig.wechatSessionData.title = "麦块我的世界盒子"
+        UMSocialData.defaultData().extConfig.wechatTimelineData.title = "麦块我的世界盒子"
         
         UMSocialData.defaultData().extConfig.qzoneData.url = shareUrl;
         UMSocialData.defaultData().extConfig.qqData.url = shareUrl;

@@ -184,8 +184,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!){
-//        println("locationManager,didFailWithError %@", error)
-        var errorAlert : UIAlertView = UIAlertView(title: "Error", message: "Failed to get your location", delegate: nil, cancelButtonTitle: "OK")
+        TSMessage.showNotificationWithTitle("获取位置失败,请检查你的定位服务是否开启", type: .Warning)
     }
     
     func upAddrToServer(city: String) {

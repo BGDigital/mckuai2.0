@@ -49,11 +49,11 @@ class Profile_Password:UIViewController,UIGestureRecognizerDelegate {
         let ensure = ensure_pass.text
         
         if oldpass == "" || newpass == "" || ensure == ""{
-            UIAlertView(title: "提示", message: "密码不能为空", delegate: nil, cancelButtonTitle: "确定").show()
+            TSMessage.showNotificationWithTitle("密码不能为空", type: .Error)
             return
         }
         if newpass != ensure {
-            UIAlertView(title: "提示", message: "两次密码输入不一致", delegate: nil, cancelButtonTitle: "确定").show()
+            TSMessage.showNotificationWithTitle("两次密码输入不一致", type: .Error)
             return
         }
         let dic = [

@@ -202,7 +202,8 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         self.roundProgressView.imageUrl = appUserPic
         self.nickname.text = appUserNickName
         self.level.setTitle("LV.\(appUserLevel)", forState: .Normal)
-        self.locationCity.setTitle(appUserAddr, forState: .Normal)
+        var city = appUserAddr != "" ? appUserAddr : "未定位"
+        self.locationCity.setTitle(city, forState: .Normal)
         
         //leftViewController
         var leftCV = (MCUtils.leftView as! leftMenuViewController)

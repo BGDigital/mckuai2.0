@@ -28,10 +28,10 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
                     allCount: self.json["dataObject", "list", "allCount"].intValue)
                 if let d = self.json["dataObject", "list", "data"].array {
                     if page.currentPage == 1 {
-                        println("刷新数据")
+//                        println("刷新数据")
                         self.datasource = d
                     } else {
-                        println("加载更多")
+//                        println("加载更多")
                         self.datasource = self.datasource + d
                     }
                 }
@@ -46,9 +46,9 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
         didSet {
             if self.datasource.count < page.allCount {
                 self.tableView.footer.hidden = self.datasource.count < page.pageSize
-                println("没有达到最大值 \(self.tableView.footer.hidden)")
+//                println("没有达到最大值 \(self.tableView.footer.hidden)")
             } else {
-                println("最大值了,noMoreData")
+//                println("最大值了,noMoreData")
                 self.tableView.footer.hidden = true
             }
             self.tableView.reloadData()

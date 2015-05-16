@@ -212,7 +212,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
     
     
     func uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection(picker: UzysAssetsPickerController!) {
-        var alertView = UIAlertView(title: "", message: "图片已达到上限", delegate: self, cancelButtonTitle: "确定").show()
+        //UIAlertView(title: "", message: "图片已达到上限", delegate: self, cancelButtonTitle: "确定").show()
     }
 
     

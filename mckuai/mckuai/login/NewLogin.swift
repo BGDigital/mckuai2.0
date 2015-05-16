@@ -89,23 +89,25 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     }
     
     func mckuaiLoginFunction() {
+        var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.labelText = "登录中"
+        
         let params = [
             "userName":self.userName.text,
             "passWord":self.passWord.text,
             
         ]
         
-        manager.POST(login_url,
+        manager.GET(login_url,
             parameters: params,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
                 var json = JSON(responseObject)
                 println(responseObject)
                 if "ok" == json["state"].stringValue {
-                    MCUtils.AnalysisUserInfo(json)
+                    MCUtils.AnalysisUserInfo(json["dataObject"])
                     
                     self.Delegate?.onLoginSuccessfull()
-                    self.backToPage()
                     
                     if !appUserRCToken.isEmpty {
                         //RongCloud
@@ -119,7 +121,10 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                         })
                         Async.background({MCUtils.GetFriendsList()})
                     }
+                    hud.hide(true)
+                    self.backToPage()
                 } else {
+                    hud.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "用户名或密码错误,请检查后再试", imgName: "HUD_ERROR")
                 }
                 
@@ -127,6 +132,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
+                hud.hide(true)
                 MCUtils.showCustomHUD(self.view, title: "登录失败,请重试", imgName: "HUD_ERROR")
         })
     }
@@ -136,7 +142,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         MobClick.event("qqLoginPage",attributes: ["type":"noQQ"])
         
         if(!self.userName.text.isEmpty && !self.passWord.text.isEmpty) {
-            println(self.userName.text)
+            self.dismissKeyboard()
             mckuaiLoginFunction()
         }else {
             MCUtils.showCustomHUD(self.view, title: "登录信息不能为空", imgName: "HUD_ERROR")
@@ -197,7 +203,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                 parameters: params,
                 success: { (operation: AFHTTPRequestOperation!,
                     responseObject: AnyObject!) in
-                    println(responseObject)
+//                    println(responseObject)
                     hud.hide(true)
                     if (responseObject != nil)  {
                         var json = JSON(responseObject)
@@ -215,9 +221,8 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                                     error: {status in
                                         println("RongCloud Login Faild. \(status)")
                                 })
-                                Async.background({MCUtils.GetFriendsList()})
                             }
-
+                            Async.background({MCUtils.GetFriendsList()})
                             
                             self.backToPage()
                         }else{

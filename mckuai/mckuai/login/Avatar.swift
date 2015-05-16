@@ -107,7 +107,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
     }
     
     func uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection(picker: UzysAssetsPickerController!) {
-        UIAlertView(title: "", message: "图片已达到上限", delegate: self, cancelButtonTitle: "确定").show()
+        TSMessage.showNotificationWithTitle("图片已达到上限", type: .Warning)
     }
     
     
