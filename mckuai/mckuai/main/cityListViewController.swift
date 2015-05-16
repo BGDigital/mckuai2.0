@@ -257,9 +257,11 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(animated: Bool) {
         MobClick.beginLogPageView("cityListView")
+        self.tabBarController?.tabBar.hidden = true
         
     }
     override func viewWillDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
         MobClick.endLogPageView("cityListView")
     }
 }

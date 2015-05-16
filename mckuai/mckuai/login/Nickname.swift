@@ -102,8 +102,10 @@ class Nickname:UIViewController,UIGestureRecognizerDelegate {
     
     override func viewWillAppear(animated: Bool) {
         MobClick.beginLogPageView("userInfoSetNickName")
+        self.tabBarController?.tabBar.hidden = true
     }
     override func viewWillDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
         MobClick.endLogPageView("userInfoSetNickName")
     }
     

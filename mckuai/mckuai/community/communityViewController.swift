@@ -173,19 +173,15 @@ class communityViewController: UIViewController {
       
             MobClick.beginLogPageView("friendsView")
             self.tabBarController?.tabBar.hidden = false
-            if(currentForumName != ""){
+            if(currentForumName != "" && forumName != nil){
                 
                 var index = 0
-                
                 for(var i = 0;i<forumName.count;i++){
                     if(currentForumName == forumName[i]["id"].stringValue){
                         index = i
                         break
                     }
                 }
-                
-//                println(index)
-//                println(currentForumName)
                 topScrollView.setShowCurrentView(index)
                 currentForumName = ""
             }

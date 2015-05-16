@@ -8,7 +8,7 @@
 
 import UIKit
 
-class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewDelegate, UITableViewDataSource, UMSocialUIDelegate {
+class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewDelegate, UITableViewDataSource, UMSocialUIDelegate,ExitProtocol{
     
     let cellHeight: CGFloat = 50
     let headerHeight: CGFloat = 85
@@ -202,7 +202,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             //设置
             MobClick.event("leftMenuView", attributes: ["Type":"Setting"])
             if appUserIdSave != 0 {
-                UserInfo.showUserInfoView(self.navigationController)
+                UserInfo.showUserInfoView(self.navigationController,aDelegate: (MCUtils.leftView as! leftMenuViewController))
             } else {
                 TSMessage.showNotificationWithTitle("提示", subtitle: "亲,你要登录麦块后才能修改信息,先去登录吧", type: .Warning)
             }
@@ -244,6 +244,36 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         }
         //隐藏菜单
         self.sideMenuViewController.hideMenuViewController()
+    }
+    
+    func userExitProtocol() {
+        print("userExitProtocol")
+        //清除数据
+        Defaults.remove(D_USER_ID)
+        Defaults.remove(D_USER_ARATAR)
+        Defaults.remove(D_USER_LEVEL)
+        Defaults.remove(D_USER_NICKNAME)
+        Defaults.remove(D_USER_ADDR)
+        Defaults.remove(D_USER_PROCESS)
+        appUserIdSave = 0
+        appUserLevel = 0
+        appUserPic = ""
+        appUserAddr = ""
+        appUserNickName = ""
+        
+        //刷新界面
+        self.Avatar.image = DefaultUserAvatar_big
+        self.username.hidden = true
+        self.level.hidden = true
+        self.btnLogin.hidden = false
+        //刷新主界面
+        var mainCV = (MCUtils.mainHeadView as! mainHeaderViewController)
+        mainCV.roundProgressView.imageUrl = "1"
+        mainCV.nickname.hidden = true
+        mainCV.level.hidden = true
+        mainCV.locationCity.hidden = true
+        mainCV.bag.hidden = true
+        mainCV.btnLogin.hidden = false
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

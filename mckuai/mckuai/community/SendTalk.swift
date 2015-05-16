@@ -83,14 +83,18 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         
         if(small_height != nil){
             
-            content_view = UIView(frame: CGRectMake(10, small_height+20, self.view.frame.width-20, self.view.frame.height-small_height-20-20))
+            content_view = UIView(frame: CGRectMake(0, small_height+20, self.view.frame.width, self.view.frame.height-small_height-20-20))
             textField = UITextField(frame: CGRectMake(0, 5, self.content_view.frame.width, 30))
             textField.borderStyle = UITextBorderStyle.None
+            textField.leftViewMode = UITextFieldViewMode.Always
+            var whiteView = UIView(frame: CGRectMake(0, 0, 5, 30))
+            textField.leftView = whiteView
 //            textField.layer.borderColor = UIColor.grayColor().CGColor
 //            textField.layer.borderWidth = 1.0;
             textField.textAlignment = NSTextAlignment.Left
             textField.backgroundColor = UIColor.whiteColor()
             textField.placeholder = "帖子标题"
+            textField.setValue(UIColor.lightGrayColor(), forKeyPath: "_placeholderLabel.textColor")
             textField.font = UIFont.systemFontOfSize(14)
             textField.clearButtonMode = UITextFieldViewMode.WhileEditing
             textField.delegate = self
@@ -105,7 +109,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
             textView.font = UIFont.systemFontOfSize(14)
             textView.scrollEnabled = true;
             textView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
-            textView.textAlignment = NSTextAlignment.Left
+//            textView.textAlignment = NSTextAlignment.Left
             textView.text = "内容"
             textView.textColor = UIColor.lightGrayColor()
             
@@ -280,7 +284,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
     }
     
     func initBigKinds(){
-        var bigLable = UILabel(frame: CGRectMake(10, 65, 150, 20))
+        var bigLable = UILabel(frame: CGRectMake(5, 65, 150, 20))
         bigLable.text = "请选择版块类型"
         bigLable.font = UIFont.systemFontOfSize(12)
         bigLable.textColor = UIColor.grayColor()
@@ -345,7 +349,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         small_view = UIView(frame: CGRectMake(0, small_height+20, self.view.frame.width-20, 70))
         small_view.alpha = 0
         
-        var smallLable = UILabel(frame: CGRectMake(10, 0, 150, 20))
+        var smallLable = UILabel(frame: CGRectMake(5, 0, 150, 20))
         smallLable.text = "请选择发帖类型"
         smallLable.font = UIFont.systemFontOfSize(12)
         smallLable.textColor = UIColor.grayColor()
@@ -399,7 +403,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
             self.small_view.alpha = 1
             if(self.isFirst == true){
                 println(self.small_view_height+20)
-                self.content_view.frame = CGRectMake(10,self.content_view.frame.origin.y+70, self.content_view.frame.width ,self.content_view.frame.height)
+                self.content_view.frame = CGRectMake(0,self.content_view.frame.origin.y+70, self.content_view.frame.width ,self.content_view.frame.height)
             }
 
             

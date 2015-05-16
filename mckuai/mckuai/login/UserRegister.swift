@@ -6,11 +6,16 @@
 //  Copyright (c) 2015年 XingfuQiu. All rights reserved.
 //
 
+
+
+
 import Foundation
 import UIKit
 
 class UserRegister: UIViewController,UITextFieldDelegate {
     var manager = AFHTTPRequestOperationManager()
+    
+    var Delegate: LoginProtocol?
     
     @IBOutlet weak var nickName: UITextField!
     @IBOutlet weak var passWord: UITextField!
@@ -95,15 +100,14 @@ class UserRegister: UIViewController,UITextFieldDelegate {
                 if "ok" == json["state"].stringValue {
                     MobClick.event("registerPage", attributes: ["type":"register","result":"success"])
                     //保存登录信息
-                    
-                    MCUtils.AnalysisUserInfo(json)
-                    
+//                    MCUtils.AnalysisUserInfo(json)
+                    hud.hide(true)
+                    MCUtils.showCustomHUD(self.view, title: "注册成功,请登录", imgName: "HUD_OK")
                     self.navigationController?.popViewControllerAnimated(true)
                     
                 }else{
                     hud.hide(true)
                     MCUtils.showCustomHUD(self.view, title: "注册失败,请使用QQ登录", imgName: "HUD_ERROR")
-                    
                     MobClick.event("registerPage", attributes: ["type":"register","result":"error"])
                 }
                 
@@ -119,8 +123,9 @@ class UserRegister: UIViewController,UITextFieldDelegate {
  
     }
     
-    class func showUserRegisterView(presentNavigator ctl:UINavigationController?){
+    class func showUserRegisterView(presentNavigator ctl:UINavigationController?,aDelegate: LoginProtocol?){
         var userRegisterView = UIStoryboard(name: "UserRegister", bundle: nil).instantiateViewControllerWithIdentifier("userRegister") as! UserRegister
+        userRegisterView.Delegate = aDelegate
         if (ctl != nil) {
             ctl?.pushViewController(userRegisterView, animated: true)
         } else {

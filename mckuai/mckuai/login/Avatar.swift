@@ -277,9 +277,11 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
     
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
         MobClick.beginLogPageView("userInfoSetHeadImg")
     }
     override func viewWillDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
         MobClick.endLogPageView("userInfoSetHeadImg")
     }
     
