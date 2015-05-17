@@ -32,8 +32,10 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     @IBOutlet weak var hiddenView: UIView!
     @IBOutlet weak var passWord: UITextField!
     
+    @IBOutlet weak var qqIcon: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.qqIcon.frame.origin.y = 100
         self.hidesBottomBarWhenPushed = true
         self.hiddenView.hidden = true
         //设置navigation
