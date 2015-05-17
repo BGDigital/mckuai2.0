@@ -36,7 +36,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
         initTableView()
         
         if(isReloadView == true) {
-            self.tableView.legendHeader.beginRefreshing()
+//            self.tableView.legendHeader.beginRefreshing()
             loadNewData()
         }
         
@@ -222,7 +222,7 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     func updateTableView () {
         if(isReloadView == false){
-            self.tableView.legendHeader.beginRefreshing()
+//            self.tableView.legendHeader.beginRefreshing()
             loadNewData()
         }
 

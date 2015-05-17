@@ -112,16 +112,16 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     
                     if !appUserRCToken.isEmpty {
                         //RongCloud
-                        RCIM.initWithAppKey(RC_AppKey, deviceToken: nil)
                         RCIM.connectWithToken(appUserRCToken,
                             completion: {userId in
+                                MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
                                 println("RongCloud Login Successrull:\(userId)")
                             },
                             error: {status in
                                 println("RongCloud Login Faild. \(status)")
                         })
-                        Async.background({MCUtils.GetFriendsList()})
                     }
+                    Async.main({MCUtils.GetFriendsList()})
                     hud.hide(true)
                     self.backToPage()
                 } else {
@@ -214,16 +214,16 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                             
                             if !appUserRCToken.isEmpty {
                                 //RongCloud
-                                RCIM.initWithAppKey(RC_AppKey, deviceToken: nil)
                                 RCIM.connectWithToken(appUserRCToken,
                                     completion: {userId in
+                                        MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
                                         println("RongCloud Login Successrull:\(userId)")
                                     },
                                     error: {status in
                                         println("RongCloud Login Faild. \(status)")
                                 })
                             }
-                            Async.background({MCUtils.GetFriendsList()})
+                            Async.main({MCUtils.GetFriendsList()})
                             
                             self.backToPage()
                         }else{

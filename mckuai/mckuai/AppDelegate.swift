@@ -17,14 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window?.makeKeyAndVisible()
         //启动页面加载广告
-        loadLaunchView()
+        if Defaults.hasKey(ISFIRSTRUN) {
+            loadLaunchView()
+        }
         Async.main({
             println("多线程调用三方库.")
+            self.initRongCloud()
             //RongCloud登录
             if !appUserRCToken.isEmpty {
                 //RongCloud
-                self.initRongCloud()
-                
                 RCIM.connectWithToken(appUserRCToken,
                     completion: {userId in
 //                        println("RongCloud Login Successrull:\(userId)")
@@ -67,7 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     //加载Rongcloud
     func initRongCloud() {
         RCIM.initWithAppKey(RC_AppKey, deviceToken: nil)
-        
         //设置用户信息
         RCIM.setUserInfoFetcherWithDelegate(self, isCacheUserInfo: true)
         //设置好友信息

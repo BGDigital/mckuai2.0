@@ -21,6 +21,9 @@
 #import "MobClick.h"
 #import "TSMessage.h"
 #import "UMessage.h"
+//WebViewProgress
+#import "NJKWebViewProgress.h"
+#import "NJKWebViewProgressView.h"
 
 
 //Rongcloud

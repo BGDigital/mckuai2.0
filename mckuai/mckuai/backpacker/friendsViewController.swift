@@ -25,7 +25,7 @@ class friendsViewController: UICollectionViewController {
                 if let d = self.json["dataObject", "data"].array {
                     self.datasource = d
                     //刷新好友列表
-                    Async.background({MCUtils.GetFriendsList()})
+                    Async.main({MCUtils.GetFriendsList()})
                 }
             }
         }

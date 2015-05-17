@@ -9,10 +9,12 @@
 
 import UIKit
 
-class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate,UIAlertViewDelegate {
+class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate,UIAlertViewDelegate, NJKWebViewProgressDelegate {
     
     var manager = AFHTTPRequestOperationManager()
-    var progress = MBProgressHUD()
+    var _progressView: NJKWebViewProgressView!
+    var _progressProxy: NJKWebViewProgress!
+//    var progress = MBProgressHUD()
     var webView: UIWebView!
     var url:NSURL!
     var firstLoad:Bool = true
@@ -54,10 +56,25 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
          initWebView()
          setRightBarButtonItem()
          initReplyBar();
+        initNJKWebViewProgress()
     }
     
     override func viewDidDisappear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+    }
+    
+    func initNJKWebViewProgress() {
+        _progressProxy = NJKWebViewProgress()
+        webView.delegate = _progressProxy
+        _progressProxy.webViewProxyDelegate = self
+        _progressProxy.progressDelegate = self
+        
+        var progressBarHeight: CGFloat = 2.0
+        var navigationBarBounds = self.navigationController!.navigationBar.bounds
+        var barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight)
+        _progressView = NJKWebViewProgressView(frame: barFrame)
+        _progressView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin
+        _progressView.progressBarView.backgroundColor = UIColor(hexString: "#2FA044")
     }
 
     
@@ -311,50 +328,43 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             if(appUserIdSave == 0) {
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
             }else{
-                
-                UIAlertView(title: "", message: "土豪,你确定要打赏该帖子吗?", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定").show()
-                
-                
-                
-            }
-        }
-    }
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex == 1 {
-            if(self.shang_btn.selected == false){
-                
-                let params = [
-                    "userId":String(stringInterpolationSegment: appUserIdSave),
-                    "talkId":String(self.id)
-                ]
-                
-                manager.POST(daShang_url,
-                    parameters: params,
-                    success: { (operation: AFHTTPRequestOperation!,
-                        responseObject: AnyObject!) in
-                        var json = JSON(responseObject)
+                let alert = SCLAlertView()
+                alert.addButton("必须要", action: {
+                    if(self.shang_btn.selected == false){
                         
-                        if "ok" == json["state"].stringValue {
-                            self.shang_btn.enabled = false
-                            MCUtils.showCustomHUD("土豪,感谢你的打赏", aType: .Success)
-                            self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
-                        }else{
-                            MCUtils.showCustomHUD(json["msg"].stringValue, aType: .Error)
-                        }
+                        let params = [
+                            "userId":String(stringInterpolationSegment: appUserIdSave),
+                            "talkId":String(self.id)
+                        ]
                         
-                    },
-                    failure: { (operation: AFHTTPRequestOperation!,
-                        error: NSError!) in
-                        println("Error: " + error.localizedDescription)
+                        self.manager.POST(daShang_url,
+                            parameters: params,
+                            success: { (operation: AFHTTPRequestOperation!,
+                                responseObject: AnyObject!) in
+                                var json = JSON(responseObject)
+                                
+                                if "ok" == json["state"].stringValue {
+                                    self.shang_btn.enabled = false
+                                    MCUtils.showCustomHUD("感谢你的打赏", aType: .Success)
+                                    self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
+                                }else{
+                                    MCUtils.showCustomHUD(json["msg"].stringValue, aType: .Error)
+                                }
+                                
+                            },
+                            failure: { (operation: AFHTTPRequestOperation!,
+                                error: NSError!) in
+                                println("Error: " + error.localizedDescription)
+                                
+                        })
                         
+                        
+                    }else{
+                        MCUtils.showCustomHUD("钻石再多也只能打赏一次哦", aType: .Success)
+                    }
                 })
-                
-                
-            }else{
-                MCUtils.showCustomHUD("土豪,钻石再多也只能打赏一次", aType: .Success)
+                alert.showInfo("打赏楼主", subTitle: "土豪,你确定要给楼主打赏钻石吗?", closeButtonTitle: "取消", duration: 0)
             }
-
         }
     }
     
@@ -442,24 +452,16 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
-        if firstLoad {
-            progress = MBProgressHUD.showHUDAddedTo(view, animated: true)
-            progress.labelText = "正在加载"
-        }
+        
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-        if firstLoad {
-            self.progress.removeFromSuperview()
-            self.firstLoad = false
-        }
         self.webView.scrollView.header.endRefreshing()
         initToolBar()
         self.rightButton?.enabled = true
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        progress.hide(true)
         MCUtils.showCustomHUD("出错啦,加载失败", aType: .Error)
     }
     
@@ -657,6 +659,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
             MobClick.beginLogPageView("talkDetail")
             self.tabBarController?.tabBar.hidden = true
             //        //注册键盘通知事件
@@ -667,11 +670,18 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
             self.navigationController?.navigationBar.lt_reset()
             self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         
+        self.navigationController?.navigationBar.addSubview(_progressView)
+        
     }
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         MobClick.endLogPageView("talkDetail")
         NSNotificationCenter.defaultCenter().removeObserver(self)
-
+        _progressView.removeFromSuperview()
+    }
+    
+    func webViewProgress(webViewProgress: NJKWebViewProgress!, updateProgress progress: Float) {
+        _progressView.setProgress(progress, animated: true)
     }
     
 
