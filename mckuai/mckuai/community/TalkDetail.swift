@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate {
+class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate,UIAlertViewDelegate {
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
@@ -313,42 +313,52 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
             }else{
                 
-                if(self.shang_btn.selected == false){
-                    
-                    let params = [
-                        "userId":String(stringInterpolationSegment: appUserIdSave),
-                        "talkId":String(self.id)
-                    ]
-                    
-                    manager.POST(daShang_url,
-                        parameters: params,
-                        success: { (operation: AFHTTPRequestOperation!,
-                            responseObject: AnyObject!) in
-                            var json = JSON(responseObject)
-                            
-                            if "ok" == json["state"].stringValue {
-                                self.shang_btn.enabled = false
-                                MCUtils.showCustomHUD(self.view, title: "真土豪", imgName: "HUD_OK")
-                                self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
-                            }else{
-                                MCUtils.showCustomHUD(self.view, title: json["msg"].stringValue, imgName: "HUD_ERROR")
-                            }
-                            
-                        },
-                        failure: { (operation: AFHTTPRequestOperation!,
-                            error: NSError!) in
-                            println("Error: " + error.localizedDescription)
-                            
-                    })
-
-                    
-                }else{
-                    MCUtils.showCustomHUD(self.view, title: "土豪,钻石再多也只能打赏一次", imgName: "HUD_OK")
-                }
+                UIAlertView(title: "", message: "土豪,你确定要打赏该帖子吗?", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定").show()
+                
+                
                 
             }
         }
     }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            if(self.shang_btn.selected == false){
+                
+                let params = [
+                    "userId":String(stringInterpolationSegment: appUserIdSave),
+                    "talkId":String(self.id)
+                ]
+                
+                manager.POST(daShang_url,
+                    parameters: params,
+                    success: { (operation: AFHTTPRequestOperation!,
+                        responseObject: AnyObject!) in
+                        var json = JSON(responseObject)
+                        
+                        if "ok" == json["state"].stringValue {
+                            self.shang_btn.enabled = false
+                            MCUtils.showCustomHUD(self.view, title: "真土豪", imgName: "HUD_OK")
+                            self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
+                        }else{
+                            MCUtils.showCustomHUD(self.view, title: json["msg"].stringValue, imgName: "HUD_ERROR")
+                        }
+                        
+                    },
+                    failure: { (operation: AFHTTPRequestOperation!,
+                        error: NSError!) in
+                        println("Error: " + error.localizedDescription)
+                        
+                })
+                
+                
+            }else{
+                MCUtils.showCustomHUD(self.view, title: "土豪,钻石再多也只能打赏一次", imgName: "HUD_OK")
+            }
+
+        }
+    }
+    
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
         if(response.responseCode.value == UMSResponseCodeSuccess.value) {

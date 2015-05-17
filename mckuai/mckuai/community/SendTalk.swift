@@ -76,6 +76,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         initTextView()
         
         self.old_frame = self.view.frame
+        self.view.backgroundColor = UIColor(red: 0.933, green: 0.941, blue: 0.949, alpha: 1.00)
         
     }
     
@@ -89,8 +90,6 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
             textField.leftViewMode = UITextFieldViewMode.Always
             var whiteView = UIView(frame: CGRectMake(0, 0, 5, 30))
             textField.leftView = whiteView
-//            textField.layer.borderColor = UIColor.grayColor().CGColor
-//            textField.layer.borderWidth = 1.0;
             textField.textAlignment = NSTextAlignment.Left
             textField.backgroundColor = UIColor.whiteColor()
             textField.placeholder = "帖子标题"
@@ -286,7 +285,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
     func initBigKinds(){
         var bigLable = UILabel(frame: CGRectMake(5, 65, 150, 20))
         bigLable.text = "请选择版块类型"
-        bigLable.font = UIFont.systemFontOfSize(12)
+        bigLable.font = UIFont.systemFontOfSize(14)
         bigLable.textColor = UIColor.grayColor()
         self.view.addSubview(bigLable)
         
@@ -351,7 +350,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         
         var smallLable = UILabel(frame: CGRectMake(5, 0, 150, 20))
         smallLable.text = "请选择发帖类型"
-        smallLable.font = UIFont.systemFontOfSize(12)
+        smallLable.font = UIFont.systemFontOfSize(14)
         smallLable.textColor = UIColor.grayColor()
         small_view.addSubview(smallLable)
         
