@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uqu-l2-pqG">
-                                <rect key="frame" x="88" y="37" width="199" height="199"/>
+                                <rect key="frame" x="88" y="122" width="199" height="199"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Uqu-l2-pqG" secondAttribute="height" multiplier="1:1" id="dIs-9i-w5G"/>
                                 </constraints>
@@ -40,7 +40,7 @@
                                     <view alpha="0.89999999999999991" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mY6-q5-f0G">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入账号" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mBT-Ik-yYg">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入账号" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mBT-Ik-yYg">
                                                 <rect key="frame" x="98" y="15" width="100" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="O3v-BS-mh1"/>
@@ -61,7 +61,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="mBT-Ik-yYg" secondAttribute="trailing" constant="10" id="4v7-LX-veb"/>
+                                            <constraint firstAttribute="trailing" secondItem="mBT-Ik-yYg" secondAttribute="trailing" constant="177" id="4v7-LX-veb"/>
                                             <constraint firstAttribute="height" constant="50" id="8rX-Ad-lNR"/>
                                             <constraint firstItem="mBT-Ik-yYg" firstAttribute="leading" secondItem="pab-gB-hGy" secondAttribute="trailing" constant="10" id="AEJ-kH-JhL"/>
                                             <constraint firstAttribute="bottom" secondItem="pab-gB-hGy" secondAttribute="bottom" constant="14" id="Dlx-9s-MDe"/>
@@ -82,7 +82,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4tX-d0-gVq">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4tX-d0-gVq">
                                                 <rect key="frame" x="98" y="15" width="100" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="GNX-Db-8oS"/>
@@ -94,7 +94,7 @@
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="4tX-d0-gVq" firstAttribute="centerY" secondItem="ly5-ee-5Wo" secondAttribute="centerY" id="05x-nz-P4J"/>
-                                            <constraint firstAttribute="trailing" secondItem="4tX-d0-gVq" secondAttribute="trailing" constant="10" id="0R6-3I-rlg"/>
+                                            <constraint firstAttribute="trailing" secondItem="4tX-d0-gVq" secondAttribute="trailing" constant="177" id="0R6-3I-rlg"/>
                                             <constraint firstItem="ly5-ee-5Wo" firstAttribute="leading" secondItem="S9w-NH-PbC" secondAttribute="leading" constant="20" id="7YA-ex-PVd"/>
                                             <constraint firstItem="ly5-ee-5Wo" firstAttribute="top" secondItem="S9w-NH-PbC" secondAttribute="top" constant="14" id="Ovd-XB-EeV"/>
                                             <constraint firstItem="ly5-ee-5Wo" firstAttribute="centerY" secondItem="S9w-NH-PbC" secondAttribute="centerY" id="ai9-Ne-5rp"/>
@@ -164,7 +164,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhF-16-mtU">
-                                <rect key="frame" x="110" y="242" width="165" height="39"/>
+                                <rect key="frame" x="110" y="327" width="165" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="推荐使用QQ登录">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -181,7 +181,7 @@
                             <constraint firstItem="wRe-L7-IiS" firstAttribute="top" secondItem="Tux-yd-3ti" secondAttribute="bottom" constant="31" id="7Q2-5Z-5Ku"/>
                             <constraint firstItem="FNE-ey-uVy" firstAttribute="centerX" secondItem="Tux-yd-3ti" secondAttribute="centerX" id="CRl-8V-YVt"/>
                             <constraint firstItem="PQx-Iw-W5P" firstAttribute="leading" secondItem="Tux-yd-3ti" secondAttribute="trailing" id="Ecr-VP-kwG"/>
-                            <constraint firstItem="Uqu-l2-pqG" firstAttribute="top" secondItem="Ty7-Zu-lnS" secondAttribute="bottom" constant="17" id="JAm-7p-ztq"/>
+                            <constraint firstItem="Uqu-l2-pqG" firstAttribute="top" secondItem="Ty7-Zu-lnS" secondAttribute="bottom" constant="102" id="JAm-7p-ztq"/>
                             <constraint firstItem="Tux-yd-3ti" firstAttribute="centerY" secondItem="PQx-Iw-W5P" secondAttribute="centerY" id="avt-R9-Vif"/>
                             <constraint firstAttribute="centerX" secondItem="Uqu-l2-pqG" secondAttribute="centerX" id="cb6-2e-0gm"/>
                             <constraint firstItem="5Mh-lX-3B9" firstAttribute="leading" secondItem="Mac-F1-rSx" secondAttribute="leadingMargin" constant="-16" id="cph-4L-lHj"/>
