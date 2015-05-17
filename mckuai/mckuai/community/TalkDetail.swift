@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate {
+class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate,UIAlertViewDelegate {
     
     var manager = AFHTTPRequestOperationManager()
     var progress = MBProgressHUD()
@@ -345,9 +345,13 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     MCUtils.showCustomHUD("土豪,钻石再多也只能打赏一次", aType: .Success)
                 }
                 
+            }else{
+                MCUtils.showCustomHUD(self.view, title: "土豪,钻石再多也只能打赏一次", imgName: "HUD_OK")
             }
+
         }
     }
+    
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
         if(response.responseCode.value == UMSResponseCodeSuccess.value) {
