@@ -12,7 +12,7 @@ import UIKit
 class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
     var manager = AFHTTPRequestOperationManager()
     var segmentedControl:HMSegmentedControl!
-    var kindsArray = ["最新","精华","置顶"]
+    var kindsArray = ["最新","精华","推荐"]
     
     
     var forumId:Int!
