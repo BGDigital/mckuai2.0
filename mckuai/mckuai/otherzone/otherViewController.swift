@@ -94,6 +94,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hidesBottomBarWhenPushed = true
+        self.view.backgroundColor = UIColor.whiteColor()
         setupViews()
         getAttentionStatus()
         
@@ -205,7 +206,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
             parameters: param,
             success: { (operation: AFHTTPRequestOperation!,
                 responseObject: AnyObject!) in
-                println(responseObject)
+//                println(responseObject)
                 self.isFirstLoad = false
                 self.json = JSON(responseObject)
                 self.tableView.header.endRefreshing()
