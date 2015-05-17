@@ -38,7 +38,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
 
                 addr.text = u["addr"].stringValue
                 
-                image = UIImageView(frame: CGRectMake(self.view.frame.size.width-80-25, 44+22+8, 80, 80))
+                image = UIImageView(frame: CGRectMake(self.view.frame.size.width-80-25, 44+22+8+12, 80, 80))
                 image.sd_setImageWithURL(NSURL(string: u["headImg"].stringValue))
                 image.layer.masksToBounds=true;
                 image.layer.cornerRadius = image.frame.size.width/2
@@ -63,6 +63,8 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
         
         var toAddr = UITapGestureRecognizer(target: self, action: "toAddrFunction")
         self.addr_view.addGestureRecognizer(toAddr)
+        
+
     }
     
     func toHeadImgFunction() {
