@@ -148,7 +148,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         if appUserIdSave != 0 {
             MCUtils.openBackPacker(self.nav!, userId: appUserIdSave)
         } else {
-            TSMessage.showNotificationWithTitle("提示", subtitle: "亲,你要登录麦块后才能打开背包,先去登录吧", type: .Warning)
+            MCUtils.showCustomHUD("亲,你要登录麦块后才能打开背包,先去登录吧", aType: .Warning)
         }
     }
     

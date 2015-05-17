@@ -220,7 +220,7 @@ class MCUtils {
 //                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你在WIFI网络下面,随便畅玩吧", type: .Success)
             case .ReachableViaWWAN:
                 println("网络状态:3G")
-                TSMessage.showNotificationWithTitle("哇哦~", subtitle: "你正在使用流量上网,且玩且珍惜吧", type: .Warning)
+                TSMessage.showNotificationWithTitle("警告!警告!", subtitle: "你正在使用流量上网,且玩且珍惜吧", type: .Warning)
             case .NotReachable:
                 println("网络状态:不可用")
                 TSMessage.showNotificationWithTitle("出错啦~!", subtitle: "网络状态异常,请检查网络连接", type: .Error)
@@ -239,13 +239,18 @@ class MCUtils {
     :param: title   HUD的标题
     :param: imgName 自定义HUD显示的图片
     */
-    class func showCustomHUD(view: UIView, title: String, imgName: String) {
-        if "HUD_ERROR" == imgName {
-            TSMessage.showNotificationWithTitle(title, type: .Error)
-        } else {
-            TSMessage.showNotificationWithTitle(title, type: .Success)
+    class func showCustomHUD(aMsg: String, aType: TSMessageNotificationType) {
+        switch aType {
+        case .Success:
+            TSMessage.showNotificationWithTitle("操作成功", subtitle: aMsg, type: aType)
+        case .Warning:
+            TSMessage.showNotificationWithTitle("麦块提示", subtitle: aMsg, type: aType)
+        case .Error:
+            TSMessage.showNotificationWithTitle("出错啦~!", subtitle: aMsg, type: aType)
+        default:
+            TSMessage.showNotificationWithTitle("消息", subtitle: aMsg, type: aType)
         }
-//        
+//
 //        var h = MBProgressHUD.showHUDAddedTo(view, animated: true)
 //        h.labelText = title
 //        h.mode = MBProgressHUDMode.CustomView

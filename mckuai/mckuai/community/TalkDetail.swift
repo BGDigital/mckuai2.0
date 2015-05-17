@@ -196,12 +196,12 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 var json = JSON(responseObject)
                 
                 if "ok" == json["state"].stringValue {
-                    MCUtils.showCustomHUD(self.view, title: "帖子收藏成功", imgName: "HUD_OK")
+                    MCUtils.showCustomHUD("帖子收藏成功", aType: .Success)
                     self.collect_btn.selected = true
                     self.collect_btn.enabled = true
                 }else{
                     self.collect_btn.enabled = true
-                    MCUtils.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("帖子收藏失败", aType: .Error)
                 }
                 
             },
@@ -209,7 +209,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.collect_btn.enabled = true
-                MCUtils.showCustomHUD(self.view, title: "帖子收藏失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("帖子收藏失败", aType: .Error)
         })
         
         
@@ -228,12 +228,12 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 var json = JSON(responseObject)
                 
                 if "ok" == json["state"].stringValue {
-                    MCUtils.showCustomHUD(self.view, title: "取消收藏成功", imgName: "HUD_OK")
+                    MCUtils.showCustomHUD("取消收藏成功", aType: .Success)
                     self.collect_btn.selected = false
                     self.collect_btn.enabled = true
                 }else{
                     self.collect_btn.enabled = true
-                    MCUtils.showCustomHUD(self.view, title: "取消收藏失败", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("取消收藏失败", aType: .Error)
                 }
                 
             },
@@ -241,7 +241,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.collect_btn.enabled = true
-                MCUtils.showCustomHUD(self.view, title: "取消收藏失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("取消收藏失败", aType: .Error)
         })
     }
     
@@ -327,10 +327,10 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                             
                             if "ok" == json["state"].stringValue {
                                 self.shang_btn.enabled = false
-                                MCUtils.showCustomHUD(self.view, title: "真土豪", imgName: "HUD_OK")
+                                MCUtils.showCustomHUD("土豪,感谢你的钻石", aType: .Success)
                                 self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
                             }else{
-                                MCUtils.showCustomHUD(self.view, title: json["msg"].stringValue, imgName: "HUD_ERROR")
+                                MCUtils.showCustomHUD(json["msg"].stringValue, aType: .Error)
                             }
                             
                         },
@@ -342,7 +342,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
                     
                 }else{
-                    MCUtils.showCustomHUD(self.view, title: "土豪,钻石再多也只能打赏一次", imgName: "HUD_OK")
+                    MCUtils.showCustomHUD("土豪,钻石再多也只能打赏一次", aType: .Success)
                 }
                 
             }
@@ -351,7 +351,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
         if(response.responseCode.value == UMSResponseCodeSuccess.value) {
-            MCUtils.showCustomHUD(self.view, title: "分享成功", imgName: "HUD_OK")
+            MCUtils.showCustomHUD("分享成功", aType: .Success)
             MobClick.event("Share", attributes: ["Address":"详细页", "Type": "Success"])
         }
     }
@@ -450,7 +450,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
         progress.hide(true)
-        MCUtils.showCustomHUD(self.view, title: "出错啦,加载失败", imgName: "HUD_ERROR")
+        MCUtils.showCustomHUD("出错啦,加载失败", aType: .Error)
     }
     
     func initWebView() {
@@ -541,7 +541,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         self.sendButton.enabled = false
         var replyContext = self.textView.text
         if(replyContext == nil || replyContext.isEmpty){
-            MCUtils.showCustomHUD(self.view, title: "回复的内容不能为空", imgName:  "HUD_ERROR")
+            MCUtils.showCustomHUD("回复的内容不能为空", aType: .Error)
             self.sendButton.enabled = true
             return
         }
@@ -562,7 +562,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     if "ok" == json["state"].stringValue {
                         self.textView.resignFirstResponder()
                         hud.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "回复成功", imgName:  "HUD_OK")
+                        MCUtils.showCustomHUD("回复成功", aType: .Success)
                         self.sendButton.enabled = true
                         self.textView.text = ""
                         if self.params["isOver"] == "yes" {
@@ -572,7 +572,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     }else{
                         self.rightButton?.enabled = true
                         hud.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "HUD_ERROR")
+                        MCUtils.showCustomHUD("回复失败,请稍候再试", aType: .Error)
                         MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"error"])
                     }
                     
@@ -582,7 +582,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                     println("Error: " + error.localizedDescription)
                     self.rightButton?.enabled = true
                     hud.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "回复失败,请稍候再试", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("回复失败,请稍候再试", aType: .Error)
                     MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"error"])
             })
             

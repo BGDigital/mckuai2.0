@@ -124,7 +124,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     self.backToPage()
                 } else {
                     hud.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "用户名或密码错误,请检查后再试", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("用户名或密码错误,请检查后再试", aType: .Error)
                 }
                 
             },
@@ -132,7 +132,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 hud.hide(true)
-                MCUtils.showCustomHUD(self.view, title: "登录失败,请重试", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("登录失败,请重试", aType: .Error)
         })
     }
     
@@ -144,7 +144,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
             self.dismissKeyboard()
             mckuaiLoginFunction()
         }else {
-            MCUtils.showCustomHUD(self.view, title: "登录信息不能为空", imgName: "HUD_ERROR")
+            MCUtils.showCustomHUD("登录信息不能为空", aType: .Error)
         }
     }
     @IBAction func qqLoginAction(sender: UIButton) {
@@ -225,10 +225,10 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                             
                             self.backToPage()
                         }else{
-                            MCUtils.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
+                            MCUtils.showCustomHUD("登录失败,请稍候再试", aType: .Error)
                         }
                     } else {
-                        MCUtils.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
+                        MCUtils.showCustomHUD("登录失败,请稍候再试", aType: .Error)
                     }
                     
                 },
@@ -236,7 +236,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
                     hud.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "登录失败,请稍候再试", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("登录失败,请稍候再试", aType: .Error)
             })
         }else{
             println(response.errorMsg)

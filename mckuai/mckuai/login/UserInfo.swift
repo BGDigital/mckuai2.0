@@ -78,7 +78,7 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     func toPassWordFunction() {
         MobClick.event("userSetPage", attributes: ["type":"passWord"])
         if user!["userType"].stringValue == "qq"{
-            TSMessage.showNotificationWithTitle("QQ用户不能修改密码", type: .Error)
+            MCUtils.showCustomHUD("QQ用户不能修改密码", aType: .Warning)
             return
         }
         Profile_Password.changePass(self.navigationController!)
@@ -126,14 +126,14 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
                 if "ok" == json["state"].stringValue {
                     self.user = json["dataObject"]
                 }else{
-                    MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("个人信息获取失败", aType: .Error)
                 }
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                MCUtils.showCustomHUD(self.view, title: "个人信息获取失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("个人信息获取失败", aType: .Error)
         })
     }
     

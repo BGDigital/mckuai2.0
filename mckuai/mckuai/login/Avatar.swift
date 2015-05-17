@@ -107,7 +107,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
     }
     
     func uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection(picker: UzysAssetsPickerController!) {
-        TSMessage.showNotificationWithTitle("图片已达到上限", type: .Warning)
+        MCUtils.showCustomHUD("亲,你传的图片已达到上限", aType: .Warning)
     }
     
     
@@ -156,7 +156,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                             self.hud?.hide(true)
                         }
 
-                        MCUtils.showCustomHUD(self.view, title: "保存信息成功", imgName: "HUD_OK")
+                        MCUtils.showCustomHUD("保存信息成功", aType: .Success)
                         isLoginout = true
                         self.navigationController?.popViewControllerAnimated(true)
                     }else{
@@ -165,7 +165,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                             self.hud?.hide(true)
                         }
                         MobClick.event("headImgPage", attributes: ["type":"savePic","result":"error"])
-                        MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
+                        MCUtils.showCustomHUD("保存信息失败", aType: .Error)
                     }
                     
                 },
@@ -177,7 +177,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                         self.hud?.hide(true)
                     }
                     MobClick.event("headImgPage", attributes: ["type":"savePic","result":"error"])
-                    MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("保存信息失败", aType: .Error)
             })
             
         }
@@ -216,7 +216,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                         
                     }else{
                         self.hud?.hide(true)
-                        MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                        MCUtils.showCustomHUD("图片上传失败,请稍候再试", aType: .Error)
                         MobClick.event("headImgPage", attributes: ["type":"addPic","result":"error"])
                     }
                     
@@ -225,7 +225,7 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
                     error: NSError!) in
 //                    println("Error: " + error.localizedDescription)
                     self.hud?.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("图片上传失败,请稍候再试", aType: .Error)
                     MobClick.event("headImgPage", attributes: ["type":"addPic","result":"error"])
             })
         }else{

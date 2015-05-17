@@ -121,7 +121,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         
         MobClick.event("followTalkPage", attributes: ["type":"addpic","result":"all"])
         if(self.image_button.count >= 5){
-            MCUtils.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "HUD_ERROR")
+            MCUtils.showCustomHUD("最多同时支持四张图片上传", aType: .Warning)
         }else{
             
             
@@ -182,7 +182,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
 
     
     func uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection(picker: UzysAssetsPickerController!) {
-        TSMessage.showNotificationWithTitle("图片已达到上限", type: .Warning)
+        MCUtils.showCustomHUD("你传的图片已达到上限", aType: .Warning)
     }
     
     
@@ -232,7 +232,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         self.sendButton.enabled = false
         content = self.textView.text
         if(content == nil || content.isEmpty || content == "内容..."){
-            MCUtils.showCustomHUD(self.view, title: "跟贴的内容不能为空", imgName:  "HUD_ERROR")
+            MCUtils.showCustomHUD("跟贴的内容不能为空", aType: .Error)
             self.sendButton.enabled = true
             return
         }
@@ -274,7 +274,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                         }else{
                             self.sendButton?.enabled = true
                             self.progress.removeFromSuperview()
-                            MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                            MCUtils.showCustomHUD("图片上传失败,请稍候再试", aType: .Error)
                             MobClick.event("followTalkPage", attributes: ["type":"addpic","result":"error"])
                         }
                         
@@ -283,7 +283,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                         error: NSError!) in
                         println("Error: " + error.localizedDescription)
                         self.progress.removeFromSuperview()
-                        MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                        MCUtils.showCustomHUD("图片上传失败,请稍候再试", aType: .Error)
                         MobClick.event("followTalkPage", attributes: ["type":"addpic","result":"error"])
                 })
             }else{
@@ -315,7 +315,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                 }else{
                     self.sendButton?.enabled = true
                     self.progress.removeFromSuperview()
-                    MCUtils.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("跟贴失败,请稍候再试", aType: .Error)
                     MobClick.event("followTalkPage", attributes: ["type":"send","result":"error"])
                 }
                 
@@ -325,7 +325,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
                 println("Error: " + error.localizedDescription)
                 self.sendButton?.enabled = true
                 self.progress.removeFromSuperview()
-                MCUtils.showCustomHUD(self.view, title: "跟贴失败,请稍候再试", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("跟贴失败,请稍候再试", aType: .Error)
                 MobClick.event("followTalkPage", attributes: ["type":"send","result":"error"])
         })
     }

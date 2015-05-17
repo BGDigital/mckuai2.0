@@ -101,7 +101,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
 //                println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("数据加载失败", aType: .Error)
         })
     }
     
@@ -122,7 +122,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
                 error: NSError!) in
 //                println("Error: " + error.localizedDescription)
                 self.tableView.footer.endRefreshing()
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("数据加载失败", aType: .Error)
         })
     }
     
@@ -218,7 +218,7 @@ class favoriteViewController: UIViewController, UITableViewDelegate, UITableView
                     // 2.刷新数据
                     self.tableView.reloadData()
                 } else {
-                    MCUtils.showCustomHUD(self.view, title: result["msg"].stringValue, imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD(result["msg"].stringValue, aType: .Error)
                 }
             },
             failure: { (operation: AFHTTPRequestOperation!,

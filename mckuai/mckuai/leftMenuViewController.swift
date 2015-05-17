@@ -150,7 +150,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
         if(response.responseCode.value == UMSResponseCodeSuccess.value) {
-            MCUtils.showCustomHUD(self.view, title: "分享成功", imgName: "HUD_OK")
+            MCUtils.showCustomHUD("分享成功", aType: .Success)
             MobClick.event("Share", attributes: ["Address":"leftView", "Type": "Success"])
         }
     }
@@ -173,7 +173,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             if appUserIdSave != 0 {
                 MCUtils.openBackPacker(self.navigationController, userId: appUserIdSave)
             } else {
-                TSMessage.showNotificationWithTitle("提示", subtitle: "亲,你要登录麦块后才能打开背包,先去登录吧", type: .Warning)
+                MCUtils.showCustomHUD("亲,你要登录麦块后才能打开背包,先去登录吧", aType: .Warning)
             }
         case 2:
             MobClick.event("leftMenuView", attributes: ["Type":"Share"])
@@ -204,7 +204,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
             if appUserIdSave != 0 {
                 UserInfo.showUserInfoView(self.navigationController,aDelegate: (MCUtils.leftView as! leftMenuViewController))
             } else {
-                TSMessage.showNotificationWithTitle("提示", subtitle: "亲,你要登录麦块后才能修改信息,先去登录吧", type: .Warning)
+                MCUtils.showCustomHUD("亲,你要登录麦块后才能修改信息,先去登录吧", aType: .Warning)
             }
         default:
             MobClick.event("leftMenuView", attributes: ["Type":"Logout"])
@@ -237,9 +237,9 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                     mainCV.bag.hidden = true
                     mainCV.btnLogin.hidden = false
                 }
-                alert.showWarning("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏贴子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
+                alert.showInfo("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏贴子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
             } else {
-                TSMessage.showNotificationWithTitle("提示", subtitle: "你还没有登录,要登录后才可以注销哦", type: .Warning)
+                MCUtils.showCustomHUD("亲,你还没有登录,要登录后才可以注销哦", aType: .Warning)
            }
         }
         //隐藏菜单

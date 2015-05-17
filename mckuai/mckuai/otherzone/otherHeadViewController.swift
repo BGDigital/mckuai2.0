@@ -107,7 +107,7 @@ class otherHeadViewController: UIViewController, UMSocialUIDelegate {
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
         if(response.responseCode.value == UMSResponseCodeSuccess.value) {
-            MCUtils.showCustomHUD(self.view, title: "分享成功", imgName: "HUD_OK")
+            MCUtils.showCustomHUD("分享成功", aType: .Success)
             MobClick.event("Share", attributes: ["Address":"他人空间", "Type": "Success"])
         }
     }

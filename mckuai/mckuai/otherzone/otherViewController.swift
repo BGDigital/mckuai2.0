@@ -217,7 +217,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 println("Error: " + error.localizedDescription)
                 self.tableView.header.endRefreshing()
                 self.hud?.hide(true)
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("数据加载失败", aType: .Error)
         })
     }
     
@@ -238,7 +238,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 self.tableView.footer.endRefreshing()
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("数据加载失败", aType: .Error)
         })
     }
     
@@ -342,7 +342,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     */
     func doAttention(iTag: Int) {
         if appUserIdSave == self.UserId {
-            MCUtils.showCustomHUD(self.view, title: "你不能添加自己为好友", imgName: "HUD_ERROR")
+            MCUtils.showCustomHUD("你不能添加自己为好友", aType: .Error)
             return
         }
         var param = [
@@ -356,12 +356,12 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 println("背包:\(responseObject)")
                 self.btnAttention.setTitle(iTag == 1 ? "加入背包" : "移出背包", forState: .Normal)
                 self.btnAttention.tag = iTag == 1 ? 2 : 1
-                MCUtils.showCustomHUD(self.view, title: "操作成功", imgName: "HUD_OK")
+                MCUtils.showCustomHUD("操作成功", aType: .Success)
             },
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
-                MCUtils.showCustomHUD(self.view, title: "操作失败,请重试", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("操作失败,请重试", aType: .Error)
         })
     }
     

@@ -184,7 +184,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!){
-        TSMessage.showNotificationWithTitle("获取位置失败,请检查你的定位服务是否开启", type: .Warning)
+        MCUtils.showCustomHUD("获取位置失败,请检查你的定位服务是否开启", aType: .Warning)
     }
     
     func upAddrToServer(city: String) {

@@ -49,11 +49,11 @@ class Profile_Password:UIViewController,UIGestureRecognizerDelegate {
         let ensure = ensure_pass.text
         
         if oldpass == "" || newpass == "" || ensure == ""{
-            TSMessage.showNotificationWithTitle("密码不能为空", type: .Error)
+            MCUtils.showCustomHUD("密码不能为空", aType: .Warning)
             return
         }
         if newpass != ensure {
-            TSMessage.showNotificationWithTitle("两次密码输入不一致", type: .Error)
+            MCUtils.showCustomHUD("两次密码输入不一致", aType: .Warning)
             return
         }
         let dic = [
@@ -74,12 +74,12 @@ class Profile_Password:UIViewController,UIGestureRecognizerDelegate {
                 
                 if "ok" == json["state"].stringValue {
                     hud.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "保存信息成功", imgName: "HUD_OK")
+                    MCUtils.showCustomHUD("保存信息成功", aType: .Success)
                     isLoginout = true
                     self.navigationController?.popViewControllerAnimated(true)
                 }else{
                     hud.hide(true)
-                    MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("保存信息失败", aType: .Error)
                 }
                 
             },
@@ -87,7 +87,7 @@ class Profile_Password:UIViewController,UIGestureRecognizerDelegate {
                 error: NSError!) in
                 println("Error: " + error.localizedDescription)
                 hud.hide(true)
-                MCUtils.showCustomHUD(self.view, title: "保存信息失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("保存信息失败", aType: .Error)
         })
         
 //        APIClient.sharedInstance.modifiyUserInfo(self.view, ctl: self.navigationController, param: dic, success: {

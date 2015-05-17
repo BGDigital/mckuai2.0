@@ -120,7 +120,7 @@ class communityViewController: UIViewController {
                 error: NSError!) in
 //                println("Error: " + error.localizedDescription)
                 progress.hide(true)
-                MCUtils.showCustomHUD(self.view, title: "数据加载失败", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("数据加载失败", aType: .Error)
                 self.reloadDataView()
 
         })

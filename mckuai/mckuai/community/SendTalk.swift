@@ -155,7 +155,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         println("addpics")
         MobClick.event("sendTalkPage", attributes: ["type":"addPic","result":"all"])
         if(self.image_button.count >= 5){
-            MCUtils.showCustomHUD(self.view, title: "最多同时支持四张图片上传", imgName: "HUD_ERROR")
+            MCUtils.showCustomHUD("最多同时支持四张图片上传", aType: .Error)
         }else{
             
             
@@ -462,25 +462,25 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
         content_post = self.textView.text
         
         if(forumName_post == nil || forumName_post.isEmpty){
-            MCUtils.showCustomHUD(self.view, title: "请选择版块类型", imgName:  "HUD_ERROR")
+            MCUtils.showCustomHUD("请选择版块类型", aType: .Error)
             self.rightButton?.enabled = true
             return
         }
         
         if(talkTypeName_post == nil || talkTypeName_post.isEmpty){
-            MCUtils.showCustomHUD(self.view, title: "请选择帖子类型", imgName:  "HUD_ERROR")
+            MCUtils.showCustomHUD("请选择帖子类型", aType: .Error)
             self.rightButton?.enabled = true
             return
         }
         
         if(talkTitle_post == nil || talkTitle_post.isEmpty || count(talkTitle_post)<5){
-            MCUtils.showCustomHUD(self.view, title: "帖子标题不能少于5个字符", imgName:  "HUD_ERROR")
+            MCUtils.showCustomHUD("帖子标题不能少于5个字符", aType: .Error)
             self.rightButton?.enabled = true
             return
         }
         
         if(content_post == nil || content_post.isEmpty || content_post == "内容" || count(content_post)<15){
-            MCUtils.showCustomHUD(self.view, title: "发帖内容不能少于15个字符", imgName:  "HUD_ERROR")
+            MCUtils.showCustomHUD("发帖内容不能少于15个字符", aType: .Error)
             self.rightButton?.enabled = true
             return
         }
@@ -519,7 +519,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                     }else{
                         self.rightButton?.enabled = true
                         self.progress.removeFromSuperview()
-                        MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                        MCUtils.showCustomHUD("图片上传失败,请稍候再试", aType: .Error)
                         MobClick.event("sendTalkPage", attributes: ["type":"addPic","result":"error"])
                     }
                     
@@ -529,7 +529,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                     println("Error: " + error.localizedDescription)
                     self.rightButton?.enabled = true
                     self.progress.removeFromSuperview()
-                    MCUtils.showCustomHUD(self.view, title: "图片上传失败,请稍候再试", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("图片上传失败,请稍候再试", aType: .Error)
                     MobClick.event("sendTalkPage", attributes: ["type":"addPic","result":"error"])
             })
             
@@ -572,7 +572,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                 }else{
                     self.rightButton?.enabled = true
                     self.progress.removeFromSuperview()
-                    MCUtils.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "HUD_ERROR")
+                    MCUtils.showCustomHUD("帖子发送失败,请稍候再试", aType: .Error)
                     MobClick.event("community",attributes: ["type":"sendTalk","result":"error"])
                     MobClick.event("sendTalkPage", attributes: ["type":"send","result":"error"])
                 }
@@ -583,7 +583,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
                 println("Error: " + error.localizedDescription)
                 self.rightButton?.enabled = true
                 self.progress.removeFromSuperview()
-                MCUtils.showCustomHUD(self.view, title: "帖子发送失败,请稍候再试", imgName: "HUD_ERROR")
+                MCUtils.showCustomHUD("帖子发送失败,请稍候再试", aType: .Error)
                 MobClick.event("sendTalkPage", attributes: ["type":"send","result":"error"])
         })
         
