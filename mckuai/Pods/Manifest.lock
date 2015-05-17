@@ -23,6 +23,11 @@ PODS:
   - HexColors (2.2.1)
   - MBProgressHUD (0.9.1)
   - MJRefresh (1.4.6)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
   - RESideMenu (4.0.7)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
@@ -35,6 +40,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - MBProgressHUD (~> 0.9.1)
   - MJRefresh
+  - NJKWebViewProgress
   - RESideMenu (~> 4.0.7)
   - SDWebImage (~> 3.7)
   - TSMessages
@@ -45,6 +51,7 @@ SPEC CHECKSUMS:
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJRefresh: 2eaa3fd8f67fbb86497840fb0167446f7eb61dc7
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   TSMessages: 2a52642128d7ab15b46930c810b9c9403a2b58f3

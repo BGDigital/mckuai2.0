@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -103,8 +103,8 @@
                                         <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成都" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5e-aF-Bn7">
-                                        <rect key="frame" x="322" y="14" width="34" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5e-aF-Bn7">
+                                        <rect key="frame" x="277" y="14" width="79" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -146,7 +146,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2M-tO-XeP">
-                                        <rect key="frame" x="199" y="14" width="150" height="21"/>
+                                        <rect key="frame" x="205" y="14" width="150" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -157,8 +157,7 @@
                                     <constraint firstItem="fPT-3r-fw6" firstAttribute="top" secondItem="wQj-9f-l9U" secondAttribute="top" constant="14" id="AeU-tz-Qfw"/>
                                     <constraint firstItem="fPT-3r-fw6" firstAttribute="leading" secondItem="wQj-9f-l9U" secondAttribute="leading" constant="20" id="Bqt-5B-31k"/>
                                     <constraint firstAttribute="height" constant="50" id="NIZ-fA-YB0"/>
-                                    <constraint firstItem="t2M-tO-XeP" firstAttribute="leading" secondItem="fPT-3r-fw6" secondAttribute="trailing" constant="145" id="Pev-E4-vZM"/>
-                                    <constraint firstAttribute="trailing" secondItem="t2M-tO-XeP" secondAttribute="trailing" constant="34" id="fcO-Ed-EeJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="t2M-tO-XeP" secondAttribute="trailing" constant="28" id="fcO-Ed-EeJ"/>
                                     <constraint firstItem="t2M-tO-XeP" firstAttribute="top" secondItem="wQj-9f-l9U" secondAttribute="top" constant="14" id="n0o-yT-Ybf"/>
                                 </constraints>
                             </view>
@@ -242,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fjJ-n6-dST" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="664.5" y="-83.25"/>
+            <point key="canvasLocation" x="664.5" y="-83.5"/>
         </scene>
     </scenes>
 </document>

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         self.window?.makeKeyAndVisible()
         //启动页面加载广告
         loadLaunchView()
-        Async.background({
+        Async.main({
             println("多线程调用三方库.")
             //RongCloud登录
             if !appUserRCToken.isEmpty {
@@ -32,11 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
                         MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
                     },
                     error: {status in
-//                        println("RongCloud Login Faild. \(status)")
+                        println("RongCloud Login Faild. \(status)")
                 })
-
-                MCUtils.GetFriendsList()
             }
+            //获取好友列表
+            MCUtils.GetFriendsList()
             //UMeng反馈
             UMFeedback.setAppkey(UMAppKey)
             UMFeedback.setLogEnabled(false)
@@ -207,6 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
 
     func applicationWillEnterForeground(application: UIApplication) {
         //显示rongcloud未读消息
+//        MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 

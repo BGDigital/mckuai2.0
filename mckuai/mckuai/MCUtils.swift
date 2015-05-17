@@ -20,6 +20,7 @@ let wx_AppId = "wx49ba2c7147d2368d"
 let wx_AppKey = "85aa75ddb9b37d47698f24417a373134"
 let share_url = "http://www.mckuai.com"
 let RC_AppKey = "k51hidwq1fb4b"
+//"tdrvipksrg5y5"
 
 //本地配置文件
 //引导页

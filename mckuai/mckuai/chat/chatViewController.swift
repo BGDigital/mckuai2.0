@@ -47,7 +47,7 @@ class chatViewController: RCChatListViewController, RCIMReceiveMessageDelegate{
                 if let uId = MCUtils.friends[userInfo.userId] {
                     MCUtils.openOtherZone(self.navigationController, userId: uId.toInt()!, showPop: false)
                 } else {
-                    if String(appUserIdSave) != userInfo.userId {
+                    if String(appUserRCID) != userInfo.userId {
                         MCUtils.showCustomHUD("该用户还不在你的背包中,快把他加到背包中吧.", aType: .Warning)
                     }
                 }
@@ -126,6 +126,7 @@ class chatViewController: RCChatListViewController, RCIMReceiveMessageDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         MobClick.beginLogPageView("chatView")
+        MCUtils.RCTabBarItem.badgeValue = nil
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)

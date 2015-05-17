@@ -73,7 +73,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     
     func setupViews() {
-        if !self.showPop {
+        if self.showPop! {
             self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64-50), style: UITableViewStyle.Plain)
         } else {
             self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64), style: UITableViewStyle.Plain)

@@ -9,6 +9,7 @@ pod 'MJRefresh'
 pod "AFNetworking", "~> 2.0"
 pod "TSMessages"
 pod 'UMengFeedback', '~> 2.2'
+pod 'NJKWebViewProgress'
 end
 
 target 'mckuaiTests' do
