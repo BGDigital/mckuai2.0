@@ -82,7 +82,7 @@ class communityViewController: UIViewController {
         var barButtonItem = UIBarButtonItem(customView:self.rightButton!)
         
         var negativeSpacer = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.FixedSpace,target:self,action:nil)
-        negativeSpacer.width = -8
+        negativeSpacer.width = 0
         self.navigationItem.rightBarButtonItems = [negativeSpacer,barButtonItem];
     }
     
