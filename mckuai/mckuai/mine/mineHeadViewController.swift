@@ -39,8 +39,6 @@ class mineHeadViewController: UIViewController, UMSocialUIDelegate {
         super.viewDidLoad()
         self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 325)
         initSegmentedControl()
-        //模糊背景
-        imageBg.addBlurEffect(30, times: 1)
         //初始化Button
         addSubTextToBtn("消息", parent: btnMsg)
         addSubTextToBtn("动态", parent: btnDynamic)
@@ -141,6 +139,7 @@ class mineHeadViewController: UIViewController, UMSocialUIDelegate {
             })
         //
         btnMsg.setTitle(J["messageNum"].stringValue, forState: .Normal)
+            println(btnMsg.titleLabel?.text)
         btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)
         btnWork.setTitle(J["workNum"].stringValue, forState: .Normal)
         }

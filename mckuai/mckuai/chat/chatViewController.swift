@@ -31,8 +31,6 @@ class chatViewController: RCChatListViewController {
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         //设置标题颜色
         self.setNavigationTitle("聊天", textColor: UIColor.whiteColor())
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         
         var back = UIBarButtonItem(image: UIImage(named: "sidemenu"), style: UIBarButtonItemStyle.Bordered, target: self, action: "leftBarButtonItemPressed:")
         back.tintColor = UIColor.whiteColor()

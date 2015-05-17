@@ -28,7 +28,7 @@ class communityViewController: UIViewController {
 //        setForumListData()
         
         var main = UIStoryboard(name: "community", bundle: nil).instantiateViewControllerWithIdentifier("communityViewController") as! UIViewController
-        main.tabBarItem = UITabBarItem(title: "社区", image: UIImage(named: "second_normal"), selectedImage: UIImage(named: "second_selected"))
+        main.tabBarItem = UITabBarItem(title: "社区", image: UIImage(named: "fourth_normal"), selectedImage: UIImage(named: "fourth_selected"))
         return UINavigationController(rootViewController: main)
     }
     

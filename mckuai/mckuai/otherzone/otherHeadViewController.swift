@@ -102,6 +102,7 @@ class otherHeadViewController: UIViewController, UMSocialUIDelegate {
             })
         }
         btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)
+        println(btnDynamic.titleLabel?.text)
         btnWork.setTitle(J["workNum"].stringValue, forState: .Normal)
     }
     

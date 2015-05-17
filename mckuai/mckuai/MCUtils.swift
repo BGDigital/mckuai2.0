@@ -195,8 +195,8 @@ class MCUtils {
         //返回按钮的箭头颜色
         navigationBar.tintColor = UIColor.whiteColor()
         //设置标题颜色 白色
-        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
-        navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
+//        let navigationTitleAttribute : NSDictionary = NSDictionary(objectsAndKeys: UIColor.whiteColor(),NSForegroundColorAttributeName)
+//        navigationBar.titleTextAttributes = navigationTitleAttribute as [NSObject : AnyObject]
         //设置返回按钮的样式
         var img = UIImage(named: "nav_back")
         img?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
