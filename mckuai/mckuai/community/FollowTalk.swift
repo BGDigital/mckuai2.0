@@ -40,6 +40,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         self.navigationItem.rightBarButtonItem = sendButton
         initTextView()
         initimage()
+        self.edgesForExtendedLayout = UIRectEdge.None
         
         
         
@@ -49,8 +50,6 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     func initTextView() {
         self.textView = UITextView(frame: CGRectMake(0, 0,self.view.frame.width, self.view.frame.height-pic_wight-5-260))
         self.textView.delegate = self
-//                    textView.layer.borderColor = UIColor.grayColor().CGColor;
-        //            textView.layer.borderWidth = 1;
         textView.userInteractionEnabled = true;
         textView.font = UIFont.systemFontOfSize(14)
         textView.scrollEnabled = true;
@@ -58,7 +57,6 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         textView.textAlignment = NSTextAlignment.Left
         textView.text = "内容..."
         textView.textColor = UIColor.lightGrayColor()
-//        textView.backgroundColor = UIColor.greenColor()
         var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tapDismiss)
         self.view.addSubview(self.textView)

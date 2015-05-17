@@ -163,7 +163,7 @@ class mineHeadViewController: UIViewController, UMSocialUIDelegate {
 
     @IBAction func setUserInfoAction(sender: UIButton) {
         MobClick.event("mineCenter", attributes: ["Type":"Setting"])
-        UserInfo.showUserInfoView(MCUtils.mainNav)
+        UserInfo.showUserInfoView(MCUtils.mainNav,aDelegate: (MCUtils.leftView as! leftMenuViewController))
     }
 
 }

@@ -6,12 +6,22 @@
 //  Copyright (c) 2015年 XingfuQiu. All rights reserved.
 //
 
+protocol ExitProtocol {
+    /**
+    注销用户
+    
+    :returns: Void
+    */
+    func userExitProtocol() -> Void
+}
+
 import Foundation
 import UIKit
 
 class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     var manager = AFHTTPRequestOperationManager()
     var cityList: cityListViewController!
+    var Delegate: ExitProtocol?
     
     @IBOutlet weak var headImg_view: UIView!
     @IBOutlet weak var userName_view: UIView!
@@ -134,11 +144,13 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
-            Defaults.remove(D_USER_ID)
-            appUserIdSave = 0
-            isLoginout = true
-            println("用户已退出！")
-            self.navigationController?.popViewControllerAnimated(true)
+//            Defaults.remove(D_USER_ID)
+//            appUserIdSave = 0
+//            isLoginout = true
+//            println("用户已退出！")
+            self.Delegate?.userExitProtocol()
+            self.navigationController?.popToRootViewControllerAnimated(true)
+//            self.tabBarController?.selectedIndex = 1
         }
     }
 
@@ -150,8 +162,9 @@ class UserInfo: UIViewController, UIAlertViewDelegate, CityProtocol {
     
     
 
-    class func showUserInfoView(ctl:UINavigationController?){
+    class func showUserInfoView(ctl:UINavigationController?,aDelegate: ExitProtocol?){
         var userInfo = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewControllerWithIdentifier("userInfo") as! UserInfo
+        userInfo.Delegate = aDelegate
         if (ctl != nil) {
             ctl?.pushViewController(userInfo, animated: true)
         } else {

@@ -58,7 +58,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     func backToPage() {
         Async.userInitiated {
-            NSNotificationCenter.defaultCenter().removeObserver(self)
+            
             self.dismissKeyboard()
         }.main{
             self.navigationController?.popViewControllerAnimated(true)
@@ -82,10 +82,9 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     
     @IBAction func toRegister(sender: UIButton) {
         MobClick.event("qqLoginPage",attributes: ["type":"toRegister"])
-        NSNotificationCenter.defaultCenter().removeObserver(self)
         self.dismissKeyboard()
         
-        UserRegister.showUserRegisterView(presentNavigator: self.presentNavigator)
+        UserRegister.showUserRegisterView(presentNavigator: self.presentNavigator,aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
     }
     
     func mckuaiLoginFunction() {
@@ -272,8 +271,6 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         userLoginView = UIStoryboard(name: "NewLogin", bundle: nil).instantiateViewControllerWithIdentifier("newLogin") as! NewLogin
         userLoginView.presentNavigator = ctl
         userLoginView.Delegate = aDelegate
-        NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidShowLogin:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidHiddenLogin:", name: UIKeyboardWillHideNotification, object: nil)
 //        ctl?.presentViewController(userLoginView, animated: true, completion: nil)
         ctl?.pushViewController(userLoginView, animated: true)
     }
@@ -290,10 +287,13 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     }
     
     override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidShowLogin:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(userLoginView, selector: "keyboardDidHiddenLogin:", name: UIKeyboardWillHideNotification, object: nil)
         self.tabBarController?.tabBar.hidden = true
         MobClick.beginLogPageView("userLogin")
     }
     override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
         self.tabBarController?.tabBar.hidden = false
         MobClick.endLogPageView("userLogin")

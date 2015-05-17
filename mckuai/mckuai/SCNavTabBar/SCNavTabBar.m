@@ -83,7 +83,7 @@
 
 - (CGFloat)contentWidthAndAddNavTabBarItemsWithButtonsWidth:(NSArray *)widths
 {
-    CGFloat buttonX = DOT_COORDINATE;
+    CGFloat buttonX = 5;
     for (NSInteger index = 0; index < [_itemTitles count]; index++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

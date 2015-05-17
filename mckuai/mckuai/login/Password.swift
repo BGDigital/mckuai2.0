@@ -105,9 +105,11 @@ class Profile_Password:UIViewController,UIGestureRecognizerDelegate {
     
     override func viewWillAppear(animated: Bool) {
         MobClick.beginLogPageView("userInfoSetPassWord")
+        self.tabBarController?.tabBar.hidden = true
     }
     override func viewWillDisappear(animated: Bool) {
         MobClick.endLogPageView("userInfoSetPassWord")
+        self.tabBarController?.tabBar.hidden = false
     }
     
     
