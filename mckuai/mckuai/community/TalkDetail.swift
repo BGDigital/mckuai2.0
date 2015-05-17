@@ -312,41 +312,47 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 NewLogin.showUserLoginView(self.navigationController, aDelegate: (MCUtils.mainHeadView as! mainHeaderViewController))
             }else{
                 
-                if(self.shang_btn.selected == false){
-                    
-                    let params = [
-                        "userId":String(stringInterpolationSegment: appUserIdSave),
-                        "talkId":String(self.id)
-                    ]
-                    
-                    manager.POST(daShang_url,
-                        parameters: params,
-                        success: { (operation: AFHTTPRequestOperation!,
-                            responseObject: AnyObject!) in
-                            var json = JSON(responseObject)
-                            
-                            if "ok" == json["state"].stringValue {
-                                self.shang_btn.enabled = false
-                                MCUtils.showCustomHUD("土豪,感谢你的钻石", aType: .Success)
-                                self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
-                            }else{
-                                MCUtils.showCustomHUD(json["msg"].stringValue, aType: .Error)
-                            }
-                            
-                        },
-                        failure: { (operation: AFHTTPRequestOperation!,
-                            error: NSError!) in
-                            println("Error: " + error.localizedDescription)
-                            
-                    })
-
-                    
-                }else{
-                    MCUtils.showCustomHUD("土豪,钻石再多也只能打赏一次", aType: .Success)
-                }
+                UIAlertView(title: "", message: "土豪,你确定要打赏该帖子吗?", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定").show()
+                
+                
+                
+            }
+        }
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            if(self.shang_btn.selected == false){
+                
+                let params = [
+                    "userId":String(stringInterpolationSegment: appUserIdSave),
+                    "talkId":String(self.id)
+                ]
+                
+                manager.POST(daShang_url,
+                    parameters: params,
+                    success: { (operation: AFHTTPRequestOperation!,
+                        responseObject: AnyObject!) in
+                        var json = JSON(responseObject)
+                        
+                        if "ok" == json["state"].stringValue {
+                            self.shang_btn.enabled = false
+                            MCUtils.showCustomHUD("土豪,感谢你的打赏", aType: .Success)
+                            self.webView.stringByEvaluatingJavaScriptFromString("daShang()");
+                        }else{
+                            MCUtils.showCustomHUD(json["msg"].stringValue, aType: .Error)
+                        }
+                        
+                    },
+                    failure: { (operation: AFHTTPRequestOperation!,
+                        error: NSError!) in
+                        println("Error: " + error.localizedDescription)
+                        
+                })
+                
                 
             }else{
-                MCUtils.showCustomHUD(self.view, title: "土豪,钻石再多也只能打赏一次", imgName: "HUD_OK")
+                MCUtils.showCustomHUD("土豪,钻石再多也只能打赏一次", aType: .Success)
             }
 
         }
