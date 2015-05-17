@@ -43,11 +43,13 @@ class chatViewController: RCChatListViewController, RCIMReceiveMessageDelegate{
     //点击用户头像
     func setUserPortraitClick() {
         RCIM.sharedRCIM().setUserPortraitClickEvent { (_, userInfo) -> Void in
-            if let uId = MCUtils.friends[userInfo.userId] {
-                MCUtils.openOtherZone(self.navigationController, userId: uId.toInt()!, showPop: false)
-            } else {
-                if String(appUserIdSave) != userInfo.userId {
-                    MCUtils.showCustomHUD("该用户还不在你的背包中,快把他加到背包中吧.", aType: .Warning)
+            if userInfo != nil {
+                if let uId = MCUtils.friends[userInfo.userId] {
+                    MCUtils.openOtherZone(self.navigationController, userId: uId.toInt()!, showPop: false)
+                } else {
+                    if String(appUserIdSave) != userInfo.userId {
+                        MCUtils.showCustomHUD("该用户还不在你的背包中,快把他加到背包中吧.", aType: .Warning)
+                    }
                 }
             }
         }

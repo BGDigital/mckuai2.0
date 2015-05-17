@@ -225,6 +225,7 @@
                     <size key="freeformSize" width="600" height="235"/>
                     <connections>
                         <outlet property="bag" destination="P8c-DR-jBO" id="K4G-eD-vO8"/>
+                        <outlet property="bagTitle" destination="Hb1-Sv-f5l" id="f9V-yk-8dB"/>
                         <outlet property="chatTitle" destination="xFd-QZ-zbd" id="xgU-uC-fYb"/>
                         <outlet property="imageV" destination="kEy-aD-rvb" id="KjB-05-k1E"/>
                         <outlet property="imgView" destination="868-YO-PVl" id="LkL-vH-ma3"/>

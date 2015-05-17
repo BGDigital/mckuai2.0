@@ -25,6 +25,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     @IBOutlet weak var imageV: UIImageView!
     @IBOutlet weak var imgView: UIView!
     @IBOutlet weak var bag: UIButton!
+    @IBOutlet weak var bagTitle: UILabel!
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var level: UIButton!
     @IBOutlet weak var locationCity: UIButton!
@@ -101,6 +102,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
             self.level.hidden = false
             self.locationCity.hidden = false
             self.bag.hidden = false
+            self.bagTitle.hidden = false
             self.btnLogin.hidden = true
             
             var p = user["process"].floatValue * 100
@@ -127,6 +129,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
             self.level.hidden = true
             self.locationCity.hidden = true
             self.bag.hidden = true
+            self.bagTitle.hidden = true
             self.btnLogin.hidden = false
         }
         //聊天室
@@ -202,6 +205,7 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         self.level.hidden = false
         self.locationCity.hidden = false
         self.bag.hidden = false
+        self.bagTitle.hidden = false
         self.btnLogin.hidden = true
         
         self.roundProgressView.percent = CGFloat(appUserProcess)

@@ -73,7 +73,11 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     
     func setupViews() {
-        self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64-50), style: UITableViewStyle.Plain)
+        if !self.showPop {
+            self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64-50), style: UITableViewStyle.Plain)
+        } else {
+            self.tableView = UITableView(frame: CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64), style: UITableViewStyle.Plain)
+        }
         tableView.autoresizingMask = .FlexibleWidth | .FlexibleBottomMargin | .FlexibleTopMargin
         tableView.delegate = self
         tableView.dataSource = self
