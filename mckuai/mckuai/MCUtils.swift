@@ -110,6 +110,7 @@ class MCUtils {
     static var mainNav: UINavigationController?
     //RongCloud 好友列表
     static var friendList = NSMutableArray()
+    static var friends = Dictionary<String, String>()
         
     static let COLOR_NavBG = "#43D152"
     static let COLOR_MAIN = "#4C4D4E"
@@ -137,12 +138,16 @@ class MCUtils {
                         if let d = json["dataObject", "data"].array {
                             //重新获取好友信息,先清空之前的列表
                             MCUtils.friendList.removeAllObjects()
+                            MCUtils.friends.removeAll(keepCapacity: false)
                             for j in d {
                                 var user = RCUserInfo()
                                 user.userId = j["name"].stringValue
                                 user.name = j["nike"].stringValue
                                 user.portraitUri = j["headImg"].stringValue
                                 MCUtils.friendList.addObject(user)
+                                
+                                //添加Firends
+                                MCUtils.friends[j["name"].stringValue] = j["id"].stringValue
                             }
                         }
                     }
@@ -365,8 +370,8 @@ class MCUtils {
     }
 
     //供其它界面调用  --他人的空间
-    class func openOtherZone(nav: UINavigationController?, userId: Int) {
-        var otherZone: otherViewController = otherViewController(uId: userId)
+    class func openOtherZone(nav: UINavigationController?, userId: Int, showPop: Bool) {
+        var otherZone: otherViewController = otherViewController(uId: userId, bShowPop: showPop)
         if let n = nav {
             n.pushViewController(otherZone, animated: true)
         } else {

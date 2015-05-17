@@ -149,7 +149,7 @@ class friendsViewController: UICollectionViewController {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! CollectionCell
         self.selectUserId = cell.userId
         
-        MCUtils.openOtherZone(self.nav, userId: selectUserId!)
+        MCUtils.openOtherZone(self.nav, userId: selectUserId!, showPop: true)
     }
     
     func setNavi(navi: UINavigationController?) {

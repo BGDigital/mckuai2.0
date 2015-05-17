@@ -57,6 +57,8 @@ class rootViewController: RESideMenu, RESideMenuDelegate, UITabBarControllerDele
             MCUtils.mainNav = viewController as? UINavigationController
             if tabBarController.selectedIndex == 2{
                 MCUtils.RCTabBarItem.badgeValue = nil
+            } else {
+                MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
             }
         }
     }

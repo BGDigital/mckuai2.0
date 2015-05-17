@@ -77,16 +77,20 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     }
     
     @IBAction func joinChatRoom() {
-        MobClick.event("mainView", attributes: ["Type":"ChatRoom"])
-        // 启动聊天室，与启动单聊等类似
-        var temp: RCChatViewController = customChatViewController()
-        temp.hidesBottomBarWhenPushed = true
-        temp.currentTarget = self.chatRoomId;
-        temp.conversationType = .ConversationType_CHATROOM; // 传入聊天室类型
-        temp.enableSettings = false;
-        temp.currentTargetName = self.chatRoomName;
-        
-        self.nav?.pushViewController(temp, animated: true)
+        if appUserIdSave != 0 {
+            MobClick.event("mainView", attributes: ["Type":"ChatRoom"])
+            // 启动聊天室，与启动单聊等类似
+            var temp: RCChatViewController = customChatViewController()
+            temp.hidesBottomBarWhenPushed = true
+            temp.currentTarget = self.chatRoomId;
+            temp.conversationType = .ConversationType_CHATROOM; // 传入聊天室类型
+            temp.enableSettings = false;
+            temp.currentTargetName = self.chatRoomName;
+            
+            self.nav?.pushViewController(temp, animated: true)
+        } else {
+            MCUtils.showCustomHUD("亲,要登录了才能进入聊天室和基友们聊天哦", aType: .Warning)
+        }
     }
     
     func setData(user: JSON!, chat: JSON!) {

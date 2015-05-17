@@ -409,7 +409,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
         if action == "viewuser" && param["id"] != nil{
             if let id = param["id"]!.toInt(){
-                MCUtils.openOtherZone(self.navigationController, userId: id)
+                MCUtils.openOtherZone(self.navigationController, userId: id, showPop: true)
                 
                 MobClick.event("talkDetail", attributes: ["type":"clickHeadImg"])
                 

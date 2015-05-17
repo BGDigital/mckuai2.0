@@ -13,6 +13,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     private var tableView: UITableView!
     private var otherhead: otherHeadViewController!
     private var UserId: Int?  //外面传进来的UserId
+    private var showPop: Bool! //是否显示操作菜单
     private let NAVBAR_CHANGE_POINT:CGFloat = 50
     private var offsetY: CGFloat!
     private var manager = AFHTTPRequestOperationManager()
@@ -60,9 +61,10 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var mineType = "dynamic"
     
-    init(uId: Int) {
+    init(uId: Int, bShowPop: Bool) {
         super.init(nibName: nil, bundle: nil)
         self.UserId = uId
+        self.showPop = bShowPop
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -262,6 +264,9 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //显示弹出出的选项
     func showPopWindow(btnText: String, btnTag: Int) {
+        if !self.showPop {
+            return
+        }
         var view = UIView(frame: CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 50))
         view.backgroundColor = UIColor.blackColor()
         

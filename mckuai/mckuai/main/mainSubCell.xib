@@ -39,11 +39,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kpK-sG-Hbw">
-                                <rect key="frame" x="199" y="58" width="16" height="16"/>
+                                <rect key="frame" x="199" y="58" width="50" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="7xi-Do-7Yn"/>
                                     <constraint firstAttribute="height" constant="16" id="Irg-Gq-ZJu"/>
                                     <constraint firstAttribute="width" constant="47" id="P4U-OM-dtT"/>
+                                    <constraint firstAttribute="width" constant="50" id="jkZ-AW-Ydg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" image="replys">
@@ -89,7 +90,7 @@
                             <constraint firstItem="08l-GC-jbA" firstAttribute="leading" secondItem="MBl-yu-Y49" secondAttribute="leading" constant="8" id="Rqv-ub-qs8"/>
                             <constraint firstItem="4E9-bj-MN2" firstAttribute="top" secondItem="MBl-yu-Y49" secondAttribute="top" constant="8" id="VlY-xR-7QP"/>
                             <constraint firstAttribute="bottom" secondItem="ngm-cZ-i0w" secondAttribute="bottom" constant="6" id="YX5-0x-NGf"/>
-                            <constraint firstAttribute="centerX" secondItem="kpK-sG-Hbw" secondAttribute="centerX" id="dWI-GT-2N8"/>
+                            <constraint firstAttribute="centerX" secondItem="kpK-sG-Hbw" secondAttribute="centerX" constant="-17" id="dWI-GT-2N8"/>
                             <constraint firstAttribute="bottom" secondItem="08l-GC-jbA" secondAttribute="bottom" constant="3" id="fUZ-KH-i1U"/>
                             <constraint firstAttribute="bottom" secondItem="kpK-sG-Hbw" secondAttribute="bottom" constant="5" id="lPH-KL-Ixh"/>
                             <constraint firstItem="Gvc-9F-nwq" firstAttribute="leading" secondItem="MBl-yu-Y49" secondAttribute="leading" id="nZD-8t-B4e"/>

@@ -100,7 +100,7 @@
                                     <action selector="onShare:" destination="irB-cs-Is1" eventType="touchUpInside" id="Lsn-ND-gep"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmy-oS-IwE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmy-oS-IwE">
                                 <rect key="frame" x="220" y="176" width="160" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="2Jq-jI-Czt"/>
@@ -109,13 +109,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaI-7r-qOe">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaI-7r-qOe">
                                 <rect key="frame" x="220" y="198" width="160" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="uAF-lf-80i"/>
+                                    <constraint firstAttribute="height" constant="20" id="yeg-C1-ftA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="未定位" image="backpacker_location">
+                                <state key="normal" title="未定位" image="usercenter_location">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -206,6 +207,7 @@
                             <constraint firstItem="JLa-XY-r2o" firstAttribute="centerX" secondItem="xrB-xx-jW6" secondAttribute="centerX" constant="-177" id="vyd-oc-sZT"/>
                             <constraint firstItem="JLa-XY-r2o" firstAttribute="leading" secondItem="Lth-Vs-4Jh" secondAttribute="leadingMargin" constant="57" id="xpu-hx-06H"/>
                             <constraint firstItem="zmy-oS-IwE" firstAttribute="top" secondItem="mBl-i9-NFW" secondAttribute="bottom" constant="6" id="yqf-yE-4vS"/>
+                            <constraint firstItem="MaI-7r-qOe" firstAttribute="top" secondItem="mBl-i9-NFW" secondAttribute="bottom" constant="28" id="z5u-7d-fl0"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -216,6 +218,7 @@
                                 <exclude reference="nbZ-Hj-hEH"/>
                                 <exclude reference="vyd-oc-sZT"/>
                                 <exclude reference="xpu-hx-06H"/>
+                                <exclude reference="z5u-7d-fl0"/>
                                 <exclude reference="esN-vu-zoE"/>
                                 <exclude reference="Sbn-hQ-LWz"/>
                                 <exclude reference="0vN-0R-13G"/>
@@ -243,8 +246,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backpacker_location" width="12" height="12"/>
         <image name="mine_setting" width="48" height="48"/>
         <image name="mine_share" width="48" height="48"/>
+        <image name="usercenter_location" width="12" height="12"/>
     </resources>
 </document>

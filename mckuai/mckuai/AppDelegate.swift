@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         RCIM.initWithAppKey(RC_AppKey, deviceToken: nil)
         
         //设置用户信息
-        RCIM.setUserInfoFetcherWithDelegate(self, isCacheUserInfo: false)
+        RCIM.setUserInfoFetcherWithDelegate(self, isCacheUserInfo: true)
         //设置好友信息
         RCIM.setFriendsFetcherWithDelegate(self)
     }
@@ -109,15 +109,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
 
     // 收到本地通知
     func application(application: UIApplication , didReceiveLocalNotification notification: UILocalNotification ) {
-//        println("本地通知:\(notification)")
-        MCUtils.RCTabBarItem.badgeValue = "\(RCIM.sharedRCIM().totalUnreadCount)"
-//        var alertView = UIAlertView (title: " 系统本地通知 " , message: notification.alertBody , delegate: nil , cancelButtonTitle: " 返回 " )
-//        alertView.show ()
+//        MCUtils.RCTabBarItem.badgeValue = "\(RCIM.sharedRCIM().totalUnreadCount)"
+    }
+    
+    //收到远程通知
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        UMessage.didReceiveRemoteNotification(userInfo)
+        UMFeedback.didReceiveRemoteNotification(userInfo)
     }
     
     //处理收到的远程推送消息
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
-//        println("handleActionWithIdentifier:\(userInfo)")
         if IS_IOS8() {
             if (identifier == "declineAction") {
 //                println("declineAction")
@@ -130,9 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     
     //获取苹果推送权限成功
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-//        println("didRegisterForRemoteNotificationsWithDeviceToken:\(deviceToken)")
         RCIM.sharedRCIM().setDeviceToken(deviceToken)
-        
 //        UMeng
         UMessage.registerDeviceToken(deviceToken)
         //反馈推送
@@ -141,12 +141,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
 //                println("addAlias Error:\(error)")
             }
         }
-    }
-
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-//        println("didReceiveRemoteNotification:\(userInfo)")
-        UMessage.didReceiveRemoteNotification(userInfo)
-//        UMFeedback.didReceiveRemoteNotification(userInfo)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -212,6 +206,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
+        //显示rongcloud未读消息
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 

@@ -174,7 +174,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             TalkDetail.showTalkDetailPage(self.nav, id: id)
         } else {
             let id = self.datasource[indexPath.row]["id"].intValue
-            MCUtils.openOtherZone(self.nav, userId: id)
+            MCUtils.openOtherZone(self.nav, userId: id, showPop: true)
         }
     }
     

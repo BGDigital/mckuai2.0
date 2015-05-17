@@ -8,7 +8,7 @@
 
 import UIKit
 
-class chatViewController: RCChatListViewController {
+class chatViewController: RCChatListViewController, RCIMReceiveMessageDelegate{
     
     class func mainRoot()->UIViewController{
         var main = UIStoryboard(name: "chat", bundle: nil).instantiateViewControllerWithIdentifier("chatViewController") as! RCChatListViewController
@@ -19,12 +19,38 @@ class chatViewController: RCChatListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        RCIM.sharedRCIM().setReceiveMessageDelegate(self)
         customNavBackButton()
+        setUserPortraitClick()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    
+    //接收到消息时处理
+    func didReceivedMessage(message: RCMessage!, left: Int32) {
+        println(left)
+        Async.main({
+            if left == 0 {
+                MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
+                UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber+1
+            }
+        })
+    }
+    
+    //点击用户头像
+    func setUserPortraitClick() {
+        RCIM.sharedRCIM().setUserPortraitClickEvent { (_, userInfo) -> Void in
+            if let uId = MCUtils.friends[userInfo.userId] {
+                MCUtils.openOtherZone(self.navigationController, userId: uId.toInt()!, showPop: false)
+            } else {
+                if String(appUserIdSave) != userInfo.userId {
+                    MCUtils.showCustomHUD("该用户还不在你的背包中,快把他加到背包中吧.", aType: .Warning)
+                }
+            }
+        }
     }
     
     func customNavBackButton() {
