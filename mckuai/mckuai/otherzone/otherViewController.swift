@@ -341,6 +341,10 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     :param: iTag 1:取消关注, 2:添加关注
     */
     func doAttention(iTag: Int) {
+        if appUserIdSave == self.UserId {
+            MCUtils.showCustomHUD(self.view, title: "你不能添加自己为好友", imgName: "HUD_ERROR")
+            return
+        }
         var param = [
             "act": iTag == 1 ? "cancleAttention" : "attention",
             "ownerId": appUserIdSave,

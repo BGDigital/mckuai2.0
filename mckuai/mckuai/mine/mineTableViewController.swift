@@ -273,11 +273,13 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewWillAppear(animated: Bool) {
         MobClick.beginLogPageView("mineTableView")
+        self.tabBarController?.tabBar.hidden = true
         super.viewWillAppear(animated)
         self.scrollViewDidScroll(self.tableView)
     }
     override func viewWillDisappear(animated: Bool) {
         MobClick.endLogPageView("mineTableView")
+        self.tabBarController?.tabBar.hidden = false
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
     }
