@@ -15,6 +15,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     var mineMsgType = "reply"
     var head: mineHeadViewController!
     let NAVBAR_CHANGE_POINT:CGFloat = 50
+    var offsetY: CGFloat!
     var manager = AFHTTPRequestOperationManager()
     var page: PageInfo!
     var hud: MBProgressHUD?
@@ -100,8 +101,8 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var color = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)
-        var offsetY = scrollView.contentOffset.y
-        if offsetY > NAVBAR_CHANGE_POINT {
+        self.offsetY = scrollView.contentOffset.y
+        if self.offsetY > NAVBAR_CHANGE_POINT {
             var alpha = 1 - (NAVBAR_CHANGE_POINT + 64 - offsetY) / 64
             self.navigationItem.title = "个人中心"
             self.navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(alpha))
@@ -262,6 +263,10 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.offsetY > 64 {
+            return
+        }
         //View 渐隐
         var navAlpha = 1
         var color = UIColor(hexString: MCUtils.COLOR_NavBG)

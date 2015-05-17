@@ -29,7 +29,7 @@ class mainSubCell: UITableViewCell {
         self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
         
         //底部线  +50是为了滑动删除时样式的同步
-        var linetop = UIView(frame: CGRectMake(0, self.frame.size.height-0.5, self.frame.size.width+50, 0.5))
+        var linetop = UIView(frame: CGRectMake(0, self.frame.size.height-0.5, self.frame.size.width+100, 0.5))
         linetop.backgroundColor = UIColor(hexString: "#E1E3E5")
         self.addSubview(linetop)
         

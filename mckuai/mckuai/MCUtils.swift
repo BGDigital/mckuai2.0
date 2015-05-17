@@ -120,7 +120,7 @@ class MCUtils {
     static let TEXT_SEARCH = "搜索中..."
 
     static let URL_LAUNCH = "http://cdn.mckuai.com/app_start.png"
-    
+        
     /**
     获取融云好友列表
     */

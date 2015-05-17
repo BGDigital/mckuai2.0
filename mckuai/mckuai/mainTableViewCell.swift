@@ -32,7 +32,8 @@ class mainTableViewCell: UITableViewCell {
         self.userName.imageView?.layer.masksToBounds = true
         self.userName.imageView?.layer.cornerRadius = 10
         self.userName.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
-        self.replys.titleEdgeInsets = UIEdgeInsetsMake(-2, 2, 0, 0)
+        self.replys.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 0)
+        self.liveStatus.imageEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 2)
     }
     
     func update(json: JSON, iType: Int) {

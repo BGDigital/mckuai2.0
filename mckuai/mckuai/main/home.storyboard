@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--麦块-->
@@ -51,11 +51,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="21"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="小小麦童鞋" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grs-bx-qWy">
-                                        <rect key="frame" x="76" y="21" width="102" height="21"/>
+                                        <rect key="frame" x="76" y="24" width="102" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="102" id="PIu-gd-JDU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
@@ -77,14 +77,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8c-DR-jBO">
-                                        <rect key="frame" x="518" y="34" width="63" height="27"/>
-                                        <state key="normal" title="背包" image="backpacker_normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="od5-If-XNm">
-                                        <rect key="frame" x="186" y="23" width="45" height="15"/>
+                                        <rect key="frame" x="186" y="26" width="45" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="TIz-bI-ZSQ"/>
                                             <constraint firstAttribute="height" constant="15" id="hZN-19-5Zp"/>
@@ -95,8 +89,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0K-Fu-ERJ">
-                                        <rect key="frame" x="76" y="50" width="153" height="15"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0K-Fu-ERJ">
+                                        <rect key="frame" x="76" y="53" width="153" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="153" id="M0Q-5i-f0Q"/>
                                         </constraints>
@@ -109,13 +103,30 @@
                                             <action selector="openCityList:" destination="XJX-YD-otr" eventType="touchUpInside" id="lnW-tT-93M"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="背包" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hb1-Sv-f5l">
+                                        <rect key="frame" x="566" y="55" width="20" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8c-DR-jBO">
+                                        <rect key="frame" x="562" y="26" width="27" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="27" id="ewv-yz-P0Y"/>
+                                            <constraint firstAttribute="height" constant="27" id="phr-Bb-g8t"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <state key="normal" image="backpacker_normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.17254901960784313" green="0.82352941176470584" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="od5-If-XNm" firstAttribute="leading" secondItem="grs-bx-qWy" secondAttribute="trailing" constant="8" id="31t-Qn-FdM"/>
-                                    <constraint firstItem="P8c-DR-jBO" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="34" id="6v2-r7-6CI"/>
-                                    <constraint firstAttribute="trailing" secondItem="P8c-DR-jBO" secondAttribute="trailing" constant="19" id="B4s-gX-QWu"/>
+                                    <constraint firstItem="P8c-DR-jBO" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="26" id="6v2-r7-6CI"/>
+                                    <constraint firstAttribute="trailing" secondItem="P8c-DR-jBO" secondAttribute="trailing" constant="11" id="B4s-gX-QWu"/>
                                     <constraint firstItem="a0K-Fu-ERJ" firstAttribute="top" secondItem="grs-bx-qWy" secondAttribute="bottom" constant="8" id="H0S-EQ-jFg"/>
                                     <constraint firstItem="qj8-bT-NLt" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="14" id="PLb-yh-thD"/>
                                     <constraint firstItem="grs-bx-qWy" firstAttribute="leading" secondItem="qj8-bT-NLt" secondAttribute="trailing" constant="8" id="U8m-pe-M0t"/>
@@ -124,9 +135,11 @@
                                     <constraint firstItem="a0K-Fu-ERJ" firstAttribute="leading" secondItem="T0F-CA-wdz" secondAttribute="leading" constant="76" id="jgK-Yx-IWw"/>
                                     <constraint firstAttribute="height" constant="74" id="ohu-Ig-Lae"/>
                                     <constraint firstItem="qj8-bT-NLt" firstAttribute="leading" secondItem="T0F-CA-wdz" secondAttribute="leading" constant="8" id="orp-hg-i0Y"/>
-                                    <constraint firstItem="grs-bx-qWy" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="21" id="qFT-1C-P5d"/>
+                                    <constraint firstItem="grs-bx-qWy" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="24" id="qFT-1C-P5d"/>
+                                    <constraint firstItem="Hb1-Sv-f5l" firstAttribute="centerX" secondItem="P8c-DR-jBO" secondAttribute="centerX" id="rWh-va-VDs"/>
                                     <constraint firstItem="GDh-xh-4rA" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" id="thD-6o-25Z"/>
-                                    <constraint firstItem="od5-If-XNm" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="23" id="tqC-UC-kRq"/>
+                                    <constraint firstItem="od5-If-XNm" firstAttribute="top" secondItem="T0F-CA-wdz" secondAttribute="top" constant="26" id="tqC-UC-kRq"/>
+                                    <constraint firstItem="Hb1-Sv-f5l" firstAttribute="top" secondItem="P8c-DR-jBO" secondAttribute="bottom" constant="2" id="xRS-Sq-OOa"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frP-xz-HHH">
@@ -226,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSa-5e-ByW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2589" y="-404.5"/>
+            <point key="canvasLocation" x="2343" y="-391.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Epc-4z-TTs">

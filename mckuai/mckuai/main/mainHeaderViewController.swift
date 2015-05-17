@@ -71,6 +71,8 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(btnLogin)
         btnLogin.hidden = true
+        
+        //背包图片,文字位置
         // Do any additional setup after loading the view.
     }
     

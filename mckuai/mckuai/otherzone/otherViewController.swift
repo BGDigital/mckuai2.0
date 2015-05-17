@@ -14,6 +14,7 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     private var otherhead: otherHeadViewController!
     private var UserId: Int?  //外面传进来的UserId
     private let NAVBAR_CHANGE_POINT:CGFloat = 50
+    private var offsetY: CGFloat!
     private var manager = AFHTTPRequestOperationManager()
     var page: PageInfo!
     var hud: MBProgressHUD?
@@ -29,10 +30,10 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
                 allCount: self.json["dataObject", "list", "allCount"].intValue)
                 if let d = self.json["dataObject", "list", "data"].array {
                     if page.currentPage == 1 {
-                        println("刷新数据")
+//                        println("刷新数据")
                         self.datasource = d
                     } else {
-                        println("加载更多")
+//                        println("加载更多")
                         self.datasource = self.datasource + d
                     }
                 }
@@ -111,8 +112,8 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var color = UIColor(red: 0.247, green: 0.812, blue: 0.333, alpha: 1.00)
-        var offsetY = scrollView.contentOffset.y
-        if offsetY > NAVBAR_CHANGE_POINT {
+        self.offsetY = scrollView.contentOffset.y
+        if self.offsetY > NAVBAR_CHANGE_POINT {
             var alpha = 1 - (NAVBAR_CHANGE_POINT + 64 - offsetY) / 64
             self.navigationItem.title = self.User["nike"].stringValue
             self.navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(alpha))
@@ -366,6 +367,10 @@ class otherViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.offsetY > 64 {
+            return
+        }
         //View 渐隐
         var navAlpha = 1
         var color = UIColor(hexString: MCUtils.COLOR_NavBG)
