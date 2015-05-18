@@ -47,6 +47,7 @@
 		E603D64B1ADE66BF00D93708 /* UIImage+BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603D64A1ADE66BF00D93708 /* UIImage+BlurEffect.swift */; };
 		E60624ED1ADE6F27007D6DEF /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60624EC1ADE6F27007D6DEF /* SwiftyUserDefaults.swift */; };
 		E626508E1ADFA35F00B16094 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E626508D1ADFA35F00B16094 /* SwiftyJSON.swift */; };
+		E637CF9B1B09D2CC00CCE36A /* KMPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E637CF9A1B09D2CC00CCE36A /* KMPlaceholderTextView.swift */; };
 		E63898941AE0307E00756679 /* mainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63898921AE0307E00756679 /* mainTableViewCell.swift */; };
 		E63898951AE0307E00756679 /* mainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E63898931AE0307E00756679 /* mainTableViewCell.xib */; };
 		E63898971AE042D900756679 /* mainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63898961AE042D900756679 /* mainData.swift */; };
@@ -208,6 +209,7 @@
 		E603D64A1ADE66BF00D93708 /* UIImage+BlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+BlurEffect.swift"; path = "ThirdParty/SABlurImageView/UIImage+BlurEffect.swift"; sourceTree = "<group>"; };
 		E60624EC1ADE6F27007D6DEF /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyUserDefaults.swift; path = ThirdParty/SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		E626508D1ADFA35F00B16094 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ThirdParty/SwiftyJSON.swift; sourceTree = "<group>"; };
+		E637CF9A1B09D2CC00CCE36A /* KMPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KMPlaceholderTextView.swift; path = ThirdParty/KMPlaceholderTextView.swift; sourceTree = "<group>"; };
 		E63898921AE0307E00756679 /* mainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTableViewCell.swift; sourceTree = "<group>"; };
 		E63898931AE0307E00756679 /* mainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainTableViewCell.xib; sourceTree = "<group>"; };
 		E63898961AE042D900756679 /* mainData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainData.swift; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 				E692AA521AE9FA9E00577B3C /* UILabel+DynamicHeight.m */,
 				E692AA541AE9FAF300577B3C /* UILabel+DynamicHeight.h */,
 				E6A40C921AFBD07000F19D75 /* SCLAlertView.swift */,
+				E637CF9A1B09D2CC00CCE36A /* KMPlaceholderTextView.swift */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				E692AA4A1AE962AC00577B3C /* SwiftColors.swift in Sources */,
 				0B3950DC1AFFA7820030F7C3 /* UIImage+UzysExtension.m in Sources */,
 				E603D64B1ADE66BF00D93708 /* UIImage+BlurEffect.swift in Sources */,
+				E637CF9B1B09D2CC00CCE36A /* KMPlaceholderTextView.swift in Sources */,
 				E696E5291AE7920800261F57 /* MFRoundProgressView.swift in Sources */,
 				E692AA591AEA477A00577B3C /* HMSegmentedControl.m in Sources */,
 				E63DA5091AE6AD27001D7811 /* mineTableViewController.swift in Sources */,

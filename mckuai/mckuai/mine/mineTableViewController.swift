@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MineProtocol {
+class mineTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MineProtocol, UITextViewDelegate {
     var tableView: UITableView!
     var isFirstLoad = true
     var mineType = "message"
@@ -19,6 +19,15 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     var manager = AFHTTPRequestOperationManager()
     var page: PageInfo!
     var hud: MBProgressHUD?
+    
+    //快捷回复
+    var containerView:UIView!
+    var cancleButton:UIButton!
+    var sendButton:UIButton!
+    var viewButton:UIButton!
+    var textView:KMPlaceholderTextView!
+    var selectData: JSON!
+    
     var json: JSON! {
         didSet {
             if "ok" == self.json["state"].stringValue {
@@ -86,6 +95,7 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        initReplyBar()
         
         if isFirstLoad {
             loadDataWithoutMJRefresh()
@@ -177,10 +187,21 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if self.mineMsgType != "system" {
-            let id = self.datasource[indexPath.row]["id"].stringValue
-            TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+        self.selectData = self.datasource[indexPath.row]
+        if self.mineMsgType == "reply" {
+            self.textView.placeholder = "回复 " + self.selectData["userName"].stringValue
+            self.textView.becomeFirstResponder()
+        } else {
+            if self.mineMsgType != "system" {
+                let id = self.selectData["id"].stringValue
+                TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+            }
         }
+        
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        return super.becomeFirstResponder()
     }
     
     func loadNewData() {
@@ -277,16 +298,182 @@ class mineTableViewController: UIViewController, UITableViewDataSource, UITableV
 
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         MobClick.beginLogPageView("mineTableView")
         self.tabBarController?.tabBar.hidden = true
-        super.viewWillAppear(animated)
         self.scrollViewDidScroll(self.tableView)
+        
+        //        //注册键盘通知事件
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
     }
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         MobClick.endLogPageView("mineTableView")
         self.tabBarController?.tabBar.hidden = false
-        super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor(hexString: MCUtils.COLOR_NavBG))
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    
+    //快捷回复
+    func initReplyBar() {
+        self.containerView = UIView(frame: CGRectMake(0, self.view.bounds.height, self.view.bounds.width, 100))
+        self.containerView.backgroundColor = UIColor(red: 0.949, green: 0.949, blue: 0.949, alpha: 1.00)
+        
+        var line = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, 1))
+        line.backgroundColor = UIColor(hexString: "#D8D8D8")
+        
+        self.cancleButton = UIButton(frame: CGRectMake(5, 3, 50, 25))
+        self.cancleButton.setTitle("取消", forState: UIControlState.Normal)
+        self.cancleButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        self.cancleButton.setTitleColor(UIColor.lightGrayColor(), forState: UIControlState.Highlighted)
+        self.cancleButton.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.cancleButton.addTarget(self, action: "cancleReply", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.sendButton = UIButton(frame: CGRectMake(self.containerView.frame.size.width-5-50, 3, 50, 25))
+        self.sendButton.setTitle("发送", forState: UIControlState.Normal)
+        self.sendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        self.sendButton.setTitleColor(UIColor.lightGrayColor(), forState: UIControlState.Highlighted)
+        self.sendButton.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.sendButton.addTarget(self, action: "sendReply", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.viewButton = UIButton(frame: CGRectMake((self.containerView.frame.size.width)/2-40, 3, 80, 25))
+        self.viewButton.setTitle("查看原帖", forState: UIControlState.Normal)
+        self.viewButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        self.viewButton.setTitleColor(UIColor.lightGrayColor(), forState: UIControlState.Highlighted)
+        self.viewButton.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.viewButton.addTarget(self, action: "showReply", forControlEvents: UIControlEvents.TouchUpInside)
+
+        self.textView = KMPlaceholderTextView(frame: CGRectMake(5, 33, self.containerView.frame.size.width-10, 60))
+        self.textView.delegate = self
+        textView.layer.borderColor = UIColor(hexString: "#C7C7C7")!.CGColor
+        textView.layer.borderWidth = 1;
+        textView.layer.cornerRadius = 5;
+        textView.layer.masksToBounds = true;
+        textView.userInteractionEnabled = true;
+        textView.font = UIFont.systemFontOfSize(15)
+        textView.scrollEnabled = true;
+        textView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+        var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        tapDismiss.cancelsTouchesInView = false
+        self.tableView.addGestureRecognizer(tapDismiss)
+        
+        self.containerView.addSubview(self.cancleButton)
+        self.containerView.addSubview(self.viewButton)
+        self.containerView.addSubview(self.sendButton)
+        self.containerView.addSubview(self.textView)
+        self.containerView.addSubview(line)
+        self.containerView.hidden = true
+        self.view.addSubview(containerView)
+    }
+    
+    //查看原帖
+    func showReply() {
+        self.textView.resignFirstResponder()
+        let id = self.selectData["id"].stringValue
+        TalkDetail.showTalkDetailPage(self.navigationController, id: id)
+    }
+    
+    //取消回复
+    func cancleReply() {
+        self.textView.resignFirstResponder()
+    }
+    //发送回复
+    func sendReply() {
+        self.sendButton.enabled = false
+        var replyContext = self.textView.text
+        if(replyContext == nil || replyContext.isEmpty){
+            self.textView.shake(.Horizontal, numberOfTimes: 10, totalDuration: 0.8, completion: {})
+            MCUtils.showCustomHUD("回复的内容不能为空", aType: .Error)
+            self.sendButton.enabled = true
+            return
+        }
+        
+        var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.labelText = "正在发送"
+        //
+        var params = [
+            "act":"addReplyByCenter",
+            "loginId": appUserIdSave,
+            "replyContent": replyContext,
+            "cont2": selectData["cont2"].stringValue]
+        manager.POST(URL_MC,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                println(responseObject)
+                var json = JSON(responseObject)
+                
+                if "ok" == json["state"].stringValue {
+                    self.textView.resignFirstResponder()
+                    hud.hide(true)
+                    MCUtils.showCustomHUD("快速回复成功", aType: .Success)
+                    self.sendButton.enabled = true
+                    self.textView.text = ""
+                }else{
+                    hud.hide(true)
+                    self.sendButton.enabled = true
+                    MCUtils.showCustomHUD("回复失败,请稍候再试", aType: .Error)
+                }
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+                hud.hide(true)
+                self.sendButton.enabled = true
+                MCUtils.showCustomHUD("回复失败,请稍候再试", aType: .Error)
+//                    MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"error"])
+        })
+    }
+    
+    func dismissKeyboard(){
+//        MobClick.event("talkDetail", attributes: ["type":"cancleReplyOther"])
+        println("dismissKeyboard")
+        self.textView.resignFirstResponder()
+    }
+    
+
+    func textViewDidChange(textView: UITextView) {
+        self.textView.scrollRangeToVisible(self.textView.selectedRange)
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+
+    }
+    
+    func keyboardDidShow(notification:NSNotification) {
+        self.containerView.hidden = false
+        var userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        var v : NSValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        
+        var keyHeight = v.CGRectValue().size.height
+        var duration = userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as! NSNumber
+        var curve:NSNumber = userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as! NSNumber
+        var temp:UIViewAnimationCurve = UIViewAnimationCurve(rawValue: curve.integerValue)!
+        UIView.animateWithDuration(duration.doubleValue, animations: {
+            UIView.setAnimationBeginsFromCurrentState(true)
+            UIView.setAnimationCurve(temp)
+            
+            self.containerView.frame = CGRectMake(0, self.view.frame.size.height-keyHeight-100, self.view.bounds.size.width, 100)
+            
+        })
+        
+    }
+    
+    func keyboardDidHidden(notification:NSNotification) {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.25)
+        self.containerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.bounds.size.width, 100)
+        self.containerView.hidden = true
+        
+        UIView.commitAnimations()
     }
     
 

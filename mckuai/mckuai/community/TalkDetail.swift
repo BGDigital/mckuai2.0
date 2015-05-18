@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate,UIAlertViewDelegate, NJKWebViewProgressDelegate {
+class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextViewDelegate, NJKWebViewProgressDelegate {
     
     var manager = AFHTTPRequestOperationManager()
     var _progressView: NJKWebViewProgressView!
@@ -39,11 +39,10 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         }
     }
     
-    
     var containerView:UIView!
     var cancleButton:UIButton!
     var sendButton:UIButton!
-    var textView:UITextView!
+    var textView:KMPlaceholderTextView!
     var lableView:UILabel!
 
     
@@ -518,8 +517,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
         self.lableView.textAlignment = NSTextAlignment.Center
         self.lableView.textColor = UIColor.grayColor()
         
-        self.textView = UITextView(frame: CGRectMake(15, 50, self.containerView.frame.size.width-30, 80))
+        self.textView = KMPlaceholderTextView(frame: CGRectMake(15, 50, self.containerView.frame.size.width-30, 80))
         self.textView.delegate = self
+        self.textView.placeholder = "快速回复"
         textView.layer.borderColor = UIColor.grayColor().CGColor;
         textView.layer.borderWidth = 1;
         textView.layer.cornerRadius = 6;
