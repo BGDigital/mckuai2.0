@@ -294,17 +294,17 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 var shareParams = MBProgress.getQueryDictionary(query)
                 shareText = shareParams["shareText"]?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
                 if(shareParams["shareImg"] != nil && shareParams["shareImg"] != "empty"){
-                    UIImageView().sd_setImageWithURL(NSURL(string: shareParams["shareImg"]!), placeholderImage: DefaultShareImg!, completed: { (img, _, _, _) -> Void in
-                        if img != nil {
-                            shareImg = img
-                        }
-                    })
+                    shareImg = UIImage(data: NSData(contentsOfURL: NSURL(string:shareParams["shareImg"]!)!)!)
                 }
+                
+                if(shareImg == nil){
+                    shareImg = UIImage(named: "share_default")
+                }
+                
                 if(shareText != nil && shareImg != nil){
                     MobClick.event("Share", attributes: ["Address":"详情页", "Type": "start"])
                     ShareUtil.shareInitWithTextAndPicture(self, text: shareText, image: shareImg!,shareUrl:"http://www.mckuai.com/thread-"+id+".html", callDelegate: self)
                 }
-                
             }
             
         }else if(sender.tag == 2){
