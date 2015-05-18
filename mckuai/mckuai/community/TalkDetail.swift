@@ -582,7 +582,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                         }
                         MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"success"])
                     }else{
-                        self.rightButton?.enabled = true
+                        self.sendButton?.enabled = true
                         hud.hide(true)
                         MCUtils.showCustomHUD("回复失败,请稍候再试", aType: .Error)
                         MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"error"])
@@ -592,7 +592,7 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
                 failure: { (operation: AFHTTPRequestOperation!,
                     error: NSError!) in
                     println("Error: " + error.localizedDescription)
-                    self.rightButton?.enabled = true
+                    self.sendButton?.enabled = true
                     hud.hide(true)
                     MCUtils.showCustomHUD("回复失败,请稍候再试", aType: .Error)
                     MobClick.event("talkDetail", attributes: ["type":"sendReply","result":"error"])
@@ -661,7 +661,6 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
             MobClick.beginLogPageView("talkDetail")
-            self.tabBarController?.tabBar.hidden = true
             //        //注册键盘通知事件
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHidden:", name: UIKeyboardWillHideNotification, object: nil)
@@ -683,6 +682,8 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
     func webViewProgress(webViewProgress: NJKWebViewProgress!, updateProgress progress: Float) {
         _progressView.setProgress(progress, animated: true)
     }
+    
+    
     
 
     

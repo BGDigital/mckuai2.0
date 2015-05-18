@@ -8,7 +8,7 @@
         <!--跟贴-->
         <scene sceneID="xh9-2I-x7E">
             <objects>
-                <viewController storyboardIdentifier="followTalk" title="跟贴" id="S1B-zk-VvB" customClass="FollowTalk" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="followTalk" title="跟贴" hidesBottomBarWhenPushed="YES" id="S1B-zk-VvB" customClass="FollowTalk" customModule="mckuai" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Djb-bQ-JEM"/>
                         <viewControllerLayoutGuide type="bottom" id="2gc-CH-zth"/>
