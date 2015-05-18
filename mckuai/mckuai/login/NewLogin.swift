@@ -32,6 +32,7 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
     @IBOutlet weak var hiddenView: UIView!
     @IBOutlet weak var passWord: UITextField!
     
+    @IBOutlet weak var qqLogin_text: UIButton!
     @IBOutlet weak var qqIcon: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,9 @@ class NewLogin: UIViewController,UITextFieldDelegate,TencentSessionDelegate{
         passWord.delegate = self
         var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tapDismiss)
+        
+        self.qqLogin_text.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.qqLogin_text.titleLabel?.numberOfLines = 1
     }
     
     @IBAction func changeLogin(sender: UIButton) {

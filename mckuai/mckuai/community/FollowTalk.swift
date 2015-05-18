@@ -16,7 +16,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     var progress = MBProgressHUD()
     var params = [String: String]()
     var fromViewController:UIViewController!
-    var textView:UITextView!
+    var textView:KMPlaceholderTextView!
     var pic_wight:CGFloat!
     var addPic:UIButton!
     var image_array = [UIImage]()
@@ -31,6 +31,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(red: 0.933, green: 0.941, blue: 0.949, alpha: 1.00) 
         self.pic_wight = (self.view.frame.width-6*10)/5
         
         sendButton = UIBarButtonItem()
@@ -48,14 +49,15 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     }
     
     func initTextView() {
-        self.textView = UITextView(frame: CGRectMake(0, 0,self.view.frame.width, self.view.frame.height-pic_wight-5-260))
+        self.textView = KMPlaceholderTextView(frame: CGRectMake(0, 0,self.view.frame.width, self.view.frame.height-pic_wight-5-260))
+        
         self.textView.delegate = self
         textView.userInteractionEnabled = true;
         textView.font = UIFont.systemFontOfSize(14)
         textView.scrollEnabled = true;
         textView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
         textView.textAlignment = NSTextAlignment.Left
-        textView.text = "内容..."
+        textView.placeholder = "内容..."
         textView.textColor = UIColor.lightGrayColor()
         var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tapDismiss)
@@ -64,19 +66,6 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         self.textView.becomeFirstResponder()
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
-        if (textView.text == "") {
-            textView.text = "内容..."
-            textView.textColor = UIColor.lightGrayColor()
-        }
-    }
-    
-    func textViewDidBeginEditing(textView: UITextView){
-        if (textView.text == "内容..."){
-            textView.text = ""
-            textView.textColor = UIColor.blackColor()
-        }
-    }
     
     func textViewDidChange(textView: UITextView) {
         self.textView.scrollRangeToVisible(self.textView.selectedRange)
@@ -90,7 +79,7 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
     func initimage() {
         
         
-        addPic = UIButton(frame: CGRectMake(10, self.textView.frame.origin.y+self.textView.frame.size.height+5, pic_wight, pic_wight))
+        addPic = UIButton(frame: CGRectMake(10, self.textView.frame.origin.y+self.textView.frame.size.height-60, pic_wight, pic_wight))
         addPic.setImage(UIImage(named: "addImage"), forState: UIControlState.Normal)
         addPic.addTarget(self, action: "addPicAction", forControlEvents: UIControlEvents.TouchUpInside)
         image_button += [addPic]
@@ -362,7 +351,12 @@ class FollowTalk: UIViewController,UITextViewDelegate,UzysAssetsPickerController
         MobClick.beginLogPageView("followTalk")
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
+    }
     override func viewWillDisappear(animated: Bool) {
+        
         MobClick.endLogPageView("followTalk")
     }
     

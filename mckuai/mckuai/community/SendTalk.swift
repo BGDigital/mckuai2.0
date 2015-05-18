@@ -52,7 +52,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
     var small_last:UIButton!
     
     
-    var textView:UITextView!
+    var textView:KMPlaceholderTextView!
     var textField:UITextField!
     
     var image_array = [UIImage]()
@@ -93,14 +93,14 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
             textField.textAlignment = NSTextAlignment.Left
             textField.backgroundColor = UIColor.whiteColor()
             textField.placeholder = "帖子标题"
-            textField.setValue(UIColor.lightGrayColor(), forKeyPath: "_placeholderLabel.textColor")
+//            textField.setValue(UIColor.lightGrayColor(), forKeyPath: "_placeholderLabel.textColor")
             textField.font = UIFont.systemFontOfSize(14)
             textField.clearButtonMode = UITextFieldViewMode.WhileEditing
             textField.delegate = self
             
             
             
-            self.textView = UITextView(frame: CGRectMake(0, self.textField.frame.origin.y+self.textField.frame.size.height+5,self.content_view.frame.width, 200))
+            self.textView = KMPlaceholderTextView(frame: CGRectMake(0, self.textField.frame.origin.y+self.textField.frame.size.height+5,self.content_view.frame.width, 200))
             self.textView.delegate = self
 //            textView.layer.borderColor = UIColor.grayColor().CGColor;
 //            textView.layer.borderWidth = 1;
@@ -109,7 +109,7 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
             textView.scrollEnabled = true;
             textView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
 //            textView.textAlignment = NSTextAlignment.Left
-            textView.text = "内容"
+            textView.placeholder = "内容"
             textView.textColor = UIColor.lightGrayColor()
             
             var tapDismiss = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -133,17 +133,17 @@ class SendTalk: UIViewController,UITextFieldDelegate,UITextViewDelegate,UzysAsse
     }
     
     func textViewDidEndEditing(textView: UITextView) {
-        if (textView.text == "") {
-            textView.text = "内容"
-            textView.textColor = UIColor.lightGrayColor()
-        }
+//        if (textView.text == "") {
+//            textView.text = "内容"
+//            textView.textColor = UIColor.lightGrayColor()
+//        }
     }
     
     func textViewDidBeginEditing(textView: UITextView){
-        if (textView.text == "内容"){
-            textView.text = ""
-            textView.textColor = UIColor.blackColor()
-        }
+//        if (textView.text == "内容"){
+//            textView.text = ""
+//            textView.textColor = UIColor.blackColor()
+//        }
     }
     
     func textViewDidChange(textView: UITextView) {

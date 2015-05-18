@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -168,7 +168,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="推荐使用QQ登录">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="qqLoginAction:" destination="FfR-qf-pJh" eventType="touchUpInside" id="Zcl-bs-GsT"/>
@@ -181,8 +180,10 @@
                             <constraint firstItem="wRe-L7-IiS" firstAttribute="top" secondItem="Tux-yd-3ti" secondAttribute="bottom" constant="31" id="7Q2-5Z-5Ku"/>
                             <constraint firstItem="FNE-ey-uVy" firstAttribute="centerX" secondItem="Tux-yd-3ti" secondAttribute="centerX" id="CRl-8V-YVt"/>
                             <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Uqu-l2-pqG" secondAttribute="trailing" constant="102" id="DVw-Xd-Mu9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FhF-16-mtU" secondAttribute="trailing" constant="89" id="DWZ-BN-uaw"/>
                             <constraint firstItem="PQx-Iw-W5P" firstAttribute="leading" secondItem="Tux-yd-3ti" secondAttribute="trailing" id="Ecr-VP-kwG"/>
                             <constraint firstItem="Uqu-l2-pqG" firstAttribute="leading" secondItem="Mac-F1-rSx" secondAttribute="leadingMargin" constant="101" id="HaG-dD-gXk"/>
+                            <constraint firstItem="FhF-16-mtU" firstAttribute="leading" secondItem="Mac-F1-rSx" secondAttribute="leadingMargin" constant="89" id="LWa-hn-aC1"/>
                             <constraint firstAttribute="centerX" secondItem="FhF-16-mtU" secondAttribute="centerX" id="OAm-tC-Sjz"/>
                             <constraint firstAttribute="centerX" secondItem="Uqu-l2-pqG" secondAttribute="centerX" id="TEO-bf-DGu"/>
                             <constraint firstItem="Uqu-l2-pqG" firstAttribute="top" secondItem="Ty7-Zu-lnS" secondAttribute="bottom" constant="127" id="U34-W6-iKw"/>
@@ -210,6 +211,7 @@
                     <connections>
                         <outlet property="hiddenView" destination="5Mh-lX-3B9" id="4Xw-uF-Zf4"/>
                         <outlet property="passWord" destination="4tX-d0-gVq" id="pKO-9l-WPt"/>
+                        <outlet property="qqLogin_text" destination="FhF-16-mtU" id="Xa6-Fk-cLy"/>
                         <outlet property="register_btn" destination="Tux-yd-3ti" id="QTg-zZ-MVe"/>
                         <outlet property="register_img" destination="PQx-Iw-W5P" id="AIN-QP-jDg"/>
                         <outlet property="userName" destination="mBT-Ik-yYg" id="dSS-hJ-pOT"/>
