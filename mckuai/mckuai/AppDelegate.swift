@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window?.makeKeyAndVisible()
+        //NSURLCache  5M Memory,100M Disk
+        var shareCache = NSURLCache(memoryCapacity: 5*1024*1024, diskCapacity: 100*1024*1024, diskPath: nil)
+        NSURLCache.setSharedURLCache(shareCache)
         //启动页面加载广告
         if Defaults.hasKey(ISFIRSTRUN) {
             loadLaunchView()
