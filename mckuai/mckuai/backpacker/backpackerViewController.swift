@@ -66,7 +66,7 @@ class backpackerViewController: UIViewController {
     }
     
     func initSegmentedControl() {
-        segmentedControl = HMSegmentedControl(sectionTitles: ["贴子", "麦友"])
+        segmentedControl = HMSegmentedControl(sectionTitles: ["帖子", "麦友"])
         segmentedControl.frame = CGRectMake(0, 64, self.view.frame.size.width, 35)
         
         

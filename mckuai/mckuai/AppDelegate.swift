@@ -209,8 +209,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        //显示rongcloud未读消息
-//        MCUtils.RCTabBarItem.badgeValue = RCIM.sharedRCIM().totalUnreadCount > 0 ? "\(RCIM.sharedRCIM().totalUnreadCount)" : nil
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 

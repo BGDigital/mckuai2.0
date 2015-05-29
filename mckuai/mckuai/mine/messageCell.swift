@@ -132,7 +132,7 @@ class messageCell: UITableViewCell {
     private func getMsgType(s: String) -> String {
         switch s {
         case "talk_reply_by_other":
-            return "  回复你的贴子"
+            return "  回复你的帖子"
         case "talk_reply":
             return "回复了"
         case "talk_add":

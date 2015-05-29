@@ -237,7 +237,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                     mainCV.bag.hidden = true
                     mainCV.btnLogin.hidden = false
                 }
-                alert.showInfo("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏贴子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
+                alert.showInfo("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏帖子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
             } else {
                 MCUtils.showCustomHUD("亲,你还没有登录,要登录后才可以注销哦", aType: .Warning)
            }

@@ -146,7 +146,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             return 2
         } else {
             self.tableView.tableHeaderView?.hidden = true
-            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有贴子,快下拉刷新试试?")
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有帖子,快下拉刷新试试?")
             return 0
         }
     }
@@ -171,7 +171,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         } else {
             self.tableView.tableHeaderView?.hidden = true
-            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有贴子,快下拉刷新试试?")
+            MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有帖子,快下拉刷新试试?")
             return 0
         }
     }

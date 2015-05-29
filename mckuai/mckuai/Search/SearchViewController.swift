@@ -84,7 +84,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func initSearchBar() {
         searchBar = UISearchBar(frame: CGRectMake(5, 5, self.view.frame.width-10, 35))
         searchBar.delegate = self
-        searchBar.placeholder = "搜索贴子或麦友"
+        searchBar.placeholder = "搜索帖子或麦友"
         searchBar.showsCancelButton = true
         nav?.navigationBar.addSubview(searchBar)
     }
@@ -154,7 +154,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if !searchKey.isEmpty {
                 MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "没有找到你想要的信息,换个条件试试?")
             } else {
-                MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "小麦可以帮你找到你想看的贴子和麦友哦")
+                MCUtils.showEmptyView(self.tableView, aImg: Load_Empty!, aText: "小麦可以帮你找到你想看的帖子和麦友哦")
             }
             return 0
         }
@@ -209,7 +209,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     :returns: Void
     */
     func initSegmentedControl() {
-        segmentedControl = HMSegmentedControl(sectionTitles: ["贴子", "麦友"])
+        segmentedControl = HMSegmentedControl(sectionTitles: ["帖子", "麦友"])
         segmentedControl.frame = CGRectMake(0, 64, self.view.frame.size.width, 35)
         
         segmentedControl.autoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleWidth
