@@ -19,6 +19,16 @@
       "idiom" : "iphone",
       "scale" : "3x",
       "filename" : "引导页2-6p.png"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "filename" : "iPadL.png"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "filename" : "iPadL@2.png"
     }
   ],
   "info" : {
