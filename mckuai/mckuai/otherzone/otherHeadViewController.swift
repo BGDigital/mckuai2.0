@@ -42,12 +42,6 @@ class otherHeadViewController: UIViewController, UMSocialUIDelegate {
         addSubTextToBtn("作品", parent: btnWork)
         btnDynamic.selected = true
         lastSelected = btnDynamic
-        //所在城市
-        if let city = Defaults[D_USER_ADDR].string {
-            locationCity.setTitle(city, forState: .Normal)
-        } else {
-            locationCity.setTitle("未定位", forState: .Normal)
-        }
     }
     
     func addSubTextToBtn(aText: String, parent: UIButton) {
@@ -101,6 +95,13 @@ class otherHeadViewController: UIViewController, UMSocialUIDelegate {
                 self.imageBg.addBlurEffect(8, times: 1)
             })
         }
+        //所在城市
+        if let city = J["addr"].string {
+            locationCity.setTitle(city, forState: .Normal)
+        } else {
+            locationCity.setTitle("未定位", forState: .Normal)
+        }
+
         btnDynamic.setTitle(J["dynamicNum"].stringValue, forState: .Normal)
         println(btnDynamic.titleLabel?.text)
         btnWork.setTitle(J["workNum"].stringValue, forState: .Normal)
