@@ -18,12 +18,6 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
     var chatRoomName: String!
     
     @IBOutlet weak var roundProgressView: MFRoundProgressView!
-    @IBOutlet weak var userHeadImg: UIImageView!
-    @IBOutlet weak var userLastSay: UILabel!
-    @IBOutlet weak var times: UIButton!
-    @IBOutlet weak var chatTitle: UILabel!
-    @IBOutlet weak var imageV: UIImageView!
-    @IBOutlet weak var imgView: UIView!
     @IBOutlet weak var bag: UIButton!
     @IBOutlet weak var bagTitle: UILabel!
     @IBOutlet weak var nickname: UILabel!
@@ -42,7 +36,6 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         level.layer.cornerRadius = 7
         
         bag.setImage(UIImage(named: "backpacker_selected"), forState: .Selected)
-        imageV.sd_setImageWithURL(nil, placeholderImage: UIImage(named: "loading"))
         
         //用户头像
         self.roundProgressView.progressLineWidth = 1
@@ -58,10 +51,6 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         var tapRoundHead = UITapGestureRecognizer(target: self, action: "openMineSB")
         roundProgressView.addGestureRecognizer(tapRoundHead)
         
-        imgView.userInteractionEnabled = true
-        var tapChatRoom = UITapGestureRecognizer(target: self, action: "joinChatRoom")
-        imgView.addGestureRecognizer(tapChatRoom)
-        
         bag.addTarget(self, action: "openBackPacker", forControlEvents: UIControlEvents.TouchUpInside)
         //登录按钮
         btnLogin = UIButton(frame: CGRectMake(75, 30, 100, 30))
@@ -75,23 +64,6 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
         
         //背包图片,文字位置
         // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func joinChatRoom() {
-        if appUserIdSave != 0 {
-            MobClick.event("mainView", attributes: ["Type":"ChatRoom"])
-            // 启动聊天室，与启动单聊等类似
-            var temp: RCChatViewController = customChatViewController()
-            temp.hidesBottomBarWhenPushed = true
-            temp.currentTarget = self.chatRoomId;
-            temp.conversationType = .ConversationType_CHATROOM; // 传入聊天室类型
-            temp.enableSettings = false;
-            temp.currentTargetName = self.chatRoomName;
-            
-            self.nav?.pushViewController(temp, animated: true)
-        } else {
-            MCUtils.showCustomHUD("亲,要登录了才能进入聊天室和基友们聊天哦", aType: .Warning)
-        }
     }
     
     func setData(user: JSON!, chat: JSON!) {
@@ -132,18 +104,6 @@ class mainHeaderViewController: UIViewController, CityProtocol, LoginProtocol {
             self.bagTitle.hidden = true
             self.btnLogin.hidden = false
         }
-        //聊天室
-        self.chatRoomId = chat["id"].stringValue
-        self.chatRoomName = chat["name"].stringValue
-        var time = (chat["endTime"].stringValue as NSString).substringToIndex(16)
-        self.times.setTitle(time, forState: .Normal)
-        self.chatTitle.text = self.chatRoomName
-        self.chatTitle.sizeOfMultiLineLabel()
-        self.userHeadImg.sd_setImageWithURL(NSURL(string: chat["headImg"].stringValue), placeholderImage: UIImage(named: "SmallAvatar"))
-        self.userHeadImg.layer.masksToBounds = true
-        self.userHeadImg.layer.cornerRadius = 10
-        self.userLastSay.text = chat["lastSpeak"].stringValue
-        self.imageV.sd_setImageWithURL(NSURL(string: chat["icon"].stringValue), placeholderImage: UIImage(named: "loading"))
         
     }
     

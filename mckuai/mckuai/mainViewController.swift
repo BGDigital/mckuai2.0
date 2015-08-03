@@ -98,7 +98,7 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //添加Header
         head = UIStoryboard(name: "home", bundle: nil).instantiateViewControllerWithIdentifier("mainHeaderViewController") as! mainHeaderViewController
         MCUtils.mainHeadView = head
-        head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 235)
+        head.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 74)
         head.setNavi(self.navigationController)
         tableView.tableHeaderView = head.view
         //初始化的时候隐藏head

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -20,7 +20,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="live_cell_bg" translatesAutoresizingMaskIntoConstraints="NO" id="O0c-MS-O9N">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Xj-dp-nxk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Xj-dp-nxk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="149" id="gsY-Rj-Iuc"/>
@@ -84,6 +84,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94509803921568625" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="EYO-wS-A5a" firstAttribute="top" secondItem="4Iw-Yc-srH" secondAttribute="bottom" constant="-47" id="0D0-40-wN0"/>
                             <constraint firstItem="GEm-Hy-L3L" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" constant="15" id="1k9-Zg-X8g"/>
                             <constraint firstItem="lKh-h0-Xiq" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" constant="15" id="3Lj-mW-Rby"/>
                             <constraint firstAttribute="trailing" secondItem="EYO-wS-A5a" secondAttribute="trailing" constant="15" id="6RQ-pb-HAx"/>
@@ -106,6 +107,11 @@
                             <constraint firstItem="EYO-wS-A5a" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" constant="15" id="xxY-da-YhQ"/>
                             <constraint firstItem="5Xj-dp-nxk" firstAttribute="leading" secondItem="AuI-QP-hHi" secondAttribute="leading" id="y2e-p4-0kd"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SJS-F5-NB4"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>
