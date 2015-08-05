@@ -22,19 +22,19 @@ PODS:
     - AFNetworking/NSURLSession
   - HexColors (2.2.1)
   - MBProgressHUD (0.9.1)
-  - MJRefresh (1.4.6)
+  - MJRefresh (2.3.2)
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
   - RESideMenu (4.0.7)
-  - SDWebImage (3.7.2):
-    - SDWebImage/Core (= 3.7.2)
-  - SDWebImage/Core (3.7.2)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
   - TSMessages (0.9.12):
-    - HexColors
-  - UMengFeedback (2.2)
+    - HexColors (~> 2.2.0)
+  - UMengFeedback (2.3.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -50,11 +50,11 @@ SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MJRefresh: 2eaa3fd8f67fbb86497840fb0167446f7eb61dc7
+  MJRefresh: 0f6f5e8387970607c26080b44058b229a23065d7
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
-  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  TSMessages: 2a52642128d7ab15b46930c810b9c9403a2b58f3
-  UMengFeedback: fa4cbef85478c68997433fc9e2338d55313b70e1
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
+  UMengFeedback: 6dd19dc88d310c317023aa495d10671b1c112531
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.38.2

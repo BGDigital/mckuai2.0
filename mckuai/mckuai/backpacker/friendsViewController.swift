@@ -44,7 +44,8 @@ class friendsViewController: UICollectionViewController {
         self.collectionView?.allowsMultipleSelection = false
         self.collectionView?.backgroundColor = UIColor(hexString: "#EDF1F2")
         // Do any additional setup after loading the view.
-        self.collectionView!.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+        self.collectionView!.header = MJRefreshNormalHeader(refreshingBlock: { self.loadNewData() })
+//        self.collectionView!.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
         
         if isFirstLoad {
             loadDataWithoutMJRefresh()

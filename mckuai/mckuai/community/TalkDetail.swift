@@ -475,8 +475,9 @@ class TalkDetail: UIViewController,UIWebViewDelegate,UMSocialUIDelegate,UITextVi
 
         var request = NSURLRequest(URL: url)
         webView.loadRequest(request)
-        
-        self.webView.scrollView.addLegendHeaderWithRefreshingBlock({self.reloadView()})
+        self.webView.scrollView.header = MJRefreshNormalHeader(refreshingBlock: { self.reloadView()
+        })
+//        self.webView.scrollView.addLegendHeaderWithRefreshingBlock({self.reloadView()})
         self.view.addSubview(webView)
     }
     

@@ -106,7 +106,8 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.view.addSubview(tableView)
         
-        self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+        self.tableView.header = MJRefreshNormalHeader(refreshingBlock: { self.loadNewData() })
+//        self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
     }
     
     //加载数据,刷新

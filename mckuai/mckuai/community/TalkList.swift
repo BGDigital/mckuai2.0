@@ -119,8 +119,10 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
         v.addSubview(tableView)
         self.view.addSubview(v)
         
-        self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
-        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
+        self.tableView.header = MJRefreshNormalHeader(refreshingBlock: { self.loadNewData() })
+        self.tableView.footer = MJRefreshAutoNormalFooter(refreshingBlock: {self.loadMoreData()})
+//        self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+//        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
         self.tableView.footer.hidden =  true
         
 
@@ -239,7 +241,8 @@ class TalkList: UIViewController,UITableViewDelegate, UITableViewDataSource{
         
          MobClick.event("talkList",attributes: ["type":self.type])
         
-        self.tableView.legendHeader.beginRefreshing()
+        self.tableView.header.beginRefreshing()
+//        self.tableView.legendHeader.beginRefreshing()
         self.loadNewData()
     }
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -39,7 +39,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NbU-bn-eo4" customClass="SABlurImageView" customModule="mckuai" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                             </imageView>
-                            <view alpha="0.30000001192092896" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fx-a5-Xua" userLabel="shadow">
+                            <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fx-a5-Xua" userLabel="shadow">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -122,6 +122,7 @@
                             <constraint firstItem="NbU-bn-eo4" firstAttribute="leading" secondItem="V7p-T9-L3q" secondAttribute="leading" id="07i-aM-O0r"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xZO-w5-yyD" secondAttribute="trailing" constant="30" id="1Gc-0t-97m"/>
                             <constraint firstItem="3Qb-A1-AbJ" firstAttribute="top" secondItem="xzN-dE-srM" secondAttribute="bottom" constant="6" id="1MF-Eb-fp4"/>
+                            <constraint firstItem="8fx-a5-Xua" firstAttribute="leading" secondItem="V7p-T9-L3q" secondAttribute="leading" id="27i-IG-SJ9"/>
                             <constraint firstItem="FFg-g7-Yja" firstAttribute="leading" secondItem="nUQ-aM-kyg" secondAttribute="trailing" constant="10" id="2Bb-rb-Y3c"/>
                             <constraint firstItem="IYO-U3-Vnl" firstAttribute="top" secondItem="3Qb-A1-AbJ" secondAttribute="bottom" constant="8" symbolic="YES" id="3qr-jY-psB"/>
                             <constraint firstItem="NbU-bn-eo4" firstAttribute="top" secondItem="V7p-T9-L3q" secondAttribute="top" id="72d-b2-uYO"/>
@@ -129,6 +130,7 @@
                             <constraint firstItem="NbU-bn-eo4" firstAttribute="leading" secondItem="nUQ-aM-kyg" secondAttribute="trailing" constant="-173" id="Ac6-5L-IZK"/>
                             <constraint firstItem="FFg-g7-Yja" firstAttribute="centerX" secondItem="NbU-bn-eo4" secondAttribute="centerX" constant="55" id="CNN-3l-vA3"/>
                             <constraint firstItem="NbU-bn-eo4" firstAttribute="leading" secondItem="nUQ-aM-kyg" secondAttribute="trailing" constant="-295" id="EZV-o7-IDT"/>
+                            <constraint firstAttribute="trailing" secondItem="8fx-a5-Xua" secondAttribute="trailing" id="FM6-bV-gGL"/>
                             <constraint firstItem="NbU-bn-eo4" firstAttribute="top" secondItem="xZO-w5-yyD" secondAttribute="bottom" constant="-131" id="IX3-jq-qHs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xZO-w5-yyD" secondAttribute="trailing" constant="82" id="Ona-Pv-vWP"/>
                             <constraint firstAttribute="centerX" secondItem="3Qb-A1-AbJ" secondAttribute="centerX" id="PPw-lW-HL7"/>
@@ -136,11 +138,13 @@
                             <constraint firstItem="NbU-bn-eo4" firstAttribute="centerX" secondItem="3Qb-A1-AbJ" secondAttribute="centerX" id="SzD-MH-ch5"/>
                             <constraint firstItem="ZdV-g6-g6K" firstAttribute="top" secondItem="nUQ-aM-kyg" secondAttribute="bottom" constant="18" id="TA0-vF-Fhv"/>
                             <constraint firstItem="xzN-dE-srM" firstAttribute="top" secondItem="wCt-8P-xOR" secondAttribute="bottom" constant="50" id="VrX-0X-pAM"/>
+                            <constraint firstItem="ZdV-g6-g6K" firstAttribute="top" secondItem="8fx-a5-Xua" secondAttribute="bottom" id="WOQ-bt-a5L"/>
                             <constraint firstItem="ZdV-g6-g6K" firstAttribute="top" secondItem="FFg-g7-Yja" secondAttribute="bottom" constant="18" id="XWQ-Xz-uiO"/>
                             <constraint firstItem="IYO-U3-Vnl" firstAttribute="trailing" secondItem="3Qb-A1-AbJ" secondAttribute="trailing" id="a0z-hi-KGf"/>
                             <constraint firstItem="nUQ-aM-kyg" firstAttribute="centerX" secondItem="NbU-bn-eo4" secondAttribute="centerX" constant="-55" id="e1k-tJ-RNz"/>
                             <constraint firstItem="FFg-g7-Yja" firstAttribute="top" secondItem="IYO-U3-Vnl" secondAttribute="bottom" constant="13" id="fNn-Oe-4sy"/>
                             <constraint firstItem="FFg-g7-Yja" firstAttribute="leading" secondItem="NbU-bn-eo4" secondAttribute="trailing" constant="-174" id="ha7-gY-SAi"/>
+                            <constraint firstItem="8fx-a5-Xua" firstAttribute="top" secondItem="V7p-T9-L3q" secondAttribute="top" id="qDO-RM-X0P"/>
                             <constraint firstItem="nUQ-aM-kyg" firstAttribute="top" secondItem="NbU-bn-eo4" secondAttribute="bottom" constant="-93" id="xD8-7d-7JL"/>
                             <constraint firstItem="IYO-U3-Vnl" firstAttribute="leading" secondItem="3Qb-A1-AbJ" secondAttribute="leading" id="xnq-ot-EAv"/>
                         </constraints>

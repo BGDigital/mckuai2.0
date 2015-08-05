@@ -296,8 +296,10 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.view.addSubview(tableView)
         
-        self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
-        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
+        self.tableView.header = MJRefreshNormalHeader(refreshingBlock: { self.loadNewData() })
+        self.tableView.footer = MJRefreshAutoNormalFooter(refreshingBlock: {self.loadMoreData()})
+//        self.tableView.addLegendHeaderWithRefreshingBlock({self.loadNewData()})
+//        self.tableView.addLegendFooterWithRefreshingBlock({self.loadMoreData()})
         self.tableView.footer.hidden = true
     }
     
