@@ -22,13 +22,11 @@
     },
     {
       "idiom" : "ipad",
-      "scale" : "1x",
-      "filename" : "iPadL.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "ipad",
-      "scale" : "2x",
-      "filename" : "iPadL@2.png"
+      "scale" : "2x"
     }
   ],
   "info" : {

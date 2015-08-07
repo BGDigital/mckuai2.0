@@ -87,7 +87,7 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         btnLogin.addTarget(self, action: "userLogin", forControlEvents: UIControlEvents.TouchUpInside)
         header.addSubview(btnLogin)
         
-        btnSearch = UIButton(frame: CGRectMake(15, 55, self.view.bounds.size.width-15-120, 30))
+        btnSearch = UIButton(frame: CGRectMake(15, 55, (self.view.bounds.size.width * 0.666)-15, 30))
         btnSearch.backgroundColor = UIColor.blackColor()
         btnSearch.layer.borderColor = UIColor.whiteColor().CGColor
         btnSearch.layer.borderWidth = 1
