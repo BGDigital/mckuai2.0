@@ -67,10 +67,10 @@ class rootViewController: RESideMenu, RESideMenuDelegate, UITabBarControllerDele
         super.viewDidLoad()
         
         //Defaults.remove(ISFIRSTRUN)
-        if !Defaults.hasKey(ISFIRSTRUN) {
-            //没有"ISFIRSTRUN"这个key就是第一次启动,显示引导页
-            loadWelcome()
-        }
+//        if !Defaults.hasKey(ISFIRSTRUN) {
+//            //没有"ISFIRSTRUN"这个key就是第一次启动,显示引导页
+//            loadWelcome()
+//        }
     }
 
     override func didReceiveMemoryWarning() {

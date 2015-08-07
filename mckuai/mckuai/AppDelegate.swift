@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         var shareCache = NSURLCache(memoryCapacity: 5*1024*1024, diskCapacity: 100*1024*1024, diskPath: nil)
         NSURLCache.setSharedURLCache(shareCache)
         //启动页面加载广告
-        if Defaults.hasKey(ISFIRSTRUN) {
-            loadLaunchView()
-        }
+        loadLaunchView()
+//        if Defaults.hasKey(ISFIRSTRUN) {
+//            loadLaunchView()
+//        }
         Async.main({
             println("多线程调用三方库.")
             self.initRongCloud()

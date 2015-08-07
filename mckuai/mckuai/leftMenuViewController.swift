@@ -231,10 +231,12 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
                     //刷新主界面
                     var mainCV = (MCUtils.mainHeadView as! mainHeaderViewController)
                     mainCV.roundProgressView.imageUrl = "1"
+                    mainCV.roundProgressView.percent = 0.0
                     mainCV.nickname.hidden = true
                     mainCV.level.hidden = true
                     mainCV.locationCity.hidden = true
                     mainCV.bag.hidden = true
+                    mainCV.bagTitle.hidden = true
                     mainCV.btnLogin.hidden = false
                 }
                 alert.showInfo("注销登录", subTitle: "注销后不能打开个人中心,回复,收藏帖子,确定要注销吗?", closeButtonTitle: "我点错了", duration: 0)
@@ -269,10 +271,12 @@ class leftMenuViewController: UIViewController, RESideMenuDelegate, UITableViewD
         //刷新主界面
         var mainCV = (MCUtils.mainHeadView as! mainHeaderViewController)
         mainCV.roundProgressView.imageUrl = "1"
+        mainCV.roundProgressView.percent = 0.0
         mainCV.nickname.hidden = true
         mainCV.level.hidden = true
         mainCV.locationCity.hidden = true
         mainCV.bag.hidden = true
+        mainCV.bagTitle.hidden = true
         mainCV.btnLogin.hidden = false
     }
     
