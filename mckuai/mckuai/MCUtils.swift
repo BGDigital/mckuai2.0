@@ -121,7 +121,8 @@ class MCUtils {
     static let TEXT_LOADING = "正在加载"
     static let TEXT_SEARCH = "搜索中..."
 
-    static let URL_LAUNCH = "http://cdn.mckuai.com/app_start.png"
+    static let URL_LAUNCH = "http://cdn.mckuai.com/app_start_iphone.jpg"
+    static let URL_LAUNCH_PAD = "http://cdn.mckuai.com/app_start_ipad.jpg"
         
     /**
     获取融云好友列表
