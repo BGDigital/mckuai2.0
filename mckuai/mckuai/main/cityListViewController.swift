@@ -61,7 +61,7 @@ class cityListViewController: UIViewController, UITableViewDelegate, UITableView
         lb.textColor = UIColor(hexString: "#B3B4B5")
         head.addSubview(lb)
         
-        currentCity = UIButton(frame: CGRectMake(head.bounds.size.width-160, (head.bounds.size.height - 20) / 2, 140, 20))
+        currentCity = UIButton(frame: CGRectMake(head.bounds.size.width-170, (head.bounds.size.height - 20) / 2, 140, 20))
         currentCity.setTitle("点击定位", forState: .Normal)
         currentCity.setTitleColor(UIColor(hexString: "#32C561"), forState: .Normal)
         currentCity.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right

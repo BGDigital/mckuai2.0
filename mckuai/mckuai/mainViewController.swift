@@ -154,9 +154,9 @@ class mainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 190
+            return 220
         } else {
-            return 190
+            return 220
         }
     }
     

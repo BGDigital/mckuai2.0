@@ -181,7 +181,13 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             alertController.addAction(novelAction)
             alertController.addAction(allAction)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone {
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                //iPad
+                var popoverCntlr = UIPopoverController(contentViewController: alertController)
+                popoverCntlr.presentPopoverFromBarButtonItem(self.navigationItem.rightBarButtonItem!, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+            }
         } else {
             //iOS7
             var alertView = UIAlertView()
@@ -309,7 +315,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-       return 190
+       return 220
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
