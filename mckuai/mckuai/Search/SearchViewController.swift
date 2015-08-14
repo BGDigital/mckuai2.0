@@ -82,11 +82,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func initSearchBar() {
-        searchBar = UISearchBar(frame: CGRectMake(5, 5, self.view.frame.width-10, 35))
+        searchBar = UISearchBar(frame: CGRectMake(5, 5, self.view.frame.width - 65, 35))
         searchBar.delegate = self
         searchBar.placeholder = "搜索帖子或麦友"
-        searchBar.showsCancelButton = true
         nav?.navigationBar.addSubview(searchBar)
+        
+        var cancelBtn = UIButton(frame: CGRectMake(searchBar.bounds.size.width+5, 5, 55, 35))
+        cancelBtn.setTitle("取消", forState: .Normal)
+        cancelBtn.addTarget(self, action: "CancelBtnOnClick", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        nav?.navigationBar.addSubview(cancelBtn)
+    }
+    
+    @IBAction func CancelBtnOnClick() {
+        self.nav?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -101,12 +110,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
 //
     }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        println("取消搜索,返回")
-        self.nav?.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+        
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         onSearch()
         searchBar.resignFirstResponder()

@@ -181,7 +181,7 @@ class liveViewController: UIViewController, UITableViewDelegate, UITableViewData
             alertController.addAction(novelAction)
             alertController.addAction(allAction)
             
-            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone {
+            if UIDevice.currentDevice().model == "iPhone" {
                 self.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 //iPad

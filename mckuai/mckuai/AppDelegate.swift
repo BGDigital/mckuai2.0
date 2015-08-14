@@ -161,7 +161,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMFriendsFetcherDelegat
         var imageV = UIImageView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height))
         launchView.addSubview(imageV)
         // 加载网络图片
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone {
+        
+        if UIDevice.currentDevice().model == "iPhone" {
             imageV.sd_setImageWithURL(NSURL(string: MCUtils.URL_LAUNCH), placeholderImage: UIImage(named: "appLaunchImg"))
         } else {
             imageV.sd_setImageWithURL(NSURL(string: MCUtils.URL_LAUNCH_PAD), placeholderImage: UIImage(named: "appLaunchImg"))

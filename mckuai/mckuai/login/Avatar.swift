@@ -45,23 +45,23 @@ class Avatar:UIViewController,UICollectionViewDataSource,UICollectionViewDelegat
         avatarList.delegate = self
         avatarList.scrollEnabled = false
         
-        initAddPicButtton()
+        //initAddPicButtton()
         
         
     }
     
     func initAddPicButtton(){
-        var addLable = UILabel(frame: CGRectMake(20, self.avatarList.frame.size.height-180,150 , 25))
+        var addLable = UILabel(frame: CGRectMake(20, self.avatarList.frame.size.height + 15,150 , 25))
         addLable.text = "选择本地图片"
         addLable.textColor = UIColor(red: 0.263, green: 0.263, blue: 0.263, alpha: 1.00)
         self.view.addSubview(addLable)
-        addPic = UIButton(frame: CGRectMake(10,self.avatarList.frame.size.height-140 , 60, 60))
+        addPic = UIButton(frame: CGRectMake(10,self.avatarList.frame.size.height + 55 , 60, 60))
         addPic.setImage(UIImage(named: "addImage"), forState: UIControlState.Normal)
         addPic.addTarget(self, action: "addPicAction", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(addPic)
     }
     
-    func addPicAction() {
+    @IBAction func addPicAction() {
         
         MobClick.event("headImgPage", attributes: ["type":"addPic","result":"all"])
         

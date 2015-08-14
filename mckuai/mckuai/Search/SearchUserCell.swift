@@ -27,7 +27,8 @@ class SearchUserCell: UITableViewCell {
         //self.username.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
         
         //底部线
-        var line = UIView(frame: CGRectMake(0, self.bounds.size.height-1, self.bounds.size.width, 0.5))
+        var iWidth = UIScreen.mainScreen().bounds.size.width;
+        var line = UIView(frame: CGRectMake(0, self.frame.size.height-1, iWidth, 1))
         line.backgroundColor = UIColor(hexString: "#EFF0F2")
         self.addSubview(line)
     }
